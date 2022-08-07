@@ -44,7 +44,8 @@ map("n", "<leader>s", ":w<CR>")
 map("n", "<leader><S-q>", ":qa!<CR>")
 
 -- Reload source
-map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua")
+map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua<CR>")
+
 
 -- Reload current file
 map("n", "<leader>r", ":so %<CR>")
@@ -67,7 +68,7 @@ map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
 map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+-- map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
 map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
@@ -104,12 +105,82 @@ require("telescope").setup {
 -----------------------------------------------------------
 -- AutoComplete
 -----------------------------------------------------------
-
+local luasnip = require "luasnip"
 
 local cmp = require "cmp"
 cmp.setup {
     mapping = {
+        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
         ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+        ["<C-y>"] = cmp.config.disable,
+        ["<C-e>"] = cmp.mapping {
+            i = cmp.mapping.abort(),
+            c = cmp.mapping.close(),
+        },
         ["<CR>"] = cmp.mapping.confirm { select = true },
+        ["<Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_next_item()
+            elseif luasnip.expandable() then
+                luasnip.expand()
+            elseif luasnip.expand_or_jumpable() then
+                luasnip.expand_or_jump()
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
+        ["<S-Tab>"] = cmp.mapping(function(fallback)
+            if cmp.visible() then
+                cmp.select_prev_item()
+            elseif luasnip.jumpable(-1) then
+                luasnip.jump(-1)
+            else
+                fallback()
+            end
+        end, {
+            "i",
+            "s",
+        }),
     },
+    sources = {
+        { name = "nvim_lsp" },
+        { name = "luasnip" },
+    },
+    ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<CR>"] = cmp.mapping.confirm { select = true },
 }
+
+
+require("gitsigns").setup {
+
+    on_attach = function(bufnr)
+        -- Actions
+        map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>")
+        map("v", "<leader>gs", ":Gitsigns stage_hunk<CR>")
+        map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>")
+        map("v", "<leader>gr", ":Gitsigns reset_hunk<CR>")
+        map("n", "<leader>gS", "<cmd>Gitsigns stage_buffer<CR>")
+        map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>")
+        map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>")
+        map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>")
+        map("n", "<leader>gb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
+        map("n", "<leader>tB", "<cmd>Gitsigns toggle_current_line_blame<CR>")
+        map("n", "<leader>gd", "<cmd>Gitsigns diffthis<CR>")
+        map("n", "<leader>gD", "<cmd>Gitsigns toggle_deleted<CR>")
+
+        -- Text object
+--        map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+--        map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
+    end
+
+}
+
+-- Terminal
+vim.cmd [[autocmd TermEnter term://*toggleterm#* tnoremap <silent><leader>t <Cmd>exe v:count1 . "ToggleTerm"<CR>]]
+vim.cmd [[nnoremap <silent><leader>t <Cmd>exe v:count1 . "ToggleTerm"<CR>]]
+-- vim.cmd [[inoremap <silent><leader>T <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]]
+

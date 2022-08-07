@@ -61,6 +61,7 @@ return packer.startup(function(use)
     use({ "hrsh7th/cmp-buffer" })
     use({ "hrsh7th/cmp-path" })
     use({ "hrsh7th/cmp-cmdline" })
+    use({ "hrsh7th/cmp-nvim-lua" })
 
     -- Package manager for LSP
     use({
@@ -68,6 +69,11 @@ return packer.startup(function(use)
         "neovim/nvim-lspconfig",
         "williamboman/mason-lspconfig.nvim",
     })
+
+    -- LSP Loading icon
+    use { "j-hui/fidget.nvim", config = function()
+        require "fidget".setup {}
+    end }
 
     -- LSP Flutter
     use({
@@ -112,6 +118,37 @@ return packer.startup(function(use)
                 max_length = 500,
                 scroll_limit = -1,
             }
+        end
+    }
+
+    -- Git integration
+    use {
+        "lewis6991/gitsigns.nvim",
+        tag = "release", -- To use the latest releasu
+    }
+
+    -- Blank line
+    use { "lukas-reineke/indent-blankline.nvim",
+        config = function()
+            require("indent_blankline").setup {
+            }
+        end }
+
+    -- Terminal
+    use { "akinsho/toggleterm.nvim", tag = "v2.*", config = function()
+        require("toggleterm").setup()
+    end }
+
+    -- Line
+    use {
+        "nvim-lualine/lualine.nvim",
+        requires = { "kyazdani42/nvim-web-devicons", opt = true },
+        config = function()
+            require("lualine").setup({
+                options = {
+                    theme = "dracula-nvim"
+                }
+            })
         end
     }
 

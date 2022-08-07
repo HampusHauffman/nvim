@@ -48,6 +48,12 @@ opt.tabstop = 4 -- 1 tab == 4 spaces
 opt.smartindent = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
 
 -----------------------------------------------------------
+-- List
+-----------------------------------------------------------
+
+opt.list = true
+-- opt.listchars:append "eol:↴"
+-----------------------------------------------------------
 -- Memory, CPU
 -----------------------------------------------------------
 opt.hidden = true -- Enable background buffers

@@ -18,6 +18,7 @@ local wk = require("which-key")
 
 wk.register({
     ["<CR>"] = "which_key_ignore", -- special label to hide it in the popup
+    ["h"] = "which_key_ignore",
     ["<Up>"] = "Select area",
     f = "Formatting",
     n = "File explorer",
@@ -26,4 +27,6 @@ wk.register({
     c = "Code action",
     Z = "Reload nvim init",
     s = "Save file",
+    g = "Git actions",
+    t = "Count + Terminal",
 }, { prefix = "<leader>" })

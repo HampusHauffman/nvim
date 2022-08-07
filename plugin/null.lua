@@ -6,5 +6,7 @@ require("null-ls").setup({
         require("null-ls").builtins.diagnostics.ktlint,
         -- require("null-ls").builtins.formatter.dart_format,
         -- require("null-ls").builtins.formatting.stylua,
+        require("null-ls").builtins.code_actions.gitsigns,
+
     },
 })

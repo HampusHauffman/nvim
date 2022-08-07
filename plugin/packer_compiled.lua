@@ -75,7 +75,7 @@ _G.packer_plugins = {
     url = "https://github.com//L3MON4D3/LuaSnip"
   },
   ["cinnamon.nvim"] = {
-    config = { "\27LJ\2\n\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\4\17scroll_limit\3ÿÿÿÿ\15\18extra_keymaps\2\15max_length\3ô\3\21override_keymaps\2\nsetup\rcinnamon\frequire\0" },
+    config = { "\27LJ\2\n\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\4\18extra_keymaps\2\17scroll_limit\3ÿÿÿÿ\15\15max_length\3ô\3\21override_keymaps\2\nsetup\rcinnamon\frequire\0" },
     loaded = true,
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/cinnamon.nvim",
     url = "https://github.com/declancm/cinnamon.nvim"
@@ -95,6 +95,11 @@ _G.packer_plugins = {
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/cmp-nvim-lsp",
     url = "https://github.com/hrsh7th/cmp-nvim-lsp"
   },
+  ["cmp-nvim-lua"] = {
+    loaded = true,
+    path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/cmp-nvim-lua",
+    url = "https://github.com/hrsh7th/cmp-nvim-lua"
+  },
   ["cmp-path"] = {
     loaded = true,
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/cmp-path",
@@ -110,6 +115,12 @@ _G.packer_plugins = {
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/dracula",
     url = "https://github.com/dracula/vim"
   },
+  ["fidget.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0" },
+    loaded = true,
+    path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/fidget.nvim",
+    url = "https://github.com/j-hui/fidget.nvim"
+  },
   ["flutter-tools.nvim"] = {
     config = { "\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18flutter-tools\frequire\0" },
     loaded = true,
@@ -120,6 +131,23 @@ _G.packer_plugins = {
     loaded = true,
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/friendly-snippets",
     url = "https://github.com/rafamadriz/friendly-snippets"
+  },
+  ["gitsigns.nvim"] = {
+    loaded = true,
+    path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/gitsigns.nvim",
+    url = "https://github.com/lewis6991/gitsigns.nvim"
+  },
+  ["indent-blankline.nvim"] = {
+    config = { "\27LJ\2\nB\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\21indent_blankline\frequire\0" },
+    loaded = true,
+    path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/indent-blankline.nvim",
+    url = "https://github.com/lukas-reineke/indent-blankline.nvim"
+  },
+  ["lualine.nvim"] = {
+    config = { "\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\ntheme\17dracula-nvim\nsetup\flualine\frequire\0" },
+    loaded = true,
+    path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/lualine.nvim",
+    url = "https://github.com/nvim-lualine/lualine.nvim"
   },
   ["mason-lspconfig.nvim"] = {
     loaded = true,
@@ -187,6 +215,12 @@ _G.packer_plugins = {
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/telescope.nvim",
     url = "https://github.com/nvim-telescope/telescope.nvim"
   },
+  ["toggleterm.nvim"] = {
+    config = { "\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0" },
+    loaded = true,
+    path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/toggleterm.nvim",
+    url = "https://github.com/akinsho/toggleterm.nvim"
+  },
   ["which-key.nvim"] = {
     loaded = true,
     path = "/Users/hampus/.local/share/nvim/site/pack/packer/start/which-key.nvim",
@@ -199,14 +233,30 @@ time([[Defining packer_plugins]], false)
 time([[Config for flutter-tools.nvim]], true)
 try_loadstring("\27LJ\2\n?\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\18flutter-tools\frequire\0", "config", "flutter-tools.nvim")
 time([[Config for flutter-tools.nvim]], false)
--- Config for: cinnamon.nvim
-time([[Config for cinnamon.nvim]], true)
-try_loadstring("\27LJ\2\n\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\4\17scroll_limit\3ÿÿÿÿ\15\18extra_keymaps\2\15max_length\3ô\3\21override_keymaps\2\nsetup\rcinnamon\frequire\0", "config", "cinnamon.nvim")
-time([[Config for cinnamon.nvim]], false)
+-- Config for: indent-blankline.nvim
+time([[Config for indent-blankline.nvim]], true)
+try_loadstring("\27LJ\2\nB\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\21indent_blankline\frequire\0", "config", "indent-blankline.nvim")
+time([[Config for indent-blankline.nvim]], false)
+-- Config for: fidget.nvim
+time([[Config for fidget.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0004\2\0\0B\0\2\1K\0\1\0\nsetup\vfidget\frequire\0", "config", "fidget.nvim")
+time([[Config for fidget.nvim]], false)
+-- Config for: toggleterm.nvim
+time([[Config for toggleterm.nvim]], true)
+try_loadstring("\27LJ\2\n8\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\15toggleterm\frequire\0", "config", "toggleterm.nvim")
+time([[Config for toggleterm.nvim]], false)
 -- Config for: null-ls.nvim
 time([[Config for null-ls.nvim]], true)
 try_loadstring("\27LJ\2\n5\0\0\3\0\3\0\0066\0\0\0'\2\1\0B\0\2\0029\0\2\0B\0\1\1K\0\1\0\nsetup\fnull-ls\frequire\0", "config", "null-ls.nvim")
 time([[Config for null-ls.nvim]], false)
+-- Config for: lualine.nvim
+time([[Config for lualine.nvim]], true)
+try_loadstring("\27LJ\2\nO\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\1\ntheme\17dracula-nvim\nsetup\flualine\frequire\0", "config", "lualine.nvim")
+time([[Config for lualine.nvim]], false)
+-- Config for: cinnamon.nvim
+time([[Config for cinnamon.nvim]], true)
+try_loadstring("\27LJ\2\n\0\0\3\0\4\0\a6\0\0\0'\2\1\0B\0\2\0029\0\2\0005\2\3\0B\0\2\1K\0\1\0\1\0\4\18extra_keymaps\2\17scroll_limit\3ÿÿÿÿ\15\15max_length\3ô\3\21override_keymaps\2\nsetup\rcinnamon\frequire\0", "config", "cinnamon.nvim")
+time([[Config for cinnamon.nvim]], false)
 if should_profile then save_profiles() end
 
 end)

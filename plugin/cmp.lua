@@ -56,14 +56,22 @@ local luasnip = require "luasnip"
 -- nvim-cmp setup
 local cmp = require "cmp"
 cmp.setup {
+    cmp = {
+        source_priority = {
+            nvim_lsp = 1000,
+            luasnip = 750,
+            buffer = 500,
+            path = 250,
+        },
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
     },
-
-    sources = {
+    sources = cmp.config.sources({
         { name = "nvim_lsp" },
-        { name = "luasnip" },
-    },
+        { name = "luasnip" }, -- For luasnip users.
+        { name = "nvim_lua" },
+    })
 }
