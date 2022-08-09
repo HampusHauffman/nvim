@@ -45,17 +45,13 @@ require "mason-lspconfig".setup_handlers {
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require "cmp_nvim_lsp".update_capabilities(capabilities)
 
-capabilities.textDocument.completion.completionItem.snippetSupport = true
-capabilities.textDocument.completion.completionItem.preselectSupport = true
-capabilities.textDocument.completion.completionItem.insertReplaceSupport = true
-capabilities.textDocument.completion.completionItem.labelDetailsSupport = true
-
+local keymap = require "keymaps".cmp
 -- luasnip setup
 local luasnip = require "luasnip"
-
 -- nvim-cmp setup
 local cmp = require "cmp"
 cmp.setup {
+    mapping = keymap,
     cmp = {
         source_priority = {
             nvim_lsp = 1000,

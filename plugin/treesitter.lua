@@ -1,11 +1,16 @@
-require 'nvim-treesitter.configs'.setup {
+local keymaps = require "keymaps".treesitter
 
+require "nvim-treesitter.configs".setup {
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,
 
     -- Automatically install missing parsers when entering buffer
     auto_install = true,
 
+    incremental_selection = {
+        enable = true,
+        keymaps = keymaps,
+    },
 
     highlight = {
         -- `false` will disable the whole extension
@@ -16,14 +21,5 @@ require 'nvim-treesitter.configs'.setup {
         -- Using this option may slow down your editor, and you may see some duplicate highlights.
         -- Instead of true it can also be a list of languages
         additional_vim_regex_highlighting = false,
-    },
-
-    incremental_selection = {
-        enable = true,
-        keymaps = {
-            init_selection = "<leader><up>",
-            node_incremental = "<leader><up>",
-            node_decremental = "<leader><down>"
-        },
     },
 }

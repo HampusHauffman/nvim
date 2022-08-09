@@ -34,10 +34,10 @@ end
 -- Install plugins
 return packer.startup(function(use)
     -- Add you plugins here:
-    use "wbthomason/packer.nvim" -- packer can manage itself
+    use "wbthomason/packer.nvim"
 
     -- Theme
-    use({ "dracula/vim", as = "dracula" })
+    use({ "Mofiqul/dracula.nvim" })
 
     -- Dev Icons
     use({ "kyazdani42/nvim-web-devicons" })
@@ -63,12 +63,10 @@ return packer.startup(function(use)
     use({ "hrsh7th/cmp-cmdline" })
     use({ "hrsh7th/cmp-nvim-lua" })
 
-    -- Package manager for LSP
-    use({
-        "williamboman/mason.nvim",
-        "neovim/nvim-lspconfig",
-        "williamboman/mason-lspconfig.nvim",
-    })
+    -- LSP
+    use({ "neovim/nvim-lspconfig" })
+    use({ "williamboman/mason.nvim" })
+    use({ "williamboman/mason-lspconfig.nvim" })
 
     -- LSP Loading icon
     use { "j-hui/fidget.nvim", config = function()
@@ -78,37 +76,38 @@ return packer.startup(function(use)
     -- LSP Flutter
     use({
         "akinsho/flutter-tools.nvim",
-        requires = "nvim-lua/plenary.nvim",
+        rquires = "nvim-lua/plenary.nvim",
         config = function()
             require("flutter-tools").setup({}) -- use defaults
         end,
     })
 
+    -- LSP Prisma
+    use({ "pantharshit00/vim-prisma" })
+
     -- Snippets source for nvim-cmp
-    use({ "/L3MON4D3/LuaSnip" })
+    use({ "L3MON4D3/LuaSnip" })
     use({ "saadparwaiz1/cmp_luasnip" })
     use({ "rafamadriz/friendly-snippets" })
 
-    -- Linting
-    use({
-        "jose-elias-alvarez/null-ls.nvim",
+    use {
+        "folke/trouble.nvim",
+        requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("null-ls").setup()
-        end,
-        requires = { "nvim-lua/plenary.nvim" },
-    })
-
+            require("trouble").setup {
+            }
+        end
+    }
 
     -- Telescope (fuzz)
     use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.0",
-        -- or                            , branch = '0.1.x',
+        "nvim-telescope/telescope.nvim", tag = "0.1.x",
         requires = { { "nvim-lua/plenary.nvim" } }
     }
 
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
-    -- Smooth Scrolling
+    -- Smooth Scrolling use {
     use {
         "declancm/cinnamon.nvim",
         config = function()
@@ -124,20 +123,17 @@ return packer.startup(function(use)
     -- Git integration
     use {
         "lewis6991/gitsigns.nvim",
-        tag = "release", -- To use the latest releasu
+        tag = "release",
     }
 
     -- Blank line
     use { "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require("indent_blankline").setup {
-            }
+            require("indent_blankline").setup {}
         end }
 
     -- Terminal
-    use { "akinsho/toggleterm.nvim", tag = "v2.*", config = function()
-        require("toggleterm").setup()
-    end }
+    use { "akinsho/toggleterm.nvim", tag = "v2.*"}
 
     -- Line
     use {
@@ -154,6 +150,7 @@ return packer.startup(function(use)
 
     -- Which key
     use({ "folke/which-key.nvim" })
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then

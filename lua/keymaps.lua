@@ -1,7 +1,7 @@
+local M = {}
 -----------------------------------------------------------
--- Define keymaps of Neovim and installed plugins.
+-- Key maps
 -----------------------------------------------------------
-
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then
@@ -49,6 +49,7 @@ map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua<CR>")
 
 -- Reload current file
 map("n", "<leader>r", ":so %<CR>")
+
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
@@ -88,99 +89,76 @@ map("n", "<leader>e", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
 map("n", "fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
 map("n", "fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
 
-require("telescope").setup {
-    defaults = {
-        mappings = {
-            i = {
-                ["kj"] = "close",
-                ["jk"] = "close",
-                ["<TAB>"] = "move_selection_previous",
-                ["<S-TAB>"] = "move_selection_next",
-            },
-        },
-    },
+M.telescope = {
+    i = {
+        ["kj"] = "close",
+        ["jk"] = "close",
+        ["<TAB>"] = "move_selection_previous",
+        ["<S-TAB>"] = "move_selection_next",
+    }
 }
-
 
 -----------------------------------------------------------
 -- AutoComplete
 -----------------------------------------------------------
 local luasnip = require "luasnip"
-
 local cmp = require "cmp"
-cmp.setup {
-    mapping = {
-        ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-        ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
-        ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-        ["<C-y>"] = cmp.config.disable,
-        ["<C-e>"] = cmp.mapping {
-            i = cmp.mapping.abort(),
-            c = cmp.mapping.close(),
-        },
-        ["<CR>"] = cmp.mapping.confirm { select = true },
-        ["<Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_next_item()
-            elseif luasnip.expandable() then
-                luasnip.expand()
-            elseif luasnip.expand_or_jumpable() then
-                luasnip.expand_or_jump()
-            else
-                fallback()
-            end
-        end, {
-            "i",
-            "s",
-        }),
-        ["<S-Tab>"] = cmp.mapping(function(fallback)
-            if cmp.visible() then
-                cmp.select_prev_item()
-            elseif luasnip.jumpable(-1) then
-                luasnip.jump(-1)
-            else
-                fallback()
-            end
-        end, {
-            "i",
-            "s",
-        }),
-    },
-    sources = {
-        { name = "nvim_lsp" },
-        { name = "luasnip" },
-    },
+M.cmp = {
+    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
+    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+    ["<C-y>"] = cmp.config.disable,
+    ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
     ["<CR>"] = cmp.mapping.confirm { select = true },
+    ["<Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_next_item()
+        elseif luasnip.expandable() then
+            luasnip.expand()
+        elseif luasnip.expand_or_jumpable() then
+            luasnip.expand_or_jump()
+        else
+            fallback()
+        end
+    end, {
+        "i",
+        "s",
+    }),
+    ["<S-Tab>"] = cmp.mapping(function(fallback)
+        if cmp.visible() then
+            cmp.select_prev_item()
+        elseif luasnip.jumpable(-1) then
+            luasnip.jump(-1)
+        else
+            fallback()
+        end
+    end, {
+        "i",
+        "s",
+    }),
 }
 
-
-require("gitsigns").setup {
-
-    on_attach = function(bufnr)
-        -- Actions
-        map("n", "<leader>gs", ":Gitsigns stage_hunk<CR>")
-        map("v", "<leader>gs", ":Gitsigns stage_hunk<CR>")
-        map("n", "<leader>gr", ":Gitsigns reset_hunk<CR>")
-        map("v", "<leader>gr", ":Gitsigns reset_hunk<CR>")
-        map("n", "<leader>gS", "<cmd>Gitsigns stage_buffer<CR>")
-        map("n", "<leader>gu", "<cmd>Gitsigns undo_stage_hunk<CR>")
-        map("n", "<leader>gR", "<cmd>Gitsigns reset_buffer<CR>")
-        map("n", "<leader>gp", "<cmd>Gitsigns preview_hunk<CR>")
-        map("n", "<leader>gb", '<cmd>lua require"gitsigns".blame_line{full=true}<CR>')
-        map("n", "<leader>tB", "<cmd>Gitsigns toggle_current_line_blame<CR>")
-        map("n", "<leader>gd", "<cmd>Gitsigns diffthis<CR>")
-        map("n", "<leader>gD", "<cmd>Gitsigns toggle_deleted<CR>")
-
-        -- Text object
---        map("o", "ih", ":<C-U>Gitsigns select_hunk<CR>")
---        map("x", "ih", ":<C-U>Gitsigns select_hunk<CR>")
-    end
-
+-----------------------------------------------------------
+--  Treesitter
+-----------------------------------------------------------
+M.treesitter = {
+    init_selection = "<S-up>",
+    node_incremental = "<S-up>",
+    node_decremental = "<S-down>"
 }
+-----------------------------------------------------------
+--  Terminal
+-----------------------------------------------------------
+map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm"<CR>', {
+    silent = true,
+    noremap = true,
+})
+map("t", "<esc>", [[<C-\><C-n>]])
+map("t", "jk", [[<C-\><C-n>]])
+map("t", "kj", [[<C-\><C-n>]])
+map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
+map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
+map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 
--- Terminal
-vim.cmd [[autocmd TermEnter term://*toggleterm#* tnoremap <silent><leader>t <Cmd>exe v:count1 . "ToggleTerm"<CR>]]
-vim.cmd [[nnoremap <silent><leader>t <Cmd>exe v:count1 . "ToggleTerm"<CR>]]
--- vim.cmd [[inoremap <silent><leader>T <Esc><Cmd>exe v:count1 . "ToggleTerm"<CR>]]
-
+return M

@@ -12,8 +12,8 @@ local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 -----------------------------------------------------------
 -- General
 -----------------------------------------------------------
-opt.mouse = 'a' -- Enable mouse support
-opt.clipboard = 'unnamedplus' -- Copy/paste to system clipboard
+opt.mouse = "a" -- Enable mouse support
+opt.clipboard = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile = false -- Don't use swapfile
 -- opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 opt.undofile = true -- Persistant undo
@@ -22,6 +22,16 @@ opt.undofile = true -- Persistant undo
 -- Color
 -----------------------------------------------------------
 vim.cmd [[colorscheme dracula]]
+local colors = require "dracula".colors()
+local highlight = function(group, fg, bg)
+    fg = fg and "guifg=" .. fg or "guifg=NONE"
+    bg = bg and "guibg=" .. bg or "guibg=NONE"
+
+    vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
+end
+highlight("NeoTreeNormal", nil, colors.menu)
+highlight("NeoTreeNormalNC", nil, colors.menu)
+highlight("VertSplit", colors.menu, colors.menu)
 
 -----------------------------------------------------------
 -- Neovim UI
@@ -29,7 +39,7 @@ vim.cmd [[colorscheme dracula]]
 opt.number = true -- Show line number
 opt.relativenumber = true
 opt.showmatch = true -- Highlight matching parenthesis
-opt.foldmethod = 'marker' -- Enable folding (default 'foldmarker')
+opt.foldmethod = "marker" -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
 opt.splitright = true -- Vertical split to the right
 opt.splitbelow = true -- Horizontal split to the bottom
