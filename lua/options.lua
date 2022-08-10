@@ -29,9 +29,12 @@ local highlight = function(group, fg, bg)
 
     vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
 end
-highlight("NeoTreeNormal", nil, colors.menu)
-highlight("NeoTreeNormalNC", nil, colors.menu)
+highlight("NeoTreeNormal", colors.fg, colors.menu)
+highlight("NeoTreeNormalNC", colors.fg, colors.menu)
 highlight("VertSplit", colors.menu, colors.menu)
+highlight("NeoTreeFloatBorder", colors.menu, colors.menu)
+highlight("NeoTreeFloatTitle", colors.menu, colors.menu)
+highlight("NeoTreeTitleBar", colors.fg, colors.menu)
 
 -----------------------------------------------------------
 -- Neovim UI
