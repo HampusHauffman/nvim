@@ -21,7 +21,7 @@ end
 vim.cmd [[
   augroup packer_user_config
     autocmd!
-    autocmd BufWritePost packer_init.lua source <afile> | PackerSync
+    autocmd BufWritePost packer.lua source <afile> | PackerSync
   augroup end
 ]]
 
@@ -51,6 +51,30 @@ return packer.startup(function(use)
             "MunifTanjim/nui.nvim",
         },
     })
+
+    -- Git side status
+    use {
+        "lewis6991/gitsigns.nvim",
+        tag = "release", -- To use the latest release
+        config = {
+            require("gitsigns").setup()
+        }
+    }
+
+    --[[ Snazzy buffline
+    use { "akinsho/bufferline.nvim",
+        tag = "v2.*",
+        requires = "kyazdani42/nvim-web-devicons",
+        config = {
+            require("bufferline").setup {
+                options = {
+                    mode = "tabs",
+                }
+            }
+        }
+    }--]]
+
+
 
     -- Syntax highlighting
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
@@ -120,12 +144,6 @@ return packer.startup(function(use)
         end
     }
 
-    -- Git integration
-    use {
-        "lewis6991/gitsigns.nvim",
-        tag = "release",
-    }
-
     -- Blank line
     use { "lukas-reineke/indent-blankline.nvim",
         config = function()
@@ -133,7 +151,7 @@ return packer.startup(function(use)
         end }
 
     -- Terminal
-    use { "akinsho/toggleterm.nvim", tag = "v2.*"}
+    use { "akinsho/toggleterm.nvim", tag = "v2.*" }
 
     -- Line
     use {

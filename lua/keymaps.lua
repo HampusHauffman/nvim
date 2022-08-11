@@ -73,7 +73,7 @@ map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 map("n", "<f14>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 map("n", "<f2>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
-map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+--map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
 map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
 map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
@@ -81,7 +81,6 @@ map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_fo
 -----------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
-
 -- map("n", "E", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
 map("n", "ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
 map("n", "fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
@@ -93,8 +92,8 @@ M.telescope = {
     i = {
         ["kj"] = "close",
         ["jk"] = "close",
-        ["<TAB>"] = "move_selection_previous",
-        ["<S-TAB>"] = "move_selection_next",
+        ["<TAB>"] = "cycle_history_next",
+        ["<S-TAB>"] = "cycle_history_previous",
     }
 }
 

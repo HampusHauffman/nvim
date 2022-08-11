@@ -17,6 +17,7 @@ opt.clipboard = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile = false -- Don't use swapfile
 -- opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 opt.undofile = true -- Persistant undo
+opt.cul = true
 
 -----------------------------------------------------------
 -- Color
@@ -35,7 +36,8 @@ highlight("VertSplit", colors.menu, colors.menu)
 highlight("NeoTreeFloatBorder", colors.menu, colors.menu)
 highlight("NeoTreeFloatTitle", colors.menu, colors.menu)
 highlight("NeoTreeTitleBar", colors.fg, colors.menu)
-
+highlight("MsgArea", colors.cyan, colors.menu)
+highlight("CursorLineNr", colors.cyan, nil)
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
