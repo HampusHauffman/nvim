@@ -1,3 +1,27 @@
+-- :set buflisted makes the buff show up in ls
+vim.api.nvim_create_user_command("AWD", function()
+    --   print(vim.api.nvim_buf_get_name(0))
+    --  --   print(vim.api.nvim_win_get_number(vim.api.nvim_get_current_win()))
+    local window_handle = vim.api.nvim_get_current_win()
+    --    print(vim.api.nvim_buf_get_name(0))
+    --   vim.api.nvim_win_set_width(window_handle, 38)
+    --   vim.api.nvim_win_set_buf("neo")
+
+    -- Get bufNr and convert to win id
+    local win_number = vim.api.nvim_exec([[
+            echo bufwinid(bufnr("neo-tree"))
+        ]],
+        true)
+    if (tonumber(win_number) ~= -1) then
+        vim.api.nvim_win_set_width(tonumber(win_number), 30)
+    end
+    print(win_number)
+
+end, {})
+
+
+
+
 -----------------------------------------------------------
 -- General Neovim settings and configuration
 -----------------------------------------------------------
@@ -18,6 +42,7 @@ opt.swapfile = false -- Don't use swapfile
 -- opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 opt.undofile = true -- Persistant undo
 opt.cul = true
+opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
 
 -----------------------------------------------------------
 -- Color

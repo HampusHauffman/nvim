@@ -56,9 +56,9 @@ return packer.startup(function(use)
     use {
         "lewis6991/gitsigns.nvim",
         tag = "release", -- To use the latest release
-        config = {
+        config = function()
             require("gitsigns").setup()
-        }
+        end
     }
 
     --[[ Snazzy buffline
@@ -114,12 +114,17 @@ return packer.startup(function(use)
     use({ "saadparwaiz1/cmp_luasnip" })
     use({ "rafamadriz/friendly-snippets" })
 
+    -- Automatic character pairs
+    use {
+        "windwp/nvim-autopairs",
+        config = function() require("nvim-autopairs").setup {} end
+    }
+
     use {
         "folke/trouble.nvim",
         requires = "kyazdani42/nvim-web-devicons",
         config = function()
-            require("trouble").setup {
-            }
+            require("trouble").setup {}
         end
     }
 
@@ -164,6 +169,12 @@ return packer.startup(function(use)
                 }
             })
         end
+    }
+
+    -- Stabalize splits so they dont jump around
+    use {
+        "luukvbaal/stabilize.nvim",
+        config = function() require("stabilize").setup() end
     }
 
     -- Which key
