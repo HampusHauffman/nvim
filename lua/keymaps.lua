@@ -10,7 +10,7 @@ local function map(mode, lhs, rhs, opts)
     vim.api.nvim_set_keymap(mode, lhs, rhs, options)
 end
 
--- Change leader to a comma
+-- Change leader to a space
 vim.g.mapleader = " "
 vim.cmd [[nnoremap <Space> <Nop>]]
 
@@ -24,12 +24,14 @@ map("", "<down>", "<nop>")
 map("", "<left>", "<nop>")
 map("", "<right>", "<nop>")
 
+map("n","ö","$")
+
 -- Map Esc to kk and jj
 map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
 
 -- Toggle auto-indenting for code paste
-map("n", "<F2>", ":set invpaste paste?<CR>")
+--map("n", "<F2>", ":set invpaste paste?<CR>")
 
 -- Move around splits using Ctrl + {h,j,k,l}
 map("n", "<C-h>", "<C-w>h")
@@ -57,7 +59,7 @@ map("n", "<leader>r", ":so %<CR>")
 -----------------------------------------------------------
 -- Neotree
 -----------------------------------------------------------
-map("n", "<leader>n", ":Neotree focus reveal_force_cwd<CR>")
+map("n", "<leader>n", ":Neotree float focus reveal_force_cwd<CR>")
 
 -----------------------------------------------------------
 -- LSP
@@ -148,7 +150,7 @@ M.treesitter = {
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
-map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm"<CR>', {
+map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=60"<CR>', {
     silent = true,
     noremap = true,
 })

@@ -1,25 +1,62 @@
 -- :set buflisted makes the buff show up in ls
 vim.api.nvim_create_user_command("AWD", function()
-    --   print(vim.api.nvim_buf_get_name(0))
-    --  --   print(vim.api.nvim_win_get_number(vim.api.nvim_get_current_win()))
-    local window_handle = vim.api.nvim_get_current_win()
-    --    print(vim.api.nvim_buf_get_name(0))
-    --   vim.api.nvim_win_set_width(window_handle, 38)
-    --   vim.api.nvim_win_set_buf("neo")
 
-    -- Get bufNr and convert to win id
-    local win_number = vim.api.nvim_exec([[
-            echo bufwinid(bufnr("neo-tree"))
-        ]],
-        true)
-    if (tonumber(win_number) ~= -1) then
-        vim.api.nvim_win_set_width(tonumber(win_number), 30)
+    -- Get winId of buf term
+    local get_win_id = function(buff_name)
+        vim.g.buff_name = buff_name
+        return tonumber(vim.api.nvim_exec([[
+                echo bufwinid(bufnr(buff_name))
+            ]],
+            true))
     end
-    print(win_number)
+
+    local move_to_left = function(win_name)
+        local win_id = get_win_id(win_name)
+        vim.g.win_id = win_id
+        if (win_id ~= -1) then
+            vim.api.nvim_exec([[
+                call win_execute(win_id, 'vert topleft split')
+            ]], false)
+            vim.api.nvim_win_close(win_id, false)
+            vim.api.nvim_win_set_width(get_win_id(win_name), 60)
+        end
+    end
+
+    local move_to_right = function(win_name)
+        local win_id = get_win_id(win_name)
+        vim.g.win_id = win_id
+        if (win_id ~= -1) then
+            vim.api.nvim_exec([[
+                call win_execute(win_id, 'vert botright split')
+            ]], false)
+            vim.api.nvim_win_close(win_id, false)
+            vim.api.nvim_win_set_width(get_win_id(win_name), 60)
+        end
+    end
+
+    local move_to_bot = function(win_name)
+        local win_id = get_win_id(win_name)
+        vim.g.win_id = win_id
+        if (win_id ~= -1) then
+            vim.api.nvim_exec([[
+                call win_execute(win_id, "botright split")
+            ]], false)
+            vim.api.nvim_win_close(win_id, false)
+            vim.api.nvim_win_set_height(get_win_id(win_name), 10)
+        end
+    end
+
+    local move_neo_tree = function()
+        vim.api.nvim_exec([[
+        :Neotree show left
+      ]] , false)
+    end
+
+    move_to_right "term"
+    move_neo_tree()
+
 
 end, {})
-
-
 
 
 -----------------------------------------------------------
@@ -42,7 +79,7 @@ opt.swapfile = false -- Don't use swapfile
 -- opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 opt.undofile = true -- Persistant undo
 opt.cul = true
-opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
+-- opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
 
 -----------------------------------------------------------
 -- Color
@@ -59,7 +96,7 @@ highlight("NeoTreeNormal", colors.fg, colors.menu)
 highlight("NeoTreeNormalNC", colors.fg, colors.menu)
 highlight("VertSplit", colors.menu, colors.menu)
 highlight("NeoTreeFloatBorder", colors.menu, colors.menu)
-highlight("NeoTreeFloatTitle", colors.menu, colors.menu)
+highlight("NeoTreeFloatTitle", colors.cyan, colors.menu)
 highlight("NeoTreeTitleBar", colors.fg, colors.menu)
 highlight("MsgArea", colors.cyan, colors.menu)
 highlight("CursorLineNr", colors.cyan, nil)
@@ -78,6 +115,7 @@ opt.smartcase = true -- Ignore lowercase for the whole pattern
 opt.linebreak = true -- Wrap on word boundary
 opt.termguicolors = true -- Enable 24-bit RGB colors
 opt.laststatus = 3 -- Set global statusline
+opt.ea = false
 
 -----------------------------------------------------------
 -- Tabs, indent

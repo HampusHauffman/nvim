@@ -3,6 +3,7 @@ require("toggleterm").setup({
     terminal_mappings = true,
     persist_size = true,
     shade_terminals = false,
+    direction = 'vertical',
     highlights = {
         Normal = {
             guibg = require "dracula".colors().menu,
