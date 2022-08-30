@@ -59,7 +59,7 @@ map("n", "<leader>r", ":so %<CR>")
 -----------------------------------------------------------
 -- Neotree
 -----------------------------------------------------------
-map("n", "<leader>n", ":Neotree float focus reveal_force_cwd<CR>")
+map("n", "<leader>n", ":Neotree left focus reveal<CR>")
 
 -----------------------------------------------------------
 -- LSP
@@ -73,6 +73,7 @@ map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
 map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
 map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+map("v", "<leader>c", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
 map("n", "<f14>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 map("n", "<f2>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 --map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
@@ -150,13 +151,13 @@ M.treesitter = {
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
-map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=60"<CR>', {
+map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
     silent = true,
     noremap = true,
 })
 map("t", "<esc>", [[<C-\><C-n>]])
-map("t", "jk", [[<C-\><C-n>]])
-map("t", "kj", [[<C-\><C-n>]])
+--map("t", "jk", [[<C-\><C-n>]])
+--map("t", "kj", [[<C-\><C-n>]])
 map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
 map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
 map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])

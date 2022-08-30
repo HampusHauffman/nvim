@@ -180,6 +180,16 @@ return packer.startup(function(use)
     -- Which key
     use({ "folke/which-key.nvim" })
 
+    -- Splits
+    use { "beauwilliams/focus.nvim", config = function() require("focus").setup({
+            excluded_filetypes = { "fterm", "term", "toggleterm" }
+        })
+    end }
+
+    use { "RRethy/vim-illuminate" }
+
+    use "nvim-treesitter/nvim-treesitter-context"
+
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
     if packer_bootstrap then
