@@ -175,7 +175,7 @@ return packer.startup(function(use)
     use { "RRethy/vim-illuminate" }
 
 
-    use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+    use { "kevinhwang91/nvim-bqf", ft = "qf" }
 
 
     -- Automatically set up your configuration after cloning packer.nvim
