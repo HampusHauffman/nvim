@@ -60,6 +60,7 @@ map("n", "<leader>r", ":so %<CR>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader>n", ":Neotree left focus reveal<CR>")
+map("n", "<leader>N", ":Neotree float git_status<CR>")
 
 -----------------------------------------------------------
 -- LSP
