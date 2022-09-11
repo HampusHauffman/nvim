@@ -24,7 +24,7 @@ map("", "<down>", "<nop>")
 map("", "<left>", "<nop>")
 map("", "<right>", "<nop>")
 
-map("n","ö","$")
+map("n", "ö", "$")
 
 -- Map Esc to kk and jj
 map("i", "jk", "<Esc>")
@@ -75,6 +75,7 @@ map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
 map("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
 map("v", "<leader>c", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
 map("n", "<f14>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+map("n", "<S-f2>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
 map("n", "<f2>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
 --map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
 map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
@@ -155,12 +156,17 @@ map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
     silent = true,
     noremap = true,
 })
+map("t", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
+    silent = true,
+    noremap = true,
+})
 map("t", "<esc>", [[<C-\><C-n>]])
---map("t", "jk", [[<C-\><C-n>]])
---map("t", "kj", [[<C-\><C-n>]])
+map("t", "jk", [[<C-\><C-n>]])
+map("t", "kj", [[<C-\><C-n>]])
 map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
 map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
 map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
 map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 
+-- Git
 return M

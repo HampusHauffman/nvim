@@ -48,15 +48,21 @@ vim.api.nvim_create_user_command("AWD", function()
 
     local move_neo_tree = function()
         vim.api.nvim_exec([[
-        :Neotree show left
+        Neotree close
+        Neotree show left
       ]] , false)
     end
 
-    move_to_right "term"
+    move_to_bot "term"
     move_neo_tree()
 
 
 end, {})
+
+vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
+    pattern = { "*" },
+    command = ""
+})
 
 
 -----------------------------------------------------------

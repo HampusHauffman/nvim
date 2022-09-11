@@ -27,6 +27,5 @@ wk.register({
     c = "Code action",
     Z = "Reload nvim init",
     s = "Save file",
-    g = "Git actions",
     t = "Count + Terminal",
 }, { prefix = "<leader>" })

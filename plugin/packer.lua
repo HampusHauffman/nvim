@@ -42,7 +42,7 @@ return packer.startup(function(use)
     -- Dev Icons
     use({ "kyazdani42/nvim-web-devicons" })
 
-    -- Tree
+    -- NeoTree
     use({
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
@@ -61,23 +61,9 @@ return packer.startup(function(use)
         end
     }
 
-    --[[ Snazzy buffline
-    use { "akinsho/bufferline.nvim",
-        tag = "v2.*",
-        requires = "kyazdani42/nvim-web-devicons",
-        config = {
-            require("bufferline").setup {
-                options = {
-                    mode = "tabs",
-                }
-            }
-        }
-    }--]]
-
-
-
     -- Syntax highlighting
     use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
+    use "nvim-treesitter/nvim-treesitter-context"
 
     -- Autocomplete
     use({ "hrsh7th/nvim-cmp" })
@@ -144,7 +130,7 @@ return packer.startup(function(use)
                 extra_keymaps = true,
                 override_keymaps = true,
                 max_length = 500,
-                scroll_limit = -1,
+                scroll_limit = 100,
             }
         end
     }
@@ -188,7 +174,9 @@ return packer.startup(function(use)
 
     use { "RRethy/vim-illuminate" }
 
-    use "nvim-treesitter/nvim-treesitter-context"
+
+    use {'kevinhwang91/nvim-bqf', ft = 'qf'}
+
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins
