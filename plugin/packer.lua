@@ -1,4 +1,3 @@
------------------------------------------------------------
 -- Automatically install packer
 local fn = vim.fn
 local install_path = fn.stdpath "data" .. "/site/pack/packer/start/packer.nvim"
@@ -34,23 +33,24 @@ end
 -- Install plugins
 return packer.startup(function(use)
     -- Add you plugins here:
-    use "wbthomason/packer.nvim"
+    use { "wbthomason/packer.nvim" }
 
     -- Theme
-    use({ "Mofiqul/dracula.nvim" })
+    use { "Mofiqul/dracula.nvim" }
 
     -- Dev Icons
-    use({ "kyazdani42/nvim-web-devicons" })
+    use { "kyazdani42/nvim-web-devicons" }
 
     -- NeoTree
-    use({
+    use {
         "nvim-neo-tree/neo-tree.nvim",
         branch = "v2.x",
         requires = {
             "nvim-lua/plenary.nvim",
             "MunifTanjim/nui.nvim",
+            "kyazdani42/nvim-web-devicons",
         },
-    })
+    }
 
     -- Git side status
     use {
@@ -62,48 +62,60 @@ return packer.startup(function(use)
     }
 
     -- Syntax highlighting
-    use({ "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" })
-    use "nvim-treesitter/nvim-treesitter-context"
+    use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
+    -- Show current context as top line
+    use { "nvim-treesitter/nvim-treesitter-context" }
 
     -- Autocomplete
-    use({ "hrsh7th/nvim-cmp" })
-    use({ "hrsh7th/cmp-nvim-lsp" })
-    use({ "hrsh7th/cmp-buffer" })
-    use({ "hrsh7th/cmp-path" })
-    use({ "hrsh7th/cmp-cmdline" })
-    use({ "hrsh7th/cmp-nvim-lua" })
+    use { "hrsh7th/nvim-cmp" }
+    use { "hrsh7th/cmp-nvim-lsp" }
+    use { "hrsh7th/cmp-buffer" }
+    use { "hrsh7th/cmp-path" }
+    use { "hrsh7th/cmp-cmdline" }
+    use { "hrsh7th/cmp-nvim-lua" }
 
     -- LSP
-    use({ "neovim/nvim-lspconfig" })
-    use({ "williamboman/mason.nvim" })
-    use({ "williamboman/mason-lspconfig.nvim" })
+    use { "neovim/nvim-lspconfig" }
+
+    -- Language provider installer
+    use { "williamboman/mason.nvim" }
+    use { "williamboman/mason-lspconfig.nvim" }
 
     -- LSP Loading icon
     use { "j-hui/fidget.nvim", config = function()
         require "fidget".setup {}
-    end }
+    end
+    }
 
     -- LSP Flutter
-    use({
+    use {
         "akinsho/flutter-tools.nvim",
         rquires = "nvim-lua/plenary.nvim",
         config = function()
             require("flutter-tools").setup({}) -- use defaults
-        end,
-    })
+        end
+    }
 
     -- LSP Prisma
-    use({ "pantharshit00/vim-prisma" })
+    use { "pantharshit00/vim-prisma" }
 
     -- Snippets source for nvim-cmp
-    use({ "L3MON4D3/LuaSnip" })
-    use({ "saadparwaiz1/cmp_luasnip" })
-    use({ "rafamadriz/friendly-snippets" })
+    use { "L3MON4D3/LuaSnip" }
+    use { "saadparwaiz1/cmp_luasnip" }
+    use { "rafamadriz/friendly-snippets" }
 
     -- Automatic character pairs
     use {
         "windwp/nvim-autopairs",
-        config = function() require("nvim-autopairs").setup {} end
+        config = function()
+            require("nvim-autopairs").setup {}
+            local cmp_autopairs = require "nvim-autopairs.completion.cmp"
+            local cmp = require "cmp"
+            cmp.event:on(
+                "confirm_done",
+                cmp_autopairs.on_confirm_done()
+            )
+        end
     }
 
     use {
@@ -120,7 +132,9 @@ return packer.startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } }
     }
 
-    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+    use {
+        "nvim-telescope/telescope-fzf-native.nvim", run = "make"
+    }
 
     -- Smooth Scrolling use {
     use {
@@ -136,10 +150,14 @@ return packer.startup(function(use)
     }
 
     -- Blank line
-    use { "lukas-reineke/indent-blankline.nvim",
+    use {
+        "lukas-reineke/indent-blankline.nvim",
         config = function()
-            require("indent_blankline").setup {}
-        end }
+            require("indent_blankline").setup {
+                filetype_exclude = { "dashboard" }
+            }
+        end
+    }
 
     -- Terminal
     use { "akinsho/toggleterm.nvim", tag = "v2.*" }
@@ -158,24 +176,34 @@ return packer.startup(function(use)
     }
 
     -- Stabalize splits so they dont jump around
-    use {
-        "luukvbaal/stabilize.nvim",
-        config = function() require("stabilize").setup() end
+    use { "luukvbaal/stabilize.nvim",
+        config = function()
+            require("stabilize").setup()
+        end
     }
 
     -- Which key
     use({ "folke/which-key.nvim" })
 
-    -- Splits
-    use { "beauwilliams/focus.nvim", config = function() require("focus").setup({
-            excluded_filetypes = { "fterm", "term", "toggleterm" }
-        })
-    end }
-
+    -- Highlight words that match cursos
     use { "RRethy/vim-illuminate" }
 
-
+    -- Better quickfix
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
+
+
+    use { "folke/zen-mode.nvim", config = function()
+        require("zen-mode").setup {
+            window = {
+                height = 0.90, -- height of the Zen window
+                options = {
+                    signcolumn = "no", -- disable signcolumn
+                },
+            }
+        }
+    end }
+
+    use { "glepnir/dashboard-nvim"}
 
 
     -- Automatically set up your configuration after cloning packer.nvim

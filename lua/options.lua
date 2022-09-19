@@ -1,78 +1,6 @@
--- :set buflisted makes the buff show up in ls
-vim.api.nvim_create_user_command("AWD", function()
-
-    -- Get winId of buf term
-    local get_win_id = function(buff_name)
-        vim.g.buff_name = buff_name
-        return tonumber(vim.api.nvim_exec([[
-                echo bufwinid(bufnr(buff_name))
-            ]],
-            true))
-    end
-
-    local move_to_left = function(win_name)
-        local win_id = get_win_id(win_name)
-        vim.g.win_id = win_id
-        if (win_id ~= -1) then
-            vim.api.nvim_exec([[
-                call win_execute(win_id, 'vert topleft split')
-            ]], false)
-            vim.api.nvim_win_close(win_id, false)
-            vim.api.nvim_win_set_width(get_win_id(win_name), 60)
-        end
-    end
-
-    local move_to_right = function(win_name)
-        local win_id = get_win_id(win_name)
-        vim.g.win_id = win_id
-        if (win_id ~= -1) then
-            vim.api.nvim_exec([[
-                call win_execute(win_id, 'vert botright split')
-            ]], false)
-            vim.api.nvim_win_close(win_id, false)
-            vim.api.nvim_win_set_width(get_win_id(win_name), 60)
-        end
-    end
-
-    local move_to_bot = function(win_name)
-        local win_id = get_win_id(win_name)
-        vim.g.win_id = win_id
-        if (win_id ~= -1) then
-            vim.api.nvim_exec([[
-                call win_execute(win_id, "botright split")
-            ]], false)
-            vim.api.nvim_win_close(win_id, false)
-            vim.api.nvim_win_set_height(get_win_id(win_name), 10)
-        end
-    end
-
-    local move_neo_tree = function()
-        vim.api.nvim_exec([[
-        Neotree close
-        Neotree show left
-      ]] , false)
-    end
-
-    move_to_bot "term"
-    move_neo_tree()
-
-
-end, {})
-
-vim.api.nvim_create_autocmd({ "BufEnter", "BufWinEnter" }, {
-    pattern = { "*" },
-    command = ""
-})
-
-
 -----------------------------------------------------------
 -- General Neovim settings and configuration
 -----------------------------------------------------------
-
--- Default options are not included
--- See: https://neovim.io/doc/user/vim_diff.html
--- [2] Defaults - *nvim-defaults*
-
 local g = vim.g -- Global variables
 local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 
@@ -82,30 +10,54 @@ local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 opt.mouse = "a" -- Enable mouse support
 opt.clipboard = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile = false -- Don't use swapfile
--- opt.completeopt = 'menuone,noinsert,noselect' -- Autocomplete options
 opt.undofile = true -- Persistant undo
 opt.cul = true
--- opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
+opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
 
 -----------------------------------------------------------
 -- Color
 -----------------------------------------------------------
 vim.cmd [[colorscheme dracula]]
+
 local colors = require "dracula".colors()
 local highlight = function(group, fg, bg)
-    fg = fg and "guifg=" .. fg or "guifg=NONE"
-    bg = bg and "guibg=" .. bg or "guibg=NONE"
-
-    vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
+	fg = fg and "guifg=" .. fg or "guifg=NONE"
+	bg = bg and "guibg=" .. bg or "guibg=NONE"
+	vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
 end
+
+-- NeoTree
 highlight("NeoTreeNormal", colors.fg, colors.menu)
 highlight("NeoTreeNormalNC", colors.fg, colors.menu)
-highlight("VertSplit", colors.menu, colors.menu)
 highlight("NeoTreeFloatBorder", colors.menu, colors.menu)
 highlight("NeoTreeFloatTitle", colors.cyan, colors.menu)
 highlight("NeoTreeTitleBar", colors.fg, colors.menu)
+
 highlight("MsgArea", colors.cyan, colors.menu)
 highlight("CursorLineNr", colors.cyan, nil)
+
+highlight("VertSplit", colors.menu, colors.menu)
+
+-- IndentLines
+highlight("IndentBlanklineIndent1", colors.bright_red, colors.bright_red)
+highlight("IndentBlanklineIndent2", colors.bright_yellow, colors.bright_yellow)
+highlight("IndentBlanklineIndent3", colors.bright_green, colors.bright_green)
+highlight("IndentBlanklineIndent4", colors.bright_blue, colors.bright_blue)
+highlight("IndentBlanklineIndent5", colors.bright_magenta, colors.bright_magenta)
+highlight("IndentBlanklineIndent5", colors.bright_cyan, colors.bright_cyan)
+
+require("indent_blankline").setup {
+	space_char_blankline = "",
+	show_trailing_blankline_indent = false,
+}
+
+-- Dashboard
+
+highlight("DashboardCenter", colors.cyan, nil)
+highlight("DashboardHeader", colors.green, nil)
+highlight("DashboardShortCut", colors.pink, nil)
+highlight("DashboardFooter", colors.purple, nil)
+
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
@@ -142,7 +94,7 @@ opt.list = true
 -----------------------------------------------------------
 opt.hidden = true -- Enable background buffers
 opt.history = 100 -- Remember N lines in history
-opt.lazyredraw = true -- Faster scrolling
+opt.lazyredraw = false -- Faster scrolling true / smoother animations false
 opt.synmaxcol = 240 -- Max column for syntax highlight
 opt.updatetime = 700 -- ms to wait for trigger an event
 
@@ -159,33 +111,33 @@ opt.shortmess:append "sI"
 
 -- Disable builtin plugins
 local disabled_built_ins = {
-    "2html_plugin",
-    "getscript",
-    "getscriptPlugin",
-    "gzip",
-    "logipat",
-    "netrw",
-    "netrwPlugin",
-    "netrwSettings",
-    "netrwFileHandlers",
-    "matchit",
-    "tar",
-    "tarPlugin",
-    "rrhelper",
-    "spellfile_plugin",
-    "vimball",
-    "vimballPlugin",
-    "zip",
-    "zipPlugin",
-    "tutor",
-    "rplugin",
-    "synmenu",
-    "optwin",
-    "compiler",
-    "bugreport",
-    "ftplugin",
+	"2html_plugin",
+	"getscript",
+	"getscriptPlugin",
+	"gzip",
+	"logipat",
+	"netrw",
+	"netrwPlugin",
+	"netrwSettings",
+	"netrwFileHandlers",
+	"matchit",
+	"tar",
+	"tarPlugin",
+	"rrhelper",
+	"spellfile_plugin",
+	"vimball",
+	"vimballPlugin",
+	"zip",
+	"zipPlugin",
+	"tutor",
+	"rplugin",
+	"synmenu",
+	"optwin",
+	"compiler",
+	"bugreport",
+	"ftplugin",
 }
 
 for _, plugin in pairs(disabled_built_ins) do
-    g["loaded_" .. plugin] = 1
+	g["loaded_" .. plugin] = 1
 end

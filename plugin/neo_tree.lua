@@ -1,5 +1,7 @@
 -- Defaults:
 -- https://github.com/nvim-neo-tree/neo-tree.nvim/blob/v2.x/lua/neo-tree/defaults.lua
+-- Disable Neotree legacy commands
+vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 require("neo-tree").setup({
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
     enable_git_status = true,
@@ -60,54 +62,13 @@ require("neo-tree").setup({
     },
     window = {
         position = "left",
-        width = 30,
+        width = 35,
         mapping_options = {
             noremap = true,
             nowait = true,
         },
-        mappings = {
-            ["<space>"] = {
-                "toggle_node",
-                nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-            },
-            ["<2-LeftMouse>"] = "open",
-            ["<cr>"] = "open",
-            ["S"] = "open_split",
-            ["s"] = "open_vsplit",
-            -- ["S"] = "split_with_window_picker",
-            -- ["s"] = "vsplit_with_window_picker",
-            ["t"] = "open_tabnew",
-            ["w"] = "open_with_window_picker",
-            ["C"] = "close_node",
-            ["z"] = "close_all_nodes",
-            --["Z"] = "expand_all_nodes",
-            ["a"] = {
-                "add",
-                -- some commands may take optional config options, see `:h neo-tree-mappings` for details
-                config = {
-                    show_path = "none" -- "none", "relative", "absolute"
-                }
-            },
-            ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
-            ["d"] = "delete",
-            ["r"] = "rename",
-            ["y"] = "copy_to_clipboard",
-            ["x"] = "cut_to_clipboard",
-            ["p"] = "paste_from_clipboard",
-            ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-            -- ["c"] = {
-            --  "copy",
-            --  config = {
-            --    show_path = "none" -- "none", "relative", "absolute"
-            --  }
-            --}
-            ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
-            ["q"] = "close_window",
-            ["R"] = "refresh",
-            ["?"] = "show_help",
-            ["<"] = "prev_source",
-            [">"] = "next_source",
-        }
+        mappings = require "keymaps".neotree
+
     },
     nesting_rules = {},
     filesystem = {
@@ -138,17 +99,7 @@ require("neo-tree").setup({
         use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
         -- instead of relying on nvim autocmd events.
         window = {
-            mappings = {
-                ["<bs>"] = "navigate_up",
-                ["."] = "set_root",
-                ["H"] = "toggle_hidden",
-                ["/"] = "fuzzy_finder",
-                ["D"] = "fuzzy_finder_directory",
-                ["f"] = "filter_on_submit",
-                ["<c-x>"] = "clear_filter",
-                ["[g"] = "prev_git_modified",
-                ["]g"] = "next_git_modified",
-            }
+            mappings = require"keymaps".neotreefile
         }
     },
     buffers = {
@@ -168,15 +119,7 @@ require("neo-tree").setup({
         window = {
             --position = "float",
             position = "left",
-            mappings = {
-                ["A"]  = "git_add_all",
-                ["gu"] = "git_unstage_file",
-                ["ga"] = "git_add_file",
-                ["gr"] = "git_revert_file",
-                ["gc"] = "git_commit",
-                ["gp"] = "git_push",
-                ["gg"] = "git_commit_and_push",
-            }
+            mappings = require("keymaps").neotreegit
         }
     }
 })
