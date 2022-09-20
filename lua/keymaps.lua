@@ -160,7 +160,7 @@ M.telescope = {
         ["jk"] = "close",
         ["<TAB>"] = "cycle_history_next",
         ["<S-TAB>"] = "cycle_history_previous",
-    }
+    },
 }
 
 -----------------------------------------------------------
@@ -169,11 +169,7 @@ M.telescope = {
 local luasnip = require "luasnip"
 local cmp = require "cmp"
 M.cmp = {
-    ["<C-d>"] = cmp.mapping(cmp.mapping.scroll_docs(-1), { "i", "c" }),
-    ["<C-f>"] = cmp.mapping(cmp.mapping.scroll_docs(1), { "i", "c" }),
     ["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-    ["<C-y>"] = cmp.config.disable,
-    ["<C-e>"] = cmp.mapping { i = cmp.mapping.abort(), c = cmp.mapping.close(), },
     ["<CR>"] = cmp.mapping.confirm { select = true },
     ["<Tab>"] = cmp.mapping(function(fallback)
         if cmp.visible() then
@@ -237,5 +233,9 @@ map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 -----------------------------------------------------------
 map("n", "<leader>z",[[<Cmd>ZenMode<CR>]])
 
+-----------------------------------------------------------
+--  Aerial
+-----------------------------------------------------------
+map("n", "<leader>a",[[<Cmd>AerialToggle<CR>]])
 
 return M

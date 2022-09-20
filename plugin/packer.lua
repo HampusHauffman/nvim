@@ -73,6 +73,8 @@ return packer.startup(function(use)
     use { "hrsh7th/cmp-path" }
     use { "hrsh7th/cmp-cmdline" }
     use { "hrsh7th/cmp-nvim-lua" }
+    -- Fancy symbols for cmp
+    use { "onsails/lspkind.nvim" }
 
     -- LSP
     use { "neovim/nvim-lspconfig" }
@@ -80,6 +82,18 @@ return packer.startup(function(use)
     -- Language provider installer
     use { "williamboman/mason.nvim" }
     use { "williamboman/mason-lspconfig.nvim" }
+
+    -- Non LSP linting
+    use { "jose-elias-alvarez/null-ls.nvim",
+        rquires = "nvim-lua/plenary.nvim",
+        config = function()
+            require("null-ls").setup({
+                sources = {
+                    require("null-ls").builtins.completion.spell,
+                }
+            })
+        end }
+
 
     -- LSP Loading icon
     use { "j-hui/fidget.nvim", config = function()
@@ -102,7 +116,10 @@ return packer.startup(function(use)
     -- Snippets source for nvim-cmp
     use { "L3MON4D3/LuaSnip" }
     use { "saadparwaiz1/cmp_luasnip" }
-    use { "rafamadriz/friendly-snippets" }
+    use { "rafamadriz/friendly-snippets", config = function()
+        require "luasnip".filetype_extend("ruby", { "rails" })
+        require "luasnip".filetype_extend("dart", { "flutter" })
+    end }
 
     -- Automatic character pairs
     use {
@@ -203,8 +220,32 @@ return packer.startup(function(use)
         }
     end }
 
-    use { "glepnir/dashboard-nvim"}
+    -- Start screen
+    use { "glepnir/dashboard-nvim" }
 
+    -- Symbol list
+    use {
+        "stevearc/aerial.nvim",
+        config = function()
+            require("aerial").setup()
+            require("lspconfig").vimls.setup {
+                on_attach = require("aerial").on_attach,
+            }
+        end
+    }
+
+    -- Sticky buffer
+    use { "stevearc/stickybuf.nvim", confg = function()
+        require("stickybuf").setup {
+            buftype = {
+                terminal = "bufnr"
+            },
+            filetype = {
+                aerial = "filetype",
+                ["neo-tree"] = "filetype",
+            },
+        }
+    end }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

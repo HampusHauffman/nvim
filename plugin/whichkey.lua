@@ -14,7 +14,7 @@ require("which-key").setup {
     triggers = { "<leader>" } -- or specify a list manually
 }
 
-local wk = require("which-key")
+local wk = require "which-key"
 
 wk.register({
     ["<CR>"] = "which_key_ignore", -- special label to hide it in the popup
@@ -22,10 +22,11 @@ wk.register({
     ["<Up>"] = "Select area",
     f = "Formatting",
     n = "File explorer",
+    N = "Qick git explorer",
     w = { name = "workspace" },
     e = "Recent files",
     c = "Code action",
-    Z = "Reload nvim init",
     s = "Save file",
     t = "Count + Terminal",
+    r = "Rename",
 }, { prefix = "<leader>" })

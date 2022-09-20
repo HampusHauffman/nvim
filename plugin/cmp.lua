@@ -1,58 +1,13 @@
-require "mason".setup {
-    ui = {
-        icons = {
-            package_installed = "✓",
-            package_pending = "➜",
-            package_uninstalled = "✗",
-        },
-    },
-}
-
-local lspconfig = require "lspconfig"
-
-require "mason-lspconfig".setup_handlers {
-    -- The first entry (without a key) will be the default handler
-    -- and will be called for each installed server that doesn't have
-    -- a dedicated handler.
-    function(server_name) -- default handler (optional)
-        require "lspconfig"[server_name].setup {}
-    end,
-    -- Next, you can provide targeted overrides for specific servers.
-    -- For example, a handler override for the `rust_analyzer`:
-    ["sumneko_lua"] = function()
-        lspconfig.sumneko_lua.setup {
-            settings = {
-                Lua = {
-                    format = {
-                        enable = true,
-                        -- Put format options here
-                        -- NOTE: the value should be STRING!!
-                        defaultConfig = {
-                            quote_style = "double",
-                            call_arg_parentheses = "unambiguous_remove_string_only",
-                        }
-                    },
-                    diagnostics = {
-                        globals = { "vim" },
-                    },
-                },
-            },
-        }
-    end,
-}
-
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
 capabilities = require "cmp_nvim_lsp".update_capabilities(capabilities)
 
-local keymap = require "keymaps".cmp
--- luasnip setup
 local luasnip = require "luasnip"
 -- nvim-cmp setup
 local cmp = require "cmp"
 
 cmp.setup {
-    mapping = keymap,
+    mapping = require "keymaps".cmp,
     cmp = {
         source_priority = {
             nvim_lsp = 1000,
@@ -61,14 +16,72 @@ cmp.setup {
             path = 250,
         },
     },
+    window = {
+        completion = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered(),
+    },
     snippet = {
         expand = function(args)
             luasnip.lsp_expand(args.body)
         end,
     },
     sources = cmp.config.sources({
-        { name = "nvim_lsp" },
+        -- Dont suggest Text from nvm_lsp
+        { name = "nvim_lsp",
+            entry_filter = function(entry, ctx)
+                return require("cmp").lsp.CompletionItemKind.Text ~= entry:get_kind()
+            end },
         { name = "luasnip" }, -- For luasnip users.
         { name = "nvim_lua" },
     })
 }
+
+-- Fancy symbols
+local lspkind = require "lspkind"
+cmp.setup {
+    formatting = {
+        format = lspkind.cmp_format({
+            mode = "symbol_text", -- show only symbol annotations
+            maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
+
+            -- The function below will be called before any actual modifications from lspkind
+            -- so that you can provide more controls on popup customization. (See [#30](https://github.com/onsails/lspkind-nvim/pull/30))
+            before = function(entry, vim_item)
+                return vim_item
+            end
+        })
+    }
+}
+
+-- Set configuration for specific filetype.
+cmp.setup.filetype("gitcommit", {
+    sources = cmp.config.sources({
+        { name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
+    }, {
+        { name = "buffer" },
+    })
+})
+
+-- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline("/", {
+    mapping = cmp.mapping.preset.cmdline(),
+    view = {
+        entries = { name = "wildmenu", separator = "|" }
+    },
+    sources = {
+        { name = "buffer" }
+    }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(":", {
+    mapping = cmp.mapping.preset.cmdline(),
+    view = {
+        entries = { name = "wildmenu", separator = "|" }
+    },
+    sources = cmp.config.sources({
+        { name = "path" }
+    }, {
+        { name = "cmdline" }
+    })
+})
