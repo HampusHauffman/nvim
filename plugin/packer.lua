@@ -51,8 +51,6 @@ return packer.startup(function(use)
             "kyazdani42/nvim-web-devicons",
         },
     }
-
-    -- Git side status
     use {
         "lewis6991/gitsigns.nvim",
         tag = "release", -- To use the latest release
@@ -65,6 +63,29 @@ return packer.startup(function(use)
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     -- Show current context as top line
     use { "nvim-treesitter/nvim-treesitter-context" }
+    -- Show nvim values
+    use { "nvim-treesitter/playground", config = function()
+        require "nvim-treesitter.configs".setup {
+            playground = {
+                enable = true,
+                disable = {},
+                updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
+                persist_queries = false, -- Whether the query persists across vim sessions
+                keybindings = {
+                    toggle_query_editor = "o",
+                    toggle_hl_groups = "i",
+                    toggle_injected_languages = "t",
+                    toggle_anonymous_nodes = "a",
+                    toggle_language_display = "I",
+                    focus_language = "f",
+                    unfocus_language = "F",
+                    update = "R",
+                    goto_node = "<cr>",
+                    show_help = "?",
+                },
+            }
+        }
+    end }
 
     -- Autocomplete
     use { "hrsh7th/nvim-cmp" }
@@ -149,9 +170,16 @@ return packer.startup(function(use)
         requires = { { "nvim-lua/plenary.nvim" } }
     }
 
-    use {
-        "nvim-telescope/telescope-fzf-native.nvim", run = "make"
-    }
+    use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
+
+    -- Nicer menus when code action
+    use { "stevearc/dressing.nvim", config = function()
+        require("dressing").setup({
+            select = {
+                telescope = require("telescope.themes").get_cursor()
+            }
+        })
+    end }
 
     -- Smooth Scrolling use {
     use {
@@ -210,7 +238,6 @@ return packer.startup(function(use)
     -- Better quickfix
     use { "kevinhwang91/nvim-bqf", ft = "qf" }
 
-
     use { "folke/zen-mode.nvim", config = function()
         require("zen-mode").setup {
             window = {
@@ -235,19 +262,6 @@ return packer.startup(function(use)
             }
         end
     }
-
-    -- Sticky buffer
-    use { "stevearc/stickybuf.nvim", confg = function()
-        require("stickybuf").setup {
-            buftype = {
-                terminal = "bufnr"
-            },
-            filetype = {
-                aerial = "filetype",
-                ["neo-tree"] = "filetype",
-            },
-        }
-    end }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

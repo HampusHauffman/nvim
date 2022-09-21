@@ -2,7 +2,6 @@
 -- Color
 -----------------------------------------------------------
 vim.cmd [[colorscheme dracula]]
-
 local colors = require "dracula".colors()
 
 local hl = function(group, fg, bg)
@@ -11,14 +10,23 @@ local hl = function(group, fg, bg)
     vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
 end
 
+local link = function(group, target)
+    vim.api.nvim_command("hi! link " .. group .. " " .. target)
+end
+
+hl("Border", colors.menu, colors.menu)
+hl("Menu", colors.fg, colors.menu)
+
+-- Terminal
+link("Terminal", "Menu")
+
 -- NeoTree
-hl("NeoTreeNormal", colors.fg, colors.menu)
-hl("NeoTreeNormalNC", colors.fg, colors.menu)
+link("NeoTreeNormal", "Menu")
+link("NeoTreeNormalNC", "Menu")
 --hl("NeoTreeFloatBorder", colors.menu, colors.menu)
 hl("NeoTreeFloatTitle", colors.cyan, colors.menu)
 
-hl("MsgArea", colors.cyan, colors.menu)
-hl("Menu", colors.cyan, colors.menu)
+link("MsgArea", "Menu")
 hl("CursorLineNr", colors.cyan, nil)
 
 hl("VertSplit", colors.menu, colors.menu)
@@ -44,3 +52,14 @@ hl("DashboardFooter", colors.purple, nil)
 -- CMP
 hl("CmpItemAbbr", colors.cyan, nil)
 hl("CmpItemAbbrMatch", colors.green, nil)
+
+link("TelescopePromptNormal", "Menu")
+link("TelescopePromptBorder","Menu")
+link("TelescopePromptTitle","Menu")
+link("TelescopePreviewTitle","Menu")
+link("TelescopeResultsTitle","Menu")
+link("TelescopeNormal","Menu")
+link("TelescopeBorder", "Border")
+link("TelescopePromptBorder","Border")
+link("TelescopeResultsBorder", "Border")
+link("TelescopePreviewBorder", "Border")

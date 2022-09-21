@@ -5,9 +5,19 @@ require("toggleterm").setup({
     shade_terminals = false,
     height = 10,
     direction = "horizontal",
+    float_opts = {
+        border = "curved",
+        highlights = {
+            border = "Normal",
+            background = "Normal",
+        },
+    },
     highlights = {
         Normal = {
             guibg = require "dracula".colors().menu,
+        },
+        NormalFloat = {
+            --guibg = require "dracula".colors().menu,
         },
     }
 })
@@ -21,4 +31,3 @@ local lazygit  = Terminal:new({ cmd = "lazygit",
 function _lazygit_toggle()
     lazygit:toggle()
 end
-

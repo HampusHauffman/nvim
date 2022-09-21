@@ -68,5 +68,4 @@ vim.api.nvim_create_augroup("CheckSingleWindow", {
     clear = false
 })
 
-
 return M

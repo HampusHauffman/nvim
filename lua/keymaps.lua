@@ -32,10 +32,10 @@ map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
 
 -- Move in insert mode
-map("i","<C-h>","<left>")
-map("i","<C-j>","<down>")
-map("i","<C-k>","<up>")
-map("i","<C-l>","<right>")
+map("i", "<C-h>", "<left>")
+map("i", "<C-j>", "<down>")
+map("i", "<C-k>", "<up>")
+map("i", "<C-l>", "<right>")
 
 -- Move around splits using Ctrl + {h,j,k,l}
 map("n", "<C-h>", "<C-w>h")
@@ -159,8 +159,8 @@ M.telescope = {
     i = {
         ["kj"] = "close",
         ["jk"] = "close",
-        ["<TAB>"] = "cycle_history_next",
-        ["<S-TAB>"] = "cycle_history_previous",
+        ["<Tab>"] = "move_selection_previous",
+        ["<S-Tab>"] = "move_selection_next"
     },
 }
 
@@ -215,14 +215,12 @@ map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
     silent = true,
     noremap = true,
 })
-local Terminal  = require('toggleterm.terminal').Terminal
-local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
-function _lazygit_toggle()
-  lazygit:toggle()
-end
-
-map("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>")
+map("t", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
+    silent = true,
+    noremap = true,
+})
+map("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>") -- Function defined in terminal
 
 map("t", "<esc>", [[<C-\><C-n>]])
 map("t", "jk", [[<C-\><C-n>]])
@@ -235,11 +233,11 @@ map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 -----------------------------------------------------------
 --  ZenMode
 -----------------------------------------------------------
-map("n", "<leader>z",[[<Cmd>ZenMode<CR>]])
+map("n", "<leader>z", [[<Cmd>ZenMode<CR>]])
 
 -----------------------------------------------------------
 --  Aerial
 -----------------------------------------------------------
-map("n", "<leader>a",[[<Cmd>AerialToggle<CR>]])
+map("n", "<leader>a", [[<Cmd>AerialToggle<CR>]])
 
 return M
