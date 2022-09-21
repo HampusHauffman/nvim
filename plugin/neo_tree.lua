@@ -7,7 +7,6 @@ require("neo-tree").setup({
     enable_git_status = true,
     enable_diagnostics = true,
     sort_case_insensitive = true, -- used when sorting files and directories in the tree
-    popup_border_style = "rounded",
     default_component_configs = {
         container = {
             enable_character_fade = true

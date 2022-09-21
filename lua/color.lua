@@ -23,6 +23,7 @@ link("Terminal", "Menu")
 -- NeoTree
 link("NeoTreeNormal", "Menu")
 link("NeoTreeNormalNC", "Menu")
+link("NeoTreeFloatBorder", "Border")
 --hl("NeoTreeFloatBorder", colors.menu, colors.menu)
 hl("NeoTreeFloatTitle", colors.cyan, colors.menu)
 
