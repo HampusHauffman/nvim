@@ -214,11 +214,14 @@ map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
     silent = true,
     noremap = true,
 })
+local Terminal  = require('toggleterm.terminal').Terminal
+local lazygit = Terminal:new({ cmd = "lazygit", hidden = true })
 
-map("t", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
-    silent = true,
-    noremap = true,
-})
+function _lazygit_toggle()
+  lazygit:toggle()
+end
+
+map("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>")
 
 map("t", "<esc>", [[<C-\><C-n>]])
 map("t", "jk", [[<C-\><C-n>]])
