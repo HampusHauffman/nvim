@@ -171,7 +171,9 @@ return packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require("indent_blankline").setup {
-                filetype_exclude = { "dashboard" }
+                filetype_exclude = { "dashboard" },
+                space_char_blankline = "",
+                show_trailing_blankline_indent = false,
             }
         end
     }
