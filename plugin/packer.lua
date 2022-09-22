@@ -172,14 +172,16 @@ return packer.startup(function(use)
 
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
+    use { "nvim-telescope/telescope-ui-select.nvim" }
+
     -- Nicer menus when code action
-    use { "stevearc/dressing.nvim", config = function()
-        require("dressing").setup({
-            select = {
-                telescope = require("telescope.themes").get_cursor()
-            }
-        })
-    end }
+    --    use { "stevearc/dressing.nvim", config = function()
+    --    require("dressing").setup({
+    --            select = {
+    --            telescope = require("telescope.themes").get_cursor()
+    --            }
+    --    })
+    --    end }
 
     -- Smooth Scrolling use {
     use {
@@ -199,7 +201,7 @@ return packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require("indent_blankline").setup {
-                filetype_exclude = { "dashboard" },
+                filetype_exclude = { "dashboard", "help" },
                 space_char_blankline = "",
                 show_trailing_blankline_indent = false,
             }
@@ -251,6 +253,18 @@ return packer.startup(function(use)
 
     -- Start screen
     use { "glepnir/dashboard-nvim" }
+
+    -- Sticks the buffesrs (Might show up in NVIM eventually)
+    use { "/stevearc/stickybuf.nvim", config = function()
+        require("stickybuf").setup({
+            filetype = {
+                ["neo-tree"] = "filetype",
+                ["toggleterm"] = "filetype",
+                ["aerial"] = "filetype",
+            }
+
+        })
+    end }
 
     -- Symbol list
     use {

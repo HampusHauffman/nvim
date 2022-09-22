@@ -159,8 +159,8 @@ M.telescope = {
     i = {
         ["kj"] = "close",
         ["jk"] = "close",
-        ["<Tab>"] = "move_selection_previous",
-        ["<S-Tab>"] = "move_selection_next"
+        ["<S-Tab>"] = "move_selection_previous",
+        ["<Tab>"] = "move_selection_next"
     },
 }
 
