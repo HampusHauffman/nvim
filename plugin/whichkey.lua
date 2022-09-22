@@ -1,6 +1,6 @@
 require("which-key").setup {
     window = {
-        border = "shadow", -- none, single, double, shadow
+        border = "none", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 15, 15, 5, 15 }, -- extra window margin [top, right, bottom, left]
     },

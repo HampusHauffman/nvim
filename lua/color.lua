@@ -20,6 +20,9 @@ hl("Menu", colors.fg, colors.menu)
 -- Terminal
 link("Terminal", "Menu")
 
+-- Which Key
+link("NormalFloat", "Menu")
+
 -- NeoTree
 link("NeoTreeNormal", "Menu")
 link("NeoTreeNormalNC", "Menu")
