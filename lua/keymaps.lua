@@ -221,6 +221,7 @@ map("t", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
     noremap = true,
 })
 map("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>") -- Function defined in terminal
+map("t", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>") -- Function defined in terminal
 
 map("t", "<esc>", [[<C-\><C-n>]])
 map("t", "jk", [[<C-\><C-n>]])
