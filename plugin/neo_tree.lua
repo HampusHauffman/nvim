@@ -3,8 +3,8 @@
 -- Disable Neotree legacy commands
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 require("neo-tree").setup({
-    close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
     enable_git_status = true,
+    close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
     enable_diagnostics = true,
     sort_case_insensitive = true, -- used when sorting files and directories in the tree
     default_component_configs = {
@@ -35,7 +35,7 @@ require("neo-tree").setup({
             highlight = "NeoTreeFileIcon"
         },
         modified = {
-            symbol = "[+]",
+            symbol = "",
             highlight = "NeoTreeModified",
         },
         name = {
@@ -98,7 +98,7 @@ require("neo-tree").setup({
         use_libuv_file_watcher = false, -- This will use the OS level file watchers to detect changes
         -- instead of relying on nvim autocmd events.
         window = {
-            mappings = require"keymaps".neotreefile
+            mappings = require "keymaps".neotreefile
         }
     },
     buffers = {
@@ -122,3 +122,5 @@ require("neo-tree").setup({
         }
     }
 })
+
+
