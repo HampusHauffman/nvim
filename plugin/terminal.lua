@@ -14,11 +14,14 @@ require("toggleterm").setup({
     },
     highlights = {
         Normal = {
-            guibg = require "dracula".colors().menu,
+            link = "Menu"
         },
         NormalFloat = {
-            --guibg = require "dracula".colors().menu,
+            link = "Menu"
         },
+        FloatBorder = {
+            link = "Border"
+        }
     }
 })
 
