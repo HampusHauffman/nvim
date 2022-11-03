@@ -1,6 +1,6 @@
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require "cmp_nvim_lsp".update_capabilities(capabilities)
+capabilities = require "cmp_nvim_lsp".default_capabilities(capabilities)
 local luasnip = require "luasnip"
 -- nvim-cmp setup
 local cmp = require "cmp"
@@ -20,7 +20,9 @@ cmp.setup {
             --border = "shadow",
             winhighlight = "FloatBorder:Border,Normal:Menu",
         }),
-        documentation = cmp.config.window.bordered(),
+        documentation = cmp.config.window.bordered({
+            winhighlight = "FloatBorder:Border,Normal:Menu",
+        }),
     },
     formatting = {
         fields = { "kind", "abbr", "menu" },

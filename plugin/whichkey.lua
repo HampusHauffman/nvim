@@ -10,8 +10,8 @@ require("which-key").setup {
         spacing = 3, -- spacing between columns
         align = "center", -- align columns left, center or right
     },
-    -- triggers = "auto", -- automatically setup triggers
-    triggers = { "<leader>" } -- or specify a list manually
+     triggers = "auto", -- automatically setup triggers
+    -- triggers = { "<leader>" } -- or specify a list manually
 }
 
 local wk = require "which-key"

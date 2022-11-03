@@ -51,6 +51,7 @@ return packer.startup(function(use)
             "kyazdani42/nvim-web-devicons",
         },
     }
+
     use {
         "lewis6991/gitsigns.nvim",
         tag = "release", -- To use the latest release
@@ -110,7 +111,9 @@ return packer.startup(function(use)
         config = function()
             require("null-ls").setup({
                 sources = {
+                    require("null-ls").builtins.formatting.prettier,
                     require("null-ls").builtins.completion.spell,
+
                 }
             })
         end }
@@ -196,6 +199,7 @@ return packer.startup(function(use)
         end
     }
 
+
     -- Blank line
     use {
         "lukas-reineke/indent-blankline.nvim",
@@ -252,10 +256,9 @@ return packer.startup(function(use)
     end }
 
     -- Start screen
-    use { "glepnir/dashboard-nvim" }
 
     -- Sticks the buffesrs (Might show up in NVIM eventually)
-    use { "/stevearc/stickybuf.nvim", config = function()
+    use { "stevearc/stickybuf.nvim", config = function()
         require("stickybuf").setup({
             filetype = {
                 ["neo-tree"] = "filetype",

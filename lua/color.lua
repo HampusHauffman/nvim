@@ -14,26 +14,30 @@ local link = function(group, target)
     vim.api.nvim_command("hi! link " .. group .. " " .. target)
 end
 
-hl("Border", colors.menu, colors.menu)
-hl("Menu", colors.fg, colors.menu)
+--hl("Border", colors.menu, colors.menu)
+--hl("Menu", colors.fg, colors.menu)
 
 -- Terminal
-link("Terminal", "Menu")
+--link("Terminal", "Menu")
 
 -- Which Key
-link("NormalFloat", "Menu")
+--link("NormalFloat", "Menu")
 
 -- NeoTree
-link("NeoTreeNormal", "Menu")
-link("NeoTreeNormalNC", "Menu")
-link("NeoTreeFloatBorder", "Border")
+--link("NeoTreeNormal", "Menu")
+--link("NeoTreeNormalNC", "Menu")
+--link("NeoTreeFloatBorder", "Border")
 --hl("NeoTreeFloatBorder", colors.menu, colors.menu)
-hl("NeoTreeFloatTitle", colors.cyan, colors.menu)
+--hl("NeoTreeFloatTitle", colors.cyan, colors.menu)
 
-link("MsgArea", "Menu")
-hl("CursorLineNr", colors.cyan, nil)
+--link("MsgArea", "Menu")
+--hl("CursorLineNr", colors.cyan, nil)
 
-hl("VertSplit", colors.menu, colors.menu)
+--hl("VertSplit", colors.menu, colors.menu)
+
+hl("NeoTreeTabInactive", colors.fg, colors.menu)
+hl("NeoTreeTabSeparatorInactive", colors.fg, colors.menu)
+hl("NeoTreeTabSeparatorActive", colors.fg, colors.bg)
 
 -- IndentLines
 hl("IndentBlanklineIndent1", colors.bright_red, colors.bright_red)
@@ -57,15 +61,15 @@ hl("DashboardFooter", colors.purple, nil)
 hl("CmpItemAbbr", colors.cyan, nil)
 hl("CmpItemAbbrMatch", colors.green, nil)
 
-hl("TelescopePromptNormal", colors.fg, colors.bg)
-hl("TelescopePromptBorder", colors.bg, colors.bg)
-hl("TelescopePromptTitle", colors.fg, colors.bg)
-link("TelescopePreviewTitle","Menu")
-link("TelescopeResultsTitle","Menu")
-link("TelescopeNormal","Menu")
-link("TelescopeBorder", "Border")
-link("TelescopeResultsBorder", "Border")
-link("TelescopePreviewBorder", "Border")
+--hl("TelescopePromptNormal", colors.fg, colors.bg)
+--hl("TelescopePromptBorder", colors.bg, colors.bg)
+--hl("TelescopePromptTitle", colors.fg, colors.bg)
+--link("TelescopePreviewTitle", "Menu")
+--link("TelescopeResultsTitle", "Menu")
+--link("TelescopeNormal", "Menu")
+--link("TelescopeBorder", "Border")
+--link("TelescopeResultsBorder", "Border")
+--link("TelescopePreviewBorder", "Border")
 
 vim.fn.sign_define("DiagnosticSignError",
     { text = " ", texthl = "DiagnosticSignError" })

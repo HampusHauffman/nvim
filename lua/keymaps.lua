@@ -60,7 +60,8 @@ map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua<CR>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader>n", ":Neotree left focus reveal<CR>")
-map("n", "<leader>N", ":Neotree float git_status<CR>")
+map("n", "<leader><c-n>", ":Neotree buffers left focus reveal<CR>")
+map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
 M.neotreefile = {
     ["<bs>"] = "navigate_up",
     ["."] = "set_root",
@@ -221,7 +222,6 @@ map("t", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
     noremap = true,
 })
 map("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>") -- Function defined in terminal
-map("t", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>") -- Function defined in terminal
 
 map("t", "<esc>", [[<C-\><C-n>]])
 map("t", "jk", [[<C-\><C-n>]])
