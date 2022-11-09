@@ -3,12 +3,13 @@ local M = {}
 -----------------------------------------------------------
 -- Key maps
 -----------------------------------------------------------
+
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then
         options = vim.tbl_extend("force", options, opts)
     end
-    vim.api.nvim_set_keymap(mode, lhs, rhs, options)
+    vim.keymap.set(mode, lhs, rhs, options)
 end
 
 -- Change leader to a space
@@ -60,7 +61,6 @@ map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua<CR>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader>n", ":Neotree left focus reveal<CR>")
-map("n", "<leader><c-n>", ":Neotree buffers left focus reveal<CR>")
 map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
 M.neotreefile = {
     ["<bs>"] = "navigate_up",
@@ -128,33 +128,19 @@ M.neotree = {
     [">"] = "next_source",
 }
 -----------------------------------------------------------
--- LSP
------------------------------------------------------------
-map("n", "<leader>f", "<cmd>lua vim.lsp.buf.formatting()<CR>")
-map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
-map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
-map("n", "gd", "<cmd>lua vim.lsp.buf.definition()<CR>")
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
-map("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-map("v", "<leader>c", "<cmd>lua vim.lsp.buf.range_code_action()<CR>")
-map("n", "<f14>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-map("n", "<S-f2>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-map("n", "<f2>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
---map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
-map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
-map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
-
------------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
-map("n", "ff", "<cmd>lua require('telescope.builtin').find_files()<cr>")
-map("n", "fg", "<cmd>lua require('telescope.builtin').live_grep()<cr>")
-map("n", "<leader>e", "<cmd>lua require('telescope.builtin').oldfiles()<cr>")
-map("n", "fb", "<cmd>lua require('telescope.builtin').buffers()<cr>")
-map("n", "fh", "<cmd>lua require('telescope.builtin').help_tags()<cr>")
+-- Telescope builtins for lsp actions
+local builtin = require "telescope.builtin"
+
+map("n", "ff", builtin.find_files)
+map("n", "fg", builtin.live_grep)
+map("n", "<leader>e", builtin.oldfiles)
+map("n", "fb", builtin.buffers)
+map("n", "fh", builtin.help_tags)
+map("n", "<leader>a", function()
+    builtin.lsp_document_symbols({ ignore_symbols = { "property", "constant" } })
+end)
 
 M.telescope = {
     i = {
@@ -164,6 +150,34 @@ M.telescope = {
         ["<Tab>"] = "move_selection_next"
     },
 }
+-----------------------------------------------------------
+-- LSP
+-----------------------------------------------------------
+
+map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({asnyc = true})<CR>")
+map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
+map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+--map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
+map("n", "gr", function()
+    builtin.lsp_references(require("telescope.themes").get_cursor({ layout_config = {
+        width = 120,
+        height = 20,
+    } }
+    ))
+end)
+map("n", "gd", builtin.lsp_definitions)
+map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
+map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
+map("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+map("v", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
+map("n", "<f14>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+map("n", "<S-f2>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
+map("n", "<f2>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
+--map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
+map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
+map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
+map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+
 
 -----------------------------------------------------------
 -- AutoComplete
@@ -239,6 +253,6 @@ map("n", "<leader>z", [[<Cmd>ZenMode<CR>]])
 -----------------------------------------------------------
 --  Aerial
 -----------------------------------------------------------
-map("n", "<leader>a", [[<Cmd>AerialToggle<CR>]])
+--map("n", "<leader>a", [[<Cmd>AerialToggle<CR>]])
 
 return M

@@ -64,6 +64,9 @@ return packer.startup(function(use)
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     -- Show current context as top line
     use { "nvim-treesitter/nvim-treesitter-context" }
+    -- Rainbow parenthesis
+    use { "p00f/nvim-ts-rainbow", config = function()
+    end }
     -- Show nvim values
     use { "nvim-treesitter/playground", config = function()
         require "nvim-treesitter.configs".setup {
@@ -168,23 +171,15 @@ return packer.startup(function(use)
     }
 
     -- Telescope (fuzz)
-    use {
-        "nvim-telescope/telescope.nvim", tag = "0.1.x",
-        requires = { { "nvim-lua/plenary.nvim" } }
-    }
-
     use { "nvim-telescope/telescope-fzf-native.nvim", run = "make" }
 
     use { "nvim-telescope/telescope-ui-select.nvim" }
 
-    -- Nicer menus when code action
-    --    use { "stevearc/dressing.nvim", config = function()
-    --    require("dressing").setup({
-    --            select = {
-    --            telescope = require("telescope.themes").get_cursor()
-    --            }
-    --    })
-    --    end }
+    use {
+        "nvim-telescope/telescope.nvim", tag = "0.1.x",
+        requires = { "nvim-lua/plenary.nvim", }
+    }
+
 
     -- Smooth Scrolling use {
     use {
@@ -205,9 +200,12 @@ return packer.startup(function(use)
         "lukas-reineke/indent-blankline.nvim",
         config = function()
             require("indent_blankline").setup {
-                filetype_exclude = { "dashboard", "help" },
-                space_char_blankline = "",
-                show_trailing_blankline_indent = false,
+                space_char_blankline = " ",
+                show_current_context = true,
+                show_current_context_start = true,
+                use_treesitter = true,
+                use_treesitter_scope = true,
+                char = "▎",
             }
         end
     }
@@ -247,10 +245,16 @@ return packer.startup(function(use)
     use { "folke/zen-mode.nvim", config = function()
         require("zen-mode").setup {
             window = {
+                backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
                 height = 0.90, -- height of the Zen window
                 options = {
                     signcolumn = "no", -- disable signcolumn
                 },
+                kitty = {
+                    enabled = false,
+                    font = "+4", -- font size increment
+                },
+                gitsigns = { enabled = false }, -- disables git signs
             }
         }
     end }
@@ -279,6 +283,14 @@ return packer.startup(function(use)
             }
         end
     }
+
+    use { "edluffy/specs.nvim", }
+
+    use { "ggandor/leap.nvim",
+        requires = { "tpope/vim-repeat", opt = true },
+        config = function()
+            require("leap").add_default_mappings()
+        end }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

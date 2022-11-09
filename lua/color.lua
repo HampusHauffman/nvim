@@ -2,7 +2,9 @@
 -- Color
 -----------------------------------------------------------
 vim.cmd [[colorscheme dracula]]
-local colors = require "dracula".colors()
+local theme = require "dracula"
+
+local colors = theme.colors()
 
 local hl = function(group, fg, bg)
     fg = fg and "guifg=" .. fg or "guifg=NONE"
@@ -15,17 +17,16 @@ local link = function(group, target)
 end
 
 --hl("Border", colors.menu, colors.menu)
---hl("Menu", colors.fg, colors.menu)
 
 -- Terminal
---link("Terminal", "Menu")
+link("Terminal", "Pmenu")
 
 -- Which Key
 --link("NormalFloat", "Menu")
 
 -- NeoTree
---link("NeoTreeNormal", "Menu")
---link("NeoTreeNormalNC", "Menu")
+--link("NeoTreeNormal", "Pmenu")
+--link("NeoTreeNormalNC", "Pmenu")
 --link("NeoTreeFloatBorder", "Border")
 --hl("NeoTreeFloatBorder", colors.menu, colors.menu)
 --hl("NeoTreeFloatTitle", colors.cyan, colors.menu)
@@ -33,23 +34,29 @@ end
 --link("MsgArea", "Menu")
 --hl("CursorLineNr", colors.cyan, nil)
 
---hl("VertSplit", colors.menu, colors.menu)
+--link("VertSplit","Pmenu")
 
-hl("NeoTreeTabInactive", colors.fg, colors.menu)
-hl("NeoTreeTabSeparatorInactive", colors.fg, colors.menu)
-hl("NeoTreeTabSeparatorActive", colors.fg, colors.bg)
+link("NeoTreeTabActive", "Normal")
+link("NeoTreeTabSeparatorActive", "Normal")
+link("NeoTreeTabInactive", "Pmenu")
+link("NeoTreeTabSeparatorInactive", "Pmenu")
 
 -- IndentLines
-hl("IndentBlanklineIndent1", colors.bright_red, colors.bright_red)
-hl("IndentBlanklineIndent2", colors.bright_yellow, colors.bright_yellow)
-hl("IndentBlanklineIndent3", colors.bright_green, colors.bright_green)
-hl("IndentBlanklineIndent4", colors.bright_blue, colors.bright_blue)
-hl("IndentBlanklineIndent5", colors.bright_magenta, colors.bright_magenta)
-hl("IndentBlanklineIndent5", colors.bright_cyan, colors.bright_cyan)
+link("IndentBlankLineContextChar", "Underline")
+--hl("IndentBlanklineIndent1", colors.purple, colors.purple)
+--hl("IndentBlanklineIndent2", colors.bright_yellow, colors.bright_yellow)
+--hl("IndentBlanklineIndent3", colors.bright_green, colors.bright_green)
+--hl("IndentBlanklineIndent4", colors.bright_blue, colors.bright_blue)
+--hl("IndentBlanklineIndent5", colors.bright_magenta, colors.bright_magenta)
+--hl("IndentBlanklineIndent5", colors.bright_cyan, colors.bright_cyan)
 
 -- TreeSitter
-hl("TSProperty", colors.orange, nil)
-hl("TSVariable", colors.purple, nil)
+
+link("@property", "@parameter")
+link("@variable", "@parameter")
+--hl("TSProperty", colors.orange, nil)
+--hl("TSVariable", colors.purple, nil)
+
 
 -- Dashboard
 hl("DashboardCenter", colors.cyan, nil)
