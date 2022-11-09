@@ -4,6 +4,7 @@ local M = {}
 -- Key maps
 -----------------------------------------------------------
 
+
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then

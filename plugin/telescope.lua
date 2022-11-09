@@ -1,6 +1,7 @@
 local keymaps = require "keymaps".telescope
 require("telescope").setup {
     defaults = {
+        winblend = 0,
         mappings = keymaps,
         prompt_prefix = " ",
         selection_caret = " ",

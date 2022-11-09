@@ -16,25 +16,12 @@ local link = function(group, target)
     vim.api.nvim_command("hi! link " .. group .. " " .. target)
 end
 
---hl("Border", colors.menu, colors.menu)
+-- Menu
+link("Pmenu", "Normal")
+link("CmpItemAbbrMatch", "@text.strong")
 
 -- Terminal
 link("Terminal", "Pmenu")
-
--- Which Key
---link("NormalFloat", "Menu")
-
--- NeoTree
---link("NeoTreeNormal", "Pmenu")
---link("NeoTreeNormalNC", "Pmenu")
---link("NeoTreeFloatBorder", "Border")
---hl("NeoTreeFloatBorder", colors.menu, colors.menu)
---hl("NeoTreeFloatTitle", colors.cyan, colors.menu)
-
---link("MsgArea", "Menu")
---hl("CursorLineNr", colors.cyan, nil)
-
---link("VertSplit","Pmenu")
 
 link("NeoTreeTabActive", "Normal")
 link("NeoTreeTabSeparatorActive", "Normal")
@@ -51,32 +38,12 @@ link("IndentBlankLineContextChar", "Underline")
 --hl("IndentBlanklineIndent5", colors.bright_cyan, colors.bright_cyan)
 
 -- TreeSitter
-
 link("@property", "@parameter")
 link("@variable", "@parameter")
---hl("TSProperty", colors.orange, nil)
---hl("TSVariable", colors.purple, nil)
 
+-- Rainbow TreeSitter
+link("rainbowcol1", "@boolean")
 
--- Dashboard
-hl("DashboardCenter", colors.cyan, nil)
-hl("DashboardHeader", colors.green, nil)
-hl("DashboardShortCut", colors.pink, nil)
-hl("DashboardFooter", colors.purple, nil)
-
--- CMP
-hl("CmpItemAbbr", colors.cyan, nil)
-hl("CmpItemAbbrMatch", colors.green, nil)
-
---hl("TelescopePromptNormal", colors.fg, colors.bg)
---hl("TelescopePromptBorder", colors.bg, colors.bg)
---hl("TelescopePromptTitle", colors.fg, colors.bg)
---link("TelescopePreviewTitle", "Menu")
---link("TelescopeResultsTitle", "Menu")
---link("TelescopeNormal", "Menu")
---link("TelescopeBorder", "Border")
---link("TelescopeResultsBorder", "Border")
---link("TelescopePreviewBorder", "Border")
 
 vim.fn.sign_define("DiagnosticSignError",
     { text = " ", texthl = "DiagnosticSignError" })

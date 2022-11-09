@@ -16,6 +16,7 @@ cmp.setup {
         },
     },
     window = {
+        
         completion = cmp.config.window.bordered({
             --border = "shadow",
             winhighlight = "FloatBorder:Border,Normal:Menu",

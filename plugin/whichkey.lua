@@ -1,6 +1,6 @@
 require("which-key").setup {
     window = {
-        border = "none", -- none, single, double, shadow
+        border = "single", -- none, single, double, shadow
         position = "bottom", -- bottom, top
         margin = { 15, 15, 5, 15 }, -- extra window margin [top, right, bottom, left]
     },
@@ -10,7 +10,7 @@ require("which-key").setup {
         spacing = 3, -- spacing between columns
         align = "center", -- align columns left, center or right
     },
-     triggers = "auto", -- automatically setup triggers
+    triggers = "auto", -- automatically setup triggers
     -- triggers = { "<leader>" } -- or specify a list manually
 }
 
@@ -29,4 +29,6 @@ wk.register({
     s = "Save file",
     t = "Count + Terminal",
     r = "Rename",
+    a = "Symbols",
+    g = "Lazy Git"
 }, { prefix = "<leader>" })

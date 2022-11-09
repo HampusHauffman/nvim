@@ -36,7 +36,7 @@ return packer.startup(function(use)
     use { "wbthomason/packer.nvim" }
 
     -- Theme
-    use { "Mofiqul/dracula.nvim" }
+    use { "HampusHauffman/dracula.nvim" }
 
     -- Dev Icons
     use { "kyazdani42/nvim-web-devicons" }
