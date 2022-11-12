@@ -30,6 +30,7 @@ if not status_ok then
     return
 end
 
+
 -- Install plugins
 return packer.startup(function(use)
     -- Add you plugins here:
@@ -37,7 +38,7 @@ return packer.startup(function(use)
 
     -- Theme
     use { "HampusHauffman/dracula.nvim" }
-
+    use { "tiagovla/tokyodark.nvim" }
     -- Dev Icons
     use { "kyazdani42/nvim-web-devicons" }
 
@@ -59,6 +60,10 @@ return packer.startup(function(use)
             require("gitsigns").setup()
         end
     }
+    -- Scrollbar
+    use { "petertriho/nvim-scrollbar", config = function()
+        require("scrollbar").setup()
+    end }
 
     -- Syntax highlighting
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
@@ -217,13 +222,6 @@ return packer.startup(function(use)
     use {
         "nvim-lualine/lualine.nvim",
         requires = { "kyazdani42/nvim-web-devicons", opt = true },
-        config = function()
-            require("lualine").setup({
-                options = {
-                    theme = "dracula-nvim"
-                }
-            })
-        end
     }
 
     -- Stabalize splits so they dont jump around

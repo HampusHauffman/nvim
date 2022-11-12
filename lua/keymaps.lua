@@ -4,7 +4,6 @@ local M = {}
 -- Key maps
 -----------------------------------------------------------
 
-
 local function map(mode, lhs, rhs, opts)
     local options = { noremap = true, silent = true }
     if opts then
@@ -136,7 +135,9 @@ local builtin = require "telescope.builtin"
 
 map("n", "ff", builtin.find_files)
 map("n", "fg", builtin.live_grep)
-map("n", "<leader>e", builtin.oldfiles)
+map("n", "<leader>e", function ()
+    builtin.oldfiles({only_cwd = true})
+end)
 map("n", "fb", builtin.buffers)
 map("n", "fh", builtin.help_tags)
 map("n", "<leader>a", function()

@@ -2,6 +2,7 @@
 -- Disable Neotree legacy commands
 vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
 require("neo-tree").setup({
+    popup_border_style = "rounded",
     sources = {
         "filesystem",
         "git_status",

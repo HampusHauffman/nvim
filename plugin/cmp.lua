@@ -19,10 +19,10 @@ cmp.setup {
         
         completion = cmp.config.window.bordered({
             --border = "shadow",
-            winhighlight = "FloatBorder:Border,Normal:Menu",
+            winhighlight = "FloatBorder:TelescopePromptBorder,Normal:Normal",
         }),
         documentation = cmp.config.window.bordered({
-            winhighlight = "FloatBorder:Border,Normal:Menu",
+            winhighlight = "FloatBorder:TelescopePromptBorder,Normal:Normal",
         }),
     },
     formatting = {

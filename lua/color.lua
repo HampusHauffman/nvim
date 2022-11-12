@@ -1,15 +1,13 @@
 -----------------------------------------------------------
 -- Color
 -----------------------------------------------------------
-vim.cmd [[colorscheme dracula]]
-local theme = require "dracula"
+vim.cmd [[colorscheme tokyodark]]
 
-local colors = theme.colors()
 
 local hl = function(group, fg, bg)
     fg = fg and "guifg=" .. fg or "guifg=NONE"
     bg = bg and "guibg=" .. bg or "guibg=NONE"
-    vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
+    vim.api.nvim_command("highli" .. group .. " " .. fg .. " " .. bg)
 end
 
 local link = function(group, target)
@@ -19,9 +17,14 @@ end
 -- Menu
 link("Pmenu", "Normal")
 link("CmpItemAbbrMatch", "@text.strong")
+--link("", "@text.strong")
 
 -- Terminal
 link("Terminal", "Pmenu")
+
+-- Border
+link("FloatBorder", "TelescopePromptBorder")
+link("TelescopeBorder", "TelescopePromptBorder")
 
 link("NeoTreeTabActive", "Normal")
 link("NeoTreeTabSeparatorActive", "Normal")
