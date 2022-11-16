@@ -1,7 +1,7 @@
 -----------------------------------------------------------
 -- Color
 -----------------------------------------------------------
-vim.cmd [[colorscheme tokyodark]]
+vim.cmd [[colorscheme dracula]]
 
 
 local hl = function(group, fg, bg)
@@ -41,8 +41,8 @@ link("IndentBlankLineContextChar", "Underline")
 --hl("IndentBlanklineIndent5", colors.bright_cyan, colors.bright_cyan)
 
 -- TreeSitter
-link("@property", "@parameter")
-link("@variable", "@parameter")
+--link("@property", "@parameter")
+link("@variable", "@constant")
 
 -- Rainbow TreeSitter
 link("rainbowcol1", "@boolean")

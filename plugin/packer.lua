@@ -39,6 +39,7 @@ return packer.startup(function(use)
     -- Theme
     use { "HampusHauffman/dracula.nvim" }
     use { "tiagovla/tokyodark.nvim" }
+
     -- Dev Icons
     use { "kyazdani42/nvim-web-devicons" }
 
@@ -65,6 +66,8 @@ return packer.startup(function(use)
         require("scrollbar").setup()
     end }
 
+    -- Sets shiftwidth (no setup)
+    use { "tpope/vim-sleuth" }
     -- Syntax highlighting
     use { "nvim-treesitter/nvim-treesitter", run = ":TSUpdate" }
     -- Show current context as top line
@@ -289,6 +292,9 @@ return packer.startup(function(use)
         config = function()
             require("leap").add_default_mappings()
         end }
+
+    -- Tmux (no setup)
+    use { "christoomey/vim-tmux-navigator" }
 
     -- Automatically set up your configuration after cloning packer.nvim
     -- Put this at the end after all plugins

@@ -27,6 +27,7 @@ map("", "<right>", "<nop>")
 
 -- Move to end with ö
 map("n", "ö", "$")
+map("v", "ö", "$")
 
 -- Map Esc to kk and jj
 map("i", "jk", "<Esc>")
@@ -50,9 +51,6 @@ map("n", "<leader>s", ":w<CR>")
 -- Quit with leader shift q
 map("n", "<leader><S-q>", ":qa!<CR>")
 
--- Reload source
-map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua<CR>")
-
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
@@ -62,71 +60,7 @@ map("n", "<leader><S-z>", ":so ~/.config/nvim/init.lua<CR>")
 -----------------------------------------------------------
 map("n", "<leader>n", ":Neotree left focus reveal<CR>")
 map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
-M.neotreefile = {
-    ["<bs>"] = "navigate_up",
-    ["."] = "set_root",
-    ["H"] = "toggle_hidden",
-    ["/"] = "fuzzy_finder",
-    ["D"] = "fuzzy_finder_directory",
-    ["f"] = "filter_on_submit",
-    ["<c-x>"] = "clear_filter",
-    ["[g"] = "prev_git_modified",
-    ["]g"] = "next_git_modified",
-}
 
-M.neotreegit = {
-    ["A"]  = "git_add_all",
-    ["gu"] = "git_unstage_file",
-    ["ga"] = "git_add_file",
-    ["gr"] = "git_revert_file",
-    ["gc"] = "git_commit",
-    ["gp"] = "git_push",
-    ["gg"] = "git_commit_and_push",
-}
-
-M.neotree = {
-    ["<space>"] = {
-        "toggle_node",
-        nowait = false, -- disable `nowait` if you have existing combos starting with this char that you want to use
-    },
-    ["<2-LeftMouse>"] = "open",
-    ["<cr>"] = "open",
-    ["S"] = "open_split",
-    ["s"] = "open_vsplit",
-    -- ["S"] = "split_with_window_picker",
-    -- ["s"] = "vsplit_with_window_picker",
-    ["t"] = "open_tabnew",
-    ["w"] = "open_with_window_picker",
-    ["C"] = "close_node",
-    ["z"] = "close_all_nodes",
-    --["Z"] = "expand_all_nodes",
-    ["a"] = {
-        "add",
-        -- some commands may take optional config options, see `:h neo-tree-mappings` for details
-        config = {
-            show_path = "none" -- "none", "relative", "absolute"
-        }
-    },
-    ["A"] = "add_directory", -- also accepts the optional config.show_path option like "add".
-    ["d"] = "delete",
-    ["r"] = "rename",
-    ["y"] = "copy_to_clipboard",
-    ["x"] = "cut_to_clipboard",
-    ["p"] = "paste_from_clipboard",
-    ["c"] = "copy", -- takes text input for destination, also accepts the optional config.show_path option like "add":
-    -- ["c"] = {
-    --  "copy",
-    --  config = {
-    --    show_path = "none" -- "none", "relative", "absolute"
-    --  }
-    --}
-    ["m"] = "move", -- takes text input for destination, also accepts the optional config.show_path option like "add".
-    ["q"] = "close_window",
-    ["R"] = "refresh",
-    ["?"] = "show_help",
-    ["<"] = "prev_source",
-    [">"] = "next_source",
-}
 -----------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
@@ -135,8 +69,9 @@ local builtin = require "telescope.builtin"
 
 map("n", "ff", builtin.find_files)
 map("n", "fg", builtin.live_grep)
-map("n", "<leader>e", function ()
-    builtin.oldfiles({only_cwd = true})
+map("n", "fo", builtin.find_files)
+map("n", "<leader>e", function()
+    builtin.oldfiles({ only_cwd = true })
 end)
 map("n", "fb", builtin.buffers)
 map("n", "fh", builtin.help_tags)
@@ -159,12 +94,12 @@ M.telescope = {
 map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({asnyc = true})<CR>")
 map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
 map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
---map("n", "gr", "<cmd>lua vim.lsp.buf.references()<CR>")
 map("n", "gr", function()
-    builtin.lsp_references(require("telescope.themes").get_cursor({ layout_config = {
-        width = 120,
-        height = 20,
-    } }
+    builtin.lsp_references(require("telescope.themes").get_cursor({
+        layout_config = {
+            width = 0.7,
+        }
+    }
     ))
 end)
 map("n", "gd", builtin.lsp_definitions)
@@ -220,6 +155,7 @@ M.cmp = {
 -----------------------------------------------------------
 --  Treesitter
 -----------------------------------------------------------
+-- Shift up and down to make larger selections easely
 M.treesitter = {
     init_selection = "<S-up>",
     node_incremental = "<S-up>",
