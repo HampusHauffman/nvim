@@ -7,7 +7,7 @@ vim.cmd [[colorscheme dracula]]
 local hl = function(group, fg, bg)
     fg = fg and "guifg=" .. fg or "guifg=NONE"
     bg = bg and "guibg=" .. bg or "guibg=NONE"
-    vim.api.nvim_command("highli" .. group .. " " .. fg .. " " .. bg)
+    vim.api.nvim_command("highlight" .. group .. " " .. fg .. " " .. bg)
 end
 
 local link = function(group, target)

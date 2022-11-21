@@ -91,7 +91,13 @@ M.telescope = {
 -- LSP
 -----------------------------------------------------------
 
-map("n", "<leader>f", "<cmd>lua vim.lsp.buf.format({asnyc = true})<CR>")
+map("n", "<leader>f", function()
+    vim.lsp.buf.format({
+        timeout_ms = 2000,
+        asnyc = true,
+        filter = function(client) return client.name ~= "tsserver" end
+    })
+end)
 map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
 map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
 map("n", "gr", function()
@@ -164,15 +170,11 @@ M.treesitter = {
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
-map("n", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
+map("n", "<C-t>", '<Cmd>execute v:count1 . "ToggleTerm size=10"<CR>', {
     silent = true,
     noremap = true,
 })
 
-map("t", "<C-t>", '<Cmd>execute v:count . "ToggleTerm size=10"<CR>', {
-    silent = true,
-    noremap = true,
-})
 map("n", "<leader>g", "<cmd>lua _lazygit_toggle()<CR>") -- Function defined in terminal
 
 map("t", "<esc>", [[<C-\><C-n>]])

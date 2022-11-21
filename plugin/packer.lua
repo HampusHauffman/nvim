@@ -62,9 +62,22 @@ return packer.startup(function(use)
         end
     }
     -- Scrollbar
-    use { "petertriho/nvim-scrollbar", config = function()
-        require("scrollbar").setup()
-    end }
+    --use { "petertriho/nvim-scrollbar", config = function()
+    --    require("scrollbar").setup({
+    --           marks = {
+    --               excluded_buftypes = {
+    --                   "terminal",
+    --                   "neo-tree*"
+    --               },
+    --               excluded_filetypes = {
+    --                   "prompt",
+    --                   "TelescopePrompt",
+    --                   "noice",
+    --                   "neo-tree*",
+    --               },
+    --           }
+    --       })
+    --   end }
 
     -- Sets shiftwidth (no setup)
     use { "tpope/vim-sleuth" }
@@ -118,16 +131,23 @@ return packer.startup(function(use)
 
     -- Non LSP linting
     use { "jose-elias-alvarez/null-ls.nvim",
-        rquires = "nvim-lua/plenary.nvim",
-        config = function()
-            require("null-ls").setup({
-                sources = {
-                    require("null-ls").builtins.formatting.prettier,
-                    require("null-ls").builtins.completion.spell,
+        rquires = "nvim-lua/plenary.nvim", }
 
-                }
-            })
-        end }
+    -- Order matters Mason null-ls this!
+    use { "jayp0521/mason-null-ls.nvim", config = function()
+        require("mason").setup()
+        require("mason-null-ls").setup({
+            automatic_setup = true,
+        })
+        require "mason-null-ls".setup_handlers {
+            function(source_name, methods)
+                -- all sources with no handler get passed here
+                -- Keep original functionality of `automatic_setup = true`
+                require "mason-null-ls.automatic_setup" (source_name, methods)
+            end,
+        }
+        require("null-ls").setup()
+    end }
 
 
     -- LSP Loading icon
