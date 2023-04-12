@@ -1,3 +1,5 @@
+require("neodev").setup({})
+
 require("mason").setup({
 	ui = {
 		icons = {
@@ -10,12 +12,20 @@ require("mason").setup({
 
 local lspconfig = require("lspconfig")
 
- vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
-       vim.lsp.handlers.hover, {
-         -- Use a sharp border with `FloatBorder` highlights
-         border = "rounded"
-       }
-     )
+vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
+	vim.lsp.handlers.hover, {
+	-- Use a sharp border with `FloatBorder` highlights
+	border = "rounded"
+}
+)
+vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
+	vim.lsp.handlers.signature_help, {
+	border = "rounded"
+}
+)
+vim.diagnostic.config {
+	float = { border = "rounded" },
+}
 
 require("mason-lspconfig").setup_handlers({
 	-- The first entry (without a key) will be the default handler

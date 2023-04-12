@@ -35,6 +35,7 @@ return packer.startup(function(use)
 	-- Add you plugins here:
 	use({ "wbthomason/packer.nvim" })
 
+	use({ "folke/neodev.nvim" })
 	-- Theme
 	use({ "HampusHauffman/dracula.nvim" })
 	use({ "tiagovla/tokyodark.nvim" })
@@ -53,7 +54,7 @@ return packer.startup(function(use)
 		},
 	})
 
-	use({   "lewis6991/gitsigns.nvim",
+	use({ "lewis6991/gitsigns.nvim",
 		tag = "release", -- To use the latest release
 		config = function()
 			require("gitsigns").setup()

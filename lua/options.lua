@@ -64,7 +64,6 @@ opt.timeoutlen = 500
 -- Disable nvim intro
 opt.shortmess:append "sI"
 -- Open Neotree
-
 -- Disable builtin plugins
 local disabled_built_ins = {
 	"2html_plugin",
