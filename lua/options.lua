@@ -17,6 +17,7 @@ opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
+vim.opt.fillchars:append("statusline= '─'")
 opt.number = true -- Show line number
 opt.relativenumber = true
 opt.showmatch = true -- Highlight matching parenthesis

@@ -1,7 +1,7 @@
 -----------------------------------------------------------
 -- Color
 -----------------------------------------------------------
-vim.cmd ("colorscheme dracula")
+vim.cmd("colorscheme dracula")
 
 local hl = function(group, fg, bg)
 	fg = fg and "guifg=" .. fg or "guifg=NONE"
