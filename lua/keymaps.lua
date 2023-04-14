@@ -44,6 +44,8 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
+map("i", "<C-8>", "{")
+map("i", "<C-9>", "}")
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>")
 
@@ -184,8 +186,8 @@ M.cmp = {
 -----------------------------------------------------------
 -- Shift up and down to make larger selections easely
 M.treesitter = {
-	init_selection = "<S-up>",
-	node_incremental = "<S-up>",
+	init_selection = "<s-up>",
+	node_incremental = "<s-up>",
 	node_decremental = "<S-down>",
 }
 
