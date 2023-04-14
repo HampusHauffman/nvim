@@ -28,7 +28,11 @@ opt.ignorecase = true -- Ignore case letters when search
 opt.smartcase = true -- Ignore lowercase for the whole pattern
 opt.linebreak = true -- Wrap on word boundary
 opt.termguicolors = true -- Enable 24-bit RGB colors
-opt.laststatus = 3 -- Set global statusline
+opt.laststatus = 0 -- Set global statusline
+vim.api.nvim_create_autocmd({"BufRead","BufNewFile","VimEnter"}, {
+    pattern = "*",
+    command = "set laststatus=0",
+})
 opt.ea = false
 
 -----------------------------------------------------------

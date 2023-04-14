@@ -25,9 +25,6 @@ cmp.setup({
 		}),
 	},
 
-	--formatting = {
-	-- fields = { "kind", "abbr", "menu" },
-	--},
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)

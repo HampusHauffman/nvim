@@ -21,8 +21,8 @@ link("CmpItemAbbrMatch", "@text.strong")
 link("Terminal", "Pmenu")
 
 -- Border
-link("FloatBorder", "TelescopePromptBorder")
 link("TelescopeBorder", "TelescopePromptBorder")
+link("WinSeparator", "TelescopePromptBorder")
 
 link("NeoTreeTabActive", "Normal")
 link("NeoTreeTabSeparatorActive", "Normal")
