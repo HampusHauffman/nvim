@@ -75,7 +75,7 @@ cmp.setup.filetype("gitcommit", {
 cmp.setup.cmdline("/", {
 	mapping = cmp.mapping.preset.cmdline(),
 	view = {
-		entries = { name = "wildmenu", separator = "|" },
+		entries = { name = "wildmenu", separator = "  " },
 	},
 	sources = {
 		{ name = "buffer" },
@@ -86,7 +86,7 @@ cmp.setup.cmdline("/", {
 cmp.setup.cmdline(":", {
 	mapping = cmp.mapping.preset.cmdline(),
 	view = {
-		entries = { name = "wildmenu", separator = "|" },
+		entries = { name = "wildmenu", separator = "  " },
 	},
 	sources = cmp.config.sources({
 		{ name = "path" },

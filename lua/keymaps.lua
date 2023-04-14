@@ -13,8 +13,8 @@ end
 
 -- Change leader to a space
 vim.g.mapleader = " "
-vim.cmd([[nnoremap <Space> <Nop>]])
 
+map("n", "<leader>å", ":source $MYVIMRC <CR>")
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
@@ -119,8 +119,8 @@ map("n", "<leader>f", function()
 		end,
 	})
 end)
-map("n", "gD", "<cmd>lua vim.lsp.buf.declaration()<CR>")
-map("n", "gi", "<cmd>lua vim.lsp.buf.implementation()<CR>")
+map("n", "gD", vim.lsp.buf.declaration)
+map("n", "gi", vim.lsp.buf.implementation)
 map("n", "gr", function()
 	builtin.lsp_references({
 		fname_width = 1000,
@@ -128,17 +128,13 @@ map("n", "gr", function()
 	})
 end)
 map("n", "gd", builtin.lsp_definitions)
-map("n", "K", "<cmd>lua vim.lsp.buf.hover()<CR>")
-map("n", "<leader>r", "<cmd>lua vim.lsp.buf.rename()<CR>")
-map("n", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-map("v", "<leader>c", "<cmd>lua vim.lsp.buf.code_action()<CR>")
-map("n", "<f14>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-map("n", "<S-f2>", "<cmd>lua vim.diagnostic.goto_prev()<CR>")
-map("n", "<f2>", "<cmd>lua vim.diagnostic.goto_next()<CR>")
---map("n", "<C-k>", "<cmd>lua vim.lsp.buf.signature_help()<CR>")
-map("n", "<leader>wa", "<cmd>lua vim.lsp.buf.add_workspace_folder()<CR>")
-map("n", "<leader>wr", "<cmd>lua vim.lsp.buf.remove_workspace_folder()<CR>")
-map("n", "<leader>wl", "<cmd>lua print(vim.inspect(vim.lsp.buf.list_workspace_folders()))<CR>")
+map("n", "K", vim.lsp.buf.hover)
+map("n", "<leader>r", vim.lsp.buf.rename)
+map("n", "<leader>c", vim.lsp.buf.code_action)
+map("v", "<leader>c", vim.lsp.buf.code_action)
+map("n", "<f14>", vim.diagnostic.goto_prev)
+map("n", "<S-f2>", vim.diagnostic.goto_prev)
+map("n", "<f2>", vim.diagnostic.goto_next)
 
 -----------------------------------------------------------
 -- AutoComplete
