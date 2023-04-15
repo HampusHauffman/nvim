@@ -80,7 +80,8 @@ require("lazy").setup({
             dependencies = { "nvim-lua/plenary.nvim" },
         },
         "nvim-telescope/telescope-ui-select.nvim",
-        { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+        { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
+
         { "akinsho/toggleterm.nvim",                  version = "v2.*" },
         {
             "nvim-lualine/lualine.nvim",
@@ -148,6 +149,7 @@ require("lazy").setup({
         -- Util
         -----------------------------------------------------
         "folke/neodev.nvim",
+        'lewis6991/gitsigns.nvim',
         "christoomey/vim-tmux-navigator",
         "tpope/vim-sleuth",
         {

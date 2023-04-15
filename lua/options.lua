@@ -17,7 +17,6 @@ opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
-vim.opt.fillchars:append("statusline= '─'")
 opt.number = true -- Show line number
 opt.relativenumber = true
 opt.showmatch = true -- Highlight matching parenthesis
@@ -29,13 +28,7 @@ opt.ignorecase = true -- Ignore case letters when search
 opt.smartcase = true -- Ignore lowercase for the whole pattern
 opt.linebreak = true -- Wrap on word boundary
 opt.termguicolors = true -- Enable 24-bit RGB colors
-opt.laststatus = 0 -- Set global statusline
-vim.api.nvim_create_autocmd({"BufRead","BufNewFile","VimEnter"}, {
-    pattern = "*",
-    command = "set laststatus=0",
-})
 opt.ea = false
-
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
@@ -44,6 +37,9 @@ opt.shiftwidth = 4 -- Shift 4 spaces when tab
 opt.tabstop = 4 -- 1 tab == 4 spaces
 opt.smartindent = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
 
+-- StatusLine
+opt.laststatus = 3 -- Set global statusline
+opt.cmdheight = 0
 -----------------------------------------------------------
 -- List
 -----------------------------------------------------------
