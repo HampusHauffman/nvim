@@ -134,12 +134,6 @@ require("lazy").setup({
             end,
         },
         {
-            'echasnovski/mini.animate',
-            config = function()
-                require('mini.animate').setup()
-            end
-        },
-        {
             "folke/todo-comments.nvim",
             dependencies = "nvim-lua/plenary.nvim",
             config = function()
