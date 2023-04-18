@@ -31,7 +31,15 @@ require("lazy").setup({
         {
             'simrat39/rust-tools.nvim',
             config = function()
-                require("rust-tools")
+                local rt = require("rust-tools")
+
+                rt.setup({
+                    server = {
+                        on_attach = function(_, bufnr)
+                        end,
+                    },
+                })
+                rt.inlay_hints.enable()
             end
         },
         {
@@ -81,7 +89,6 @@ require("lazy").setup({
         },
         "nvim-telescope/telescope-ui-select.nvim",
         { 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
-
         { "akinsho/toggleterm.nvim",                  version = "v2.*" },
         {
             "nvim-lualine/lualine.nvim",
@@ -107,7 +114,6 @@ require("lazy").setup({
         "p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
         "RRethy/vim-illuminate",           -- Highlight words that match cursos
         "folke/zen-mode.nvim",             -- Zen mode
-        -- Stabalize splits
         {
             "luukvbaal/stabilize.nvim",
             config = function()
@@ -115,22 +121,24 @@ require("lazy").setup({
             end,
         },
         {
-            -- Smooth scrolling
-            "declancm/cinnamon.nvim",
-            config = function()
-                require("cinnamon").setup({
-                    extra_keymaps = true,
-                    override_keymaps = true,
-                    max_length = 500,
-                    scroll_limit = 100,
-                })
-            end,
-        },
-        {
             "j-hui/fidget.nvim",
             config = function()
                 require("fidget").setup({})
             end,
+        },
+        {
+            'echasnovski/mini.animate',
+            config = function()
+                require('mini.animate').setup()
+            end
+        },
+        {
+            "folke/todo-comments.nvim",
+            dependencies =  "nvim-lua/plenary.nvim",
+            config = function()
+                require("todo-comments").setup {
+                }
+            end
         },
 
         -----------------------------------------------------
@@ -152,6 +160,15 @@ require("lazy").setup({
         'lewis6991/gitsigns.nvim',
         "christoomey/vim-tmux-navigator",
         "tpope/vim-sleuth",
+        {
+            "Pocco81/auto-save.nvim",
+            config = function()
+                require("auto-save").setup {
+                    -- your config goes here
+                    -- or just leave it empty :)
+                }
+            end,
+        },
         {
             "nvim-treesitter/playground",
             config = function()

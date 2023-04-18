@@ -78,22 +78,22 @@ map("n", "<leader>e", function()
 end)
 map("n", "fb", builtin.buffers)
 map("n", "fh", builtin.help_tags)
-map("n", "<leader>a", function()
-	builtin.lsp_document_symbols({
-		ignore_symbols = {
-			"property",
-			"constant",
-			"object",
-			"constant",
-			"boolean",
-			"string",
-			"variable",
-			"package",
-			"array",
-			"number",
-		},
-	})
-end)
+--map("n", "<leader>a", function()
+--	builtin.lsp_document_symbols({
+--		ignore_symbols = {
+--			"property",
+--			"constant",
+--			"object",
+--			"constant",
+--			"boolean",
+--			"string",
+--			"variable",
+--			"package",
+--			"array",
+--			"number",
+--		},
+--	})
+--end)
 
 M.telescope = {
 	n = {
