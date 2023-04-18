@@ -35,7 +35,7 @@ require("lazy").setup({
 
                 rt.setup({
                     server = {
-                        on_attach = function(_, bufnr)
+                        on_attach = function()
                         end,
                     },
                 })
@@ -109,6 +109,13 @@ require("lazy").setup({
         -----------------------------------------------------
         -- Pretty
         -----------------------------------------------------
+        {
+            "folke/noice.nvim",
+            dependencies = {
+                "MunifTanjim/nui.nvim",
+                "rcarriga/nvim-notify",
+            }
+        },
         "nvim-treesitter/nvim-treesitter", -- Syntax highligting
         "onsails/lspkind.nvim",            -- Symbols / icons
         "p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
@@ -134,7 +141,7 @@ require("lazy").setup({
         },
         {
             "folke/todo-comments.nvim",
-            dependencies =  "nvim-lua/plenary.nvim",
+            dependencies = "nvim-lua/plenary.nvim",
             config = function()
                 require("todo-comments").setup {
                 }
