@@ -11,7 +11,7 @@ opt.mouse = "a" -- Enable mouse support
 opt.clipboard = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile = false -- Don't use swapfile
 opt.undofile = true -- Persistant undo
-opt.cul = true
+--opt.cul = true
 opt.autowriteall = true -- Auto write any changes. No more :qa! horrors :)
 
 -----------------------------------------------------------
@@ -28,9 +28,8 @@ opt.ignorecase = true -- Ignore case letters when search
 opt.smartcase = true -- Ignore lowercase for the whole pattern
 opt.linebreak = true -- Wrap on word boundary
 opt.termguicolors = true -- Enable 24-bit RGB colors
-opt.laststatus = 3 -- Set global statusline
 opt.ea = false
-
+opt.signcolumn = "yes:1"
 -----------------------------------------------------------
 -- Tabs, indent
 -----------------------------------------------------------
@@ -39,6 +38,9 @@ opt.shiftwidth = 4 -- Shift 4 spaces when tab
 opt.tabstop = 4 -- 1 tab == 4 spaces
 opt.smartindent = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
 
+-- StatusLine
+opt.laststatus = 3 -- Set global statusline
+opt.cmdheight = 0
 -----------------------------------------------------------
 -- List
 -----------------------------------------------------------

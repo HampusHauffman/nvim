@@ -39,7 +39,7 @@ require("neo-tree").setup({
         git_status = {
             symbols = {
                 -- Change type
-                added    = "✚", -- NOTE: you can set any of these to an empty string to not show them
+                added    = "✚",
                 deleted  = "",
                 modified = "",
                 renamed  = "",

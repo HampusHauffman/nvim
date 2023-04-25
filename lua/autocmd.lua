@@ -1,7 +1,6 @@
 -- Don't auto commenting new lines
 local au = vim.api.nvim_create_autocmd
 local ag = vim.api.nvim_create_augroup
-
 au("BufEnter", {
     pattern = "*",
     command = "set fo-=c fo-=r fo-=o",
