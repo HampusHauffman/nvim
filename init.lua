@@ -49,9 +49,6 @@ require("lazy").setup({
                 require("flutter-tools").setup({}) -- use defaults
             end,
         },
-        -----------------------------------------------------
-        -- LSP
-        -----------------------------------------------------
         'mfussenegger/nvim-dap',
         {
             "folke/trouble.nvim",
