@@ -3,18 +3,20 @@ local M = {}
 -- Key maps
 -----------------------------------------------------------
 
-local function map(mode, lhs, rhs, opts)
+local wk = require "which-key"
+local function map(mode, lhs, rhs, desc)
 	local options = { noremap = true, silent = true }
-	if opts then
-		options = vim.tbl_extend("force", options, opts)
-	end
 	vim.keymap.set(mode, lhs, rhs, options)
+	if desc then
+		wk.register({ [lhs] = desc },
+			{ mode = mode })
+	end
 end
 
 -- Change leader to a space
 vim.g.mapleader = " "
 
-map("n", "<leader>å", ":source $MYVIMRC <CR>")
+map("n", "<leader>å", ":source $MYVIMRC <CR>", "Source $MYVIMRC!")
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
@@ -45,7 +47,7 @@ map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
 -- Fast saving with <leader> and s
-map("n", "<leader>s", ":w<CR>")
+map("n", "<leader>s", ":w<CR>", "Save file")
 
 -- Quit with leader shift q
 map("n", "<leader><S-q>", ":qa!<CR>")
@@ -63,8 +65,8 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -----------------------------------------------------------
 -- Neotree
 -----------------------------------------------------------
-map("n", "<leader>n", ":Neotree left focus reveal<CR>")
-map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
+map("n", "<leader>n", ":Neotree left focus reveal<CR>", "File explorer")
+--map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
 
 -- To also work with CTRL
 -- map("n", "<c-n>", ":Neotree left focus reveal<CR>")
@@ -74,12 +76,12 @@ map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
 -- Telescope builtins for lsp actions
 local builtin = require("telescope.builtin")
 
-map("n", "ff", builtin.find_files)
-map("n", "fg", builtin.live_grep)
-map("n", "fo", builtin.find_files)
+map("n", "ff", builtin.find_files, "Find files")
+map("n", "fg", builtin.live_grep, "Find grep")
+map("n", "fo", builtin.find_files, "Find files")
 map("n", "<leader>e", function()
 	builtin.oldfiles({ only_cwd = true })
-end)
+end, "Previous files")
 map("n", "fb", builtin.buffers)
 map("n", "fh", builtin.help_tags)
 
@@ -106,23 +108,23 @@ map("n", "<leader>f", function()
 			return client.name ~= "tsserver"
 		end,
 	})
-end)
-map("n", "gD", vim.lsp.buf.declaration)
-map("n", "gi", vim.lsp.buf.implementation)
+end, "Format")
+map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
+map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
 map("n", "gr", function()
 	builtin.lsp_references({
 		fname_width = 1000,
 		show_line = false,
 	})
-end)
-map("n", "gd", builtin.lsp_definitions)
-map("n", "K", vim.lsp.buf.hover)
-map("n", "<leader>r", vim.lsp.buf.rename)
-map("n", "<leader>c", vim.lsp.buf.code_action)
-map("v", "<leader>c", vim.lsp.buf.code_action)
-map("n", "<f14>", vim.diagnostic.goto_prev)
-map("n", "<S-f2>", vim.diagnostic.goto_prev)
-map("n", "<f2>", vim.diagnostic.goto_next)
+end, "Go to reference")
+map("n", "gd", builtin.lsp_definitions, "Go to defenition")
+map("n", "K", vim.lsp.buf.hover, "Hover")
+map("n", "<leader>r", vim.lsp.buf.rename, "Rename")
+map("n", "<leader>c", vim.lsp.buf.code_action, "Code action")
+map("v", "<leader>c", vim.lsp.buf.code_action, "Code action")
+map("n", "<f14>", vim.diagnostic.goto_prev, "Go to previous fix")
+map("n", "<S-f2>", vim.diagnostic.goto_prev, "Go to previous fix")
+map("n", "<f2>", vim.diagnostic.goto_next, "Go to next fix")
 
 -----------------------------------------------------------
 -- AutoComplete
@@ -178,8 +180,8 @@ M.treesitter = {
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
-map("n", "<C-t>", ":ToggleTerm<CR>")
-map("t", "<C-t>", ":ToggleTerm<CR>")
+map("n", "<C-t>", ":ToggleTerm<CR>", "Terminal")
+map("t", "<C-t>", ":ToggleTerm<CR>", "Terminal")
 map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
 map("v", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
 
@@ -194,7 +196,13 @@ map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 -----------------------------------------------------------
 --  ZenMode
 -----------------------------------------------------------
-map("n", "<leader>z", [[<Cmd>ZenMode<CR>]])
+local function zen()
+	vim.fn.system("tmux resize-pane -Z")
+end
+map("n", "<leader>z", function ()
+	zen()
+	vim.cmd("ZenMode")
+end, "🧘")
 
 
 return M

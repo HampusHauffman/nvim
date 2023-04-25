@@ -19,16 +19,4 @@ local wk = require "which-key"
 wk.register({
     ["<CR>"] = "which_key_ignore", -- special label to hide it in the popup
     ["h"] = "which_key_ignore",
-    ["<Up>"] = "Select area",
-    f = "Formatting",
-    n = "File explorer",
-    N = "Qick git explorer",
-    w = { name = "workspace" },
-    e = "Recent files",
-    c = "Code action",
-    s = "Save file",
-    t = "Count + Terminal",
-    r = "Rename",
-    a = "Symbols",
-    g = "Lazy Git"
 }, { prefix = "<leader>" })
