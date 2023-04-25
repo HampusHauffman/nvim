@@ -78,22 +78,6 @@ map("n", "<leader>e", function()
 end)
 map("n", "fb", builtin.buffers)
 map("n", "fh", builtin.help_tags)
---map("n", "<leader>a", function()
---	builtin.lsp_document_symbols({
---		ignore_symbols = {
---			"property",
---			"constant",
---			"object",
---			"constant",
---			"boolean",
---			"string",
---			"variable",
---			"package",
---			"array",
---			"number",
---		},
---	})
---end)
 
 M.telescope = {
 	n = {
@@ -208,9 +192,5 @@ map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 -----------------------------------------------------------
 map("n", "<leader>z", [[<Cmd>ZenMode<CR>]])
 
------------------------------------------------------------
---  Aerial
------------------------------------------------------------
---map("n", "<leader>a", [[<Cmd>AerialToggle<CR>]])
 
 return M
