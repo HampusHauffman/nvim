@@ -15,7 +15,6 @@ cmp.setup({
 			path = 250,
 		},
 	},
-
 	window = {
 		completion = cmp.config.window.bordered({ --border = "shadow",
 			winhighlight = "FloatBorder:TelescopePromptBorder,Normal:Normal",
@@ -24,7 +23,6 @@ cmp.setup({
 			winhighlight = "FloatBorder:TelescopePromptBorder,Normal:Normal",
 		}),
 	},
-
 	snippet = {
 		expand = function(args)
 			luasnip.lsp_expand(args.body)
@@ -67,27 +65,3 @@ cmp.setup.filetype("gitcommit", {
 		{ name = "buffer" },
 	}),
 })
-
--- Use buffer source for `/` (if you enabled `native_menu`, this won't work anymore).
---cmp.setup.cmdline("/", {
---	mapping = cmp.mapping.preset.cmdline(),
---	view = {
---		entries = { name = "wildmenu", separator = "  " },
---	},
---	sources = {
---		{ name = "buffer" },
---	},
---})
---
----- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
---cmp.setup.cmdline(":", {
---	mapping = cmp.mapping.preset.cmdline(),
---	view = {
---		entries = { name = "wildmenu", separator = "  " },
---	},
---	sources = cmp.config.sources({
---		{ name = "path" },
---	}, {
---		{ name = "cmdline" },
---	}),
---})

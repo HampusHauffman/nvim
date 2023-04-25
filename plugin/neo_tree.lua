@@ -5,10 +5,10 @@ require("neo-tree").setup({
     popup_border_style = "rounded",
     sources = {
         "filesystem",
-        "git_status",
+        --"git_status",
     },
     source_selector = {
-        winbar = true,
+        --winbar = true,
         statusline = false
     },
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab

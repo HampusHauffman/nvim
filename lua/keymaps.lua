@@ -34,8 +34,8 @@ map("i", "kj", "<Esc>")
 
 -- Move in insert mode
 map("i", "<C-h>", "<left>")
-map("i", "<C-j>", "<nop>")
-map("i", "<C-k>", "<nop>")
+map("i", "<C-j>", "<down>")
+map("i", "<C-k>", "<up>")
 map("i", "<C-l>", "<right>")
 
 -- Move around splits using Ctrl + {h,j,k,l}
@@ -44,14 +44,18 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
-map("i", "<C-8>", "{")
-map("i", "<C-9>", "}")
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>")
 
 -- Quit with leader shift q
 map("n", "<leader><S-q>", ":qa!<CR>")
 
+-- Tmux navigation
+map("n", "<C-h>", ":<C-U>TmuxNavigateLeft<cr>")
+map("n", "<C-j>", ":<C-U>TmuxNavigateDown<cr>")
+map("n", "<C-k>", ":<C-U>TmuxNavigateUp<cr>")
+map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
+--map("n","<C-h>",":<C-U>TmuxNavigatePrevious<cr>")
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------

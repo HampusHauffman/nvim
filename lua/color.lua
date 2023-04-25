@@ -17,24 +17,13 @@ end
 link("Pmenu", "Normal")
 link("CmpItemAbbrMatch", "@text.strong")
 
--- Terminal
-link("Terminal", "Pmenu")
-
 -- Border
-link("TelescopeBorder", "TelescopePromptBorder")
-link("WinSeparator", "TelescopePromptBorder")
+link("FloatBorder", "TelescopePromptBorder")
+link("TelescopeBorder", "FloatBorder")
+link("WinSeparator", "FloatBorder")
 
 -- StatusLine
 link("StatusLine", "Normal")
-
--- Lualine
---link("lualine_c_normal", "Normal")
---link("lualine_c_insert", "lualine_c_normal")
---link("lualine_c_visual", "lualine_c_normal")
---link("lualine_c_command", "lualine_c_normal")
---link("lualine_c_replace", "lualine_c_normal")
---link("lualine_c_inactive", "lualine_c_normal")
-
 
 link("NeoTreeTabActive", "Normal")
 link("NeoTreeTabSeparatorActive", "Normal")
@@ -48,7 +37,7 @@ link("IndentBlankLineContextChar", "Underline")
 link("@property", "@parameter")
 link("@variable", "@constant")
 
--- Rainbow TreeSitter
+-- Rainbow TreeSitter (fixes ugly red first color)
 link("rainbowcol1", "@boolean")
 
 

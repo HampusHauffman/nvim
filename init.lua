@@ -35,6 +35,13 @@ require("lazy").setup({
 
                 rt.setup({
                     server = {
+                        settings = {
+                            ["rust-analyzer"] = {
+                                check = {
+                                    command = "clippy"
+                                }
+                            }
+                        },
                         on_attach = function()
                         end,
                     },
@@ -110,7 +117,7 @@ require("lazy").setup({
             "folke/noice.nvim",
             dependencies = {
                 "MunifTanjim/nui.nvim",
-                "rcarriga/nvim-notify",
+                --"rcarriga/nvim-notify",
             }
         },
         "nvim-treesitter/nvim-treesitter", -- Syntax highligting
