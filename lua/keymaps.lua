@@ -15,7 +15,9 @@ end
 
 -- Change leader to a space
 vim.g.mapleader = " "
-
+-- Telescope builtins for lsp actions
+local tele_builtin = require("telescope.builtin")
+-- Source vimRc
 map("n", "<leader>å", ":source $MYVIMRC <CR>", "Source $MYVIMRC!")
 -----------------------------------------------------------
 -- Neovim shortcuts
@@ -57,7 +59,6 @@ map("n", "<C-h>", ":<C-U>TmuxNavigateLeft<cr>")
 map("n", "<C-j>", ":<C-U>TmuxNavigateDown<cr>")
 map("n", "<C-k>", ":<C-U>TmuxNavigateUp<cr>")
 map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
---map("n","<C-h>",":<C-U>TmuxNavigatePrevious<cr>")
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
@@ -66,24 +67,41 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader>n", ":Neotree left focus reveal<CR>", "File explorer")
---map("n", "<leader><s-n>", ":Neotree git_status left focus reveal<CR>")
+map("n", "<leader><s-n>", ":Neotree float<CR>")
 
--- To also work with CTRL
--- map("n", "<c-n>", ":Neotree left focus reveal<CR>")
+-----------------------------------------------------------
+-- GitSign
+-----------------------------------------------------------
+map("n", "<C-g>", ":Gitsigns <cr>")
+
+-----------------------------------------------------------
+--  Terminal
+-----------------------------------------------------------
+map("n", "<C-t>", ":ToggleTerm<CR>", "Terminal")
+map("t", "<C-t>", ":ToggleTerm<CR>", "Terminal")
+map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
+map("v", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
+
+map("t", "<esc>", [[<C-\><C-n>]])
+map("t", "jk", [[<C-\><C-n>]])
+map("t", "kj", [[<C-\><C-n>]])
+map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
+map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
+map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
+
 -----------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
--- Telescope builtins for lsp actions
-local builtin = require("telescope.builtin")
 
-map("n", "ff", builtin.find_files, "Find files")
-map("n", "fg", builtin.live_grep, "Find grep")
-map("n", "fo", builtin.find_files, "Find files")
+map("n", "ff", tele_builtin.find_files, "Find files")
+map("n", "fg", tele_builtin.live_grep, "Find grep")
+map("n", "fo", tele_builtin.find_files, "Find files")
 map("n", "<leader>e", function()
-	builtin.oldfiles({ only_cwd = true })
+	tele_builtin.oldfiles({ only_cwd = true })
 end, "Previous files")
-map("n", "fb", builtin.buffers)
-map("n", "fh", builtin.help_tags)
+map("n", "fb", tele_builtin.buffers)
+map("n", "fh", tele_builtin.help_tags)
 
 M.telescope = {
 	n = {
@@ -97,6 +115,7 @@ M.telescope = {
 		["<C-j>"] = "move_selection_next",
 	},
 }
+
 -----------------------------------------------------------
 -- LSP
 -----------------------------------------------------------
@@ -112,12 +131,12 @@ end, "Format")
 map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
 map("n", "gr", function()
-	builtin.lsp_references({
+	tele_builtin.lsp_references({
 		fname_width = 1000,
 		show_line = false,
 	})
 end, "Go to reference")
-map("n", "gd", builtin.lsp_definitions, "Go to defenition")
+map("n", "gd", tele_builtin.lsp_definitions, "Go to defenition")
 map("n", "K", vim.lsp.buf.hover, "Hover")
 map("n", "<leader>r", vim.lsp.buf.rename, "Rename")
 map("n", "<leader>c", vim.lsp.buf.code_action, "Code action")
@@ -125,6 +144,7 @@ map("v", "<leader>c", vim.lsp.buf.code_action, "Code action")
 map("n", "<f14>", vim.diagnostic.goto_prev, "Go to previous fix")
 map("n", "<S-f2>", vim.diagnostic.goto_prev, "Go to previous fix")
 map("n", "<f2>", vim.diagnostic.goto_next, "Go to next fix")
+
 
 -----------------------------------------------------------
 -- AutoComplete
@@ -166,7 +186,6 @@ M.cmp = {
 	["<C-j>"] = next,
 	["<C-k>"] = prev,
 }
-
 -----------------------------------------------------------
 --  Treesitter
 -----------------------------------------------------------
@@ -176,33 +195,14 @@ M.treesitter = {
 	node_incremental = "<s-up>",
 	node_decremental = "<S-down>",
 }
-
------------------------------------------------------------
---  Terminal
------------------------------------------------------------
-map("n", "<C-t>", ":ToggleTerm<CR>", "Terminal")
-map("t", "<C-t>", ":ToggleTerm<CR>", "Terminal")
-map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
-map("v", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
-
-map("t", "<esc>", [[<C-\><C-n>]])
-map("t", "jk", [[<C-\><C-n>]])
-map("t", "kj", [[<C-\><C-n>]])
-map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
-map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
-map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
-map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
-
 -----------------------------------------------------------
 --  ZenMode
 -----------------------------------------------------------
 local function zen()
 	vim.fn.system("tmux resize-pane -Z")
 end
-map("n", "<leader>z", function ()
+map("n", "<leader>z", function()
 	zen()
 	vim.cmd("ZenMode")
 end, "🧘")
-
-
 return M

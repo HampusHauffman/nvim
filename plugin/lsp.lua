@@ -1,4 +1,5 @@
 require("neodev").setup({})
+local lspconfig = require("lspconfig")
 
 require("mason").setup({
 	ui = {
@@ -10,11 +11,9 @@ require("mason").setup({
 	},
 })
 
-local lspconfig = require("lspconfig")
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 	vim.lsp.handlers.hover, {
-	-- Use a sharp border with `FloatBorder` highlights
 	border = "rounded"
 }
 )

@@ -21,6 +21,7 @@ link("CmpItemAbbrMatch", "@text.strong")
 link("FloatBorder", "TelescopePromptBorder")
 link("TelescopeBorder", "FloatBorder")
 link("WinSeparator", "FloatBorder")
+link("NeoTreeFloatBorder", "FloatBorder")
 
 -- StatusLine
 link("StatusLine", "Normal")
@@ -35,8 +36,9 @@ link("IndentBlankLineContextChar", "Underline")
 
 -- TreeSitter
 link("@property", "@parameter")
-link("@variable", "@constant")
-
+link("@variable", "@variable.builtin")
+link("@lsp.type.variable", "@variable")
+vim.api.nvim_command("highlight Comment cterm=bold")
 -- Rainbow TreeSitter (fixes ugly red first color)
 link("rainbowcol1", "@boolean")
 

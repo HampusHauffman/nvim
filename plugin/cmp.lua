@@ -1,9 +1,18 @@
 -- Add additional capabilities supported by nvim-cmp
 local capabilities = vim.lsp.protocol.make_client_capabilities()
-capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 local luasnip = require("luasnip")
--- nvim-cmp setup
 local cmp = require("cmp")
+
+-- Set lsp capabilities
+capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
+-- Luasnip
+luasnip.setup({
+	history = true,
+	region_check_events = "InsertEnter",
+	delete_check_events = "TextChanged,InsertLeave",
+})
+require("luasnip.loaders.from_vscode").lazy_load() -- Allow formatting of snippets like vs-code
+luasnip.filetype_extend("flutter", { "flutter" }) -- Add flutter snippets
 
 cmp.setup({
 	mapping = require("keymaps").cmp,
@@ -55,13 +64,4 @@ cmp.setup({
 			end,
 		}),
 	},
-})
-
--- Set configuration for specific filetype.
-cmp.setup.filetype("gitcommit", {
-	sources = cmp.config.sources({
-		{ name = "cmp_git" }, -- You can specify the `cmp_git` source if you were installed it.
-	}, {
-		{ name = "buffer" },
-	}),
 })

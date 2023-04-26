@@ -64,6 +64,8 @@ require("lazy").setup({
                 require("trouble").setup({})
             end,
         },
+        "fladson/vim-kitty",
+
         -----------------------------------------------------
         -- CMP
         -----------------------------------------------------
@@ -73,15 +75,9 @@ require("lazy").setup({
         "hrsh7th/cmp-path",
         "hrsh7th/cmp-cmdline",
         "hrsh7th/cmp-nvim-lua",
-        { "L3MON4D3/LuaSnip" },
-        { "saadparwaiz1/cmp_luasnip" },
-        {
-            "rafamadriz/friendly-snippets",
-            config = function()
-                require("luasnip").filetype_extend("ruby", { "rails" })
-                require("luasnip").filetype_extend("dart", { "flutter" })
-            end,
-        },
+        "L3MON4D3/LuaSnip",
+        "saadparwaiz1/cmp_luasnip",
+        "rafamadriz/friendly-snippets",
 
         -----------------------------------------------------
         -- UI
@@ -162,7 +158,12 @@ require("lazy").setup({
         -- Util
         -----------------------------------------------------
         "folke/neodev.nvim",
-        'lewis6991/gitsigns.nvim',
+        {
+            'lewis6991/gitsigns.nvim',
+            config = function()
+                require('gitsigns').setup()
+            end
+        },
         "christoomey/vim-tmux-navigator",
         "tpope/vim-sleuth",
         {
