@@ -3,6 +3,15 @@
 -----------------------------------------------------------
 vim.cmd("colorscheme dracula")
 
+
+local function italic(grp)
+	vim.api.nvim_command("highlight " .. grp .. " gui=italic")
+end
+
+local function bold(grp)
+	vim.api.nvim_command("highlight " .. grp .. " gui=bold")
+end
+
 local hl = function(group, fg, bg)
 	fg = fg and "guifg=" .. fg or "guifg=NONE"
 	bg = bg and "guibg=" .. bg or "guibg=NONE"
@@ -35,10 +44,13 @@ link("NeoTreeTabSeparatorInactive", "Pmenu")
 link("IndentBlankLineContextChar", "Underline")
 
 -- TreeSitter
+--vim.api.nvim_command("highlight Comment gui=italic")
+italic("Comment")
 link("@property", "@parameter")
+bold("@property")
+--bold("@property")
 link("@variable", "@variable.builtin")
 link("@lsp.type.variable", "@variable")
-vim.api.nvim_command("highlight Comment cterm=bold")
 -- Rainbow TreeSitter (fixes ugly red first color)
 link("rainbowcol1", "@boolean")
 

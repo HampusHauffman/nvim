@@ -104,7 +104,7 @@ require("lazy").setup({
             }
         },
         "folke/which-key.nvim",
-        "nvim-treesitter/nvim-treesitter-context",
+        --"nvim-treesitter/nvim-treesitter-context",
 
         -----------------------------------------------------
         -- Pretty

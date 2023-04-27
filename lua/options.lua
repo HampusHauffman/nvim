@@ -14,6 +14,7 @@ opt.undofile = true           -- Persistant undo
 --opt.cul = true -- Line for the cursor
 opt.autowriteall = true       -- Auto write any changes. No more :qa! horrors :)
 opt.splitkeep = "screen"
+--opt.more
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
