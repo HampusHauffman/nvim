@@ -7,7 +7,6 @@ local function get_root_node()
 end
 
 
-
 vim.cmd('highlight Bloc0 guibg=#001234')
 vim.cmd('highlight Bloc1 guibg=#004321')
 
@@ -17,22 +16,25 @@ function awd()
 end
 
 function awddddd()
+
 end
 
 ---@param ts_node TSNode
 ---@param nest_nr integer
 local function color_node(ts_node, nest_nr)
-  local start_row, _, _ = ts_node:start()
-  local end_row, _, _ = ts_node:end_()
+  local start_row, start_col, end_row, end_col = ts_node:range()
+
   if (start_row == end_row) then return end
   print("start " .. start_row .. " end " .. end_row)
 
+  nest_nr = nest_nr + ((ts_node:type() == "block")  and -1 or 0)
+  for row = start_row, end_row do
+    vim.api.nvim_buf_add_highlight(0, -1, "Bloc" .. nest_nr % 2, row, start_col, 255)
+  end
+  --if (ts_node:type() == "block") then nest_nr = nest_nr - 1 end
   for i in ts_node:iter_children() do
     color_node(i, nest_nr + 1)
   end
-  if (ts_node:type() == "block") then nest_nr = nest_nr - 1 end
-  vim.api.nvim_buf_set_extmark(0, ns_id, start_row, 0,
-    { end_row = end_row, end_col = 0, hl_eol = true, hl_group = "Bloc" .. nest_nr % 2 }) -- highlight the entire row
 end
 
 function M()
