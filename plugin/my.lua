@@ -43,12 +43,12 @@ local function color_node(ts_node, nest_nr, lines, prev_col)
 
   nest_nr = nest_nr + (ts_node:type() == "block" and -1 or 0)
 
-  for row = start_row, end_row - (nest_nr == 0 and 1 or 0) do -- Figure out why i need this check
+  for row = start_row, end_row do -- Figure out why i need this check
     local line_len = string.len(lines[row + 1])
     local padding = max_col - line_len
     local total_length = line_len + padding
 
-    local spaces = string.rep(" ", padding)
+    local spaces = string.rep(" ", padding + 1)
     local colors = { { spaces, "Bloc" .. nest_nr % 2 } }
 
     for p = #prev_col, 1, -1 do
@@ -56,14 +56,14 @@ local function color_node(ts_node, nest_nr, lines, prev_col)
       local padding = prev_max_col - total_length
       total_length = total_length + padding
       local s = string.rep(" ", padding)
-      table.insert(colors, { s, "Bloc" .. (nest_nr + p) % 2 })
+      table.insert(colors, { s, "Bloc" .. (nest_nr + p - 1) % 2 })
     end
 
     -- Fill out space to  longest char (spaces)
     vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
       id = row + 1,
       virt_text = colors,
-      --virt_text_pos = "eol",
+      virt_text_pos = "eol",
       virt_text_win_col = line_len
     })
 
@@ -82,5 +82,8 @@ function M()
   local root_node = get_root_node()
   local buf_lines = vim.api.nvim_buf_line_count(0)
   local lines = vim.api.nvim_buf_get_lines(0, 0, buf_lines, true)
-  color_node(root_node, 0, lines, {})
+  for i in root_node:iter_children() do
+    color_node(i, 0, lines, {})
+  end
+  --  color_node(root_node, 0, lines, {})
 end
