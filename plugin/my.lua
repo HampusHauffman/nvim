@@ -20,25 +20,49 @@ function awddddd()
 end
 
 ---@param ts_node TSNode
+local function find_biggest_end_col(ts_node)
+  local _, max, _ = ts_node:start()
+
+  for c in ts_node:iter_children() do
+    max = math.max(max, find_biggest_end_col(c))
+  end
+  return max
+end
+
+---@param ts_node TSNode
 ---@param nest_nr integer
-local function color_node(ts_node, nest_nr)
+---@param lines string[]
+local function color_node(ts_node, nest_nr, lines, prev_max_col)
   local start_row, start_col, end_row, end_col = ts_node:range()
+  local max_col = find_biggest_end_col(ts_node)
 
   if (start_row == end_row) then return end
-  print("start " .. start_row .. " end " .. end_row)
+  if (ts_node:type() == "arguments") then return end
 
-  nest_nr = nest_nr + ((ts_node:type() == "block")  and -1 or 0)
-  for row = start_row, end_row do
-    vim.api.nvim_buf_add_highlight(0, -1, "Bloc" .. nest_nr % 2, row, start_col, 255)
+  nest_nr = nest_nr + (ts_node:type() == "block" and -1 or 0)
+
+  for row = start_row, end_row - (nest_nr == 0 and 1 or 0) do -- Figure out why i need this check
+    local spaces = string.rep(" ", max_col - string.len(lines[row + 1]))
+    local prev_spaces = string.rep(" ", prev_max_col - max_col)
+
+    -- Fill out space to  longest char (spaces)
+    vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+      id = row + 1,
+      virt_text = { { spaces, "Bloc" .. nest_nr % 2 }, { prev_spaces, "Bloc" .. (nest_nr - 1) % 2 } },
+      virt_text_pos = "eol",
+    })
   end
-  --if (ts_node:type() == "block") then nest_nr = nest_nr - 1 end
+
   for i in ts_node:iter_children() do
-    color_node(i, nest_nr + 1)
+    color_node(i, nest_nr + 1, lines, max_col)
   end
 end
 
 function M()
-  local l = get_root_node()
+  local root_node = get_root_node()
+  local buf_lines = vim.api.nvim_buf_line_count(0)
+  local lines = vim.api.nvim_buf_get_lines(0, 0, buf_lines, true)
+  print(root_node:end_())
 
-  color_node(l, 0)
+  color_node(root_node, 0, lines, find_biggest_end_col(root_node))
 end
