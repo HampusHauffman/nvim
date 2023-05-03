@@ -118,7 +118,7 @@ require("lazy").setup({
         },
         "nvim-treesitter/nvim-treesitter", -- Syntax highligting
         "onsails/lspkind.nvim",            -- Symbols / icons
-        "p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
+        --"p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
         "RRethy/vim-illuminate",           -- Highlight words that match cursos
         "folke/zen-mode.nvim",             -- Zen mode
         {

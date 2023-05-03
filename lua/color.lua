@@ -43,12 +43,10 @@ link("NeoTreeTabSeparatorInactive", "Pmenu")
 -- IndentLines
 link("IndentBlankLineContextChar", "Underline")
 
--- TreeSitter
---vim.api.nvim_command("highlight Comment gui=italic")
 italic("Comment")
+bold("@variable")
+-- TreeSitter
 link("@lsp.type.property", "@field")
---bold("@property")
---bold("@property")
 link("@variable", "@constant")
 link("@lsp.type.variable", "@variable")
 -- Rainbow TreeSitter (fixes ugly red first color)
@@ -56,10 +54,10 @@ link("rainbowcol1", "@boolean")
 
 
 vim.fn.sign_define("DiagnosticSignError",
-	{ text = " ", texthl = "DiagnosticSignError" })
+	{ text = "", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn",
-	{ text = " ", texthl = "DiagnosticSignWarn" })
+	{ text = "", texthl = "DiagnosticSignWarn" })
 vim.fn.sign_define("DiagnosticSignInfo",
-	{ text = " ", texthl = "DiagnosticSignInfo" })
+	{ text = "", texthl = "DiagnosticSignInfo" })
 vim.fn.sign_define("DiagnosticSignHint",
 	{ text = "", texthl = "DiagnosticSignHint" })
