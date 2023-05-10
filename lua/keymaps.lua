@@ -4,6 +4,10 @@ local M = {}
 -----------------------------------------------------------
 
 local wk = require "which-key"
+
+
+
+
 local function map(mode, lhs, rhs, desc)
 	local options = { noremap = true, silent = true }
 	vim.keymap.set(mode, lhs, rhs, options)
@@ -12,6 +16,8 @@ local function map(mode, lhs, rhs, desc)
 			{ mode = mode })
 	end
 end
+
+
 
 -- Change leader to a space
 vim.g.mapleader = " "
