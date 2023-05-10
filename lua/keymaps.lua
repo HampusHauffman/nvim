@@ -5,8 +5,6 @@ local M = {}
 
 local wk = require "which-key"
 
-
-
 local function map(mode, lhs, rhs, desc)
 	local options = { noremap = true, silent = true }
 	vim.keymap.set(mode, lhs, rhs, options)
@@ -15,8 +13,6 @@ local function map(mode, lhs, rhs, desc)
 			{ mode = mode })
 	end
 end
-
-
 
 -- Change leader to a space
 vim.g.mapleader = " "
@@ -143,7 +139,10 @@ map("n", "gr", function()
 end, "Go to reference")
 map("n", "gd", tele_builtin.lsp_definitions, "Go to defenition")
 map("n", "K", vim.lsp.buf.hover, "Hover")
-map("n", "<leader>r", vim.lsp.buf.rename, "Rename")
+map("n", "<leader>r", function()
+	vim.lsp.buf.rename()
+	vim.cmd('silent! wa')
+end, "Rename")
 map("n", "<leader>c", vim.lsp.buf.code_action, "Code action")
 map("v", "<leader>c", vim.lsp.buf.code_action, "Code action")
 map("n", "<f14>", vim.diagnostic.goto_prev, "Go to previous fix")
