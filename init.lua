@@ -22,11 +22,11 @@ require("lazy").setup({
         -----------------------------------------------------
         "neovim/nvim-lspconfig",
         "jose-elias-alvarez/null-ls.nvim",
-
         "williamboman/mason.nvim",
         "williamboman/mason-lspconfig.nvim",
         "jayp0521/mason-null-ls.nvim",
-
+        'mfussenegger/nvim-dap',
+        "fladson/vim-kitty",
         "pantharshit00/vim-prisma",
         {
             'simrat39/rust-tools.nvim',
@@ -56,7 +56,6 @@ require("lazy").setup({
                 require("flutter-tools").setup({}) -- use defaults
             end,
         },
-        'mfussenegger/nvim-dap',
         {
             "folke/trouble.nvim",
             dependencies = "kyazdani42/nvim-web-devicons",
@@ -64,7 +63,14 @@ require("lazy").setup({
                 require("trouble").setup({})
             end,
         },
-        "fladson/vim-kitty",
+        {
+            "saecki/crates.nvim",
+            version = 'v0.3.0',
+            dependencies = { 'nvim-lua/plenary.nvim' },
+            config = function()
+                require('crates').setup()
+            end,
+        },
 
         -----------------------------------------------------
         -- CMP
@@ -78,6 +84,13 @@ require("lazy").setup({
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
+        {
+            'huggingface/hfcc.nvim',
+            opts = {
+                api_token = "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",
+                model = "bigcode/starcoder" -- can be a model ID or an http endpoint
+            }
+        },
 
         -----------------------------------------------------
         -- UI
@@ -124,21 +137,21 @@ require("lazy").setup({
         {
             "luukvbaal/stabilize.nvim",
             config = function()
-                require("stabilize").setup()
+                require("stabilize").setup({
+                })
             end,
         },
-        {
-            "j-hui/fidget.nvim",
-            config = function()
-                require("fidget").setup({})
-            end,
-        },
+        --{
+        --    "j-hui/fidget.nvim",
+        --    config = function()
+        --        require("fidget").setup({})
+        --    end,
+        --},
         {
             "folke/todo-comments.nvim",
             dependencies = "nvim-lua/plenary.nvim",
             config = function()
-                require("todo-comments").setup {
-                }
+                require("todo-comments").setup {}
             end
         },
 

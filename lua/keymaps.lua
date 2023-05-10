@@ -7,7 +7,6 @@ local wk = require "which-key"
 
 
 
-
 local function map(mode, lhs, rhs, desc)
 	local options = { noremap = true, silent = true }
 	vim.keymap.set(mode, lhs, rhs, options)
@@ -72,8 +71,8 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -----------------------------------------------------------
 -- Neotree
 -----------------------------------------------------------
-map("n", "<leader>n", ":Neotree left focus reveal<CR>", "File explorer")
-map("n", "<leader><s-n>", ":Neotree float<CR>")
+map("n", "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer")
+map("n", "<leader>n", ":Neotree float<CR>")
 
 -----------------------------------------------------------
 -- GitSign
@@ -204,11 +203,8 @@ M.treesitter = {
 -----------------------------------------------------------
 --  ZenMode
 -----------------------------------------------------------
-local function zen()
-	vim.fn.system("tmux resize-pane -Z")
-end
+
 map("n", "<leader>z", function()
-	zen()
 	vim.cmd("ZenMode")
 end, "🧘")
 return M

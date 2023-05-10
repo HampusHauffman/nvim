@@ -12,7 +12,7 @@ luasnip.setup({
 	delete_check_events = "TextChanged,InsertLeave",
 })
 require("luasnip.loaders.from_vscode").lazy_load() -- Allow formatting of snippets like vs-code
-luasnip.filetype_extend("flutter", { "flutter" }) -- Add flutter snippets
+luasnip.filetype_extend("flutter", { "flutter" })  -- Add flutter snippets
 
 cmp.setup({
 	mapping = require("keymaps").cmp,
@@ -38,6 +38,9 @@ cmp.setup({
 		end,
 	},
 	sources = cmp.config.sources({
+		{ name = 'path' },
+		{ name = "luasnip" }, -- For luasnip users.
+		{ name = "nvim_lua" },
 		-- Dont suggest Text from nvm_lsp
 		{
 			name = "nvim_lsp",
@@ -45,8 +48,6 @@ cmp.setup({
 				return require("cmp").lsp.CompletionItemKind.Text ~= entry:get_kind()
 			end,
 		},
-		{ name = "luasnip" }, -- For luasnip users.
-		{ name = "nvim_lua" },
 	}),
 })
 
