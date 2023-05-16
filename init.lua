@@ -9,6 +9,8 @@ if not vim.loop.fs_stat(lazypath) then
         lazypath,
     })
 end
+
+
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
@@ -28,6 +30,23 @@ require("lazy").setup({
         'mfussenegger/nvim-dap',
         "fladson/vim-kitty",
         "pantharshit00/vim-prisma",
+        {
+            "zbirenbaum/copilot.lua",
+            cmd = "Copilot",
+            event = "InsertEnter",
+            config = function()
+                require("copilot").setup({
+                    suggestion = { enabled = false },
+                    panel = { enabled = false },
+                })
+            end,
+        },
+        {
+            "zbirenbaum/copilot-cmp",
+            config = function()
+                require("copilot_cmp").setup()
+            end
+        },
         {
             'simrat39/rust-tools.nvim',
             config = function()
@@ -84,13 +103,13 @@ require("lazy").setup({
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
-        {
-            'huggingface/hfcc.nvim',
-            opts = {
-                api_token = "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",
-                model = "bigcode/starcoder" -- can be a model ID or an http endpoint
-            }
-        },
+       -- {
+       --     'huggingface/hfcc.nvim',
+       --     opts = {
+       --         api_token = "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",
+       --         model = "bigcode/starcoder" -- can be a model ID or an http endpoint
+       --     }
+       -- },
 
         -----------------------------------------------------
         -- UI

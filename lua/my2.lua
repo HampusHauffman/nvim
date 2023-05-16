@@ -4,13 +4,15 @@ local parsers = require('nvim-treesitter.parsers')
 
 local api     = vim.api
 local ts      = vim.treesitter
+
 local ns_id   = vim.api.nvim_create_namespace('bloc')
 vim.cmd('highlight Bloc0 guibg=#001234')
 vim.cmd('highlight Bloc1 guibg=#004321')
 
 --- @type table<integer,{lang:string, parser:LanguageTree}>
 local buffers = {}
-local c       = 0
+--- @type table<integer>
+local hl_ids = {}
 
 ---@param lines string[]
 local function find_biggest_end_col(lines)
@@ -24,29 +26,22 @@ end
 ---@param ts_node TSNode
 ---@param nest_nr integer
 ---@param lines string[]
-local function color_node(ts_node, nest_nr, lines)
+local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_start_col)
 	local start_row, start_col, end_row, end_col = ts_node:range()
 	local node_lines = { table.unpack(lines, start_row + 1, end_row) }
 	local max_col = find_biggest_end_col(node_lines) + 1
-	if (start_row == end_row) then return end
-	if (ts_node:type() == "block") then ns_id = ns_id + 1 end
-
-	--vim.api.nvim_buf_clear_namespace(0, ns_id, row + 1, end_row)
-	for row = start_row, end_row do -- Figure out why i need this check
-		vim.api.nvim_buf_clear_namespace(0, ns_id, row, row+1)
-		vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
-			line_hl_group = "Bloc" .. nest_nr % 2,
-			hl_group = "Bloc" .. nest_nr % 2,
-			id = 100000 + row
-		})
-		--vim.api.nvim_buf_add_highlight(0, ns_id, "Bloc" .. nest_nr % 2, row + 1, start_col, -1)
+	if (start_row >= end_row) then return end
+	if (start_row ~= prev_start_row) then
+		for row = start_row, end_row do -- Figure out why i need this check
+			vim.api.nvim_buf_add_highlight(0, ns_id, "Bloc" .. nest_nr % 2, row, start_col, -1)
+		end
 	end
+
 	for i in ts_node:iter_children() do
-		color_node(i, nest_nr + 1, lines)
+		color_node(i, nest_nr + 1, lines, start_row, start_col)
 	end
 end
 
---- srow scol erow ecol
 ---@param bufnr integer
 local function update(bufnr)
 	local lang_tree = buffers[bufnr].parser
@@ -54,7 +49,13 @@ local function update(bufnr)
 	local ts_node = trees[1]:root()
 	local sr, sc, er, ec = ts_node:range()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, er, true)
-	color_node(ts_node, 0, lines)
+	for i, val in ipairs(hl_ids) do
+		--vim.api.nvim_buf_del_extmark(0, ns_id, val)
+		--table.remove(hl_ids, i)
+	end
+
+	vim.api.nvim_buf_clear_namespace(0, ns_id, 0, #lines)
+	color_node(ts_node, 0, lines, 0, 0)
 end
 
 
@@ -67,7 +68,6 @@ local function start()
 	parser:register_cbs({
 		on_changedtree = function()
 			update(bufnr)
-			c = c + 1
 		end
 	})
 end
@@ -77,3 +77,14 @@ function M.test()
 end
 
 return M
+
+--vim.api.nvim_buf_clear_namespace(0, ns_id, row, end_row - 1)
+--local id = vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+--line_hl_group = "Bloc" .. nest_nr % 2,
+--	end_col = string.len(lines[row + 1]),
+--	hl_group = "Bloc" .. nest_nr % 2,
+--})
+--table.insert(hl_ids, id)
+--vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+--	virt_text = { { "" .. row .. "-" ..nest_nr, "Normal" } }
+--})

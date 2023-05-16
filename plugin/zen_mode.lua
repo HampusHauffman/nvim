@@ -25,7 +25,7 @@ require("zen-mode").setup {
 		local zoomed = tonumber(vim.fn.system("tmux display -p -F '#{window_zoomed_flag}'"))
 		if (zoomed == 0) then
 			vim.fn.system("tmux resize-pane -Z")
-			vim.fn.system("tmux set-option status")
+			vim.fn.system("tmux set status off")
 		end
 	end,
 	-- callback where you can add custom code when the Zen window closes
@@ -33,7 +33,7 @@ require("zen-mode").setup {
 		local zoomed = tonumber(vim.fn.system("tmux display -p -F '#{window_zoomed_flag}'"))
 		if (zoomed == 1) then
 			vim.fn.system("tmux resize-pane -Z")
-			vim.fn.system("tmux set-option status")
+			vim.fn.system("tmux set status on")
 		end
 	end,
 

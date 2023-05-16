@@ -54,6 +54,7 @@ require("noice").setup({
 		},
 	},
 })
+
 require("lualine").setup({
   sections = {
     lualine_x = {

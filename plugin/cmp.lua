@@ -3,6 +3,9 @@ local capabilities = vim.lsp.protocol.make_client_capabilities()
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 
+-- lua hellow world
+
+
 -- Set lsp capabilities
 capabilities = require("cmp_nvim_lsp").default_capabilities(capabilities)
 -- Luasnip
@@ -20,10 +23,12 @@ cmp.setup({
 		source_priority = {
 			nvim_lsp = 1000,
 			luasnip = 750,
-			buffer = 500,
+			copilot = 600,
 			path = 250,
+			buffer = 500,
 		},
 	},
+	-- add a new source
 	window = {
 		completion = cmp.config.window.bordered({ --border = "shadow",
 			winhighlight = "FloatBorder:TelescopePromptBorder,Normal:Normal",
@@ -38,6 +43,7 @@ cmp.setup({
 		end,
 	},
 	sources = cmp.config.sources({
+		{ name = "copilot"},
 		{ name = 'path' },
 		{ name = "luasnip" }, -- For luasnip users.
 		{ name = "nvim_lua" },
@@ -53,9 +59,25 @@ cmp.setup({
 
 -- Fancy symbols
 local lspkind = require("lspkind")
+lspkind.init({
+	symbol_map = {
+		Copilot = "",
+	},
+})
+
+cmp.event:on("menu_opened", function()
+  vim.b.copilot_suggestion_hidden = true
+end)
+
+cmp.event:on("menu_closed", function()
+  vim.b.copilot_suggestion_hidden = false
+end)
+
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 cmp.setup({
 	formatting = {
 		format = lspkind.cmp_format({
+			symbol_map = { Copilot = "" },
 			mode = "symbol", -- show only symbol annotations
 			maxwidth = 50, -- prevent the popup from showing more than provided characters (e.g 50 will not show more than 50 characters)
 			-- The function below will be called before any actual modifications from lspkind

@@ -68,7 +68,7 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer")
-map("n", "<leader>n", ":Neotree float<CR>")
+map("n", "<leader>n", ":Neotree toggle filesystem reveal float<CR>")
 
 -----------------------------------------------------------
 -- GitSign
