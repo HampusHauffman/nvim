@@ -4,21 +4,23 @@ local parsers = require('nvim-treesitter.parsers')
 
 local api     = vim.api
 local ts      = vim.treesitter
-
 local ns_id   = vim.api.nvim_create_namespace('bloc')
 vim.cmd('highlight Bloc0 guibg=#001234')
 vim.cmd('highlight Bloc1 guibg=#004321')
+vim.cmd('highlight Bloc2 guibg=#432100')
 
 --- @type table<integer,{lang:string, parser:LanguageTree}>
 local buffers = {}
 --- @type table<integer>
 local hl_ids = {}
 
+local tabstop = vim.api.nvim_buf_get_option(0, "tabstop")
+
 ---@param lines string[]
 local function find_biggest_end_col(lines)
 	local max = 0
-	for i = 1, #lines do
-		max = math.max(max, #lines[i])
+	for _, l in ipairs(lines) do
+		max = math.max(max, #l)
 	end
 	return max
 end
@@ -26,19 +28,25 @@ end
 ---@param ts_node TSNode
 ---@param nest_nr integer
 ---@param lines string[]
-local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_start_col)
+local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_end_col)
 	local start_row, start_col, end_row, end_col = ts_node:range()
-	local node_lines = { table.unpack(lines, start_row + 1, end_row) }
-	local max_col = find_biggest_end_col(node_lines) + 1
+	local node_lines = { table.unpack(lines, start_row, end_row + 1) }
+	local max_col = find_biggest_end_col(node_lines)
 	if (start_row >= end_row) then return end
 	if (start_row ~= prev_start_row) then
-		for row = start_row, end_row do -- Figure out why i need this check
-			vim.api.nvim_buf_add_highlight(0, ns_id, "Bloc" .. nest_nr % 2, row, start_col, -1)
+		for row = start_row, end_row do
+			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+				virt_text = { { string.rep(" ", max_col - string.len(lines[row + 1])), "bloc" .. nest_nr % 3 } },
+				-- Set virt_text_win_col so it aligns with the end of the current line not max_col
+				virt_text_win_col = string.len(lines[row + 1]),
+				priority = 1000+nest_nr,
+				--virt_text_win_col = , --max_col ok now
+			})
+			vim.api.nvim_buf_add_highlight(0, ns_id, "bloc" .. nest_nr % 3, row, start_col, -1)
 		end
 	end
-
 	for i in ts_node:iter_children() do
-		color_node(i, nest_nr + 1, lines, start_row, start_col)
+		color_node(i, nest_nr + 1, lines, start_row, max_col)
 	end
 end
 
@@ -49,9 +57,14 @@ local function update(bufnr)
 	local ts_node = trees[1]:root()
 	local sr, sc, er, ec = ts_node:range()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, er, true)
+	for i, line in ipairs(lines) do
+		local spaces = string.rep(" ", tabstop) -- Spaces equivalent to one tab
+		local converted_line = string.gsub(line, "\t", spaces)
+		lines[i] = converted_line
+	end
 	for i, val in ipairs(hl_ids) do
-		--vim.api.nvim_buf_del_extmark(0, ns_id, val)
-		--table.remove(hl_ids, i)
+		vim.api.nvim_buf_del_extmark(0, ns_id, val)
+		table.remove(hl_ids, i)
 	end
 
 	vim.api.nvim_buf_clear_namespace(0, ns_id, 0, #lines)
@@ -68,6 +81,7 @@ local function start()
 	parser:register_cbs({
 		on_changedtree = function()
 			update(bufnr)
+			print("awd")
 		end
 	})
 end
