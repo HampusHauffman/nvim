@@ -48,7 +48,7 @@ opt.cmdheight = 0
 -----------------------------------------------------------
 
 opt.list = true
---opt.listchars:append "eol:↴"
+--opt.listchars:append("eol:,")
 --opt.endofline = false
 
 -----------------------------------------------------------

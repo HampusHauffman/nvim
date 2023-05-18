@@ -15,7 +15,6 @@ local buffers = {}
 local hl_ids = {}
 
 local tabstop = vim.api.nvim_buf_get_option(0, "tabstop")
-
 ---@param lines string[]
 local function find_biggest_end_col(lines)
 	local max = 0
@@ -25,29 +24,44 @@ local function find_biggest_end_col(lines)
 	return max
 end
 
+-- a func called tab_to_space that converts each tab to tabstop amount of spaces
 ---@param ts_node TSNode
 ---@param nest_nr integer
 ---@param lines string[]
+---@return integer
 local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_end_col)
 	local start_row, start_col, end_row, end_col = ts_node:range()
 	local node_lines = { table.unpack(lines, start_row, end_row + 1) }
 	local max_col = find_biggest_end_col(node_lines)
-	if (start_row >= end_row) then return end
+	local window_col = vim.fn.wincol()
+	if (start_row >= end_row) then return 0 end
+	-- Add the extmarks that make up the boxes
 	if (start_row ~= prev_start_row) then
 		for row = start_row, end_row do
 			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
 				virt_text = { { string.rep(" ", max_col - string.len(lines[row + 1])), "bloc" .. nest_nr % 3 } },
-				-- Set virt_text_win_col so it aligns with the end of the current line not max_col
 				virt_text_win_col = string.len(lines[row + 1]),
-				priority = 1000+nest_nr,
-				--virt_text_win_col = , --max_col ok now
+				priority = 1000 + nest_nr,
 			})
+			-- variable start col that is 0 if start col is 0 or startcol -1 if start col above 0
 			vim.api.nvim_buf_add_highlight(0, ns_id, "bloc" .. nest_nr % 3, row, start_col, -1)
 		end
 	end
+	-- Recurse into children
+	local pad = 0
 	for i in ts_node:iter_children() do
-		color_node(i, nest_nr + 1, lines, start_row, max_col)
+		pad = math.max(pad, color_node(i, nest_nr + 1, lines, start_row, max_col))
 	end
+
+	if (start_row ~= prev_start_row) then
+		for row = start_row, end_row do
+			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+				virt_text = { { string.rep(" ", pad), "bloc" .. nest_nr % 3 } },
+				virt_text_win_col = max_col,
+			})
+		end
+	end
+	return pad+1
 end
 
 ---@param bufnr integer
@@ -81,7 +95,6 @@ local function start()
 	parser:register_cbs({
 		on_changedtree = function()
 			update(bufnr)
-			print("awd")
 		end
 	})
 end
@@ -91,6 +104,7 @@ function M.test()
 end
 
 return M
+-- Define a new highlight group for the end-of-line character
 
 --vim.api.nvim_buf_clear_namespace(0, ns_id, row, end_row - 1)
 --local id = vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
