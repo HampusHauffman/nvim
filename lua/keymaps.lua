@@ -71,14 +71,22 @@ map("n", "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer")
 --map("n", "<leader>n", ":Neotree toggle filesystem reveal float<CR>")
 -- To make neotree open in current if we're in zen mode (ZENENABLED is defined in zen_mode.lua)
 map("n", "<leader>n", function()
-	if (vim.g.ZENENABLED == true) then
-		vim.cmd("Neotree toggle reveal current")
+	if vim.g.ZENENABLED == true then
+		local currentFilePath = vim.fn.expand('%:p')
+		if currentFilePath == "" or currentFilePath == nil then
+			vim.cmd("Neotree toggle reveal current")
+		else
+			local success, _ = pcall(function() -- this can fail if we're in a neotree buffer and as such we should just toggle
+				vim.cmd("Neotree reveal_file=" .. currentFilePath .. " current")
+			end)
+			if not success then
+				vim.cmd("Neotree toggle reveal current")
+			end
+		end
 	else
 		vim.cmd("Neotree toggle filesystem reveal float")
 	end
-end
-
-)
+end)
 
 -----------------------------------------------------------
 -- GitSign
