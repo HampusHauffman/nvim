@@ -35,7 +35,7 @@ require("zen-mode").setup {
 	on_close = function()
 		local zoomed = vim.fn.system("tmux display -p -F '#{?window_zoomed_flag,Zoomed,#{status}}'")
 		vim.g.ZENENABLED = false
-		if (zoomed == "off\n") then
+		if (zoomed == "Zoomed\n") then
 			vim.fn.system("tmux resize-pane -Z")
 			vim.fn.system("tmux set status on")
 		end
