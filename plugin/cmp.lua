@@ -43,7 +43,7 @@ cmp.setup({
 		end,
 	},
 	sources = cmp.config.sources({
-		{ name = "copilot"},
+		{ name = "copilot" },
 		{ name = 'path' },
 		{ name = "luasnip" }, -- For luasnip users.
 		{ name = "nvim_lua" },
@@ -57,6 +57,7 @@ cmp.setup({
 	}),
 })
 
+
 -- Fancy symbols
 local lspkind = require("lspkind")
 lspkind.init({
@@ -66,11 +67,11 @@ lspkind.init({
 })
 
 cmp.event:on("menu_opened", function()
-  vim.b.copilot_suggestion_hidden = true
+	vim.b.copilot_suggestion_hidden = true
 end)
 
 cmp.event:on("menu_closed", function()
-  vim.b.copilot_suggestion_hidden = false
+	vim.b.copilot_suggestion_hidden = false
 end)
 
 vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })

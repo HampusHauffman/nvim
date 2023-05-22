@@ -68,7 +68,17 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer")
-map("n", "<leader>n", ":Neotree toggle filesystem reveal float<CR>")
+--map("n", "<leader>n", ":Neotree toggle filesystem reveal float<CR>")
+-- To make neotree open in current if we're in zen mode (ZENENABLED is defined in zen_mode.lua)
+map("n", "<leader>n", function()
+	if (vim.g.ZENENABLED == true) then
+		vim.cmd("Neotree toggle reveal current")
+	else
+		vim.cmd("Neotree toggle filesystem reveal float")
+	end
+end
+
+)
 
 -----------------------------------------------------------
 -- GitSign
@@ -184,7 +194,7 @@ end, {
 
 M.cmp = {
 	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
-	["<CR>"] = cmp.mapping.confirm({ select = true }),
+	["<CR>"] = cmp.mapping.confirm({ select = false }),
 	["<Tab>"] = next,
 	["<S-Tab>"] = prev,
 	["<C-j>"] = next,
@@ -195,9 +205,9 @@ M.cmp = {
 -----------------------------------------------------------
 -- Shift up and down to make larger selections easely
 M.treesitter = {
-	init_selection = "<s-up>",
-	node_incremental = "<s-up>",
-	node_decremental = "<S-down>",
+	init_selection = "<leader> v",
+	node_incremental = "k",
+	node_decremental = "j",
 }
 -----------------------------------------------------------
 --  ZenMode

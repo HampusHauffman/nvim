@@ -29,7 +29,7 @@ end
 ---@param nest_nr integer
 ---@param lines string[]
 ---@return integer
-local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_end_col)
+local function color_node(ts_node, nest_nr, lines, prev_start_row)
 	local start_row, start_col, end_row, end_col = ts_node:range()
 	local node_lines = { table.unpack(lines, start_row, end_row + 1) }
 	local max_col = find_biggest_end_col(node_lines)
@@ -50,7 +50,7 @@ local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_end_col)
 	-- Recurse into children
 	local pad = 0
 	for i in ts_node:iter_children() do
-		pad = math.max(pad, color_node(i, nest_nr + 1, lines, start_row, max_col))
+		pad = math.max(pad, color_node(i, nest_nr + 1, lines, start_row))
 	end
 
 	if (start_row ~= prev_start_row) then
@@ -61,7 +61,7 @@ local function color_node(ts_node, nest_nr, lines, prev_start_row, prev_end_col)
 			})
 		end
 	end
-	return pad+1
+	return pad + 1
 end
 
 ---@param bufnr integer
@@ -82,7 +82,7 @@ local function update(bufnr)
 	end
 
 	vim.api.nvim_buf_clear_namespace(0, ns_id, 0, #lines)
-	color_node(ts_node, 0, lines, 0, 0)
+	color_node(ts_node, 0, lines, 0)
 end
 
 
