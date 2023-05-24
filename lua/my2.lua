@@ -1,4 +1,4 @@
-local M       = {}
+local M       = {}     
 
 ---@class MTSNode
 ---@field children MTSNode[]
@@ -30,6 +30,7 @@ local function find_biggest_end_col(lines)
 	end
 	return max
 end
+
 -- Define the ModifiedTSNode class
 ---@param ts_node TSNode
 ---@param color integer
@@ -37,7 +38,7 @@ end
 ---@return MTSNode
 local function convert_ts_node(ts_node, color, lines)
 	local start_row, start_col, end_row, _ = ts_node:range()
-	local node_lines = { table.unpack(lines, start_row, end_row) }
+	local node_lines = { table.unpack(lines, start_row, end_row+1) }
 	local max_col = find_biggest_end_col(node_lines)
 	local mts_node = {
 		children = {},
@@ -65,7 +66,7 @@ end
 -- a func called tab_to_space that converts each tab to tabstop amount of spaces
 ---@param mts_node MTSNode
 local function color_mts_node(mts_node, lines)
-	for row = mts_node.start_row, mts_node.end_row - 1 do
+	for row = mts_node.start_row, mts_node.end_row-1 do
 		vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
 			virt_text = {
 				{ string.rep(" ", mts_node.end_col - string.len(lines[row + 1]) + mts_node.pad),
@@ -73,7 +74,6 @@ local function color_mts_node(mts_node, lines)
 			virt_text_win_col = string.len(lines[row + 1]),
 			priority = 1000 + mts_node.color,
 		})
-		-- variable start col that is 0 if start col is 0 or startcol -1 if start col above 0
 		vim.api.nvim_buf_add_highlight(0, ns_id, "bloc" .. mts_node.color % 3, row, mts_node.start_col, -1)
 	end
 	for _, child in ipairs(mts_node.children) do
@@ -93,7 +93,6 @@ local function update(bufnr)
 		local converted_line = string.gsub(line, "\t", spaces)
 		lines[i] = converted_line
 	end
-
 	vim.api.nvim_buf_clear_namespace(0, ns_id, 0, #lines)
 	--color_node(ts_node, 0, lines, 0)
 	local l = convert_ts_node(ts_node, 0, lines)
@@ -120,4 +119,5 @@ function M.test()
 	end)
 end
 
+--ath
 return M
