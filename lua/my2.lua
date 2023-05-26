@@ -57,11 +57,17 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 	end
 	for c in ts_node:iter_children() do
 		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col)
-		if child_mts.start_row ~= child_mts.end_row then --and child_mts.start_row ~= start_row then
+		if child_mts.start_row ~= child_mts.end_row then -- Only adds multiline children (chan be done better)
 			table.insert(mts_node.children, child_mts)
+			-- Takes the node with the node with the largest pad and holds it so we can add to it
 			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
+			-- Makes sure we dont add padding for nodes started on the same row as previous bloc
 			if start_row == prev_start_row then
 				mts_node.pad = mts_node.pad - 2
+			end
+			-- Makes sure padding is only added if needed
+			if mts_node.end_col > child_mts.end_col then
+				mts_node.pad = 0
 			end
 		end
 	end
@@ -101,7 +107,6 @@ local function update(bufnr)
 	local lang_tree = buffers[bufnr].parser
 	local trees = lang_tree:trees()
 	local ts_node = trees[1]:root()
-	local sr, sc, er, ec = ts_node:range()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
 	for i, line in ipairs(lines) do
 		local spaces = string.rep(" ", tabstop) -- Spaces equivalent to one tab
