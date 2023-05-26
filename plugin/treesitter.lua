@@ -34,3 +34,6 @@ require "nvim-treesitter.configs".setup {
         -- termcolors = {} -- table of colour name strings
     }
 }
+local opt = vim.opt -- Set options (global/buffer/windows-scoped)
+opt.foldmethod="expr"
+opt.foldexpr="nvim_treesitter#foldexpr()"

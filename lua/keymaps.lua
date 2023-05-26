@@ -140,11 +140,11 @@ M.telescope = {
 -----------------------------------------------------------
 map("n", "<leader>f", function()
 	vim.lsp.buf.format({
-		timeout_ms = 2000,
-		asnyc = true,
-		filter = function(client)
-			return client.name ~= "tsserver"
-		end,
+		--		timeout_ms = 2000,
+		--		asnyc = true,
+		--		filter = function(client)
+		--			return client.name ~= "tsserver"
+		--		end,
 	})
 end, "Format")
 map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")

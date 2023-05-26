@@ -7,13 +7,14 @@ if not vim.loop.fs_stat(lazypath) then
         "https://github.com/folke/lazy.nvim.git",
         "--branch=stable", -- latest stable release
         lazypath,
-    })
+   })
 end
 
 
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
+        "HampusHauffman/bionic.nvim",
         -----------------------------------------------------
         -- ColorSchemes
         -----------------------------------------------------
@@ -51,7 +52,6 @@ require("lazy").setup({
             'simrat39/rust-tools.nvim',
             config = function()
                 local rt = require("rust-tools")
-
                 rt.setup({
                     server = {
                         settings = {
@@ -254,3 +254,10 @@ require "keymaps"
 require "autocmd"
 require "color"
 require "my2"
+--require "my3"
+vim.cmd([[
+  augroup BionicAutocmd
+    autocmd!
+    autocmd FileType * Bionic
+  augroup END
+]])

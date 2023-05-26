@@ -65,10 +65,6 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 			if start_row == prev_start_row then
 				mts_node.pad = mts_node.pad - 2
 			end
-			-- Makes sure padding is only added if needed
-			--if mts_node.end_col > child_mts.end_col then
-			--	mts_node.pad = 0
-			--end
 		end
 	end
 	mts_node.pad = mts_node.pad + 2
@@ -129,6 +125,9 @@ local function start()
 	parser:register_cbs({
 		on_changedtree = function()
 			update(bufnr)
+			vim.defer_fn(function()
+				update(bufnr)
+			end, 0)
 		end
 	})
 end
