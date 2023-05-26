@@ -18,9 +18,9 @@ local tabstop = vim.api.nvim_buf_get_option(0, "tabstop")
 local api     = vim.api
 local ts      = vim.treesitter
 local ns_id   = vim.api.nvim_create_namespace('bloc')
-vim.cmd('highlight Bloc0 guibg=#001234')
-vim.cmd('highlight Bloc1 guibg=#004321')
-vim.cmd('highlight Bloc2 guibg=#432100')
+vim.cmd('highlight Bloc2 guibg=#1f2029')
+vim.cmd('highlight Bloc1 guibg=#272833')
+vim.cmd('highlight Bloc0 guibg=#2f303d')
 
 ---@param lines string[]
 local function find_biggest_end_col(lines)
@@ -51,19 +51,21 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		color = color,
 		pad = 0,
 	}
-
 	if start_row == prev_start_row then
 		mts_node.start_col = prev_start_col
+		mts_node.color = color - 1
 	end
-
 	for c in ts_node:iter_children() do
-		local child_mts = convert_ts_node(c, color + 1, lines, mts_node.start_row, mts_node.start_col)
+		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col)
 		if child_mts.start_row ~= child_mts.end_row then --and child_mts.start_row ~= start_row then
 			table.insert(mts_node.children, child_mts)
 			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
+			if start_row == prev_start_row then
+				mts_node.pad = mts_node.pad - 2
+			end
 		end
 	end
-	mts_node.pad = mts_node.pad + 1
+	mts_node.pad = mts_node.pad + 2
 	return mts_node
 end
 
@@ -80,8 +82,7 @@ local function color_mts_node(mts_node, lines)
 			priority = 1000 + mts_node.color,
 		})
 		local l = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
-		if (#l < mts_node.start_col) then
-		else
+		if (#l > mts_node.start_col) then
 			vim.api.nvim_buf_set_extmark(0, ns_id, row, mts_node.start_col, {
 				end_col = #l,
 				hl_group = "bloc" .. mts_node.color % 3,
@@ -109,7 +110,7 @@ local function update(bufnr)
 	end
 	vim.api.nvim_buf_clear_namespace(0, ns_id, 0, #lines)
 	--color_node(ts_node, 0, lines, 0)
-	local l = convert_ts_node(ts_node, 0, lines, 0, 0)
+	local l = convert_ts_node(ts_node, 0, lines, -1, -1)
 	color_mts_node(l, lines)
 end
 
