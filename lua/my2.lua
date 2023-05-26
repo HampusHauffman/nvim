@@ -35,10 +35,12 @@ end
 ---@param ts_node TSNode
 ---@param color integer
 ---@param lines string[]
+---@param prev_start_row integer
+---@param prev_start_col integer
 ---@return MTSNode
-local function convert_ts_node(ts_node, color, lines)
+local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start_col) -- FIX: send the start row and propegate it down if its the same
 	local start_row, start_col, end_row, _ = ts_node:range()
-	local node_lines = { table.unpack(lines, start_row + 1, end_row) }
+	local node_lines = { table.unpack(lines, start_row + 1, end_row + 1) }
 	local max_col = find_biggest_end_col(node_lines)
 	local mts_node = {
 		children = {},
@@ -49,9 +51,14 @@ local function convert_ts_node(ts_node, color, lines)
 		color = color,
 		pad = 0,
 	}
+
+	if start_row == prev_start_row then
+		mts_node.start_col = prev_start_col
+	end
+
 	for c in ts_node:iter_children() do
-		local child_mts = convert_ts_node(c, color + 1, lines)
-		if child_mts.start_row ~= start_row and child_mts.start_row ~= child_mts.end_row then
+		local child_mts = convert_ts_node(c, color + 1, lines, mts_node.start_row, mts_node.start_col)
+		if child_mts.start_row ~= child_mts.end_row then --and child_mts.start_row ~= start_row then
 			table.insert(mts_node.children, child_mts)
 			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
 		end
@@ -74,7 +81,6 @@ local function color_mts_node(mts_node, lines)
 		})
 		local l = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
 		if (#l < mts_node.start_col) then
-
 		else
 			vim.api.nvim_buf_set_extmark(0, ns_id, row, mts_node.start_col, {
 				end_col = #l,
@@ -82,7 +88,6 @@ local function color_mts_node(mts_node, lines)
 				priority = 1000 + mts_node.color,
 			})
 		end
-
 		--vim.api.nvim_buf_add_highlight(0, ns_id, "bloc" .. mts_node.color % 3, row, mts_node.start_col, -1)
 	end
 	for _, child in ipairs(mts_node.children) do
@@ -104,7 +109,7 @@ local function update(bufnr)
 	end
 	vim.api.nvim_buf_clear_namespace(0, ns_id, 0, #lines)
 	--color_node(ts_node, 0, lines, 0)
-	local l = convert_ts_node(ts_node, 0, lines)
+	local l = convert_ts_node(ts_node, 0, lines, 0, 0)
 	color_mts_node(l, lines)
 end
 
