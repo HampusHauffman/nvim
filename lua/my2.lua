@@ -18,9 +18,9 @@ local tabstop = vim.api.nvim_buf_get_option(0, "tabstop")
 local api     = vim.api
 local ts      = vim.treesitter
 local ns_id   = vim.api.nvim_create_namespace('bloc')
-vim.cmd('highlight Bloc2 guibg=#1f2029')
-vim.cmd('highlight Bloc1 guibg=#272833')
 vim.cmd('highlight Bloc0 guibg=#2f303d')
+vim.cmd('highlight Bloc1 guibg=#2b2c38')
+vim.cmd('highlight Bloc2 guibg=#272833')
 
 ---@param lines string[]
 local function find_biggest_end_col(lines)
@@ -66,9 +66,9 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 				mts_node.pad = mts_node.pad - 2
 			end
 			-- Makes sure padding is only added if needed
-			if mts_node.end_col > child_mts.end_col then
-				mts_node.pad = 0
-			end
+			--if mts_node.end_col > child_mts.end_col then
+			--	mts_node.pad = 0
+			--end
 		end
 	end
 	mts_node.pad = mts_node.pad + 2
