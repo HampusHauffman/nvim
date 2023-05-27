@@ -117,11 +117,11 @@ end
 
 
 ---Update the parser for a buffer.
-local function start()
-	local bufnr = api.nvim_get_current_buf()
+local function add_buff_and_start(bufnr)
 	local lang = parsers.get_buf_lang(bufnr)
 	local parser = ts.get_parser(bufnr, lang)
 	buffers[bufnr] = { lang = lang, parser = parser }
+	update(bufnr)
 	parser:register_cbs({
 		on_changedtree = function()
 			update(bufnr)
@@ -132,10 +132,30 @@ local function start()
 	})
 end
 
-function M.test()
-	xpcall(start, function(err)
-		print(err)
-	end)
+function M.on()
+	local bufnr = api.nvim_get_current_buf()
+	if not buffers[bufnr] then
+		add_buff_and_start(bufnr)
+	end
+end
+
+function M.off()
+	local bufnr = api.nvim_get_current_buf()
+	vim.api.nvim_buf_clear_namespace(bufnr, ns_id, 0, -1)
+	if buffers[bufnr] then
+		local parser = buffers[bufnr].parser
+		parser:register_cbs({}) -- Remove all callbacks by registering an empty table
+		buffers[bufnr] = nil
+	end
+end
+
+function M.toggle()
+	local bufnr = api.nvim_get_current_buf()
+	if buffers[bufnr] then
+		M.off()
+	else
+		M.on()
+	end
 end
 
 --ath
