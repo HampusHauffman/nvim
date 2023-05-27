@@ -49,25 +49,24 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		start_col = start_col,
 		end_col = max_col,
 		color = color,
-		pad = 0,
+		pad = 2,
 	}
-	if start_row == prev_start_row then
+	local back = start_row == prev_start_row or ts_node:type() == "block" or ts_node:type() == "arguments" or ts_node:type() == "field"
+
+	if back then
 		mts_node.start_col = prev_start_col
 		mts_node.color = color - 1
 	end
+	local max_child_col = 0
 	for c in ts_node:iter_children() do
 		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col)
 		if child_mts.start_row ~= child_mts.end_row then -- Only adds multiline children (chan be done better)
 			table.insert(mts_node.children, child_mts)
 			-- Takes the node with the node with the largest pad and holds it so we can add to it
-			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
-			-- Makes sure we dont add padding for nodes started on the same row as previous bloc
-			if start_row == prev_start_row then
-				mts_node.pad = mts_node.pad - 2
-			end
+			mts_node.pad = math.max(mts_node.pad, child_mts.pad + 2)
+			max_child_col = math.max(max_child_col, child_mts.end_col)
 		end
 	end
-	mts_node.pad = mts_node.pad + 2
 	return mts_node
 end
 
@@ -91,7 +90,6 @@ local function color_mts_node(mts_node, lines)
 				priority = 1000 + mts_node.color,
 			})
 		end
-		--vim.api.nvim_buf_add_highlight(0, ns_id, "bloc" .. mts_node.color % 3, row, mts_node.start_col, -1)
 	end
 	for _, child in ipairs(mts_node.children) do
 		color_mts_node(child, lines)
