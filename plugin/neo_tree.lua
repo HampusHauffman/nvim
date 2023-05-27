@@ -11,12 +11,12 @@ require("neo-tree").setup({
         --winbar = true,
         statusline = false
     },
-    close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+    close_if_last_window = true,    -- Close Neo-tree if it is the last window left in the tab
     enable_git_status = true,
     enable_modified_markers = true, -- Show markers for files with unsaved changes.
     enable_refresh_on_write = true, -- Refresh the tree when a file is written. Only used if `use_libuv_file_watcher` is false.
     git_status_async = true,
-    sort_case_insensitive = true, -- used when sorting files and directories in the tree
+    sort_case_insensitive = true,   -- used when sorting files and directories in the tree
     default_component_configs = {
         container = {
             enable_character_fade = true,
@@ -48,7 +48,8 @@ require("neo-tree").setup({
     },
     window = {
         width = 30, -- applies to left and right positions
-    }, filesystem = {
+    },
+    filesystem = {
         follow_current_file = true,
         use_libuv_file_watcher = true,
         filtered_items = {

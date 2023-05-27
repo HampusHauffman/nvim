@@ -46,8 +46,8 @@ local function color_node(ts_node, nest_nr, lines, prev_col)
   for row = start_row, end_row do -- Figure out why i need this check
     local line_len = string.len(lines[row + 1])
     local padding = max_col - line_len
-    local total_length = line_len + padding
 
+    local total_length = line_len + padding
     local spaces = string.rep(" ", padding + 1)
     local colors = { { spaces, "Bloc" .. nest_nr % 2 } }
 

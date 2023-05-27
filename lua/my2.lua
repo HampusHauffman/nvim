@@ -14,7 +14,7 @@ local parsers = require('nvim-treesitter.parsers')
 
 --- @type table<integer,{lang:string, parser:LanguageTree}>
 local buffers = {}
-local tabstop = vim.api.nvim_buf_get_option(0, "tabstop")
+local tabstop = vim.lsp.util.get_effective_tabstop()
 local api     = vim.api
 local ts      = vim.treesitter
 local ns_id   = vim.api.nvim_create_namespace('bloc')
@@ -51,9 +51,7 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		color = color,
 		pad = 0,
 	}
-	local back = start_row == prev_start_row or ts_node:type() == "block" or ts_node:type() == "arguments" or
-		ts_node:type() == "field"
-
+	local back = start_row == prev_start_row or ts_node:type() == "block" or ts_node:type() == "arguments"
 	if back then
 		mts_node.start_col = prev_start_col
 		mts_node.color = color - 1
@@ -96,8 +94,9 @@ local function color_mts_node(mts_node, lines)
 		if string.len(lines[row + 1]) == 0 then
 			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
 				virt_text = {
-					{ string.rep(" ", mts_node.start_col * tabstop),
+					{ string.rep(" ", mts_node.start_col * vim.lsp.util.get_effective_tabstop()),
 						"bloc" .. (mts_node.color - 1) % 3 } },
+
 				virt_text_win_col = 0,
 				priority = 2001 - mts_node.color,
 			})
