@@ -52,7 +52,7 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		pad = 0,
 	}
 	local back = start_row == prev_start_row or ts_node:type() == "block" or ts_node:type() == "arguments" or
-	ts_node:type() == "field"
+		ts_node:type() == "field"
 
 	if back then
 		mts_node.start_col = prev_start_col
@@ -63,7 +63,6 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col)
 		if child_mts.start_row ~= child_mts.end_row then -- Only adds multiline children (chan be done better)
 			table.insert(mts_node.children, child_mts)
-			-- Takes the node with the node with the largest pad and holds it so we can add to it
 			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
 			max_child_col = math.max(max_child_col, child_mts.end_col + child_mts.pad)
 		end
@@ -92,6 +91,15 @@ local function color_mts_node(mts_node, lines)
 				end_col = #l,
 				hl_group = "bloc" .. mts_node.color % 3,
 				priority = 1000 + mts_node.color,
+			})
+		end
+		if string.len(lines[row + 1]) == 0 then
+			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+				virt_text = {
+					{ string.rep(" ", mts_node.start_col * tabstop),
+						"bloc" .. (mts_node.color - 1) % 3 } },
+				virt_text_win_col = 0,
+				priority = 2001 - mts_node.color,
 			})
 		end
 	end
