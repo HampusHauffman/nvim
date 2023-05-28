@@ -8,6 +8,7 @@ local M       = {}
 ---@field end_col integer
 ---@field color integer
 ---@field pad integer
+---@field parent MTSNode | nil
 local MTSNode = {}
 
 local parsers = require('nvim-treesitter.parsers')
@@ -36,8 +37,9 @@ end
 ---@param lines string[]
 ---@param prev_start_row integer
 ---@param prev_start_col integer
+---@param parent MTSNode | nil
 ---@return MTSNode
-local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start_col)
+local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start_col, parent)
 	local start_row, start_col, end_row, _ = ts_node:range()
 	local node_lines = { table.unpack(lines, start_row + 1, end_row + 1) }
 	local max_col = find_biggest_end_col(node_lines)
@@ -49,6 +51,7 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		end_col = max_col,
 		color = color,
 		pad = 0,
+		parent = parent,
 	}
 	local back = start_row == prev_start_row or ts_node:type() == "block" or ts_node:type() == "arguments"
 	if back then
@@ -57,7 +60,7 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 	end
 	local max_child_col = mts_node.end_col + mts_node.pad
 	for c in ts_node:iter_children() do
-		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col)
+		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col, mts_node)
 		if child_mts.start_row ~= child_mts.end_row then -- Only adds multiline children (chan be done better)
 			table.insert(mts_node.children, child_mts)
 			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
@@ -91,16 +94,17 @@ local function color_mts_node(mts_node, lines)
 			})
 		end
 
-		if string.len(lines[row + 1]) < mts_node.start_col then
-			local col = vim.lsp.util.get_effective_tabstop() * mts_node.start_col
-			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
-				virt_text = {
-					{ string.rep(" ", col),
-
-						"bloc" .. mts_node.color - 1 % 3 } },
-				virt_text_win_col = 0,
-				priority = 2001 - mts_node.color,
-			})
+		local a = vim.lsp.util.get_effective_tabstop()
+		if string.len(lines[row + 1]) == 0 then
+			if mts_node.parent ~= nil then
+				vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
+					virt_text = {
+						{ string.rep(" ", (mts_node.start_col - mts_node.parent.start_col) * a),
+							"bloc" .. mts_node.parent.color % 3 } },
+					virt_text_win_col = mts_node.parent.start_col * a,
+					priority = 2001 + mts_node.color,
+				})
+			end
 		end
 	end
 	for _, child in ipairs(mts_node.children) do

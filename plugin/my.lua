@@ -24,6 +24,7 @@ local function find_biggest_end_col(ts_node)
   local _, max, _ = ts_node:start()
 
   for c in ts_node:iter_children() do
+
     max = math.max(max, find_biggest_end_col(c))
   end
   return max
@@ -49,6 +50,7 @@ local function color_node(ts_node, nest_nr, lines, prev_col)
 
     local total_length = line_len + padding
     local spaces = string.rep(" ", padding + 1)
+
     local colors = { { spaces, "Bloc" .. nest_nr % 2 } }
 
     for p = #prev_col, 1, -1 do
