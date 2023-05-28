@@ -94,15 +94,21 @@ local function color_mts_node(mts_node, lines)
 			})
 		end
 
-		local a = vim.lsp.util.get_effective_tabstop()
+		local expandtab = vim.bo.expandtab
+		local a = 1
+		if not expandtab then
+			a = vim.lsp.util.get_effective_tabstop()
+		end
 		if string.len(lines[row + 1]) == 0 then
 			if mts_node.parent ~= nil then
 				vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
 					virt_text = {
-						{ string.rep(" ", (mts_node.start_col - mts_node.parent.start_col) * a),
+						{ string.rep(" ",
+							(mts_node.start_col - mts_node.parent.start_col) * a),
+
 							"bloc" .. mts_node.parent.color % 3 } },
 					virt_text_win_col = mts_node.parent.start_col * a,
-					priority = 2001 + mts_node.color,
+					priority = 2001 - mts_node.color,
 				})
 			end
 		end
