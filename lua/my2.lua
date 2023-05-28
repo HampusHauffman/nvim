@@ -14,7 +14,6 @@ local parsers = require('nvim-treesitter.parsers')
 
 --- @type table<integer,{lang:string, parser:LanguageTree}>
 local buffers = {}
-local tabstop = vim.lsp.util.get_effective_tabstop()
 local api     = vim.api
 local ts      = vim.treesitter
 local ns_id   = vim.api.nvim_create_namespace('bloc')
@@ -91,12 +90,14 @@ local function color_mts_node(mts_node, lines)
 				priority = 1000 + mts_node.color,
 			})
 		end
-		if string.len(lines[row + 1]) == 0 then
+
+		if string.len(lines[row + 1]) < mts_node.start_col then
+			local col = vim.lsp.util.get_effective_tabstop() * mts_node.start_col
 			vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
 				virt_text = {
-					{ string.rep(" ", mts_node.start_col * vim.lsp.util.get_effective_tabstop()),
-						"bloc" .. (mts_node.color - 1) % 3 } },
+					{ string.rep(" ", col),
 
+						"bloc" .. mts_node.color - 1 % 3 } },
 				virt_text_win_col = 0,
 				priority = 2001 - mts_node.color,
 			})
@@ -114,7 +115,7 @@ local function update(bufnr)
 	local ts_node = trees[1]:root()
 	local lines = vim.api.nvim_buf_get_lines(0, 0, -1, true)
 	for i, line in ipairs(lines) do
-		local spaces = string.rep(" ", tabstop) -- Spaces equivalent to one tab
+		local spaces = string.rep(" ", vim.lsp.util.get_effective_tabstop()) -- Spaces equivalent to one tab
 		local converted_line = string.gsub(line, "\t", spaces)
 		lines[i] = converted_line
 	end
@@ -167,5 +168,4 @@ function M.toggle()
 	end
 end
 
---ath
 return M
