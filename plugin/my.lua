@@ -24,7 +24,6 @@ local function find_biggest_end_col(ts_node)
   local _, max, _ = ts_node:start()
 
   for c in ts_node:iter_children() do
-
     max = math.max(max, find_biggest_end_col(c))
   end
   return max

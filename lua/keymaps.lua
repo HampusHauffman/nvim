@@ -20,6 +20,11 @@ vim.g.mapleader = " "
 local tele_builtin = require("telescope.builtin")
 -- Source vimRc
 map("n", "<leader>å", ":source $MYVIMRC <CR>", "Source $MYVIMRC!")
+
+-- Smooth scrolling
+map("n", "<C-U>", "<C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y><C-Y>")
+map("n", "<C-D>", "<C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E><C-E>")
+
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------

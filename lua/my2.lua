@@ -27,6 +27,7 @@ local function find_biggest_end_col(lines)
 	local max = 0
 	for _, i in ipairs(lines) do
 		max = math.max(max, #i)
+
 	end
 	return max
 end
@@ -63,6 +64,7 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
 		local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col, mts_node)
 		if child_mts.start_row ~= child_mts.end_row then -- Only adds multiline children (chan be done better)
 			table.insert(mts_node.children, child_mts)
+
 			mts_node.pad = math.max(mts_node.pad, child_mts.pad)
 			max_child_col = math.max(max_child_col, child_mts.end_col + child_mts.pad)
 		end
@@ -79,18 +81,17 @@ local function color_mts_node(mts_node, lines)
 	for row = mts_node.start_row, math.min(#lines - 1, mts_node.end_row) do
 		local str_len = string.len(lines[row + 1])
 		vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
-			virt_text = {
-				{ string.rep(" ", mts_node.end_col - str_len + mts_node.pad),
+			virt_text = { { string.rep(" ", mts_node.end_col - str_len + mts_node.pad),
 					"bloc" .. mts_node.color % 3 } },
 			virt_text_win_col = str_len,
-			priority = 1000 + mts_node.color,
+			priority = 100 + mts_node.color,
 		})
 		local l = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
 		if (#l > mts_node.start_col) then
 			vim.api.nvim_buf_set_extmark(0, ns_id, row, mts_node.start_col, {
 				end_col = #l,
 				hl_group = "bloc" .. mts_node.color % 3,
-				priority = 1000 + mts_node.color,
+				priority = 100 + mts_node.color,
 			})
 		end
 
@@ -108,7 +109,7 @@ local function color_mts_node(mts_node, lines)
 
 							"bloc" .. mts_node.parent.color % 3 } },
 					virt_text_win_col = mts_node.parent.start_col * a,
-					priority = 2001 - mts_node.color,
+					priority = 201 - mts_node.color,
 				})
 			end
 		end
