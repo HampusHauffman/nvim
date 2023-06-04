@@ -12,7 +12,7 @@ opt.clipboard = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile = false          -- Don't use swapfile
 opt.undofile = true           -- Persistant undo
 --opt.cul = true -- Line for the cursor
-opt.autowriteall = true       -- Auto write any changes. No more :qa! horrors :)
+opt.autowriteall = true       -- Auto write any changes. No more :qa! horrors :)--------------------
 opt.splitkeep = "screen"
 --opt.more
 -----------------------------------------------------------
@@ -28,7 +28,7 @@ opt.splitbelow = true     -- Horizontal split to the bottom
 opt.ignorecase = true     -- Ignore case letters when search
 opt.smartcase = true      -- Ignore lowercase for the whole pattern
 opt.linebreak = true      -- Wrap on word boundary
-opt.wrap = true          -- Disable line wrap
+opt.wrap = false          -- Disable line wrap
 --opt.wrap = false          -- Disable line wrap
 opt.termguicolors = true  -- Enable 24-bit RGB colors
 opt.ea = false

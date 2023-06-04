@@ -7,7 +7,7 @@ if not vim.loop.fs_stat(lazypath) then
         "https://github.com/folke/lazy.nvim.git",
         "--branch=stable", -- latest stable release
         lazypath,
-   })
+    })
 end
 
 
@@ -15,6 +15,7 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
         "HampusHauffman/bionic.nvim",
+        "HampusHauffman/block.nvim",
         -----------------------------------------------------
         -- ColorSchemes
         -----------------------------------------------------
@@ -103,13 +104,13 @@ require("lazy").setup({
         "L3MON4D3/LuaSnip",
         "saadparwaiz1/cmp_luasnip",
         "rafamadriz/friendly-snippets",
-       -- {
-       --     'huggingface/hfcc.nvim',
-       --     opts = {
-       --         api_token = "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",
-       --         model = "bigcode/starcoder" -- can be a model ID or an http endpoint
-       --     }
-       -- },
+        -- {
+        --     'huggingface/hfcc.nvim',
+        --     opts = {
+        --         api_token = "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",
+        --         model = "bigcode/starcoder" -- can be a model ID or an http endpoint
+        --     }
+        -- },
 
         -----------------------------------------------------
         -- UI

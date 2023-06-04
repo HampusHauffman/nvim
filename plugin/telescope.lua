@@ -3,7 +3,7 @@ require("telescope").setup {
     defaults = {
         winblend = 0,
         mappings = keymaps,
-        prompt_prefix = " ",
+        prompt_prefix = " ",
         selection_caret = " ",
         layout_strategy = "horizontal",
         sorting_strategy = "ascending",
