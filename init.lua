@@ -137,6 +137,13 @@ require("lazy").setup({
             }
         },
         "folke/which-key.nvim",
+--        {
+--            'echasnovski/mini.animate',
+--            version = '*',
+--            config = function()
+--                require('mini.animate').setup()
+--            end
+--        },
         --"nvim-treesitter/nvim-treesitter-context",
 
         -----------------------------------------------------

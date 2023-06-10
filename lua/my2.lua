@@ -9,8 +9,7 @@ local function darken_hex_color(hex_color)
     local g = tonumber(hex_color:sub(3, 4), 16)
     local b = tonumber(hex_color:sub(5, 6), 16)
 
-    -- Darken the color by 2%
-    local darken_amount = 0.80
+    local darken_amount = 0.90
     r = math.floor(r * darken_amount)
     g = math.floor(g * darken_amount)
     b = math.floor(b * darken_amount)
@@ -43,7 +42,7 @@ local ns_id        = vim.api.nvim_create_namespace('bloc')
 local normal_color = api.nvim_get_hl(0, { name = "Normal" })
 local bg           = normal_color.bg
 local hex_color    = string.format("#%06X", bg)
-local nest_amount  = 3
+local nest_amount  = 4
 
 vim.cmd('highlight Bloc' .. 0 .. ' guibg=' .. hex_color)
 for i = 1, nest_amount do
@@ -91,7 +90,7 @@ local function convert_ts_node(ts_node, color, lines, prev_start_row, prev_start
     local max_child_col = mts_node.end_col + mts_node.pad
     for c in ts_node:iter_children() do
         local child_mts = convert_ts_node(c, mts_node.color + 1, lines, mts_node.start_row, mts_node.start_col, mts_node)
-        if child_mts.start_row ~= child_mts.end_row then -- Only adds multiline children (chan be done better)
+        if child_mts.start_row ~= child_mts.end_row then
             table.insert(mts_node.children, child_mts)
 
             mts_node.pad = math.max(mts_node.pad, child_mts.pad)
@@ -108,6 +107,7 @@ end
 ---@param mts_node MTSNode
 local function color_mts_node(mts_node, lines)
     for row = mts_node.start_row, math.min(#lines - 1, mts_node.end_row) do
+        -- Set the padding at the end of the line
         local str_len = string.len(lines[row + 1])
         vim.api.nvim_buf_set_extmark(0, ns_id, row, 0, {
             virt_text = { { string.rep(" ", mts_node.end_col - str_len + mts_node.pad),
@@ -115,8 +115,10 @@ local function color_mts_node(mts_node, lines)
             virt_text_win_col = str_len,
             priority = 100 + mts_node.color,
         })
+
+        -- Set the color of the line
         local l = vim.api.nvim_buf_get_lines(0, row, row + 1, false)[1]
-        if (#l > mts_node.start_col) then
+        if (#l > mts_node.start_col + 1) then -- Check to make sure we dont draw on empty lines
             vim.api.nvim_buf_set_extmark(0, ns_id, row, mts_node.start_col, {
                 end_col = #l,
                 hl_group = "bloc" .. mts_node.color % nest_amount,
@@ -124,7 +126,8 @@ local function color_mts_node(mts_node, lines)
             })
         end
 
-        local expandtab = vim.bo.expandtab
+        -- Handle empty lines
+        local expandtab = vim.bo.expandtab -- TODO: Move this to a better place
         local a = 1
         if not expandtab then
             a = vim.lsp.util.get_effective_tabstop()

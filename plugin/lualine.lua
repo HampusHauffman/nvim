@@ -1,3 +1,13 @@
+local tmux_tabs = ""
+
+local function get_tmux_tabs()
+    if tmux_tabs == "" then
+        tmux_tabs = vim.fn.system([[tmux list-windows -F "#{window_index}:#{window_name}" | tr '\n' ' ']])
+        tmux_tabs = tmux_tabs:gsub("%s+$", "") -- Remove trailing whitespace
+    end
+    return tmux_tabs
+end
+
 require("lualine").setup({
     options = {
         theme = 'dracula-nvim',
@@ -14,7 +24,7 @@ require("lualine").setup({
             { 'mode', separator = { left = '  ' }, right_padding = 2 },
         },
         lualine_b = { { 'filename', icon = { '', align = 'left' } }, 'branch' },
-        lualine_c = {},
+        lualine_c = { get_tmux_tabs },
         lualine_x = {},
         lualine_y = { 'filetype', 'progress' },
         lualine_z = {

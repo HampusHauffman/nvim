@@ -3,7 +3,7 @@ vim.g.ZENENABLED = false
 require("zen-mode").setup {
 	window = {
 		backdrop = 1,      -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
-		height = 0.90,     -- height of the Zen window
+		height = 0.95,     -- height of the Zen window
 		options = {
 			signcolumn = "no", -- disable signcolumn
 			number = false, -- disable number column
