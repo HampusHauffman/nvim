@@ -48,6 +48,10 @@ require("neo-tree").setup({
     },
     window = {
         width = 30, -- applies to left and right positions
+        mappings = {
+            ["<esc>"] = "close_window",
+            ["q"] = "close_window",
+        }
     },
     filesystem = {
         follow_current_file = true,
