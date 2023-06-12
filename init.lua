@@ -15,7 +15,15 @@ vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
         "HampusHauffman/bionic.nvim",
-        "HampusHauffman/block.nvim",
+        {
+            "HampusHauffman/block.nvim",
+            config = function()
+                require("block").setup({
+                    percent = 0.8,
+                    depth = 3,
+                })
+            end
+        },
         -----------------------------------------------------
         -- ColorSchemes
         -----------------------------------------------------
@@ -137,13 +145,13 @@ require("lazy").setup({
             }
         },
         "folke/which-key.nvim",
---        {
---            'echasnovski/mini.animate',
---            version = '*',
---            config = function()
---                require('mini.animate').setup()
---            end
---        },
+        --        {
+        --            'echasnovski/mini.animate',
+        --            version = '*',
+        --            config = function()
+        --                require('mini.animate').setup()
+        --            end
+        --        },
         --"nvim-treesitter/nvim-treesitter-context",
 
         -----------------------------------------------------
@@ -253,7 +261,15 @@ require("lazy").setup({
     {
         defaults = {
             lazy = false, -- should plugins be lazy-loaded?
+
         },
+        install = {
+            colorscheme = { "dracula" },
+        },
+        ui = {
+            border = "rounded",
+
+        }
     }
 )
 
@@ -261,7 +277,7 @@ require "options"
 require "keymaps"
 require "autocmd"
 require "color"
-require "my2"
+--require "my2"
 --require "my3"
 vim.cmd([[
   augroup BionicAutocmd
@@ -269,3 +285,4 @@ vim.cmd([[
     autocmd FileType * Bionic
   augroup END
 ]])
+

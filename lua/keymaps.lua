@@ -177,31 +177,33 @@ map("n", "<f2>", vim.diagnostic.goto_next, "Go to next fix")
 local luasnip = require("luasnip")
 local cmp = require("cmp")
 local next = cmp.mapping(function(fallback)
-	if cmp.visible() then
-		cmp.select_next_item()
-	elseif luasnip.expandable() then
-		luasnip.expand()
-	elseif luasnip.expand_or_jumpable() then
-		luasnip.expand_or_jump()
-	else
-		fallback()
-	end
-end, {
-	"i",
-	"s",
-})
+		if cmp.visible() then
+			cmp.select_next_item()
+		elseif luasnip.expandable() then
+			luasnip.expand()
+		elseif luasnip.expand_or_jumpable() then
+			luasnip.expand_or_jump()
+		else
+			fallback()
+		end
+	end,
+	{
+		"i",
+		"s",
+	})
 local prev = cmp.mapping(function(fallback)
-	if cmp.visible() then
-		cmp.select_prev_item()
-	elseif luasnip.jumpable(-1) then
-		luasnip.jump(-1)
-	else
-		fallback()
-	end
-end, {
-	"i",
-	"s",
-})
+		if cmp.visible() then
+			cmp.select_prev_item()
+		elseif luasnip.jumpable(-1) then
+			luasnip.jump(-1)
+		else
+			fallback()
+		end
+	end,
+	{
+		"i",
+		"s",
+	})
 
 M.cmp = {
 	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
@@ -225,6 +227,8 @@ M.treesitter = {
 -----------------------------------------------------------
 
 map("n", "<leader>z", function()
-	vim.cmd("ZenMode")
-end, "🧘")
+		vim.cmd("ZenMode")
+	end,
+	"🧘")
+
 return M

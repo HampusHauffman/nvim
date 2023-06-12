@@ -3,6 +3,8 @@ local lspconfig = require("lspconfig")
 
 require("mason").setup({
 	ui = {
+		border = "rounded",
+		height = 0.8,
 		icons = {
 			package_installed = "✓",
 			package_pending = "➜",
@@ -14,13 +16,13 @@ require("mason").setup({
 
 vim.lsp.handlers["textDocument/hover"] = vim.lsp.with(
 	vim.lsp.handlers.hover, {
-	border = "rounded"
-}
+		border = "rounded"
+	}
 )
 vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 	vim.lsp.handlers.signature_help, {
-	border = "rounded"
-}
+		border = "rounded"
+	}
 )
 vim.diagnostic.config {
 	float = { border = "rounded" },
