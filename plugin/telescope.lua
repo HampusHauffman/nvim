@@ -5,14 +5,14 @@ require("telescope").setup {
         mappings = keymaps,
         prompt_prefix = " ",
         selection_caret = " ",
-        layout_strategy = "horizontal",
+        layout_strategy = "flex",
         sorting_strategy = "ascending",
         mirror = false,
         layout_config = {
             horizontal = {
                 prompt_position = "top",
-                width = 0.7,
-                preview_width = 0.6,
+                width = 0.8,
+                preview_width = 0.666666,
             }
             -- other layout configuration here
         },
