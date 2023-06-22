@@ -13,14 +13,14 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-		--"HampusHauffman/bionic.nvim",
+		"HampusHauffman/bionic.nvim",
 		{
 			"HampusHauffman/block.nvim",
 			--dev = true,
-			--branch = "cursor",
+			--branch = "scroll",
 			config = function()
 				require("block").setup({
-					percent = 0.96,
+					percent = 0.95,
 					depth = 4,
 					automatic = true
 				})
@@ -176,11 +176,16 @@ require("lazy").setup({
 				--"rcarriga/nvim-notify",
 			}
 		},
-		"nvim-treesitter/nvim-treesitter", -- Syntax highligting
-		"onsails/lspkind.nvim",      -- Symbols / icons
+		{
+			"nvim-treesitter/nvim-treesitter",
+			config = function()
+				require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
+			end
+		},                 -- Syntax highligting
+		"onsails/lspkind.nvim", -- Symbols / icons
 		--"p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
-		"RRethy/vim-illuminate",     -- Highlight words that match cursos
-		"folke/zen-mode.nvim",       -- Zen mode
+		"RRethy/vim-illuminate", -- Highlight words that match cursos
+		"folke/zen-mode.nvim", -- Zen mode
 		{
 			"luukvbaal/stabilize.nvim",
 			config = function()

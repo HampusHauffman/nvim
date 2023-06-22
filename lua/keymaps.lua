@@ -40,6 +40,13 @@ map("v", "ö", "$")
 map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
 
+-- Dont yank into register when deleting
+map("v", "d", '"_d')
+map("v", "d", '"_d')
+
+map("n", "D", '"_D')
+map("v", "D", '"_D')
+
 -- Move in insert mode
 map("i", "<C-h>", "<left>")
 map("i", "<C-j>", "<down>")
