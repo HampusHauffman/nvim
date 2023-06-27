@@ -99,7 +99,9 @@ map("n", "<leader>n", function()
 	else -- If we're not in zen mode then open neotree in float unless there is already a buffer open called neotre
 		-- Check if there's a buffer with filetype "neo-tree"
 		local neotreeBuffer = nil
-		for _, buffer in ipairs(vim.api.nvim_list_bufs()) do
+		for _, win in ipairs(vim.api.nvim_list_wins()) do
+			--get buffer number from win
+			local buffer = vim.api.nvim_win_get_buf(win)
 			local filetype = vim.api.nvim_buf_get_option(buffer, 'filetype')
 			if filetype == 'neo-tree' then
 				print(filetype)
