@@ -144,6 +144,11 @@ map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 -----------------------------------------------------------
 
 map("n", "ff", tele_builtin.find_files, "Find files")
+map("n", "fa", function()
+	tele_builtin.lsp_document_symbols({
+		--symbols = {}
+	})
+end, "Document symbols")
 map("n", "fg", tele_builtin.live_grep, "Find grep")
 map("n", "fo", tele_builtin.find_files, "Find files")
 map("n", "<leader>e", function()
