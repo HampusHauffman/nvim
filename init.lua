@@ -16,13 +16,13 @@ require("lazy").setup({
 		"HampusHauffman/bionic.nvim",
 		{
 			"HampusHauffman/block.nvim",
-			--dev = true,
+			dev = true,
 			--branch = "scroll",
 			config = function()
 				require("block").setup({
 					percent = 0.95,
 					depth = 4,
-					automatic = true
+					--automatic = true
 				})
 			end
 		},
@@ -177,6 +177,10 @@ require("lazy").setup({
 			}
 		},
 		{
+			'stevearc/dressing.nvim',
+			opts = {},
+		},
+		{
 			"nvim-treesitter/nvim-treesitter",
 			config = function()
 				require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
@@ -306,3 +310,23 @@ require "color"
 --    autocmd FileType * Bionic
 --  augroup END
 --]])
+-- create an aucmd when a window opens
+vim.api.nvim_create_augroup('awd', {})
+
+--vim.api.nvim_create_autocmd({ "WinEnter", "WinNew" }, {
+--	group = 'awd',
+--	pattern = '*',
+--	callback = function(args)
+--		print("okk")
+--		local id = vim.api.nvim_get_current_win()
+--		local r = vim.api.nvim_win_get_config(id).relative
+--		if r ~= "" then
+--			vim.api.nvim_win_set_config(id, {
+--				border = {" "}
+--			})
+--			vim.api.nvim_win_set_config(id, {
+--				border = "shadow"
+--			})
+--		end
+--	end
+--})

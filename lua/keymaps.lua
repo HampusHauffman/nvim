@@ -41,11 +41,11 @@ map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
 
 -- Dont yank into register when deleting
-map("v", "d", '"_d')
-map("v", "d", '"_d')
+--map("v", "d", '"_d')
+--map("v", "d", '"_d')
 
-map("n", "D", '"_D')
-map("v", "D", '"_D')
+--map("n", "D", '"_D')
+--map("v", "D", '"_D')
 
 -- Move in insert mode
 map("i", "<C-h>", "<left>")
@@ -174,6 +174,9 @@ map("n", "<leader>f", function()
 		--			return client.name ~= "tsserver"
 		--		end,
 	})
+end, "Format")
+map("v", "<leader>f", function()
+	vim.lsp.buf.format({})
 end, "Format")
 map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
