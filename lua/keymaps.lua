@@ -262,8 +262,7 @@ M.treesitter = {
 -----------------------------------------------------------
 
 map("n", "<leader>z", function()
-		vim.cmd("ZenMode")
-	end,
-	"🧘")
+	vim.cmd("ZenMode")
+end, "🧘")
 
 return M
