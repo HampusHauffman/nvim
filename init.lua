@@ -13,7 +13,6 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 require("lazy").setup({
-		"HampusHauffman/bionic.nvim",
 		{
 			"HampusHauffman/block.nvim",
 			dev = true,
@@ -22,10 +21,11 @@ require("lazy").setup({
 				require("block").setup({
 					percent = 0.95,
 					depth = 4,
-					--automatic = true
+					automatic = true
 				})
 			end
 		},
+		"HampusHauffman/bionic.nvim",
 		-----------------------------------------------------
 		-- ColorSchemes
 		-----------------------------------------------------

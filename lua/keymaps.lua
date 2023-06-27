@@ -253,9 +253,9 @@ M.cmp = {
 -----------------------------------------------------------
 -- Shift up and down to make larger selections easely
 M.treesitter = {
-	init_selection = "<leader> v",
-	node_incremental = "<C-k>",
-	node_decremental = "<C-j>",
+	init_selection = "vi",
+	node_incremental = "k",
+	node_decremental = "j",
 }
 -----------------------------------------------------------
 --  ZenMode
