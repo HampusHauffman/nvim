@@ -40,6 +40,13 @@ map("v", "ö", "$")
 map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
 
+map("n", '"<s-c>', function()
+	for i = 34, 122 do
+		print(vim.fn.nr2char(i) .. " " .. i)
+		--vim.fn.setreg(vim.fn.nr2char(i), {})
+	end
+end, "Clear Reg")
+
 -- Dont yank into register when deleting
 --map("v", "d", '"_d')
 --map("v", "d", '"_d')
@@ -253,16 +260,17 @@ M.cmp = {
 -----------------------------------------------------------
 -- Shift up and down to make larger selections easely
 M.treesitter = {
-	init_selection = "vi",
-	node_incremental = "k",
-	node_decremental = "j",
+	init_selection = "<leader> v",
+	node_incremental = "<C-k>",
+	node_decremental = "<C-j>",
 }
 -----------------------------------------------------------
 --  ZenMode
 -----------------------------------------------------------
 
 map("n", "<leader>z", function()
-	vim.cmd("ZenMode")
-end, "🧘")
+		vim.cmd("ZenMode")
+	end,
+	"🧘")
 
 return M

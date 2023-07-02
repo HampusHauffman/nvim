@@ -21,7 +21,7 @@ require("lazy").setup({
 				require("block").setup({
 					percent = 0.95,
 					depth = 4,
-					automatic = true
+					--automatic = true
 				})
 			end
 		},
