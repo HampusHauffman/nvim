@@ -1,12 +1,13 @@
 -----------------------------------------------------------
 -- General Neovim settings and configuration
 -----------------------------------------------------------
-local g            = vim.g   -- Global variables
-local opt          = vim.opt -- Set options (global/buffer/windows-scoped)
+local g   = vim.g   -- Global variables
+local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 
 -----------------------------------------------------------
 -- General
 -----------------------------------------------------------
+--vim.opt.wildcharm = '<Tab>'
 opt.mouse          = "a"           -- Enable mouse support
 opt.clipboard      = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile       = false         -- Don't use swapfile

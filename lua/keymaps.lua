@@ -66,6 +66,13 @@ map("n", "<C-j>", "<C-w>j")
 map("n", "<C-k>", "<C-w>k")
 map("n", "<C-l>", "<C-w>l")
 
+vim.cmd [[
+  set wildcharm=<Tab>
+  cnoremap <C-j> <Tab>
+  cnoremap <C-k> <S-Tab>
+]]
+
+
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>", "Save file")
 
