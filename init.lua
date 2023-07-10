@@ -85,7 +85,7 @@ require("lazy").setup({
 		},
 		{
 			"akinsho/flutter-tools.nvim",
-			rquires = "nvim-lua/plenary.nvim",
+			dependencies = "nvim-lua/plenary.nvim",
 			config = function()
 				require("flutter-tools").setup({}) -- use defaults
 			end,
@@ -302,31 +302,3 @@ require "options"
 require "keymaps"
 require "autocmd"
 require "color"
---require "my2"
---require "my3"
---vim.cmd([[
---  augroup BionicAutocmd
---    autocmd!
---    autocmd FileType * Bionic
---  augroup END
---]])
--- create an aucmd when a window opens
-vim.api.nvim_create_augroup('awd', {})
-
---vim.api.nvim_create_autocmd({ "WinEnter", "WinNew" }, {
---	group = 'awd',
---	pattern = '*',
---	callback = function(args)
---		print("okk")
---		local id = vim.api.nvim_get_current_win()
---		local r = vim.api.nvim_win_get_config(id).relative
---		if r ~= "" then
---			vim.api.nvim_win_set_config(id, {
---				border = {" "}
---			})
---			vim.api.nvim_win_set_config(id, {
---				border = "shadow"
---			})
---		end
---	end
---})
