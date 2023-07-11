@@ -1,7 +1,8 @@
 local keymaps = require "keymaps".treesitter
 require "nvim-treesitter.configs".setup {
     indent = {
-        enable = true
+        enable = false
+        --enable = true
     },
     -- Install parsers synchronously (only applied to `ensure_installed`)
     sync_install = false,

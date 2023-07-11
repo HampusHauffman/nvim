@@ -43,27 +43,6 @@ require("lazy").setup({
 		"fladson/vim-kitty",
 		"pantharshit00/vim-prisma",
 		{
-			"zbirenbaum/copilot.lua",
-			cmd = "Copilot",
-			event = "InsertEnter",
-			config = function()
-				require("copilot").setup({
-					suggestion = { enabled = false, auto_trigger = true, },
-
-					panel = { enabled = false },
-				})
-			end,
-		},
-		{
-			"zbirenbaum/copilot-cmp",
-			config = function()
-				require("copilot_cmp").setup({
-					event = { "InsertEnter", "LspAttach" },
-					fix_pairs = true,
-				})
-			end
-		},
-		{
 			'simrat39/rust-tools.nvim',
 			config = function()
 				local rt = require("rust-tools")
@@ -118,14 +97,26 @@ require("lazy").setup({
 		"L3MON4D3/LuaSnip",
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
-		-- {
-		--     'huggingface/hfcc.nvim',
-		--     opts = {
-		--         api_token = "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",
-		--         model = "bigcode/starcoder" -- can be a model ID or an http endpoint
-		--     }
-		-- },
-
+		{
+			"zbirenbaum/copilot.lua",
+			cmd = "Copilot",
+			event = "InsertEnter",
+			config = function()
+				require("copilot").setup({
+					suggestion = { enabled = false, auto_trigger = true, },
+					panel = { enabled = false },
+				})
+			end,
+		},
+		{
+			"zbirenbaum/copilot-cmp",
+			config = function()
+				require("copilot_cmp").setup({
+					event = { "InsertEnter", "LspAttach" },
+					fix_pairs = true,
+				})
+			end
+		},
 		-----------------------------------------------------
 		-- UI
 		-----------------------------------------------------
