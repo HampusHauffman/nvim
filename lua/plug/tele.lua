@@ -11,7 +11,7 @@ M[#M + 1] = {
 		require("telescope").setup {
 			defaults = {
 				winblend = 0,
-				mappings = { -- find a way to have this in keymaps
+				mappings = {
 					n = {
 						["kj"] = "close",
 						["jk"] = "close",

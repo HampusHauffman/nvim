@@ -45,10 +45,6 @@ require("lazy").setup({
 		},
 		{ "akinsho/toggleterm.nvim",                  version = "v2.*" },
 		{
-			"nvim-lualine/lualine.nvim",
-			dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
-		},
-		{
 			"nvim-neo-tree/neo-tree.nvim",
 			branch = "v2.x",
 			dependencies = {
