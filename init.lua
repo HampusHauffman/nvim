@@ -12,7 +12,10 @@ end
 
 vim.opt.rtp:prepend(lazypath)
 
+vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
+
 require("lazy").setup({
+		{ import = "plug" },
 		{
 			"HampusHauffman/block.nvim",
 			dev = true,
@@ -86,38 +89,6 @@ require("lazy").setup({
 		},
 
 		-----------------------------------------------------
-		-- CMP
-		-----------------------------------------------------
-		"hrsh7th/nvim-cmp",
-		"hrsh7th/cmp-nvim-lsp",
-		"hrsh7th/cmp-buffer",
-		"hrsh7th/cmp-path",
-		"hrsh7th/cmp-cmdline",
-		"hrsh7th/cmp-nvim-lua",
-		"L3MON4D3/LuaSnip",
-		"saadparwaiz1/cmp_luasnip",
-		"rafamadriz/friendly-snippets",
-		{
-			"zbirenbaum/copilot.lua",
-			cmd = "Copilot",
-			event = "InsertEnter",
-			config = function()
-				require("copilot").setup({
-					suggestion = { enabled = false, auto_trigger = true, },
-					panel = { enabled = false },
-				})
-			end,
-		},
-		{
-			"zbirenbaum/copilot-cmp",
-			config = function()
-				require("copilot_cmp").setup({
-					event = { "InsertEnter", "LspAttach" },
-					fix_pairs = true,
-				})
-			end
-		},
-		-----------------------------------------------------
 		-- UI
 		-----------------------------------------------------
 		{
@@ -177,7 +148,6 @@ require("lazy").setup({
 				require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
 			end
 		},                 -- Syntax highligting
-		"onsails/lspkind.nvim", -- Symbols / icons
 		--"p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
 		"RRethy/vim-illuminate", -- Highlight words that match cursos
 		"folke/zen-mode.nvim", -- Zen mode
