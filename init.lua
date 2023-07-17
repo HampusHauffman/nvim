@@ -43,13 +43,6 @@ require("lazy").setup({
 				require('neoscroll').setup()
 			end
 		},
-		{
-			"nvim-telescope/telescope.nvim",
-			version = "0.1.x",
-			dependencies = { "nvim-lua/plenary.nvim" },
-		},
-		"nvim-telescope/telescope-ui-select.nvim",
-		{ 'nvim-telescope/telescope-fzf-native.nvim', build = 'make' },
 		{ "akinsho/toggleterm.nvim",                  version = "v2.*" },
 		{
 			"nvim-lualine/lualine.nvim",

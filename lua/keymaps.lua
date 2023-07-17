@@ -171,7 +171,7 @@ end, "Previous files")
 map("n", "fb", tele_builtin.buffers)
 map("n", "fh", tele_builtin.help_tags)
 
-M.telescope = {
+M.telescope = { -- Telscope is not using this atm find a way to fix
 	n = {
 		["kj"] = "close",
 		["jk"] = "close",

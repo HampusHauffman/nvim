@@ -50,6 +50,7 @@
         "/Users/hampus/.local/share/nvim/lazy/telescope.nvim/lua",
         "/Users/hampus/.local/share/nvim/lazy/nui.nvim/lua",
         "/Users/hampus/.config/nvim/lua",
-        "${3rd}/luv/library"
+        "${3rd}/luv/library",
+        "${3rd}/luassert/library"
     ]
 }

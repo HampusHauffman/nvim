@@ -18,5 +18,4 @@ local wk = require "which-key"
 
 wk.register({
     ["<CR>"] = "which_key_ignore", -- special label to hide it in the popup
-    ["h"] = "which_key_ignore",
 }, { prefix = "<leader>" })
