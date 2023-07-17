@@ -116,7 +116,7 @@ map("n", "<leader>n", function()
 		for _, win in ipairs(vim.api.nvim_list_wins()) do
 			--get buffer number from win
 			local buffer = vim.api.nvim_win_get_buf(win)
-			local filetype = vim.api.nvim_buf_get_option(buffer, 'filetype')
+			local filetype = vim.api.nvim_get_option_value('filetype', { buf = buffer })
 			if filetype == 'neo-tree' then
 				print(filetype)
 				neotreeBuffer = buffer

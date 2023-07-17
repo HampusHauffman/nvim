@@ -35,60 +35,6 @@ require("lazy").setup({
 		{ "HampusHauffman/dracula.nvim", lazy = false, priority = 1000 },
 		{ "tiagovla/tokyodark.nvim",     lazy = false, priority = 1000 },
 		-----------------------------------------------------
-		-- LSP
-		-----------------------------------------------------
-		"neovim/nvim-lspconfig",
-		"jose-elias-alvarez/null-ls.nvim",
-		"williamboman/mason.nvim",
-		"williamboman/mason-lspconfig.nvim",
-		"jayp0521/mason-null-ls.nvim",
-		'mfussenegger/nvim-dap',
-		"fladson/vim-kitty",
-		"pantharshit00/vim-prisma",
-		{
-			'simrat39/rust-tools.nvim',
-			config = function()
-				local rt = require("rust-tools")
-				rt.setup({
-					server = {
-						settings = {
-							["rust-analyzer"] = {
-								check = {
-									command = "clippy"
-								}
-							}
-						},
-						on_attach = function()
-						end,
-					},
-				})
-				rt.inlay_hints.enable()
-			end
-		},
-		{
-			"akinsho/flutter-tools.nvim",
-			dependencies = "nvim-lua/plenary.nvim",
-			config = function()
-				require("flutter-tools").setup({}) -- use defaults
-			end,
-		},
-		{
-			"folke/trouble.nvim",
-			dependencies = "kyazdani42/nvim-web-devicons",
-			config = function()
-				require("trouble").setup({})
-			end,
-		},
-		{
-			"saecki/crates.nvim",
-			version = 'v0.3.0',
-			dependencies = { 'nvim-lua/plenary.nvim' },
-			config = function()
-				require('crates').setup()
-			end,
-		},
-
-		-----------------------------------------------------
 		-- UI
 		-----------------------------------------------------
 		{
@@ -187,7 +133,6 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- Util
 		-----------------------------------------------------
-		"folke/neodev.nvim",
 		{
 			'lewis6991/gitsigns.nvim',
 			config = function()
