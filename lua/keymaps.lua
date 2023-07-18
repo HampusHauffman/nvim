@@ -21,8 +21,16 @@ local tele_builtin = require("telescope.builtin")
 -- Source vimRc
 map("n", "<leader>å", ":source $MYVIMRC <CR>", "Source $MYVIMRC!")
 
--- Smooth scrolling
 
+map("n", "git", function()
+	local Terminal = require("toggleterm.terminal").Terminal
+	local lazygit  = Terminal:new({
+		cmd = "lazygit",
+		hidden = true,
+		direction = "float"
+	})
+	lazygit:toggle()
+end, "💤 Git")
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
@@ -146,12 +154,12 @@ map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
 map("v", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
 
 map("t", "<esc>", [[<C-\><C-n>]])
-map("t", "jk", [[<C-\><C-n>]])
-map("t", "kj", [[<C-\><C-n>]])
-map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
-map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
-map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
-map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
+--map("t", "jk", [[<C-\><C-n>]])
+--map("t", "kj", [[<C-\><C-n>]])
+--map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
+--map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
+--map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
+--map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 
 -----------------------------------------------------------
 -- Telescope
