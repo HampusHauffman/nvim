@@ -44,15 +44,6 @@ require("lazy").setup({
 			end
 		},
 		{ "akinsho/toggleterm.nvim",                  version = "v2.*" },
-		{
-			"nvim-neo-tree/neo-tree.nvim",
-			branch = "v2.x",
-			dependencies = {
-				"nvim-lua/plenary.nvim",
-				"MunifTanjim/nui.nvim",
-				"kyazdani42/nvim-web-devicons",
-			}
-		},
 		"folke/which-key.nvim",
 		--        {
 		--            'echasnovski/mini.animate',

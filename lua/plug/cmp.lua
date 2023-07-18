@@ -64,7 +64,7 @@ M[#M + 1] = {
 				{
 					name = "nvim_lsp",
 					entry_filter = function(entry, ctx)
-						return require("cmp").lsp.CompletionItemKind.Text ~= entry:get_kind()
+						return cmp.lsp.CompletionItemKind.Text ~= entry:get_kind()
 					end,
 				},
 			}),
