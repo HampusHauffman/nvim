@@ -53,6 +53,7 @@
         "/Users/hampus/.local/share/nvim/lazy/cmp-buffer/lua",
         "/Users/hampus/.local/share/nvim/lazy/copilot-cmp/lua",
         "/Users/hampus/.config/nvim/lua",
-        "${3rd}/luv/library"
+        "${3rd}/luv/library",
+        "${3rd}/luassert/library"
     ]
 }
