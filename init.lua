@@ -22,9 +22,9 @@ require("lazy").setup({
 			--branch = "scroll",
 			config = function()
 				require("block").setup({
-					percent = 0.95,
+					percent = 0.93,
 					depth = 4,
-					--automatic = true
+					automatic = true
 				})
 			end
 		},
@@ -43,32 +43,14 @@ require("lazy").setup({
 				require('neoscroll').setup()
 			end
 		},
-		"folke/which-key.nvim",
-		--        {
-		--            'echasnovski/mini.animate',
-		--            version = '*',
-		--            config = function()
-		--                require('mini.animate').setup()
-		--            end
-		--        },
 		--"nvim-treesitter/nvim-treesitter-context",
 
 		-----------------------------------------------------
 		-- Pretty
 		-----------------------------------------------------
-		{
-			'stevearc/dressing.nvim',
-			opts = {},
-		},
-		{
-			"nvim-treesitter/nvim-treesitter",
-			config = function()
-				require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
-			end
-		},                 -- Syntax highligting
+		'stevearc/dressing.nvim',
 		--"p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
 		"RRethy/vim-illuminate", -- Highlight words that match cursos
-		"folke/zen-mode.nvim", -- Zen mode
 		{
 			"luukvbaal/stabilize.nvim",
 			config = function()
@@ -76,12 +58,6 @@ require("lazy").setup({
 				})
 			end,
 		},
-		--{
-		--    "j-hui/fidget.nvim",
-		--    config = function()
-		--        require("fidget").setup({})
-		--    end,
-		--},
 		{
 			"folke/todo-comments.nvim",
 			dependencies = "nvim-lua/plenary.nvim",
@@ -101,6 +77,7 @@ require("lazy").setup({
 				require("leap").add_default_mappings()
 			end,
 		},
+		"christoomey/vim-tmux-navigator",
 
 		-----------------------------------------------------
 		-- Util
@@ -111,7 +88,6 @@ require("lazy").setup({
 				require('gitsigns').setup()
 			end
 		},
-		"christoomey/vim-tmux-navigator",
 		"tpope/vim-sleuth",
 		{
 			"Pocco81/auto-save.nvim",
@@ -120,31 +96,6 @@ require("lazy").setup({
 					-- your config goes here
 					-- or just leave it empty :)
 				}
-			end,
-		},
-		{
-			"nvim-treesitter/playground",
-			config = function()
-				require("nvim-treesitter.configs").setup({
-					playground = {
-						enable = true,
-						disable = {},
-						updatetime = 25, -- Debounced time for highlighting nodes in the playground from source code
-						persist_queries = false, -- Whether the query persists across vim sessions
-						keybindings = {
-							toggle_query_editor = "o",
-							toggle_hl_groups = "i",
-							toggle_injected_languages = "t",
-							toggle_anonymous_nodes = "a",
-							toggle_language_display = "I",
-							focus_language = "f",
-							unfocus_language = "F",
-							update = "R",
-							goto_node = "<cr>",
-							show_help = "?",
-						},
-					},
-				})
 			end,
 		},
 		{
