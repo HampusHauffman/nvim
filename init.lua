@@ -43,7 +43,6 @@ require("lazy").setup({
 				require('neoscroll').setup()
 			end
 		},
-		{ "akinsho/toggleterm.nvim",                  version = "v2.*" },
 		"folke/which-key.nvim",
 		--        {
 		--            'echasnovski/mini.animate',
@@ -57,13 +56,6 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- Pretty
 		-----------------------------------------------------
-		{
-			"folke/noice.nvim",
-			dependencies = {
-				"MunifTanjim/nui.nvim",
-				--"rcarriga/nvim-notify",
-			}
-		},
 		{
 			'stevearc/dressing.nvim',
 			opts = {},
