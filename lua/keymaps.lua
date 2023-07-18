@@ -21,7 +21,7 @@ local tele_builtin = require("telescope.builtin")
 -- Source vimRc
 map("n", "<leader>å", ":source $MYVIMRC <CR>", "Source $MYVIMRC!")
 
-
+-- git
 map("n", "git", function()
 	local Terminal = require("toggleterm.terminal").Terminal
 	local lazygit  = Terminal:new({
