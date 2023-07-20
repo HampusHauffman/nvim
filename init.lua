@@ -16,6 +16,9 @@ vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappin
 
 require("lazy").setup({
 		{ import = "plug" },
+		-----------------------------------------------------
+		-- My plugins
+		-----------------------------------------------------
 		{
 			"HampusHauffman/block.nvim",
 			dev = true,
@@ -24,7 +27,7 @@ require("lazy").setup({
 				require("block").setup({
 					percent = 0.93,
 					depth = 4,
-					automatic = true
+					--automatic = true
 				})
 			end
 		},
@@ -43,8 +46,7 @@ require("lazy").setup({
 				require('neoscroll').setup()
 			end
 		},
-		--"nvim-treesitter/nvim-treesitter-context",
-
+		"nvim-treesitter/nvim-treesitter-context",
 		-----------------------------------------------------
 		-- Pretty
 		-----------------------------------------------------
@@ -71,7 +73,6 @@ require("lazy").setup({
 				require("todo-comments").setup {}
 			end
 		},
-
 		-----------------------------------------------------
 		-- Movement
 		-----------------------------------------------------
@@ -99,13 +100,13 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- Util
 		-----------------------------------------------------
+		"tpope/vim-sleuth",
 		{
 			'lewis6991/gitsigns.nvim',
 			config = function()
 				require('gitsigns').setup()
 			end
 		},
-		"tpope/vim-sleuth",
 		{
 			"Pocco81/auto-save.nvim",
 			config = function()
@@ -139,7 +140,6 @@ require("lazy").setup({
 		},
 		ui = {
 			border = "rounded",
-
 		}
 	}
 )
