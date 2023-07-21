@@ -2,7 +2,6 @@ local M = {}
 -----------------------------------------------------------
 -- Key maps
 -----------------------------------------------------------
-
 local wk = require "which-key"
 
 local function map(mode, lhs, rhs, desc)
@@ -14,23 +13,11 @@ local function map(mode, lhs, rhs, desc)
 	end
 end
 
--- Change leader to a space
+-- Change leader to a space (Also done in init)
 vim.g.mapleader = " "
 -- Telescope builtins for lsp actions
 local tele_builtin = require("telescope.builtin")
--- Source vimRc
-map("n", "<leader>å", ":source $MYVIMRC <CR>", "Source $MYVIMRC!")
 
--- git
-map("n", "git", function()
-	local Terminal = require("toggleterm.terminal").Terminal
-	local lazygit  = Terminal:new({
-		cmd = "lazygit",
-		hidden = true,
-		direction = "float"
-	})
-	lazygit:toggle()
-end, "💤 Git")
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
@@ -47,20 +34,6 @@ map("v", "ö", "$")
 -- Map Esc to kk and jj
 map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
-
-map("n", '"<s-c>', function()
-	for i = 34, 122 do
-		print(vim.fn.nr2char(i) .. " " .. i)
-		--vim.fn.setreg(vim.fn.nr2char(i), {})
-	end
-end, "Clear Reg")
-
--- Dont yank into register when deleting
---map("v", "d", '"_d')
---map("v", "d", '"_d')
-
---map("n", "D", '"_D')
---map("v", "D", '"_D')
 
 -- Move in insert mode
 map("i", "<C-h>", "<left>")
@@ -79,7 +52,6 @@ vim.cmd [[
   cnoremap <C-j> <Tab>
   cnoremap <C-k> <S-Tab>
 ]]
-
 
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>", "Save file")
@@ -100,25 +72,29 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -- Neotree
 -----------------------------------------------------------
 map("n", "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer")
---map("n", "<leader>n", ":Neotree toggle filesystem reveal float<CR>")
--- To make neotree open in current if we're in zen mode (ZENENABLED is defined in zen_mode.lua)
+-- To make neotree open in current buf if we're in zen mode (ZENENABLED is defined in zen_mode.lua)
+-- This also makes sure if there is a buffer open (like one opened to the left) we go to that one instead of opening a new one
 map("n", "<leader>n", function()
+	-- Open previous if we're in neotree
 	if vim.api.nvim_get_option_value("filetype", { buf = 0 }) == "neo-tree" then
 		vim.cmd("bprevious")
 	end
-	if vim.g.ZENENABLED == true then -- If zenmode is enabled open neotree in the current buff
+	-- If zenmode is enabled open neotree in the current buff
+	if vim.g.ZENENABLED == true then
 		local currentFilePath = vim.fn.expand('%:p')
 		if currentFilePath == "" or currentFilePath == nil then
 			vim.cmd("Neotree toggle reveal current")
 		else
-			local success, _ = pcall(function() -- this can fail if we're in a neotree buffer and as such we should just toggle
+			-- this can fail if we're in a neotree buffer and as such we should just toggle
+			local success, _ = pcall(function()
 				vim.cmd("Neotree reveal_file=" .. currentFilePath .. " current")
 			end)
 			if not success then
 				vim.cmd("Neotree toggle reveal current")
 			end
 		end
-	else -- If we're not in zen mode then open neotree in float unless there is already a buffer open called neotre
+		-- If we're not in zen mode then open neotree in float unless there is already a buffer open called neotre
+	else
 		-- Check if there's a buffer with filetype "neo-tree"
 		local neotreeBuffer = nil
 		for _, win in ipairs(vim.api.nvim_list_wins()) do
@@ -126,7 +102,6 @@ map("n", "<leader>n", function()
 			local buffer = vim.api.nvim_win_get_buf(win)
 			local filetype = vim.api.nvim_get_option_value('filetype', { buf = buffer })
 			if filetype == 'neo-tree' then
-				print(filetype)
 				neotreeBuffer = buffer
 				break
 			end
@@ -144,6 +119,19 @@ end)
 -- GitSign
 -----------------------------------------------------------
 map("n", "<C-g>", ":Gitsigns <cr>")
+
+-----------------------------------------------------------
+-- LazyGit
+-----------------------------------------------------------
+map("n", "git", function()
+	local Terminal = require("toggleterm.terminal").Terminal
+	local lazygit  = Terminal:new({
+		cmd = "lazygit",
+		hidden = true,
+		direction = "float"
+	})
+	lazygit:toggle()
+end, "💤 Git")
 
 -----------------------------------------------------------
 --  Terminal
@@ -164,7 +152,6 @@ map("t", "<esc>", [[<C-\><C-n>]])
 -----------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
-
 map("n", "ff", tele_builtin.find_files, "Find files")
 map("n", "fa", function()
 	tele_builtin.lsp_document_symbols({
@@ -270,6 +257,7 @@ M.cmp = {
 	["<C-j>"] = next,
 	["<C-k>"] = prev,
 }
+
 -----------------------------------------------------------
 --  Treesitter
 -----------------------------------------------------------
@@ -279,10 +267,10 @@ M.treesitter = {
 	node_incremental = "<C-k>",
 	node_decremental = "<C-j>",
 }
+
 -----------------------------------------------------------
 --  ZenMode
 -----------------------------------------------------------
-
 map("n", "<leader>z", function()
 		vim.cmd("ZenMode")
 	end,

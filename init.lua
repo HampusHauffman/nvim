@@ -21,13 +21,13 @@ require("lazy").setup({
 		-----------------------------------------------------
 		{
 			"HampusHauffman/block.nvim",
-			dev = true,
-			--branch = "scroll",
+			--dev = true,
+			branch = "main",
 			config = function()
 				require("block").setup({
-					percent = 0.93,
+					percent = 1.2,
 					depth = 4,
-					--automatic = true
+					automatic = true
 				})
 			end
 		},
@@ -63,7 +63,7 @@ require("lazy").setup({
 				require('neoscroll').setup()
 			end
 		},
-		"nvim-treesitter/nvim-treesitter-context",
+		--"nvim-treesitter/nvim-treesitter-context",
 		-----------------------------------------------------
 		-- Pretty
 		-----------------------------------------------------
@@ -93,6 +93,24 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- Movement
 		-----------------------------------------------------
+		{
+			"chrisgrieser/nvim-spider",
+			lazy = true,
+			config = function()
+				require("spider").setup({
+					skipInsignificantPunctuation = true
+				})
+				vim.keymap.set({ "n", "o", "x" }, "w", "<cmd>lua require('spider').motion('w')<CR>",
+					{ desc = "Spider-w" })
+				vim.keymap.set({ "n", "o", "x" }, "e", "<cmd>lua require('spider').motion('e')<CR>",
+					{ desc = "Spider-e" })
+				vim.keymap.set({ "n", "o", "x" }, "b", "<cmd>lua require('spider').motion('b')<CR>",
+					{ desc = "Spider-b" })
+				vim.keymap.set({ "n", "o", "x" }, "ge", "<cmd>lua require('spider').motion('ge')<CR>",
+					{ desc = "Spider-ge" })
+			end
+		},
+
 		{
 			"max397574/better-escape.nvim",
 			config = function()

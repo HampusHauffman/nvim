@@ -25,7 +25,8 @@ M[#M + 1] = {
 				},
 				prompt_prefix = " ",
 				selection_caret = " ",
-				layout_strategy = "flex",
+				--layout_strategy = "flex",
+				layout_strategy = "vertical",
 				sorting_strategy = "ascending",
 				mirror = false,
 				layout_config = {
@@ -33,8 +34,13 @@ M[#M + 1] = {
 						prompt_position = "top",
 						width = 0.8,
 						preview_width = 0.666666,
-					}
-					-- other layout configuration here
+					},
+					vertical = {
+						height = 0.9,
+						preview_cutoff = 40,
+						prompt_position = "bottom",
+						width = 0.8
+					},
 				},
 			},
 			extensions = {

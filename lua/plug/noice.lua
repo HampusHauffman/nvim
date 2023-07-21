@@ -7,6 +7,15 @@ M[#M + 1] = {
 	},
 	config = function()
 		require("noice").setup({
+			routes = {
+				{
+					filter = {
+						event = "notify",
+						min_height = 15
+					},
+					view = 'split'
+				},
+			},
 			cmdline = {
 				view = "cmdline_popup",
 			},
