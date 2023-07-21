@@ -33,6 +33,23 @@ require("lazy").setup({
 		},
 		"HampusHauffman/bionic.nvim",
 		-----------------------------------------------------
+		-- GPT
+		-----------------------------------------------------
+		{
+			"jackMort/ChatGPT.nvim",
+			event = "VeryLazy",
+			config = function()
+				require("chatgpt").setup({
+					api_key = "echo $CHATGPT_API_KEY",
+				})
+			end,
+			dependencies = {
+				"MunifTanjim/nui.nvim",
+				"nvim-lua/plenary.nvim",
+				"nvim-telescope/telescope.nvim"
+			}
+		},
+		-----------------------------------------------------
 		-- ColorSchemes
 		-----------------------------------------------------
 		{ "HampusHauffman/dracula.nvim", lazy = false, priority = 1000 },
