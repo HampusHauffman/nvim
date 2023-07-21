@@ -27,17 +27,20 @@ M[#M + 1] = {
 			},
 		})
 
-		require("lualine").setup({
-			sections = {
-				lualine_x = {
-					{
-						require("noice").api.status.mode.get,
-						cond = require("noice").api.status.mode.has,
-						color = { fg = "#ff9e64" },
-					}
+		local ok, lualine = pcall(require, "lualine")
+		if ok then
+			lualine.setup({
+				sections = {
+					lualine_x = {
+						{
+							require("noice").api.status.mode.get,
+							cond = require("noice").api.status.mode.has,
+							color = { fg = "#ff9e64" },
+						}
+					},
 				},
-			},
-		})
+			})
+		end
 	end
 }
 return M
