@@ -159,6 +159,11 @@ map("n", "fa", function()
 	})
 end, "Document symbols")
 map("n", "fg", tele_builtin.live_grep, "Find grep")
+--map("n", "fg", function()
+--	require('telescope.builtin').grep_string {
+--		shorten_path = true, word_match = "-w", only_sort_text = true, search = ''
+--	}
+--end, "Find grep")
 map("n", "fo", tele_builtin.find_files, "Find files")
 map("n", "<leader>e", function()
 	tele_builtin.oldfiles({ only_cwd = true })
