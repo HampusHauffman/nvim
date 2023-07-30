@@ -27,7 +27,7 @@ M[#M + 1] = {
 				},
 			},
 			-- callback where you can add custom code when the Zen window opens
-			on_open = function(win)
+			on_open = function(_)
 				vim.opt.rnu = false
 				vim.opt.nu = false
 				local zoomed = vim.fn.system("tmux display -p -F '#{?window_zoomed_flag,Zoomed,#{status}}'")

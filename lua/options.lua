@@ -17,6 +17,7 @@ opt.autowrite      = true          -- Auto save file when it's not focused
 opt.autowriteall   = true          -- Auto write any changes. No more :qa! horrors :)--------------------
 opt.splitkeep      = "screen"
 --opt.more
+
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
@@ -51,7 +52,6 @@ opt.cmdheight      = 0
 -----------------------------------------------------------
 -- List
 -----------------------------------------------------------
-
 opt.list           = true
 --opt.listchars:append("eol:,")
 --opt.endofline = false
@@ -69,6 +69,7 @@ opt.updatetime     = 700   -- ms to wait for trigger an event
 -- Plugins
 -----------------------------------------------------------
 opt.timeoutlen     = 500
+
 -----------------------------------------------------------
 -- Startup
 -----------------------------------------------------------
