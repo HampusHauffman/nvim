@@ -54,7 +54,7 @@ vim.cmd [[
 ]]
 
 -- Fast saving with <leader> and s
-map("n", "<leader>s", ":w<CR>", "Save file")
+map("n", "<leader>s", ":w<CR>", "Save file 💾")
 
 -- Quit with leader shift q
 map("n", "<leader><S-q>", ":qa!<CR>")

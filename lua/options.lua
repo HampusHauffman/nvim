@@ -1,8 +1,8 @@
 -----------------------------------------------------------
 -- General Neovim settings and configuration
 -----------------------------------------------------------
-local g   = vim.g   -- Global variables
-local opt = vim.opt -- Set options (global/buffer/windows-scoped)
+local g            = vim.g   -- Global variables
+local opt          = vim.opt -- Set options (global/buffer/windows-scoped)
 
 -----------------------------------------------------------
 -- General
@@ -10,9 +10,10 @@ local opt = vim.opt -- Set options (global/buffer/windows-scoped)
 --vim.opt.wildcharm = '<Tab>'
 opt.mouse          = "a"           -- Enable mouse support
 opt.clipboard      = "unnamedplus" -- Copy/paste to system clipboard
-opt.swapfile       = false         -- Don't use swapfile
+opt.swapfile       = true          -- Don't use swapfile
 opt.undofile       = true          -- Persistant undo
 --opt.cul = true -- Line for the cursor
+opt.autowrite      = true          -- Auto save file when it's not focused
 opt.autowriteall   = true          -- Auto write any changes. No more :qa! horrors :)--------------------
 opt.splitkeep      = "screen"
 --opt.more
@@ -23,7 +24,7 @@ opt.smoothscroll   = true
 opt.wrap           = false    -- Disable line wrap
 opt.number         = true     -- Show line number
 opt.relativenumber = true
-opt.showmatch      = true     -- Highlight matching parenthesis
+opt.showmatch      = false    -- Highlight matching parenthesis
 opt.foldmethod     = "marker" -- Enable folding (default 'foldmarker')
 -- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
 opt.splitright     = true     -- Vertical split to the right
@@ -33,7 +34,7 @@ opt.smartcase      = true     -- Ignore lowercase for the whole pattern
 opt.linebreak      = true     -- Wrap on word boundary
 --opt.wrap = false          -- Disable line wrap
 opt.termguicolors  = true     -- Enable 24-bit RGB colors
-opt.ea             = false
+opt.equalalways    = false
 opt.signcolumn     = "yes:1"
 
 -----------------------------------------------------------
@@ -59,7 +60,7 @@ opt.list           = true
 -- Memory, CPU
 -----------------------------------------------------------
 opt.hidden         = true  -- Enable background buffers
-opt.history        = 100   -- Remember N lines in history
+opt.history        = 1000   -- Remember N lines in history
 opt.lazyredraw     = false -- Faster scrolling true / smoother animations false
 opt.synmaxcol      = 240   -- Max column for syntax highlight
 opt.updatetime     = 700   -- ms to wait for trigger an event
@@ -72,7 +73,7 @@ opt.timeoutlen     = 500
 -- Startup
 -----------------------------------------------------------
 -- Disable nvim intro
-opt.shortmess:append "sI"
+opt.shortmess:append "sIq"
 -- Open Neotree
 -- Disable builtin plugins
 local disabled_built_ins = {

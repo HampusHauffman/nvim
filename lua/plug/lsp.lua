@@ -58,6 +58,9 @@ M[#M + 1] = {
 			function(server_name) -- default handler (optional)
 				require("lspconfig")[server_name].setup({})
 			end,
+			["rust_analyzer"] = function()
+				require("rust-tools").setup {}
+			end,
 		})
 	end
 }
