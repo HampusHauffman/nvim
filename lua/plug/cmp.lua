@@ -14,7 +14,7 @@ M[#M + 1] = {
 		"saadparwaiz1/cmp_luasnip",
 		"rafamadriz/friendly-snippets",
 	},
-	config = function(_, opts)
+	config = function(_, _)
 		-- Add additional capabilities supported by nvim-cmp
 		local capabilities = vim.lsp.protocol.make_client_capabilities()
 		local luasnip = require("luasnip")

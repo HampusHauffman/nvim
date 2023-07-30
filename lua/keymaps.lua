@@ -17,7 +17,6 @@ end
 vim.g.mapleader = " "
 -- Telescope builtins for lsp actions
 local tele_builtin = require("telescope.builtin")
-
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
@@ -67,6 +66,13 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -----------------------------------------------------------
 -- Applications and Plugins shortcuts
 -----------------------------------------------------------
+
+
+map({ "n", "x", "o" }, "s", function() require("flash").jump() end, "Flash")
+map({ "n", "o", "x" }, "S", function() require("flash").treesitter() end, "Flash Treesitter")
+map("o", "r", function() require("flash").remote() end, "Remote Flash")
+map({ "o", "x" }, "R", function() require("flash").treesitter_search() end, "Treesitter Search")
+map({ "c" }, "<c-s>", function() require("flash").toggle() end, "Toggle Flash Search")
 
 -----------------------------------------------------------
 -- Neotree
@@ -171,34 +177,29 @@ end, "Previous files")
 map("n", "fb", tele_builtin.buffers)
 map("n", "fh", tele_builtin.help_tags)
 
-M.telescope = { -- Telscope is not using this atm find a way to fix
-	n = {
-		["kj"] = "close",
-		["jk"] = "close",
-	},
-	i = {
-		["<S-Tab>"] = "move_selection_previous",
-		["<Tab>"] = "move_selection_next",
-		["<C-k>"] = "move_selection_previous",
-		["<C-j>"] = "move_selection_next",
-	},
+require("telescope").setup {
+	defaults = {
+		winblend = 0,
+		mappings = {
+			n = {
+				["kj"] = "close",
+				["jk"] = "close",
+			},
+			i = {
+				["<S-Tab>"] = "move_selection_previous",
+				["<Tab>"] = "move_selection_next",
+				["<C-k>"] = "move_selection_previous",
+				["<C-j>"] = "move_selection_next",
+			},
+		},
+	}
 }
 
 -----------------------------------------------------------
 -- LSP
 -----------------------------------------------------------
-map("n", "<leader>f", function()
-	vim.lsp.buf.format({
-		--		timeout_ms = 2000,
-		--		asnyc = true,
-		--		filter = function(client)
-		--			return client.name ~= "tsserver"
-		--		end,
-	})
-end, "Format")
-map("v", "<leader>f", function()
-	vim.lsp.buf.format({})
-end, "Format")
+map("n", "<leader>f", function() vim.lsp.buf.format({}) end, "Format")
+map("v", "<leader>f", function() vim.lsp.buf.format({}) end, "Format")
 map("n", "gD", vim.lsp.buf.declaration, "Go to declaration")
 map("n", "gi", vim.lsp.buf.implementation, "Go to implementation")
 map("n", "gr", function()
@@ -277,7 +278,7 @@ M.treesitter = {
 --  ZenMode
 -----------------------------------------------------------
 map("n", "<leader>z", function()
-		vim.cmd("ZenMode")
+		vim.cmd("zenmode")
 	end,
 	"🧘")
 

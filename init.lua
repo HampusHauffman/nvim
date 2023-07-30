@@ -76,13 +76,13 @@ require("lazy").setup({
 		"stevearc/dressing.nvim",
 		--"p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
 		"RRethy/vim-illuminate", -- Highlight words that match cursos
-		{
-			"luukvbaal/stabilize.nvim",
-			config = function()
-				require("stabilize").setup({
-				})
-			end,
-		},
+		--{
+		--	"luukvbaal/stabilize.nvim",
+		--	config = function()
+		--		require("stabilize").setup({
+		--		})
+		--	end,
+		--},
 		{
 			"folke/todo-comments.nvim",
 			dependencies = "nvim-lua/plenary.nvim",
@@ -110,7 +110,6 @@ require("lazy").setup({
 					{ desc = "Spider-ge" })
 			end
 		},
-
 		{
 			"max397574/better-escape.nvim",
 			config = function()
@@ -123,12 +122,10 @@ require("lazy").setup({
 			end
 		},
 		{
-			"ggandor/leap.nvim",
-			lazy = false,
-			dependencies = { "tpope/vim-repeat", lazy = true },
-			config = function()
-				require("leap").add_default_mappings()
-			end,
+			"folke/flash.nvim",
+			--event = "VeryLazy",
+			opts = {},
+			keys = {}
 		},
 		"christoomey/vim-tmux-navigator",
 

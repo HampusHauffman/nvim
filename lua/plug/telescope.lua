@@ -11,18 +11,6 @@ M[#M + 1] = {
 		require("telescope").setup {
 			defaults = {
 				winblend = 0,
-				mappings = {
-					n = {
-						["kj"] = "close",
-						["jk"] = "close",
-					},
-					i = {
-						["<S-Tab>"] = "move_selection_previous",
-						["<Tab>"] = "move_selection_next",
-						["<C-k>"] = "move_selection_previous",
-						["<C-j>"] = "move_selection_next",
-					},
-				},
 				prompt_prefix = " ",
 				selection_caret = " ",
 				--layout_strategy = "flex",
