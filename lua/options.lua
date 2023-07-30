@@ -73,7 +73,7 @@ opt.timeoutlen     = 500
 -- Startup
 -----------------------------------------------------------
 -- Disable nvim intro
-opt.shortmess:append "sIq"
+opt.shortmess:append "sI"
 -- Open Neotree
 -- Disable builtin plugins
 local disabled_built_ins = {
