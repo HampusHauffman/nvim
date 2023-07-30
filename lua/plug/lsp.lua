@@ -2,7 +2,6 @@ local M = {
 	{ 'mfussenegger/nvim-dap' },
 	{ "fladson/vim-kitty" },
 	{ "pantharshit00/vim-prisma" },
-
 }
 
 M[#M + 1] = {
@@ -41,11 +40,6 @@ M[#M + 1] = {
 			ui = {
 				border = "rounded",
 				height = 0.8,
-				icons = {
-					package_installed = "✓",
-					package_pending = "➜",
-					package_uninstalled = "✗",
-				},
 			},
 		})
 	end
