@@ -9,6 +9,7 @@ local opt          = vim.opt -- Set options (global/buffer/windows-scoped)
 -----------------------------------------------------------
 --vim.opt.wildcharm = '<Tab>'
 opt.mouse          = "a"           -- Enable mouse support
+
 opt.clipboard      = "unnamedplus" -- Copy/paste to system clipboard
 opt.swapfile       = true          -- Don't use swapfile
 opt.undofile       = true          -- Persistant undo

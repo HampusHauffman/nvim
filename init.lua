@@ -20,6 +20,13 @@ require("lazy").setup({
 		-- My plugins
 		-----------------------------------------------------
 		{
+			"HampusHauffman/peacock.nvim",
+			dev = true,
+			config = function(_, _)
+				require("peacock")
+			end
+		},
+		{
 			"HampusHauffman/block.nvim",
 			--dev = true,
 			--branch = "pref",
