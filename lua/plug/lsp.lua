@@ -21,7 +21,7 @@ M[#M + 1] = {
 				border = "rounded"
 			}
 
-			
+
 		)
 		vim.lsp.handlers["textDocument/signatureHelp"] = vim.lsp.with(
 			vim.lsp.handlers.signature_help, {
@@ -121,7 +121,12 @@ M[#M + 1] = {
 	version = 'v0.3.0',
 	dependencies = { 'nvim-lua/plenary.nvim' },
 	config = function()
-		require('crates').setup()
+		require('crates').setup {
+			null_ls = {
+				enabled = true,
+				name = "crates.nvim",
+			},
+		}
 	end,
 }
 return M

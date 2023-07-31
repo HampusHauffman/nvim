@@ -60,6 +60,7 @@ M[#M + 1] = {
 				{ name = 'path' },
 				{ name = "luasnip" }, -- For luasnip users.
 				{ name = "nvim_lua" },
+				{ name = "crates" },
 				-- Dont suggest Text from nvm_lsp
 				{
 					name = "nvim_lsp",
