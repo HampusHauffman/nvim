@@ -10,6 +10,7 @@ if not vim.loop.fs_stat(lazypath) then
 	})
 end
 
+
 vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " " -- Make sure to set `mapleader` before lazy so your mappings are correct
@@ -26,18 +27,18 @@ require("lazy").setup({
 				require("peacock")
 			end
 		},
-		{
-			"HampusHauffman/block.nvim",
-			--dev = true,
-			--branch = "pref",
-			config = function()
-				require("block").setup({
-					percent = 1.2,
-					depth = 4,
-					automatic = true
-				})
-			end
-		},
+--		{
+--			"HampusHauffman/block.nvim",
+--			dev = true,
+--			branch = "main",
+--			config = function()
+--				require("block").setup({
+--					percent = 1.2,
+--					depth = 4,
+--					automatic = true
+--				})
+--			end
+--		},
 		"HampusHauffman/bionic.nvim",
 		-----------------------------------------------------
 		-- GPT
@@ -157,6 +158,9 @@ require("lazy").setup({
 		},
 		{
 			"windwp/nvim-autopairs",
+			dependencies = {
+				"hrsh7th/nvim-cmp",
+			},
 			config = function()
 				require("nvim-autopairs").setup({})
 				local cmp_autopairs = require("nvim-autopairs.completion.cmp")

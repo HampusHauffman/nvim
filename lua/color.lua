@@ -53,6 +53,7 @@ link("@lsp.type.variable", "@variable")
 link("rainbowcol1", "@boolean")
 
 
+vim.api.nvim_set_hl(0, "CmpItemKindCopilot", { fg = "#6CC644" })
 vim.fn.sign_define("DiagnosticSignError",
 	{ text = "", texthl = "DiagnosticSignError" })
 vim.fn.sign_define("DiagnosticSignWarn",

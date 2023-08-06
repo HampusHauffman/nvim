@@ -11,6 +11,7 @@ M[#M + 1] = {
     config = function()
         vim.cmd [[ let g:neo_tree_remove_legacy_commands = 1 ]]
         require("neo-tree").setup({
+            enable_git_status = true,
             popup_border_style = "rounded",
             sources = {
                 "filesystem",
@@ -21,7 +22,6 @@ M[#M + 1] = {
                 statusline = false
             },
             close_if_last_window = true,    -- Close Neo-tree if it is the last window left in the tab
-            enable_git_status = true,
             enable_modified_markers = true, -- Show markers for files with unsaved changes.
             enable_refresh_on_write = true, -- Refresh the tree when a file is written. Only used if `use_libuv_file_watcher` is false.
             git_status_async = true,
@@ -70,7 +70,7 @@ M[#M + 1] = {
                     hide_dotfiles = false,
                     hide_gitignored = false,
                 },
-            }
+            },
         })
     end
 }
