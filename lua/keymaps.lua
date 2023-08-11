@@ -225,44 +225,16 @@ map("n", "<f2>", vim.diagnostic.goto_next, "Go to next fix")
 -----------------------------------------------------------
 -- AutoComplete
 -----------------------------------------------------------
-local luasnip = require("luasnip")
 local cmp = require("cmp")
-local next = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.select_next_item()
-		elseif luasnip.expandable() then
-			luasnip.expand()
-		elseif luasnip.expand_or_jumpable() then
-			luasnip.expand_or_jump()
-		else
-			fallback()
-		end
-	end,
-	{
-		"i",
-		"s",
-	})
-local prev = cmp.mapping(function(fallback)
-		if cmp.visible() then
-			cmp.select_prev_item()
-		elseif luasnip.jumpable(-1) then
-			luasnip.jump(-1)
-		else
-			fallback()
-		end
-	end,
-	{
-		"i",
-		"s",
-	})
+local cmp_action = require('lsp-zero').cmp_action()
 
 M.cmp = {
 	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 	["<CR>"] = cmp.mapping.confirm({ select = false }),
-	["<Tab>"] = next,
-	["<S-Tab>"] = prev,
-	["<C-j>"] = next,
-	["<C-k>"] = prev,
+	['<Tab>'] = cmp_action.luasnip_supertab(),
+	['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+	["<C-j>"] = cmp_action.luasnip_supertab(),
+	["<C-k>"] = cmp_action.luasnip_shift_supertab(),
 }
 
 -----------------------------------------------------------

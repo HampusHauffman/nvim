@@ -27,18 +27,18 @@ require("lazy").setup({
 				require("peacock")
 			end
 		},
---		{
---			"HampusHauffman/block.nvim",
---			dev = true,
---			branch = "main",
---			config = function()
---				require("block").setup({
---					percent = 1.2,
---					depth = 4,
---					automatic = true
---				})
---			end
---		},
+		{
+			"HampusHauffman/block.nvim",
+			dev = true,
+			branch = "perf",
+			config = function()
+				require("block").setup({
+					percent = 1.2,
+					depth = 4,
+					--automatic = true
+				})
+			end
+		},
 		"HampusHauffman/bionic.nvim",
 		-----------------------------------------------------
 		-- GPT

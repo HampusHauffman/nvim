@@ -28,6 +28,7 @@ local M = {
         config = function()
             -- Setup LSP
             local lsp = require('lsp-zero').preset({})
+            lsp.setup()
             lsp.on_attach(function(client, bufnr)
                 lsp.default_keymaps({ buffer = bufnr })
             end)
@@ -42,6 +43,10 @@ local M = {
             local cmp = require("cmp")
             local lspkind = require("lspkind")
             cmp.setup({
+                preselect = 'item',
+                completion = {
+                    completeopt = 'menu,menuone,noinsert'
+                },
                 mapping = require("keymaps").cmp,
                 window = {
                     completion = cmp.config.window.bordered({
@@ -51,9 +56,10 @@ local M = {
                 },
                 sources = cmp.config.sources({
                     { name = "copilot" },
-                    { name = 'path' },
-                    { name = "luasnip" }, -- For luasnip users.
                     { name = "nvim_lua" },
+                    { name = 'nvim_lsp' },
+                    { name = "luasnip" }, -- For luasnip users.
+                    { name = 'path' },
                     { name = "crates" },
                 }),
                 formatting = {
