@@ -1,4 +1,5 @@
 local M = {
+    { 'onsails/lspkind.nvim' },
     { 'mfussenegger/nvim-dap' },
     { "fladson/vim-kitty" },
     { "pantharshit00/vim-prisma" },
@@ -19,7 +20,6 @@ local M = {
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip",
             "rafamadriz/friendly-snippets",
-
         },
     },
     {
@@ -33,7 +33,11 @@ local M = {
                 lsp.default_keymaps({ buffer = bufnr })
             end)
 
-            require('mason').setup({})
+            require('mason').setup({
+                ui = {
+                    border = "rounded"
+                }
+            })
             require('mason-lspconfig').setup({ handlers = { lsp.default_setup, }, })
 
             require("luasnip.loaders.from_vscode").lazy_load() -- Allow formatting of snippets like vs-code
@@ -158,17 +162,4 @@ M[#M + 1] = {
     end,
 }
 
-M[#M + 1] = {
-    "saecki/crates.nvim",
-    version = 'v0.3.0',
-    dependencies = { 'nvim-lua/plenary.nvim' },
-    config = function()
-        require('crates').setup {
-            null_ls = {
-                enabled = true,
-                name = "crates.nvim",
-            },
-        }
-    end,
-}
 return M

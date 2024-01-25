@@ -1,8 +1,10 @@
 local M = {}
 M[#M + 1] = {
     "nvim-treesitter/nvim-treesitter",
+    build = function()
+        require("nvim-treesitter.install").update({ with_sync = true })()
+    end,
     config = function()
-        require("lazy").setup({ { "nvim-treesitter/nvim-treesitter", build = ":TSUpdate" } })
         --local keymaps = require "keymaps".treesitter
         require "nvim-treesitter.configs".setup {
             indent = {

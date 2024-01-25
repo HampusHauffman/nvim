@@ -4,13 +4,13 @@ M[#M + 1] = {
     dependencies = { "kyazdani42/nvim-web-devicons", lazy = true },
     config = function()
         local tmux_tabs = ""
-        local function get_tmux_tabs()
-            if tmux_tabs == "" then
-                tmux_tabs = vim.fn.system([[tmux list-windows -F "#{window_index}:#{window_name}" | tr '\n' ' ']])
-                tmux_tabs = tmux_tabs:gsub("%s+$", "") -- Remove trailing whitespace
-            end
-            return tmux_tabs
-        end
+--        local function get_tmux_tabs()
+--            if tmux_tabs == "" then
+--                tmux_tabs = vim.fn.system([[tmux list-windows -F "#{window_index}:#{window_name}" | tr '\n' ' ']])
+--                tmux_tabs = tmux_tabs:gsub("%s+$", "") -- Remove trailing whitespace
+--            end
+--            return tmux_tabs
+--        end
 
         require("lualine").setup({
             options = {

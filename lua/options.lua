@@ -15,7 +15,7 @@ opt.swapfile       = true          -- Don't use swapfile
 opt.undofile       = true          -- Persistant undo
 --opt.cul = true -- Line for the cursor
 opt.autowrite      = true          -- Auto save file when it's not focused
-opt.autowriteall   = true          -- Auto write any changes. No more :qa! horrors :)--------------------
+opt.autowriteall   = true          -- Auto write any changes. No more :qa! horrors :)
 opt.splitkeep      = "screen"
 --opt.more
 
@@ -23,12 +23,12 @@ opt.splitkeep      = "screen"
 -- Neovim UI
 -----------------------------------------------------------
 opt.smoothscroll   = true
-opt.wrap           = false    -- Disable line wrap
+opt.wrap           = true     -- Disable line wrap
 opt.number         = true     -- Show line number
 opt.relativenumber = true
 opt.showmatch      = false    -- Highlight matching parenthesis
 opt.foldmethod     = "marker" -- Enable folding (default 'foldmarker')
--- opt.colorcolumn = '80' -- Line lenght marker at 80 columns
+--opt.colorcolumn = '80' -- Line lenght marker at 80 columns
 opt.splitright     = true     -- Vertical split to the right
 opt.splitbelow     = true     -- Horizontal split to the bottom
 opt.ignorecase     = true     -- Ignore case letters when search
@@ -61,7 +61,7 @@ opt.list           = true
 -- Memory, CPU
 -----------------------------------------------------------
 opt.hidden         = true  -- Enable background buffers
-opt.history        = 1000   -- Remember N lines in history
+opt.history        = 1000  -- Remember N lines in history
 opt.lazyredraw     = false -- Faster scrolling true / smoother animations false
 opt.synmaxcol      = 240   -- Max column for syntax highlight
 opt.updatetime     = 700   -- ms to wait for trigger an event
