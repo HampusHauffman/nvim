@@ -38,7 +38,30 @@ local M = {
                     border = "rounded"
                 }
             })
-            require('mason-lspconfig').setup({ handlers = { lsp.default_setup, }, })
+            require('mason-lspconfig').setup({
+                handlers = {
+                    lsp.default_setup,
+                    -- Make sure the tailwindcss server is setup when using https://www.npmjs.com/package/tailwind-styled-components
+                    tailwindcss = function()
+                        require('lspconfig').tailwindcss.setup({
+                            settings = {
+                                tailwindCSS = {
+                                    experimental = {
+                                        classRegex = {
+                                            "tw`([^`]*)",
+                                            "tw\\.[^`]+`([^`]*)`",
+                                            "tw\\(.*?\\).*?`([^`]*)"
+                                        }
+                                    }
+                                }
+                            },
+                            on_attach = function(client, bufnr)
+                                print('hello tsserver')
+                            end
+                        })
+                    end,
+                },
+            })
 
             require("luasnip.loaders.from_vscode").lazy_load() -- Allow formatting of snippets like vs-code
 

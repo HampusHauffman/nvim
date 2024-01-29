@@ -119,7 +119,7 @@ map("n", "<leader>n", function()
 			vim.cmd("Neotree toggle filesystem reveal float")
 		end
 	end
-end)
+end, "File Explorer")
 
 
 -----------------------------------------------------------
@@ -254,5 +254,27 @@ map("n", "<leader>z", function()
 		vim.cmd("zenmode")
 	end,
 	"🧘")
+
+
+-- DAP
+map("n", "<leader>dB", function() require("dap").set_breakpoint(vim.fn.input('Breakpoint condition: ')) end,
+	"Breakpoint Condition")
+map("n", "<leader>db", function() require("dap").toggle_breakpoint() end, "Toggle Breakpoint")
+map("n", "<leader>dc", function() require("dap").continue() end, "Continue")
+--map("n", "<leader>da", function() require("dap").continue({ before = get_args }) end, "Run with Args")
+map("n", "<leader>dC", function() require("dap").run_to_cursor() end, "Run to Cursor")
+map("n", "<leader>dg", function() require("dap").goto_() end, "Go to line (no execute)")
+map("n", "<leader>di", function() require("dap").step_into() end, "Step Into")
+map("n", "<leader>dj", function() require("dap").down() end, "Down")
+map("n", "<leader>dk", function() require("dap").up() end, "Up")
+map("n", "<leader>dl", function() require("dap").run_last() end, "Run Last")
+map("n", "<leader>do", function() require("dap").step_out() end, "Step Out")
+map("n", "<leader>dO", function() require("dap").step_over() end, "Step Over")
+map("n", "<leader>dp", function() require("dap").pause() end, "Pause")
+map("n", "<leader>dr", function() require("dap").repl.toggle() end, "Toggle REPL")
+map("n", "<leader>ds", function() require("dap").session() end, "Session")
+map("n", "<leader>dt", function() require("dap").terminate() end, "Terminate")
+map("n", "<leader>dw", function() require("dap.ui.widgets").hover() end, "Widgets")
+
 
 return M
