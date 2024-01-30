@@ -251,9 +251,8 @@ M.treesitter = {
 --  ZenMode
 -----------------------------------------------------------
 map("n", "<leader>z", function()
-		vim.cmd("zenmode")
-	end,
-	"🧘")
+	vim.cmd("ZenMode")
+end, "🧘")
 
 
 -- DAP

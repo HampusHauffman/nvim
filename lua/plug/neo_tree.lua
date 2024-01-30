@@ -27,6 +27,21 @@ M[#M + 1] = {
             git_status_async = true,
             sort_case_insensitive = true,   -- used when sorting files and directories in the tree
             default_component_configs = {
+                diagnostics = {
+                    symbols = {
+                        hint = "",
+                        info = "",
+                        warn = "",
+                        error = "",
+                    },
+                    highlights = {
+                        hint = "DiagnosticSignHint",
+                        info = "DiagnosticSignInfo",
+                        warn = "DiagnosticSignWarn",
+                        error = "DiagnosticSignError",
+                    },
+                },
+
                 container = {
                     enable_character_fade = true,
                     width = "100%",
