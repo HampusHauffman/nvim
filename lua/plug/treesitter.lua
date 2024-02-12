@@ -21,8 +21,8 @@ M[#M + 1] = {
                 enable = true,
                 keymaps = {
                     init_selection = "<leader> v",
-                    node_incremental = "<C-k>",
-                    node_decremental = "<C-j>",
+                    node_incremental = "k",
+                    node_decremental = "j",
                 },
             },
 
