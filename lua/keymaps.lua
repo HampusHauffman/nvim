@@ -145,14 +145,10 @@ map("n", "git", function()
 			vim.cmd("startinsert!")
 			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>",
 				{ noremap = true, silent = true })
-			-- disable esc in vim so i can use esv in lazygit
-			map("t", "esc", "<nop>")
 		end,
 		-- function to run on closing the terminal
 		on_close = function(term)
 			vim.cmd("startinsert!")
-			-- re-enable esc in vim
-			map("t", "<esc>", [[<C-\><C-n>]])
 		end,
 	})
 	lazygit:toggle()
@@ -161,7 +157,10 @@ end, "💤 Git")
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
-map("n", "<C-t>", ":ToggleTerm<CR>", "Terminal")
+map("n", "<C-t>", function()
+	vim.cmd(":ToggleTerm<CR>")
+	vim.cmd("startinsert!")
+end, "Terminal")
 map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", "Terminal")
 --map("t", "<esc>", [[<C-\><C-n>]])
 map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
