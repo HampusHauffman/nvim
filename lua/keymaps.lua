@@ -130,12 +130,30 @@ map("n", "<C-g>", ":Gitsigns <cr>")
 -----------------------------------------------------------
 -- LazyGit
 -----------------------------------------------------------
+
 map("n", "git", function()
 	local Terminal = require("toggleterm.terminal").Terminal
 	local lazygit  = Terminal:new({
 		cmd = "lazygit",
-		hidden = true,
-		direction = "float"
+		dir = "git_dir",
+		direction = "float",
+		float_opts = {
+			border = "double",
+		},
+		-- function to run on opening the terminal
+		on_open = function(term)
+			vim.cmd("startinsert!")
+			vim.api.nvim_buf_set_keymap(term.bufnr, "n", "q", "<cmd>close<CR>",
+				{ noremap = true, silent = true })
+			-- disable esc in vim so i can use esv in lazygit
+			map("t", "esc", "<nop>")
+		end,
+		-- function to run on closing the terminal
+		on_close = function(term)
+			vim.cmd("startinsert!")
+			-- re-enable esc in vim
+			map("t", "<esc>", [[<C-\><C-n>]])
+		end,
 	})
 	lazygit:toggle()
 end, "💤 Git")
@@ -144,11 +162,10 @@ end, "💤 Git")
 --  Terminal
 -----------------------------------------------------------
 map("n", "<C-t>", ":ToggleTerm<CR>", "Terminal")
-map("t", "<C-t>", ":ToggleTerm<CR>", "Terminal")
+map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", "Terminal")
+--map("t", "<esc>", [[<C-\><C-n>]])
 map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
 map("v", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
-
-map("t", "<esc>", [[<C-\><C-n>]])
 --map("t", "jk", [[<C-\><C-n>]])
 --map("t", "kj", [[<C-\><C-n>]])
 --map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])

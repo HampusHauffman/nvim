@@ -6,6 +6,7 @@ M[#M + 1] = {
     end,
     config = function()
         --local keymaps = require "keymaps".treesitter
+---@diagnostic disable-next-line: missing-fields
         require "nvim-treesitter.configs".setup {
             indent = {
                 enable = false
@@ -20,9 +21,9 @@ M[#M + 1] = {
             incremental_selection = {
                 enable = true,
                 keymaps = {
-                    init_selection = "<leader> v",
-                    node_incremental = "k",
-                    node_decremental = "j",
+                    init_selection = "<leader>v",
+                    node_incremental = "<C-k>",
+                    node_decremental = "<C-j>",
                 },
             },
 
