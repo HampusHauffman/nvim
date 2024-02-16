@@ -30,7 +30,7 @@ M[#M + 1] = {
                 lualine_b = { { 'filename', icon = { '', align = 'left' } }, 'branch' },
                 --lualine_c = { get_tmux_tabs },
                 lualine_x = {},
-                lualine_y = { 'filetype', 'progress' },
+                lualine_y = { 'copilot', 'filetype', 'progress' },
                 lualine_z = {
                     { 'location', separator = { right = '  ' }, left_padding = 2 },
                 },
@@ -45,4 +45,5 @@ M[#M + 1] = {
         })
     end
 }
+M[#M + 1] = { 'AndreM222/copilot-lualine' }
 return M

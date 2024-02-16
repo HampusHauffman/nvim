@@ -158,12 +158,11 @@ end, "💤 Git")
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
-map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", "Terminal")
--- Open terminal and use count of there
--- allow the typing of a number and then c-t to open that terminal
 map("n", "<C-t>", function()
-	vim.cmd(":"..vim.v.count.."ToggleTerm<CR>")
-	vim.cmd("startinsert!")
+	vim.cmd(":" .. vim.v.count .. "ToggleTerm<CR>")
+end, "Terminal")
+map("t", "<C-t>", function()
+	vim.cmd(":" .. vim.v.count .. "ToggleTerm<CR>")
 end, "Terminal")
 
 -----------------------------------------------------------
