@@ -136,6 +136,7 @@ map("n", "git", function()
 	local lazygit  = Terminal:new({
 		cmd = "lazygit",
 		dir = "git_dir",
+		hidden = true,
 		direction = "float",
 		float_opts = {
 			border = "double",
@@ -157,20 +158,13 @@ end, "💤 Git")
 -----------------------------------------------------------
 --  Terminal
 -----------------------------------------------------------
+map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", "Terminal")
+-- Open terminal and use count of there
+-- allow the typing of a number and then c-t to open that terminal
 map("n", "<C-t>", function()
-	vim.cmd(":ToggleTerm<CR>")
+	vim.cmd(":"..vim.v.count.."ToggleTerm<CR>")
 	vim.cmd("startinsert!")
 end, "Terminal")
-map("t", "<C-t>", "<C-\\><C-n>:ToggleTerm<CR>", "Terminal")
---map("t", "<esc>", [[<C-\><C-n>]])
-map("n", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
-map("v", "v:count1 <C-t>", ":v:count1" .. '"ToggleTerm"<CR>')
---map("t", "jk", [[<C-\><C-n>]])
---map("t", "kj", [[<C-\><C-n>]])
---map("t", "<C-h>", [[<Cmd>wincmd h<CR>]])
---map("t", "<C-j>", [[<Cmd>wincmd j<CR>]])
---map("t", "<C-k>", [[<Cmd>wincmd k<CR>]])
---map("t", "<C-l>", [[<Cmd>wincmd l<CR>]])
 
 -----------------------------------------------------------
 -- Telescope
