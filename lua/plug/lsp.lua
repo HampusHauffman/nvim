@@ -41,6 +41,10 @@ local M = {
             require('mason-lspconfig').setup({
                 handlers = {
                     lsp.default_setup,
+                    jdtls = function()
+                        -- Disable jdtls so i can set it up manually with nvim-jdtls
+                        -- This is Only so we can actually install in with Mason in the firt place
+                    end,
                     -- Make sure the tailwindcss server is setup when using https://www.npmjs.com/package/tailwind-styled-components
                     tailwindcss = function()
                         require('lspconfig').tailwindcss.setup({
@@ -183,6 +187,16 @@ M[#M + 1] = {
     config = function()
         require("trouble").setup({})
     end,
+}
+
+M[#M + 1] = {
+    "roobert/tailwindcss-colorizer-cmp.nvim",
+    -- optionally, override the default options:
+    config = function()
+        require("tailwindcss-colorizer-cmp").setup({
+            color_square_width = 2,
+        })
+    end
 }
 
 return M

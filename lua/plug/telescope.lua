@@ -22,10 +22,11 @@ M[#M + 1] = {
 						prompt_position = "top",
 						width = 0.8,
 						preview_width = 0.666666,
+						preview_cutoff = 0,
 					},
 					vertical = {
 						height = 0.9,
-						preview_cutoff = 40,
+						preview_cutoff = 0,
 						prompt_position = "bottom",
 						width = 0.8
 					},

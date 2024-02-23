@@ -15,8 +15,6 @@ end
 
 -- Change leader to a space (Also done in init)
 vim.g.mapleader = " "
--- Telescope builtins for lsp actions
-local tele_builtin = require("telescope.builtin")
 -----------------------------------------------------------
 -- Neovim shortcuts
 -----------------------------------------------------------
@@ -168,6 +166,9 @@ end, "Terminal")
 -----------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
+-- Telescope builtins for lsp actions
+local tele_builtin = require("telescope.builtin")
+
 map("n", "ff", tele_builtin.find_files, "Find files")
 map("n", "fa", function()
 	tele_builtin.lsp_document_symbols({
@@ -218,7 +219,7 @@ map("n", "gr", function()
 		show_line = false,
 	})
 end, "Go to reference")
-map("n", "gd", tele_builtin.lsp_definitions, "Go to defenition")
+map("n", "gd", vim.lsp.buf.definition, "Go to defenition")
 map("n", "K", vim.lsp.buf.hover, "Hover")
 map("n", "<leader>r", function()
 	vim.lsp.buf.rename()
@@ -283,6 +284,15 @@ map("n", "<leader>dr", function() require("dap").repl.toggle() end, "Toggle REPL
 map("n", "<leader>ds", function() require("dap").session() end, "Session")
 map("n", "<leader>dt", function() require("dap").terminate() end, "Terminate")
 map("n", "<leader>dw", function() require("dap.ui.widgets").hover() end, "Widgets")
+
+
+-- Using default lsp functionality for jdtls
+-- specifically for goto reference and go to definition
+M.jdtls
+= function()
+	map("n", "gd", vim.lsp.buf.definition, "Go to defenition")
+	map("n", "gr", vim.lsp.buf.references, "Go to reference")
+end
 
 
 return M
