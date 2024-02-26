@@ -48,6 +48,16 @@ M[#M + 1] = {
 		require("telescope").load_extension "ui-select"
 		--require("telescope").load_extension "flutter"
 		require("telescope").load_extension "noice"
+
+		-- Transform jdt so i can read it
+		local utils = require("telescope.utils")
+		local path_transformer = utils.transform_path
+		utils.transform_path = function(opts, path)
+			if path and string.match(path, "^%w+://") ~= nil then
+				path = path:match("jdt://contents/[^/]*/(.*)?="):gsub("/", ".")
+			end
+			return path_transformer(opts, path)
+		end
 	end
 }
 

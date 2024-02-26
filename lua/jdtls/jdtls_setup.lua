@@ -4,6 +4,7 @@ function M.setup()
 	local jdtls = require("jdtls")
 	local jdtls_dap = require("jdtls.dap")
 	local jdtls_setup = require("jdtls.setup")
+	local jdtls_ui = require("jdtls.ui")
 	local home = os.getenv("HOME")
 
 	local root_markers = { ".git", "mvnw", "gradlew", "pom.xml", "build.gradle" }
@@ -134,12 +135,9 @@ function M.setup()
 			},
 			signatureHelp = { enabled = true },
 			contentProvider = { preferred = "fernflower" },
-			-- eclipse = {
-			-- 	downloadSources = true,
-			-- },
-			-- implementationsCodeLens = {
-			-- 	enabled = true,
-			-- },
+			implementationsCodeLens = {
+				enabled = true,
+			},
 			completion = {
 				favoriteStaticMembers = {
 					"org.hamcrest.MatcherAssert.assertThat",
