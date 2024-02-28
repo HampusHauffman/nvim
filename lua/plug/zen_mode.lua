@@ -19,8 +19,8 @@ M[#M + 1] = {
 				},
 			},
 			plugins = {
-				gitsigns = { enabled = true }, -- disables git signs
-				--tmux = { enabled = true }, -- disables the tmux statusline
+				--gitsigns = false,
+				--tmux = true,
 				kitty = {
 					enabled = true,
 					--font = "+4", -- font size increment

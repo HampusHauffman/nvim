@@ -20,40 +20,41 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- My plugins
 		-----------------------------------------------------
---		{
---			"HampusHauffman/block.nvim",
---			--dev = true,
---			--branch = "perf",
---			config = function()
---				require("block").setup({
---					percent = 1.2,
---					depth = 4,
---					--automatic = true
---				})
---			end
---		},
+		{
+			"HampusHauffman/block.nvim",
+			--dev = true,
+			--branch = "perf",
+			config = function()
+				require("block").setup({
+					percent = 1.2,
+					depth = 4,
+					bg = "#121318",
+					automatic = false
+				})
+			end
+		},
 		"HampusHauffman/bionic.nvim",
 		-----------------------------------------------------
 		-- GPT
 		-----------------------------------------------------
---		{
---			"jackMort/ChatGPT.nvim",
---			event = "VeryLazy",
---			config = function()
---				require("chatgpt").setup({
---					api_key = "echo $CHATGPT_API_KEY",
---				})
---			end,
---			dependencies = {
---				"MunifTanjim/nui.nvim",
---				"nvim-lua/plenary.nvim",
---				"nvim-telescope/telescope.nvim"
---			}
---		},
+		--		{
+		--			"jackMort/ChatGPT.nvim",
+		--			event = "VeryLazy",
+		--			config = function()
+		--				require("chatgpt").setup({
+		--					api_key = "echo $CHATGPT_API_KEY",
+		--				})
+		--			end,
+		--			dependencies = {
+		--				"MunifTanjim/nui.nvim",
+		--				"nvim-lua/plenary.nvim",
+		--				"nvim-telescope/telescope.nvim"
+		--			}
+		--		},
 		-----------------------------------------------------
 		-- ColorSchemes
 		-----------------------------------------------------
-		{ "HampusHauffman/dracula.nvim",dev = true, lazy = false, priority = 1000 },
+		{ "HampusHauffman/dracula.nvim", dev = true,   lazy = false,   priority = 1000 },
 		{ "tiagovla/tokyodark.nvim",     lazy = false, priority = 1000 },
 		-----------------------------------------------------
 		-- UI

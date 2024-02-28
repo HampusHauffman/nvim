@@ -11,13 +11,13 @@ local function bold(grp)
 	vim.api.nvim_command("highlight " .. grp .. " gui=bold")
 end
 
-local hl = function(group, fg, bg)
+local function hl(group, fg, bg)
 	fg = fg and "guifg=" .. fg or "guifg=NONE"
 	bg = bg and "guibg=" .. bg or "guibg=NONE"
 	vim.api.nvim_command("highlight " .. group .. " " .. fg .. " " .. bg)
 end
 
-local link = function(group, target)
+local function link(group, target)
 	vim.api.nvim_command("hi! link " .. group .. " " .. target)
 end
 
