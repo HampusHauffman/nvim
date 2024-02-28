@@ -28,6 +28,7 @@ local M = {
         config = function()
             -- Setup LSP
             local lsp = require('lsp-zero').preset({})
+            lsp.extend_lspconfig()
             lsp.setup()
             lsp.on_attach(function(client, bufnr)
                 lsp.default_keymaps({ buffer = bufnr })

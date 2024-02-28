@@ -6,7 +6,7 @@ M[#M + 1] = {
 	config = function()
 		require("zen-mode").setup {
 			window = {
-				backdrop = 1, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
+				backdrop = 0, -- shade the backdrop of the Zen window. Set to 1 to keep the same as Normal
 				height = 0.95, -- height of the Zen window
 				options = {
 					signcolumn = "no", -- disable signcolumn

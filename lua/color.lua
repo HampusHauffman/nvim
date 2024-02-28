@@ -23,6 +23,7 @@ end
 
 -- Menu
 link("Pmenu", "Normal")
+link("ZenBg", "Normal")
 link("CmpItemAbbrMatch", "@text.strong")
 
 -- Border
