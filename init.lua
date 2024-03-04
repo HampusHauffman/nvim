@@ -65,6 +65,12 @@ require("lazy").setup({
 				require('neoscroll').setup()
 			end
 		},
+		{
+			'sotte/presenting.nvim',
+			config = function(self, opts)
+				require('presenting').setup({})
+			end
+		},
 		--"nvim-treesitter/nvim-treesitter-context",
 		-----------------------------------------------------
 		-- Pretty

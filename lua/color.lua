@@ -48,6 +48,7 @@ bold("@variable")
 -- TreeSitter
 link("@lsp.type.property", "@field")
 link("@variable", "@constant")
+link("@variable.parameter", "@parameter")
 link("@lsp.type.variable", "@variable")
 -- Rainbow TreeSitter (fixes ugly red first color)
 link("rainbowcol1", "@boolean")

@@ -23,6 +23,13 @@ local M = {
         },
     },
     {
+        'windwp/nvim-ts-autotag',
+        config = function()
+            require('nvim-ts-autotag').setup()
+        end
+
+    },
+    {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'dev-v3',
         config = function()

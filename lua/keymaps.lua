@@ -220,6 +220,12 @@ map("n", "gr", function()
 	})
 end, "Go to reference")
 map("n", "gd", vim.lsp.buf.definition, "Go to defenition")
+-- use telescope for declaration
+map("n", "gd", function()
+	tele_builtin.lsp_definitions({
+		--symbols = {}
+	})
+end, "Go to defenition")
 map("n", "K", vim.lsp.buf.hover, "Hover")
 map("n", "<leader>r", function()
 	vim.lsp.buf.rename()
@@ -241,8 +247,8 @@ local cmp_action = require('lsp-zero').cmp_action()
 M.cmp = {
 	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 	["<CR>"] = cmp.mapping.confirm({ select = false }),
-	['<Tab>'] = cmp_action.luasnip_supertab(),
-	['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
+	--	['<Tab>'] = cmp_action.luasnip_supertab(),
+	--	['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
 	["<C-j>"] = cmp_action.luasnip_supertab(),
 	["<C-k>"] = cmp_action.luasnip_shift_supertab(),
 }
