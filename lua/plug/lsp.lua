@@ -185,7 +185,16 @@ M[#M + 1] = {
     "akinsho/flutter-tools.nvim",
     dependencies = "nvim-lua/plenary.nvim",
     config = function()
-        require("flutter-tools").setup({}) -- use defaults
+        require("flutter-tools").setup({
+            widget_guides = {
+                enabled = true,
+            },
+            lsp = {
+                color = {
+                    enabled = true,
+                },
+            }
+        })
     end,
 }
 
@@ -205,6 +214,10 @@ M[#M + 1] = {
             color_square_width = 2,
         })
     end
+}
+
+M[#M + 1] = {
+    'dmmulroy/ts-error-translator.nvim',
 }
 
 return M

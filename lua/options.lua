@@ -54,7 +54,9 @@ opt.cmdheight      = 0
 -- List
 -----------------------------------------------------------
 opt.list           = true
---opt.listchars:append("eol:,")
+--vim.opt.listchars  = { space = '_', tab = '>~' }
+opt.listchars      = { tab = '▸ ', trail = '￮', extends = '▶', precedes = '◀', nbsp = '‿' }
+
 --opt.endofline = false
 
 -----------------------------------------------------------

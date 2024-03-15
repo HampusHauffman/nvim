@@ -68,7 +68,12 @@ require("lazy").setup({
 		{
 			'sotte/presenting.nvim',
 			config = function(self, opts)
-				require('presenting').setup({})
+				require('presenting').setup({
+					options = {
+						width = 80,
+					},
+
+				})
 			end
 		},
 		--"nvim-treesitter/nvim-treesitter-context",

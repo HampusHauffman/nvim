@@ -81,6 +81,12 @@ M[#M + 1] = {
                 follow_current_file = { enabled = true },
                 use_libuv_file_watcher = true,
                 filtered_items = {
+                    hide_by_pattern = { -- uses glob style patterns
+                        "*.g.dart",
+                        "*.freezed.dart",
+                        --"*.meta",
+                        --"*/src/*/tsconfig.json",
+                    },
                     visible = true, -- when true, they will just be displayed differently than normal items
                     hide_dotfiles = false,
                     hide_gitignored = false,

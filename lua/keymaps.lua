@@ -163,6 +163,19 @@ map("t", "<C-t>", function()
 	vim.cmd(":" .. vim.v.count .. "ToggleTerm<CR>")
 end, "Terminal")
 
+function _G.set_terminal_keymaps()
+	local opts = { buffer = 0 }
+	--	vim.keymap.set('t', '<esc>', [[<C-\><C-n>]], opts)
+	--	vim.keymap.set('t', 'jk', [[<C-\><C-n>]], opts)
+	vim.keymap.set('t', '<C-h>', [[<Cmd>wincmd h<CR>]], opts)
+	vim.keymap.set('t', '<C-j>', [[<Cmd>wincmd j<CR>]], opts)
+	vim.keymap.set('t', '<C-k>', [[<Cmd>wincmd k<CR>]], opts)
+	vim.keymap.set('t', '<C-l>', [[<Cmd>wincmd l<CR>]], opts)
+	vim.keymap.set('t', '<C-w>', [[<C-\><C-n><C-w>]], opts)
+end
+
+-- if you only want these mappings for toggle term use term://*toggleterm#* instead
+vim.cmd('autocmd! TermOpen term://* lua set_terminal_keymaps()')
 -----------------------------------------------------------
 -- Telescope
 -----------------------------------------------------------
@@ -221,11 +234,7 @@ map("n", "gr", function()
 end, "Go to reference")
 map("n", "gd", vim.lsp.buf.definition, "Go to defenition")
 -- use telescope for declaration
-map("n", "gd", function()
-	tele_builtin.lsp_definitions({
-		--symbols = {}
-	})
-end, "Go to defenition")
+--map("n", "gd", function() tele_builtin.lsp_definitions({}) end, "Go to defenition")
 map("n", "K", vim.lsp.buf.hover, "Hover")
 map("n", "<leader>r", function()
 	vim.lsp.buf.rename()
