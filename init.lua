@@ -54,7 +54,7 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- ColorSchemes
 		-----------------------------------------------------
-		{ "HampusHauffman/dracula.nvim", dev = true,   lazy = false,   priority = 1000 },
+		{ "HampusHauffman/dracula.nvim", dev = false,   lazy = false, branch="oled",   priority = 1000 },
 		{ "tiagovla/tokyodark.nvim",     lazy = false, priority = 1000 },
 		-----------------------------------------------------
 		-- UI

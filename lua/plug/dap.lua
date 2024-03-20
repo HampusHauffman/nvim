@@ -13,6 +13,7 @@ M[#M + 1] = {
                 { "<leader>de", function() require("dapui").eval() end,     desc = "Eval",  mode = { "n", "v" } },
             },
             opts = {},
+			dependencies = {"mfussenegger/nvim-dap", "nvim-neotest/nvim-nio"},
             config = function(_, opts)
                 -- setup dap config by VsCode launch.json file
                 -- require("dap.ext.vscode").load_launchjs()
