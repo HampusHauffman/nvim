@@ -33,6 +33,9 @@ local M = {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'dev-v3',
         config = function()
+            -- Make border rounded
+            require('lspconfig.ui.windows').default_options.border = 'rounded'
+
             -- Setup LSP
             local lsp = require('lsp-zero').preset({})
             lsp.extend_lspconfig()
@@ -80,10 +83,17 @@ local M = {
             local cmp = require("cmp")
             local lspkind = require("lspkind")
             cmp.setup({
-                preselect = 'none',
                 completion = {
-                    completeopt = 'menu,menuone,noinsert,noselect'
+                    completeopt = 'menu,menuone,noinsert,noselect',
+                    autocomplete = {
+                        cmp.TriggerEvent.TextChanged,
+                        cmp.TriggerEvent.InsertEnter,
+                    },
+
+                    keyword_length = 0,
                 },
+                preselect = 'item',
+                autocomplete = true,
                 mapping = require("keymaps").cmp,
                 window = {
                     completion = cmp.config.window.bordered({
