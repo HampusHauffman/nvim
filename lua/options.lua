@@ -22,7 +22,7 @@ opt.splitkeep      = "screen"
 -----------------------------------------------------------
 -- Neovim UI
 -----------------------------------------------------------
-opt.smoothscroll   = true
+--opt.smoothscroll   = true
 opt.wrap           = true     -- Disable line wrap
 opt.number         = true     -- Show line number
 opt.relativenumber = true

@@ -245,7 +245,8 @@ map("v", "<leader>c", vim.lsp.buf.code_action, "Code action")
 map("n", "<f14>", vim.diagnostic.goto_prev, "Go to previous fix")
 map("n", "<S-f2>", vim.diagnostic.goto_prev, "Go to previous fix")
 map("n", "<f2>", vim.diagnostic.goto_next, "Go to next fix")
-
+map("n", "<C-n>", vim.diagnostic.goto_prev, "Go to previous fix")
+map("n", "<C-p>", vim.diagnostic.goto_next, "Go to next fix")
 
 -----------------------------------------------------------
 -- AutoComplete

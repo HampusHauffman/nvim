@@ -24,7 +24,7 @@ end
 -- Menu
 link("Pmenu", "Normal")
 link("ZenBg", "Normal")
-link("CmpItemAbbrMatch", "@text.strong")
+--link("CmpItemAbbrMatch", "@text.strong")
 
 -- Border
 link("FloatBorder", "TelescopePromptBorder")
@@ -33,7 +33,7 @@ link("WinSeparator", "FloatBorder")
 link("NeoTreeFloatBorder", "FloatBorder")
 
 -- StatusLine
-link("StatusLine", "Normal")
+--link("StatusLine", "Normal")
 
 link("NeoTreeTabActive", "Normal")
 link("NeoTreeTabSeparatorActive", "Normal")

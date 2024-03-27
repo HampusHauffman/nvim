@@ -36,7 +36,6 @@ local M = {
             -- Setup LSP
             local lsp = require('lsp-zero').preset({})
             lsp.extend_lspconfig()
-            lsp.setup()
             lsp.on_attach(function(client, bufnr)
                 lsp.default_keymaps({ buffer = bufnr })
             end)
@@ -68,7 +67,6 @@ local M = {
                                 }
                             },
                             on_attach = function(client, bufnr)
-                                print('hello tsserver')
                             end
                         })
                     end,
@@ -82,9 +80,9 @@ local M = {
             local cmp = require("cmp")
             local lspkind = require("lspkind")
             cmp.setup({
-                preselect = 'item',
+                preselect = 'none',
                 completion = {
-                    completeopt = 'menu,menuone,noinsert'
+                    completeopt = 'menu,menuone,noinsert,noselect'
                 },
                 mapping = require("keymaps").cmp,
                 window = {
@@ -196,6 +194,26 @@ M[#M + 1] = {
             }
         })
     end,
+}
+
+M[#M + 1] = {
+    "pmizio/typescript-tools.nvim",
+    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    config = function()
+        vim.lsp.buf.format { filter = function(client) return client.name ~= "tsserver" end }
+        require("typescript-tools").setup {
+            settings = {
+                --use eslint if it is running
+                tsserver_plugins = {
+                    -- for TypeScript v4.9+
+                    "@styled/typescript-styled-plugin",
+                    -- or for older TypeScript versions
+                    -- "typescript-styled-plugin",
+                },
+            },
+        }
+    end,
+    opts = {},
 }
 
 M[#M + 1] = {
