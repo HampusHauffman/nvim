@@ -3,10 +3,17 @@ local M = {
     { 'mfussenegger/nvim-dap' },
     { "fladson/vim-kitty" },
     { "pantharshit00/vim-prisma" },
-    { "L3MON4D3/LuaSnip" },
-    { 'williamboman/mason.nvim' },
+    {
+        'williamboman/mason.nvim',
+        config = function()
+            require('mason').setup({
+                ui = {
+                    border = "rounded"
+                }
+            })
+        end
+    },
     { 'williamboman/mason-lspconfig.nvim' },
-    -- LSP Support
     { 'neovim/nvim-lspconfig' },
     {
         'windwp/nvim-ts-autotag',
@@ -31,11 +38,6 @@ local M = {
                     client.server_capabilities.documentRangeFormattingProvider = true
                 end
             end)
-            require('mason').setup({
-                ui = {
-                    border = "rounded"
-                }
-            })
             require('mason-lspconfig').setup({
                 handlers = {
                     lsp.default_setup,
@@ -61,8 +63,6 @@ local M = {
                     end,
                 },
             })
-
-            require("luasnip.loaders.from_vscode").lazy_load() -- Allow formatting of snippets like vs-code
         end
     },
 }
@@ -74,43 +74,6 @@ M[#M + 1] = {
     end
 }
 
-M[#M + 1] = {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = "InsertEnter",
-    config = function()
-        require("copilot").setup({
-            suggestion = { enabled = false, auto_trigger = true, },
-            panel = { enabled = false },
-        })
-    end,
-}
-
-M[#M + 1] = {
-    "zbirenbaum/copilot-cmp",
-    dependencies = {
-        "hrsh7th/nvim-cmp",
-        "zbirenbaum/copilot.lua",
-        "onsails/lspkind.nvim"
-    },
-    config = function()
-        require("copilot_cmp").setup({
-            event = { "InsertEnter", "LspAttach" },
-            fix_pairs = true,
-        })
-
-        -- Make it look nice and work with CMP
-        local cmp = require("cmp")
-
-        -- Setup suggested by read me
-        cmp.event:on("menu_opened", function()
-            vim.b.copilot_suggestion_hidden = true
-        end)
-        cmp.event:on("menu_closed", function()
-            vim.b.copilot_suggestion_hidden = false
-        end)
-    end,
-}
 
 M[#M + 1] = {
     'simrat39/rust-tools.nvim',
