@@ -9,20 +9,6 @@ local M = {
     -- LSP Support
     { 'neovim/nvim-lspconfig' },
     {
-        'hrsh7th/nvim-cmp',
-        dependencies = {
-            'L3MON4D3/LuaSnip',
-            'hrsh7th/cmp-nvim-lsp',
-            "hrsh7th/cmp-nvim-lsp",
-            "hrsh7th/cmp-buffer",
-            "hrsh7th/cmp-path",
-            "hrsh7th/cmp-cmdline",
-            "hrsh7th/cmp-nvim-lua",
-            "saadparwaiz1/cmp_luasnip",
-            "rafamadriz/friendly-snippets",
-        },
-    },
-    {
         'windwp/nvim-ts-autotag',
         config = function()
             require('nvim-ts-autotag').setup()
@@ -31,16 +17,19 @@ local M = {
     },
     {
         'VonHeikemen/lsp-zero.nvim',
-        branch = 'dev-v3',
+        branch = 'v3.x',
         config = function()
             -- Make border rounded
             require('lspconfig.ui.windows').default_options.border = 'rounded'
-
             -- Setup LSP
             local lsp = require('lsp-zero').preset({})
             lsp.extend_lspconfig()
             lsp.on_attach(function(client, bufnr)
                 lsp.default_keymaps({ buffer = bufnr })
+                if client.name == "eslint" then
+                    client.server_capabilities.documentFormattingProvider = true
+                    client.server_capabilities.documentRangeFormattingProvider = true
+                end
             end)
             require('mason').setup({
                 ui = {
@@ -68,55 +57,12 @@ local M = {
                                     }
                                 }
                             },
-                            on_attach = function(client, bufnr)
-                            end
                         })
                     end,
                 },
             })
 
             require("luasnip.loaders.from_vscode").lazy_load() -- Allow formatting of snippets like vs-code
-
-            -- Setup CMP
-            lsp.extend_cmp()
-            local cmp = require("cmp")
-            local lspkind = require("lspkind")
-            cmp.setup({
-                preselect = 'item',
-                autocomplete = true,
-                completion = {
-                    completeopt = 'menu,menuone,noinsert,noselect',
-                    autocomplete = {
-                        cmp.TriggerEvent.TextChanged,
-                        cmp.TriggerEvent.InsertEnter,
-                    },
-
-                    keyword_length = 0,
-                },
-                mapping = require("keymaps").cmp,
-                window = {
-                    completion = cmp.config.window.bordered({
-                        winhighlight = "FloatBorder:FloatBorder,Normal:Normal", }),
-                    documentation = cmp.config.window.bordered({
-                        winhighlight = "FloatBorder:FloatBorder,Normal:Normal", }),
-                },
-                sources = cmp.config.sources({
-                    { name = "copilot" },
-                    { name = "nvim_lua" },
-                    { name = 'nvim_lsp' },
-                    { name = "luasnip" }, -- For luasnip users.
-                    { name = 'path' },
-                    { name = "crates" },
-                }),
-                formatting = {
-                    fields = { 'kind', 'menu', 'abbr' },
-                    format = lspkind.cmp_format({
-                        symbol_map = { Copilot = "" },
-                        mode = "symbol",
-                        maxwidth = 150,
-                    }),
-                },
-            })
         end
     },
 }
