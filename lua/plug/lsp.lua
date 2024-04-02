@@ -42,7 +42,6 @@ local M = {
             lsp.on_attach(function(client, bufnr)
                 lsp.default_keymaps({ buffer = bufnr })
             end)
-
             require('mason').setup({
                 ui = {
                     border = "rounded"
@@ -83,6 +82,8 @@ local M = {
             local cmp = require("cmp")
             local lspkind = require("lspkind")
             cmp.setup({
+                preselect = 'item',
+                autocomplete = true,
                 completion = {
                     completeopt = 'menu,menuone,noinsert,noselect',
                     autocomplete = {
@@ -92,8 +93,6 @@ local M = {
 
                     keyword_length = 0,
                 },
-                preselect = 'item',
-                autocomplete = true,
                 mapping = require("keymaps").cmp,
                 window = {
                     completion = cmp.config.window.bordered({
