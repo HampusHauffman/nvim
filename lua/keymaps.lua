@@ -232,9 +232,9 @@ map("n", "gr", function()
 		show_line = false,
 	})
 end, "Go to reference")
-map("n", "gd", vim.lsp.buf.definition, "Go to defenition")
+--map("n", "gd", vim.lsp.buf.definition, "Go to defenition")
 -- use telescope for declaration
---map("n", "gd", function() tele_builtin.lsp_definitions({}) end, "Go to defenition")
+map("n", "gd", function() tele_builtin.lsp_definitions({}) end, "Go to defenition")
 map("n", "K", vim.lsp.buf.hover, "Hover")
 map("n", "<leader>r", function()
 	vim.lsp.buf.rename()
