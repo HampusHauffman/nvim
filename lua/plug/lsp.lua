@@ -41,6 +41,16 @@ local M = {
             require('mason-lspconfig').setup({
                 handlers = {
                     lsp.default_setup,
+                    tsserver = function()
+                        require('lspconfig').tsserver.setup({
+                            settings = { typescript = { tsserver = { experimental = { enableProjectDiagnostics = true } } } },
+                            on_attach = function(client, bufnr)
+                                require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+                                client.server_capabilities.documentFormattingProvider = false
+                                client.server_capabilities.documentRangeFormattingProvider = false
+                            end,
+                        })
+                    end,
                     jdtls = function()
                         -- Disable jdtls so i can set it up manually with nvim-jdtls
                         -- This is Only so we can actually install in with Mason in the firt place
@@ -114,29 +124,37 @@ M[#M + 1] = {
     end,
 }
 
+-- Silly solve for getting all files analyzed
 M[#M + 1] = {
-    "pmizio/typescript-tools.nvim",
-    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+    'artemave/workspace-diagnostics.nvim',
     config = function()
-        vim.lsp.buf.format { filter = function(client) return client.name ~= "tsserver" end }
-        require("typescript-tools").setup {
-            settings = {
-                --use eslint if it is running
-                tsserver_plugins = {
-                    -- for TypeScript v4.9+
-                    "@styled/typescript-styled-plugin",
-                    -- or for older TypeScript versions
-                    -- "typescript-styled-plugin",
-                },
-            },
-            on_attach = function(client, bufnr)
-                client.server_capabilities.documentFormattingProvider = false
-                client.server_capabilities.documentRangeFormattingProvider = false
-            end,
-        }
-    end,
-    opts = {},
+        require("workspace-diagnostics").setup({})
+    end
 }
+
+--M[#M + 1] = {
+--    "pmizio/typescript-tools.nvim",
+--    dependencies = { "nvim-lua/plenary.nvim", "neovim/nvim-lspconfig" },
+--    config = function()
+--        --vim.lsp.buf.format { filter = function(client) return client.name ~= "tsserver" end }
+--        require("typescript-tools").setup {
+--            settings = {
+--                --use eslint if it is running
+--                tsserver_plugins = {
+--                    -- for TypeScript v4.9+
+--                    "@styled/typescript-styled-plugin",
+--                    -- or for older TypeScript versions
+--                    -- "typescript-styled-plugin",
+--                },
+--            },
+--            on_attach = function(client, bufnr)
+--                client.server_capabilities.documentFormattingProvider = false
+--                client.server_capabilities.documentRangeFormattingProvider = false
+--            end,
+--        }
+--    end,
+--    opts = {},
+--}
 
 M[#M + 1] = {
     "folke/trouble.nvim",
