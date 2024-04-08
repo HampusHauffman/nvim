@@ -4,6 +4,15 @@ local M = {
     { "fladson/vim-kitty" },
     { "pantharshit00/vim-prisma" },
 }
+
+M[#M + 1] = {
+    'neovim/nvim-lspconfig',
+    dependencies = { "folke/neodev.nvim" },
+    config = function()
+        require('lspconfig.ui.windows').default_options.border = 'rounded'
+    end
+}
+
 M[#M + 1] = {
     'williamboman/mason.nvim',
     config = function()
@@ -19,71 +28,65 @@ M[#M + 1] = {
     {
         'williamboman/mason-lspconfig.nvim',
         config = function()
-            require('mason-lspconfig').setup({
-                handlers = {
-                    eslint = function()
-                        require('lspconfig').eslint.setup({
-                            on_attach = function(client, bufnr)
-                                client.server_capabilities.documentFormattingProvider = true
-                                client.server_capabilities.documentRangeFormattingProvider = true
-                            end
-                        })
-                    end,
-                    tsserver = function()
-                        require('lspconfig').tsserver.setup({
-                            settings = { typescript = { tsserver = { experimental = { enableProjectDiagnostics = true } } } },
-                            on_attach = function(client, bufnr)
-                                -- Hacky way to make sure we load the entire workspace into the opened buffers
-                                require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
-                                client.server_capabilities.documentFormattingProvider = false
-                                client.server_capabilities.documentRangeFormattingProvider = false
-                            end,
-                        })
-                    end,
-                    jdtls = function()
-                        -- Disable jdtls so i can set it up manually with nvim-jdtls
-                        -- This is Only so we can actually install in with Mason in the firt place
-                    end,
-                    lua_ls = function()
-                        require('lspconfig').lua_ls.setup({
-                            settings = {
-                                Lua = {
-                                    completion = {
-                                        callSnippet = "Replace"
+            require("mason-lspconfig").setup_handlers({
+                function(server_name)
+                    require("lspconfig")[server_name].setup {}
+                end,
+                ["eslint"] = function()
+                    require('lspconfig').eslint.setup({
+                        on_attach = function(client, bufnr)
+                            client.server_capabilities.documentFormattingProvider = true
+                            client.server_capabilities.documentRangeFormattingProvider = true
+                        end
+                    })
+                end,
+                ["tsserver"] = function()
+                    require('lspconfig').tsserver.setup({
+                        settings = { typescript = { tsserver = { experimental = { enableProjectDiagnostics = true } } } },
+                        on_attach = function(client, bufnr)
+                            -- Hacky way to make sure we load the entire workspace into the opened buffers
+                            require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
+                            client.server_capabilities.documentFormattingProvider = false
+                            client.server_capabilities.documentRangeFormattingProvider = false
+                        end,
+                    })
+                end,
+                ["jdtls"] = function()
+                    -- Disable jdtls so i can set it up manually with nvim-jdtls
+                    -- This is Only so we can actually install in with Mason in the firt place
+                end,
+                ["lua_ls"] = function()
+                    require('lspconfig').lua_ls.setup({
+                        settings = {
+                            Lua = {
+                                completion = {
+                                    callSnippet = "Replace"
+                                }
+                            }
+                        }
+                    })
+                end,
+                -- Make sure the tailwindcss server is setup when using https://www.npmjs.com/package/tailwind-styled-components
+                ["tailwindcss"] = function()
+                    require('lspconfig').tailwindcss.setup({
+                        settings = {
+                            tailwindCSS = {
+                                experimental = {
+                                    classRegex = {
+                                        "tw`([^`]*)",
+                                        "tw\\.[^`]+`([^`]*)`",
+                                        "tw\\(.*?\\).*?`([^`]*)"
                                     }
                                 }
                             }
-                        })
-                    end,
-                    -- Make sure the tailwindcss server is setup when using https://www.npmjs.com/package/tailwind-styled-components
-                    tailwindcss = function()
-                        require('lspconfig').tailwindcss.setup({
-                            settings = {
-                                tailwindCSS = {
-                                    experimental = {
-                                        classRegex = {
-                                            "tw`([^`]*)",
-                                            "tw\\.[^`]+`([^`]*)`",
-                                            "tw\\(.*?\\).*?`([^`]*)"
-                                        }
-                                    }
-                                }
-                            },
-                        })
-                    end,
-                }
+                        },
+                    })
+                end,
             })
         end
     },
 }
 
-M[#M + 1] = {
-    'neovim/nvim-lspconfig',
-    dependencies = { "folke/neodev.nvim" },
-    config = function()
-        require('lspconfig.ui.windows').default_options.border = 'rounded'
-    end
-}
 
 M[#M + 1] = {
     "folke/neodev.nvim",
