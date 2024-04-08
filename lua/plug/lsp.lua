@@ -3,60 +3,37 @@ local M = {
     { 'mfussenegger/nvim-dap' },
     { "fladson/vim-kitty" },
     { "pantharshit00/vim-prisma" },
-    {
-        'williamboman/mason.nvim',
-        config = function()
-            require('mason').setup({
-                ui = {
-                    border = "rounded"
-                }
-            })
-        end
-    },
-    { 'williamboman/mason-lspconfig.nvim' },
-    { 'neovim/nvim-lspconfig' },
-    {
-        'windwp/nvim-ts-autotag',
-        config = function()
-            require('nvim-ts-autotag').setup()
-        end
+}
+M[#M + 1] = {
+    'williamboman/mason.nvim',
+    config = function()
+        require('mason').setup({
+            ui = {
+                border = "rounded"
+            }
+        })
+    end
+}
 
-    },
+M[#M + 1] = {
     {
-        'VonHeikemen/lsp-zero.nvim',
-        branch = 'v3.x',
+        'williamboman/mason-lspconfig.nvim',
         config = function()
-            require("neodev").setup({
-                override = function(root_dir, library)
-                    library.plugins = true
-                    library.enabled = true
-                end,
-                library = {
-                    plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
-                },
-                pathStrict = false,
-
-            })
-            -- Make border rounded
-            require('lspconfig.ui.windows').default_options.border = 'rounded'
-            -- Setup LSP
-            local lsp_zero = require('lsp-zero').preset({})
-
-            lsp_zero.extend_lspconfig()
-            lsp_zero.on_attach(function(client, bufnr)
-                lsp_zero.default_keymaps({ buffer = bufnr })
-                if client.name == "eslint" then
-                    client.server_capabilities.documentFormattingProvider = true
-                    client.server_capabilities.documentRangeFormattingProvider = true
-                end
-            end)
-            local lsp_opt = lsp_zero.nvim_lua_ls({
+            require('mason-lspconfig').setup({
                 handlers = {
-                    lsp_zero.default_setup,
+                    eslint = function()
+                        require('lspconfig').eslint.setup({
+                            on_attach = function(client, bufnr)
+                                client.server_capabilities.documentFormattingProvider = true
+                                client.server_capabilities.documentRangeFormattingProvider = true
+                            end
+                        })
+                    end,
                     tsserver = function()
                         require('lspconfig').tsserver.setup({
                             settings = { typescript = { tsserver = { experimental = { enableProjectDiagnostics = true } } } },
                             on_attach = function(client, bufnr)
+                                -- Hacky way to make sure we load the entire workspace into the opened buffers
                                 require("workspace-diagnostics").populate_workspace_diagnostics(client, bufnr)
                                 client.server_capabilities.documentFormattingProvider = false
                                 client.server_capabilities.documentRangeFormattingProvider = false
@@ -94,17 +71,35 @@ local M = {
                             },
                         })
                     end,
-                },
+                }
             })
-            require('mason-lspconfig').setup(lsp_opt)
         end
     },
+}
+
+M[#M + 1] = {
+    'neovim/nvim-lspconfig',
+    dependencies = { "folke/neodev.nvim" },
+    config = function()
+        require('lspconfig.ui.windows').default_options.border = 'rounded'
+    end
 }
 
 M[#M + 1] = {
     "folke/neodev.nvim",
     lazy = false,
     config = function()
+        require("neodev").setup({
+            override = function(root_dir, library)
+                library.plugins = true
+                library.enabled = true
+            end,
+            library = {
+                plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+            },
+            pathStrict = true,
+
+        })
     end
 }
 
