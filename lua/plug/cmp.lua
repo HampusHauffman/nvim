@@ -11,19 +11,13 @@ local M = {
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip",
             "rafamadriz/friendly-snippets",
-
-            'VonHeikemen/lsp-zero.nvim',
-
         },
         config = function()
-            local lsp = require('lsp-zero').preset({})
             -- Setup CMP
-            lsp.extend_cmp()
             local cmp = require("cmp")
             local lspkind = require("lspkind")
             cmp.setup({
                 preselect = 'item',
-                autocomplete = true,
                 completion = {
                     completeopt = 'menu,menuone,noinsert,noselect',
                 },

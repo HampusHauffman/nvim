@@ -252,15 +252,30 @@ map("n", "<C-n>", vim.diagnostic.goto_next, "Go to next fix")
 -- AutoComplete
 -----------------------------------------------------------
 local cmp = require("cmp")
-local cmp_action = require('lsp-zero').cmp_action()
+local luasnip = require("luasnip")
 
 M.cmp = {
-	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
+	["<C-Space>"] = cmp.mapping.complete(),
 	["<CR>"] = cmp.mapping.confirm({ select = false }),
-	--	['<Tab>'] = cmp_action.luasnip_supertab(),
-	--	['<S-Tab>'] = cmp_action.luasnip_shift_supertab(),
-	["<C-j>"] = cmp_action.luasnip_supertab(),
-	["<C-k>"] = cmp_action.luasnip_shift_supertab(),
+	["<C-j>"] = cmp.mapping(function(fallback)
+		if cmp.visible() then
+			cmp.select_next_item()
+		elseif luasnip.locally_jumpable(1) then
+			luasnip.jump(1)
+		else
+			fallback()
+		end
+	end, { "i", "s" }),
+
+	["<C-k>"] = cmp.mapping(function(fallback)
+		if cmp.visible() then
+			cmp.select_prev_item()
+		elseif luasnip.locally_jumpable(-1) then
+			luasnip.jump(-1)
+		else
+			fallback()
+		end
+	end, { "i", "s" }),
 }
 
 -----------------------------------------------------------
