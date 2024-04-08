@@ -255,7 +255,7 @@ local cmp = require("cmp")
 local luasnip = require("luasnip")
 
 M.cmp = {
-	["<C-Space>"] = cmp.mapping.complete(),
+	["<C-Space>"] = cmp.mapping(cmp.mapping.complete(), { "i", "c" }),
 	["<CR>"] = cmp.mapping.confirm({ select = false }),
 	["<C-j>"] = cmp.mapping(function(fallback)
 		if cmp.visible() then

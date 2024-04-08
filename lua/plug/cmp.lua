@@ -11,12 +11,25 @@ local M = {
             "hrsh7th/cmp-nvim-lua",
             "saadparwaiz1/cmp_luasnip",
             "rafamadriz/friendly-snippets",
+            "L3MON4D3/LuaSnip",
         },
         config = function()
             -- Setup CMP
             local cmp = require("cmp")
+            local cmp_autopairs = require('nvim-autopairs.completion.cmp')
+            cmp.event:on(
+                'confirm_done',
+                cmp_autopairs.on_confirm_done()
+            )
+
             local lspkind = require("lspkind")
+
             cmp.setup({
+                snippet = {
+                    expand = function(args)
+                        require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+                    end,
+                },
                 preselect = 'item',
                 completion = {
                     completeopt = 'menu,menuone,noinsert,noselect',
