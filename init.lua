@@ -22,7 +22,7 @@ require("lazy").setup({
 		-----------------------------------------------------
 		{
 			"HampusHauffman/block.nvim",
-			--dev = true,
+			dev = true,
 			--branch = "perf",
 			config = function()
 				require("block").setup({
@@ -54,7 +54,7 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- ColorSchemes
 		-----------------------------------------------------
-		{ "HampusHauffman/dracula.nvim", dev = false,   lazy = false, branch="oled",   priority = 1000 },
+		{ "HampusHauffman/dracula.nvim", dev = false,  lazy = false,   branch = "oled", priority = 1000 },
 		{ "tiagovla/tokyodark.nvim",     lazy = false, priority = 1000 },
 		-----------------------------------------------------
 		-- UI

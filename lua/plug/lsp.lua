@@ -26,21 +26,33 @@ local M = {
         'VonHeikemen/lsp-zero.nvim',
         branch = 'v3.x',
         config = function()
+            require("neodev").setup({
+                override = function(root_dir, library)
+                    library.plugins = true
+                    library.enabled = true
+                end,
+                library = {
+                    plugins = { "nvim-treesitter", "plenary.nvim", "telescope.nvim" },
+                },
+                pathStrict = false,
+
+            })
             -- Make border rounded
             require('lspconfig.ui.windows').default_options.border = 'rounded'
             -- Setup LSP
-            local lsp = require('lsp-zero').preset({})
-            lsp.extend_lspconfig()
-            lsp.on_attach(function(client, bufnr)
-                lsp.default_keymaps({ buffer = bufnr })
+            local lsp_zero = require('lsp-zero').preset({})
+
+            lsp_zero.extend_lspconfig()
+            lsp_zero.on_attach(function(client, bufnr)
+                lsp_zero.default_keymaps({ buffer = bufnr })
                 if client.name == "eslint" then
                     client.server_capabilities.documentFormattingProvider = true
                     client.server_capabilities.documentRangeFormattingProvider = true
                 end
             end)
-            require('mason-lspconfig').setup({
+            local lsp_opt = lsp_zero.nvim_lua_ls({
                 handlers = {
-                    lsp.default_setup,
+                    lsp_zero.default_setup,
                     tsserver = function()
                         require('lspconfig').tsserver.setup({
                             settings = { typescript = { tsserver = { experimental = { enableProjectDiagnostics = true } } } },
@@ -54,6 +66,17 @@ local M = {
                     jdtls = function()
                         -- Disable jdtls so i can set it up manually with nvim-jdtls
                         -- This is Only so we can actually install in with Mason in the firt place
+                    end,
+                    lua_ls = function()
+                        require('lspconfig').lua_ls.setup({
+                            settings = {
+                                Lua = {
+                                    completion = {
+                                        callSnippet = "Replace"
+                                    }
+                                }
+                            }
+                        })
                     end,
                     -- Make sure the tailwindcss server is setup when using https://www.npmjs.com/package/tailwind-styled-components
                     tailwindcss = function()
@@ -73,14 +96,15 @@ local M = {
                     end,
                 },
             })
+            require('mason-lspconfig').setup(lsp_opt)
         end
     },
 }
 
 M[#M + 1] = {
     "folke/neodev.nvim",
+    lazy = false,
     config = function()
-        require("neodev").setup({})
     end
 }
 
@@ -127,9 +151,6 @@ M[#M + 1] = {
 -- Silly solve for getting all files analyzed
 M[#M + 1] = {
     'artemave/workspace-diagnostics.nvim',
-    config = function()
-        require("workspace-diagnostics").setup({})
-    end
 }
 
 --M[#M + 1] = {
@@ -176,6 +197,9 @@ M[#M + 1] = {
 
 M[#M + 1] = {
     'dmmulroy/ts-error-translator.nvim',
+    config = function()
+        require("ts-error-translator").setup()
+    end
 }
 
 return M
