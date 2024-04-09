@@ -23,10 +23,12 @@ opt.splitkeep      = "screen"
 -- Neovim UI
 -----------------------------------------------------------
 --opt.smoothscroll   = true
+
 opt.wrap           = true     -- Disable line wrap
 opt.number         = true     -- Show line number
 opt.relativenumber = true
 opt.showmatch      = false    -- Highlight matching parenthesis
+--opt.matchpairs = ""
 opt.foldmethod     = "marker" -- Enable folding (default 'foldmarker')
 --opt.colorcolumn = '80' -- Line lenght marker at 80 columns
 opt.splitright     = true     -- Vertical split to the right
@@ -34,7 +36,6 @@ opt.splitbelow     = true     -- Horizontal split to the bottom
 opt.ignorecase     = true     -- Ignore case letters when search
 opt.smartcase      = true     -- Ignore lowercase for the whole pattern
 opt.linebreak      = true     -- Wrap on word boundary
---opt.wrap = false          -- Disable line wrap
 opt.termguicolors  = true     -- Enable 24-bit RGB colors
 opt.equalalways    = false
 opt.signcolumn     = "yes:1"

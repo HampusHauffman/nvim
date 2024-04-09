@@ -22,13 +22,14 @@ require("lazy").setup({
 		-----------------------------------------------------
 		{
 			"HampusHauffman/block.nvim",
+			dependencies = { "nvim-treesitter/nvim-treesitter", },
 			dev = true,
-			--branch = "perf",
+			branch = "re",
 			config = function()
 				require("block").setup({
-					percent = 1.2,
+					percent = 1.4,
 					depth = 4,
-					bg = "#121318",
+					bg = "#101010",
 					automatic = false
 				})
 			end
@@ -72,7 +73,6 @@ require("lazy").setup({
 					options = {
 						width = 80,
 					},
-
 				})
 			end
 		},
@@ -80,6 +80,7 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- Pretty
 		-----------------------------------------------------
+
 		{
 			"NvChad/nvim-colorizer.lua",
 			config = function()
@@ -88,7 +89,7 @@ require("lazy").setup({
 		},
 		"stevearc/dressing.nvim",
 		--"p00f/nvim-ts-rainbow",            -- Rainbow colored brackets
-		"RRethy/vim-illuminate", -- Highlight words that match cursos
+		--"RRethy/vim-illuminate", -- Highlight words that match cursos
 		--{
 		--	"luukvbaal/stabilize.nvim",
 		--	config = function()
@@ -159,18 +160,6 @@ require("lazy").setup({
 					-- your config goes here
 					-- or just leave it empty :)
 				}
-			end,
-		},
-		{
-			"windwp/nvim-autopairs",
-			dependencies = {
-				"hrsh7th/nvim-cmp",
-			},
-			config = function()
-				require("nvim-autopairs").setup({})
-				local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-				local cmp = require("cmp")
-				cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
 			end,
 		},
 	},

@@ -66,10 +66,10 @@ map("n", "<C-l>", ":<C-U>TmuxNavigateRight<cr>")
 -----------------------------------------------------------
 
 
-map({ "n", "x", "o" }, "s", function() require("flash").jump() end, "Flash")
-map({ "n", "o", "x" }, "S", function() require("flash").treesitter() end, "Flash Treesitter")
+map({ "n", "o" }, "s", function() require("flash").jump() end, "Flash")
+map({ "n", "o" }, "S", function() require("flash").treesitter() end, "Flash Treesitter")
 map("o", "r", function() require("flash").remote() end, "Remote Flash")
-map({ "o", "x" }, "R", function() require("flash").treesitter_search() end, "Treesitter Search")
+map({ "o" }, "R", function() require("flash").treesitter_search() end, "Treesitter Search")
 map({ "c" }, "<c-s>", function() require("flash").toggle() end, "Toggle Flash Search")
 
 -----------------------------------------------------------

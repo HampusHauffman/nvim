@@ -196,7 +196,9 @@ M[#M + 1] = {
 M[#M + 1] = {
     'dmmulroy/ts-error-translator.nvim',
     config = function()
-        require("ts-error-translator").setup()
+        require("ts-error-translator").setup({
+
+        })
     end
 }
 
