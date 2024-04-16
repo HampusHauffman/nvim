@@ -35,6 +35,7 @@ require("lazy").setup({
 			end
 		},
 		"HampusHauffman/bionic.nvim",
+
 		-----------------------------------------------------
 		-- GPT
 		-----------------------------------------------------
@@ -80,7 +81,6 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- Pretty
 		-----------------------------------------------------
-
 		{
 			"NvChad/nvim-colorizer.lua",
 			config = function()
@@ -153,15 +153,15 @@ require("lazy").setup({
 				require('gitsigns').setup()
 			end
 		},
-		{
-			"Pocco81/auto-save.nvim",
-			config = function()
-				require("auto-save").setup {
-					-- your config goes here
-					-- or just leave it empty :)
-				}
-			end,
-		},
+--		{
+--			"Pocco81/auto-save.nvim",
+--			config = function()
+--				require("auto-save").setup {
+--					-- your config goes here
+--					-- or just leave it empty :)
+--				}
+--			end,
+--		},
 	},
 	{
 		defaults = {

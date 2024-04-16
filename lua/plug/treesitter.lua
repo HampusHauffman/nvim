@@ -6,11 +6,11 @@ M[#M + 1] = {
     end,
     config = function()
         --local keymaps = require "keymaps".treesitter
----@diagnostic disable-next-line: missing-fields
+        ---@diagnostic disable-next-line: missing-fields
         require "nvim-treesitter.configs".setup {
             indent = {
-                enable = false
-                --enable = true
+                --enable = false
+                enable = true
             },
             -- Install parsers synchronously (only applied to `ensure_installed`)
             sync_install = false,

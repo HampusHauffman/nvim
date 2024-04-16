@@ -13,6 +13,7 @@ local M = {
             "rafamadriz/friendly-snippets",
             "L3MON4D3/LuaSnip",
         },
+        lazy = false,
         config = function()
             -- Setup CMP
             local cmp = require("cmp")
@@ -20,6 +21,7 @@ local M = {
             local lspkind = require("lspkind")
 
             cmp.setup({
+                experimental = { ghost_text = true },
                 snippet = {
                     expand = function(args)
                         require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
@@ -27,7 +29,9 @@ local M = {
                 },
                 preselect = 'item',
                 completion = {
+                    autocomplete = { cmp.TriggerEvent.TextChanged, cmp.TriggerEvent.InsertEnter },
                     completeopt = 'menu,menuone,noinsert,noselect',
+                    keyword_length = 0,
                 },
                 mapping = require("keymaps").cmp,
                 window = {
@@ -40,7 +44,7 @@ local M = {
                     { name = "copilot" },
                     { name = "nvim_lua" },
                     { name = 'nvim_lsp' },
-                    { name = "luasnip" }, -- For luasnip users.
+                    { name = "luasnip" }, -- For luasnip
                     { name = 'path' },
                     { name = "crates" },
                 }),
@@ -67,51 +71,64 @@ M[#M + 1] = {
 M[#M + 1] = {
     "zbirenbaum/copilot.lua",
     cmd = "Copilot",
-    event = "InsertEnter",
+    event = { "InsertEnter", "LspAttach" },
     config = function()
         require("copilot").setup({
-            suggestion = { enabled = false, auto_trigger = true, },
-            panel = { enabled = false },
+            suggestion = { enabled = true, auto_trigger = true },
+            panel = {
+                enabled = true,
+                auto_refresh = true,
+                layout = {
+                    position = "right", -- | top | left | right
+                    ratio = 0.4
+                },
+            },
         })
     end,
 }
+--Write some comments
 
-M[#M + 1] = {
-    "windwp/nvim-autopairs",
-    dependencies = {
-        "hrsh7th/nvim-cmp",
-    },
-    config = function()
-        require("nvim-autopairs").setup({})
-        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
-        local cmp = require("cmp")
-        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
-    end,
-}
+
+--M[#M + 1] = {
+--    "windwp/nvim-autopairs",
+--    dependencies = {
+--        "hrsh7th/nvim-cmp",
+--    },
+--    config = function()
+--        require("nvim-autopairs").setup({})
+--        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
+--        local cmp = require("cmp")
+--        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
+--    end,
+--}
+
+--write a comment here
 
 M[#M + 1] = {
     "zbirenbaum/copilot-cmp",
     dependencies = {
+        "nvim-cmp",
         "hrsh7th/nvim-cmp",
         "zbirenbaum/copilot.lua",
         "onsails/lspkind.nvim"
     },
+    event = { "InsertEnter", "LspAttach" },
     config = function()
         require("copilot_cmp").setup({
-            event = { "InsertEnter", "LspAttach" },
+            event = { "LspAttach" },
             fix_pairs = true,
         })
-
-        -- Make it look nice and work with CMP
-        local cmp = require("cmp")
-
-        -- Setup suggested by read me
-        cmp.event:on("menu_opened", function()
-            vim.b.copilot_suggestion_hidden = true
-        end)
-        cmp.event:on("menu_closed", function()
-            vim.b.copilot_suggestion_hidden = false
-        end)
+        --        -- Make it look nice and work with CMP
+        --        local cmp = require("cmp")
+        --
+        --        -- Setup suggested by read me
+        --        cmp.event:on("menu_opened", function()
+        --            vim.b.copilot_suggestion_hidden = true
+        --        end)
+        --        cmp.event:on("menu_closed", function()
+        --            vim.b.copilot_suggestion_hidden = false
+        --        end)
     end,
 }
+
 return M

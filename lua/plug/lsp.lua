@@ -4,6 +4,8 @@ local M = {
     { "fladson/vim-kitty" },
     { "pantharshit00/vim-prisma" },
 }
+--write a simple function to clear registers
+
 
 M[#M + 1] = {
     'neovim/nvim-lspconfig',
@@ -17,6 +19,10 @@ M[#M + 1] = {
     'williamboman/mason.nvim',
     config = function()
         require('mason').setup({
+            registries = {
+                'github:nvim-java/mason-registry',
+                'github:mason-org/mason-registry',
+            },
             ui = {
                 border = "rounded"
             }
@@ -52,6 +58,21 @@ M[#M + 1] = {
                     })
                 end,
                 ["jdtls"] = function()
+                    require('java').setup({})
+                    --require('jdtls').setup({})
+                    require('lspconfig').jdtls.setup({
+                        settings = {
+                            java = {
+                                format = {
+                                    settings = {
+                                        url =
+                                        '/Users/hampushauffman/.config/nvim/lua/jdtls/lang_servers/GoogleStyle.xml',
+                                        profile = 'GoogleStyle',
+                                    }
+                                }
+                            }
+                        }
+                    })
                     -- Disable jdtls so i can set it up manually with nvim-jdtls
                     -- This is Only so we can actually install in with Mason in the firt place
                 end,
@@ -198,8 +219,22 @@ M[#M + 1] = {
     config = function()
         require("ts-error-translator").setup({
 
+
         })
     end
+}
+
+M[#M + 1] = {
+    'nvim-java/nvim-java',
+    dependencies = {
+        'nvim-java/lua-async-await',
+        'nvim-java/nvim-java-core',
+        'nvim-java/nvim-java-test',
+        'nvim-java/nvim-java-dap',
+        'MunifTanjim/nui.nvim',
+        'neovim/nvim-lspconfig',
+        'mfussenegger/nvim-dap',
+    },
 }
 
 return M

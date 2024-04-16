@@ -44,7 +44,7 @@ opt.signcolumn     = "yes:1"
 -- Tabs, indent
 -----------------------------------------------------------
 --opt.expandtab      = true
-opt.shiftwidth     = 4    -- Shift 4 spaces when tab
+--opt.shiftwidth     = 4    -- Shift 4 spaces when tab
 opt.tabstop        = 4    -- 1 tab == 4 spaces
 opt.smartindent    = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
 

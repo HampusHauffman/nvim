@@ -47,6 +47,7 @@ M[#M + 1] = {
 				if (zoomed == "Zoomed\n") then
 					vim.fn.system("tmux resize-pane -Z")
 				end
+
 			end,
 		}
 	end
