@@ -69,66 +69,9 @@ M[#M + 1] = {
 }
 
 M[#M + 1] = {
-    "zbirenbaum/copilot.lua",
-    cmd = "Copilot",
-    event = { "InsertEnter", "LspAttach" },
-    config = function()
-        require("copilot").setup({
-            suggestion = { enabled = true, auto_trigger = true },
-            panel = {
-                enabled = true,
-                auto_refresh = true,
-                layout = {
-                    position = "right", -- | top | left | right
-                    ratio = 0.4
-                },
-            },
-        })
-    end,
-}
---Write some comments
-
-
---M[#M + 1] = {
---    "windwp/nvim-autopairs",
---    dependencies = {
---        "hrsh7th/nvim-cmp",
---    },
---    config = function()
---        require("nvim-autopairs").setup({})
---        local cmp_autopairs = require("nvim-autopairs.completion.cmp")
---        local cmp = require("cmp")
---        cmp.event:on("confirm_done", cmp_autopairs.on_confirm_done())
---    end,
---}
-
---write a comment here
-
-M[#M + 1] = {
-    "zbirenbaum/copilot-cmp",
-    dependencies = {
-        "nvim-cmp",
-        "hrsh7th/nvim-cmp",
-        "zbirenbaum/copilot.lua",
-        "onsails/lspkind.nvim"
-    },
-    event = { "InsertEnter", "LspAttach" },
-    config = function()
-        require("copilot_cmp").setup({
-            event = { "LspAttach" },
-            fix_pairs = true,
-        })
-        --        -- Make it look nice and work with CMP
-        --        local cmp = require("cmp")
-        --
-        --        -- Setup suggested by read me
-        --        cmp.event:on("menu_opened", function()
-        --            vim.b.copilot_suggestion_hidden = true
-        --        end)
-        --        cmp.event:on("menu_closed", function()
-        --            vim.b.copilot_suggestion_hidden = false
-        --        end)
-    end,
+    "github/copilot.vim",
+    config = function ()
+    end
 }
 
 return M

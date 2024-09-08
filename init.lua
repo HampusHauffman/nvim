@@ -26,12 +26,12 @@ require("lazy").setup({
 			dev = true,
 			branch = "re",
 			config = function()
-				require("block").setup({
-					percent = 1.4,
-					depth = 4,
-					bg = "#101010",
-					automatic = false
-				})
+				--				require("block").setup({
+				--					percent = 1.4,
+				--					depth = 4,
+				--					bg = "#101010",
+				--					automatic = false
+				--				})
 			end
 		},
 		"HampusHauffman/bionic.nvim",
@@ -61,12 +61,6 @@ require("lazy").setup({
 		-----------------------------------------------------
 		-- UI
 		-----------------------------------------------------
-		{
-			"karb94/neoscroll.nvim",
-			config = function()
-				require('neoscroll').setup()
-			end
-		},
 		{
 			'sotte/presenting.nvim',
 			config = function(self, opts)
@@ -127,13 +121,8 @@ require("lazy").setup({
 		{
 			"max397574/better-escape.nvim",
 			config = function()
-				require("better_escape").setup {
-					mapping = { "jk", "kj" }, -- a table with mappings to use
-					timeout = vim.o.timeoutlen, -- the time in which the keys must be hit in ms. Use option timeoutlen by default
-					clear_empty_lines = false, -- clear line after escaping if there is only whitespace
-					keys = "<Esc>", -- keys used for escaping, if it is a function will use the result everytime
-				}
-			end
+				require("better_escape").setup()
+			end,
 		},
 		{
 			"folke/flash.nvim",
@@ -153,15 +142,15 @@ require("lazy").setup({
 				require('gitsigns').setup()
 			end
 		},
---		{
---			"Pocco81/auto-save.nvim",
---			config = function()
---				require("auto-save").setup {
---					-- your config goes here
---					-- or just leave it empty :)
---				}
---			end,
---		},
+		--		{
+		--			"Pocco81/auto-save.nvim",
+		--			config = function()
+		--				require("auto-save").setup {
+		--					-- your config goes here
+		--					-- or just leave it empty :)
+		--				}
+		--			end,
+		--		},
 	},
 	{
 		defaults = {

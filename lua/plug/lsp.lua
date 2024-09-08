@@ -57,25 +57,25 @@ M[#M + 1] = {
                         end,
                     })
                 end,
-                ["jdtls"] = function()
-                    require('java').setup({})
-                    --require('jdtls').setup({})
-                    require('lspconfig').jdtls.setup({
-                        settings = {
-                            java = {
-                                format = {
-                                    settings = {
-                                        url =
-                                        '/Users/hampushauffman/.config/nvim/lua/jdtls/lang_servers/GoogleStyle.xml',
-                                        profile = 'GoogleStyle',
-                                    }
-                                }
-                            }
-                        }
-                    })
-                    -- Disable jdtls so i can set it up manually with nvim-jdtls
-                    -- This is Only so we can actually install in with Mason in the firt place
-                end,
+--                ["jdtls"] = function()
+--                    require('java').setup({})
+--                    --require('jdtls').setup({})
+--                    require('lspconfig').jdtls.setup({
+--                        settings = {
+--                            java = {
+--                                format = {
+--                                    settings = {
+--                                        url =
+--                                        '/Users/hampushauffman/.config/nvim/lua/jdtls/lang_servers/GoogleStyle.xml',
+--                                        profile = 'GoogleStyle',
+--                                    }
+--                                }
+--                            }
+--                        }
+--                    })
+-- Disable jdtls so i can set it up manually with nvim-jdtls
+-- This is Only so we can actually install in with Mason in the firt place
+--                end,
                 ["lua_ls"] = function()
                     require('lspconfig').lua_ls.setup({
                         settings = {
@@ -227,6 +227,7 @@ M[#M + 1] = {
 M[#M + 1] = {
     'nvim-java/nvim-java',
     dependencies = {
+        "nvim-java/nvim-java-refactor",
         'nvim-java/lua-async-await',
         'nvim-java/nvim-java-core',
         'nvim-java/nvim-java-test',

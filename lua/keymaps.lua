@@ -8,8 +8,7 @@ local function map(mode, lhs, rhs, desc)
 	local options = { noremap = true, silent = true }
 	vim.keymap.set(mode, lhs, rhs, options)
 	if desc then
-		wk.register({ [lhs] = desc },
-			{ mode = mode })
+		wk.add({ { lhs, desc = desc, mode = mode } })
 	end
 end
 

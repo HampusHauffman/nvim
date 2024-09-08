@@ -47,7 +47,7 @@ M[#M + 1] = {
 		require("telescope").load_extension "fzf"
 		require("telescope").load_extension "ui-select"
 		--require("telescope").load_extension "flutter"
-		require("telescope").load_extension "noice"
+		--require("telescope").load_extension "noice"
 
 		-- Transform jdt so i can read it
 		local utils = require("telescope.utils")
