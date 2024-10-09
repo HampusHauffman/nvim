@@ -41,6 +41,7 @@ local M = {
                         winhighlight = "FloatBorder:FloatBorder,Normal:Normal", }),
                 },
                 sources = cmp.config.sources({
+                    { name = "lazydev", group_index = 0 },
                     { name = "copilot" },
                     { name = "nvim_lua" },
                     { name = 'nvim_lsp' },
@@ -70,7 +71,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
     "github/copilot.vim",
-    config = function ()
+    config = function()
     end
 }
 

@@ -6,10 +6,8 @@ local M = {
 }
 --write a simple function to clear registers
 
-
 M[#M + 1] = {
     'neovim/nvim-lspconfig',
-    dependencies = { "folke/neodev.nvim" },
     config = function()
         require('lspconfig.ui.windows').default_options.border = 'rounded'
     end
@@ -57,29 +55,32 @@ M[#M + 1] = {
                         end,
                     })
                 end,
---                ["jdtls"] = function()
---                    require('java').setup({})
---                    --require('jdtls').setup({})
---                    require('lspconfig').jdtls.setup({
---                        settings = {
---                            java = {
---                                format = {
---                                    settings = {
---                                        url =
---                                        '/Users/hampushauffman/.config/nvim/lua/jdtls/lang_servers/GoogleStyle.xml',
---                                        profile = 'GoogleStyle',
---                                    }
---                                }
---                            }
---                        }
---                    })
--- Disable jdtls so i can set it up manually with nvim-jdtls
--- This is Only so we can actually install in with Mason in the firt place
---                end,
+                --                ["jdtls"] = function()
+                --                    require('java').setup({})
+                --                    --require('jdtls').setup({})
+                --                    require('lspconfig').jdtls.setup({
+                --                        settings = {
+                --                            java = {
+                --                                format = {
+                --                                    settings = {
+                --                                        url =
+                --                                        '/Users/hampushauffman/.config/nvim/lua/jdtls/lang_servers/GoogleStyle.xml',
+                --                                        profile = 'GoogleStyle',
+                --                                    }
+                --                                }
+                --                            }
+                --                        }
+                --                    })
+                -- Disable jdtls so i can set it up manually with nvim-jdtls
+                -- This is Only so we can actually install in with Mason in the firt place
+                --                end,
                 ["lua_ls"] = function()
                     require('lspconfig').lua_ls.setup({
                         settings = {
                             Lua = {
+                                codeLens = {
+                                    enable = true,
+                                },
                                 completion = {
                                     callSnippet = "Replace"
                                 }
@@ -108,6 +109,23 @@ M[#M + 1] = {
     },
 }
 
+
+--M[#M + 1] = {
+--    "folke/lazydev.nvim",
+--    lazy = false,
+--    ft = "lua",
+--    cmd = "LazyDev",
+--    opts = {
+--        library = {
+--            { path = "luvit-meta/library", words = { "vim%.uv" } },
+--            { path = "LazyVim",            words = { "LazyVim" } },
+--            { path = "lazy.nvim",          words = { "LazyVim" } },
+--        },
+--    },
+--}
+--
+---- Manage libuv types with lazy. Plugin will never be loaded
+--M[#M + 1] = { "Bilal2453/luvit-meta", lazy = true }
 
 M[#M + 1] = {
     "folke/neodev.nvim",
