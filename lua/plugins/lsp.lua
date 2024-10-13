@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 local M = {}
 
 ---@type LazyKeysSpec[]
@@ -18,7 +19,8 @@ local lspKeys = {
         fname_width = 1000,
         show_line = false,
       })
-    end, desc = "Go to references",
+    end,
+    desc = "Go to references",
   },
   {
     "gd",
@@ -41,7 +43,6 @@ local lspKeys = {
   { "<f2>", vim.diagnostic.goto_next, desc = "Go to next diagnostic" },
 }
 
----@type LazyPluginSpec
 M[#M + 1] = {
   "williamboman/mason.nvim",
   dependencies = {
@@ -53,6 +54,7 @@ M[#M + 1] = {
     require("mason").setup()
 
     require("mason-lspconfig").setup({
+      -- Install Stylua manually since there is no mapping
       ensure_installed = { "lua_ls" }, -- Specify the LSP servers to ensure are installed
     })
 
@@ -64,7 +66,6 @@ M[#M + 1] = {
   end,
 }
 
----@type LazyPluginSpec
 M[#M + 1] = {
   "nvimtools/none-ls.nvim",
   dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },

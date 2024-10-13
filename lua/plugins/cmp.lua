@@ -1,3 +1,4 @@
+---@type LazyPluginSpec[]
 local M = {}
 
 -- Manage libuv types with lazy. Plugin will never be loaded
