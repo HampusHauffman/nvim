@@ -65,6 +65,9 @@ M[#M + 1] = {
   version = "0.1.x",
   dependencies = { "nvim-lua/plenary.nvim" },
   keys = telescopeKeys,
+  config = function(_, opts)
+    require("telescope").setup(opts)
+  end,
   opts = {
     defaults = {
       mappings = {

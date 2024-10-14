@@ -73,8 +73,14 @@ M[#M + 1] = {
     })
     -- Borders rounded for hover and signature help
     local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
-      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+      ["textDocument/hover"] = vim.lsp.with(
+        vim.lsp.handlers.hover,
+        { border = border }
+      ),
+      ["textDocument/signatureHelp"] = vim.lsp.with(
+        vim.lsp.handlers.signature_help,
+        { border = border }
+      ),
     }
     -- Setup server automatically. And set borders to rounded
     require("mason-lspconfig").setup_handlers({

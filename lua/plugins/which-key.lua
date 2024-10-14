@@ -4,17 +4,21 @@ local M = {}
 M[#M + 1] = {
   "folke/which-key.nvim",
   event = "VeryLazy",
+  ---@type
   opts = {
     win = { border = "rounded" },
-    -- your configuration comes here
-    -- or leave it empty to use the default settings
-    -- refer to the configuration section below
+    triggers = {
+      { "<auto>", mode = "nixsotc" },
+      { "<leader>", mode = { "n", "v" } },
+      { "f", mode = { "n", "v" } },
+      { "g", mode = { "n", "v" } },
+    },
   },
   keys = {
     {
       "<leader>?",
       function()
-        require("which-key").show({global = false})
+        require("which-key").show({ global = false })
       end,
       desc = "Buffer Local Keymaps (which-key)",
     },

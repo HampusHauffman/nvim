@@ -1,3 +1,4 @@
+---@diagnostic disable: missing-fields
 ---@type LazyPluginSpec[]
 local M = {}
 
@@ -42,8 +43,21 @@ M[#M + 1] = {
         ["<C-Space>"] = cmp.mapping.complete(),
         ["<C-e>"] = cmp.mapping.abort(),
         ["<CR>"] = cmp.mapping.confirm({ select = true }), -- Accept currently selected item. Set `select` to `false` to only confirm explicitly selected items.
+        -- Makes sure we can scroll with crtl j and k
+        ["<C-j>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_next_item()
+          end
+        end, { "i", "s" }),
+
+        ["<C-k>"] = cmp.mapping(function(fallback)
+          if cmp.visible() then
+            cmp.select_prev_item()
+          end
+        end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
+--        { name = "copilot" },
         { name = "nvim_lsp" },
       }, {
         { name = "buffer" },

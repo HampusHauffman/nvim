@@ -27,10 +27,7 @@ require("lazy").setup({
   },
   install = { colorscheme = { "dracula" } },
   checker = { enabled = true },
-  dev = {
-    path = "~/Documents",
-    fallback = false,
-  },
+  dev = { path = "~/Documents" },
   ui = {
     border = "rounded",
   },
