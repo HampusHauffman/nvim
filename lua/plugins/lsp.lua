@@ -50,8 +50,8 @@ local lspKeys = {
     desc = "Rename symbol",
   },
   { "<leader>c", vim.lsp.buf.code_action, desc = "Code action" },
-  { "<f14>", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic" },
-  { "<f2>", vim.diagnostic.goto_next, desc = "Go to next diagnostic" },
+  { "<c-p>", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic" },
+  { "<c-n>", vim.diagnostic.goto_next, desc = "Go to next diagnostic" },
 }
 
 M[#M + 1] = {

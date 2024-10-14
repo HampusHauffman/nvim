@@ -81,6 +81,11 @@ M[#M + 1] = {
       },
     },
     extensions = {
+      ["ui-select"] = {
+        require("telescope.themes").get_dropdown({
+          -- even more opts
+        }),
+      },
       fzf = {
         fuzzy = true, -- false will only do exact matching
         override_generic_sorter = true, -- override the generic sorter
