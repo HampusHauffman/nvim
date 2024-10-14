@@ -12,6 +12,7 @@ local telescopeKeys = {
       require("telescope.builtin").find_files()
     end,
     desc = "Find files",
+    mode = "n",
   },
   {
     "fa",
@@ -57,30 +58,12 @@ local telescopeKeys = {
     end,
     desc = "Find help tags",
   },
-  {
-    "gr",
-    function()
-      require("telescope.builtin").lsp_references({
-        fname_width = 1000,
-        show_line = false,
-      })
-    end,
-    desc = "Go to references",
-  },
-  {
-    "gd",
-    function()
-      require("telescope.builtin").lsp_definitions({})
-    end,
-    desc = "Go to definition",
-  },
 }
 
 M[#M + 1] = {
   "nvim-telescope/telescope.nvim",
   version = "0.1.x",
   dependencies = { "nvim-lua/plenary.nvim" },
-  cmd = "Telescope",
   keys = telescopeKeys,
   opts = {
     defaults = {

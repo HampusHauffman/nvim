@@ -57,6 +57,7 @@ local lspKeys = {
 M[#M + 1] = {
   "williamboman/mason.nvim",
   dependencies = {
+    "telescope.nvim",
     "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
   },
