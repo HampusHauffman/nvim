@@ -1,6 +1,17 @@
 ---@type LazyPluginSpec[]
 local M = {}
 
+local border = {
+  { "╭", "FloatBorder" }, -- Top-left corner
+  { "─", "FloatBorder" }, -- Top border
+  { "╮", "FloatBorder" }, -- Top-right corner
+  { "│", "FloatBorder" }, -- Right border
+  { "╯", "FloatBorder" }, -- Bottom-right corner
+  { "─", "FloatBorder" }, -- Bottom border
+  { "╰", "FloatBorder" }, -- Bottom-left corner
+  { "│", "FloatBorder" }, -- Left border
+}
+
 ---@type LazyKeysSpec[]
 local lspKeys = {
   {
@@ -51,21 +62,29 @@ M[#M + 1] = {
   },
   keys = lspKeys,
   config = function()
-    require("mason").setup()
+    require("mason").setup({
+      ui = { border = "rounded" },
+    })
 
     require("mason-lspconfig").setup({
       -- Install Stylua manually since there is no mapping
       ensure_installed = { "lua_ls" }, -- Specify the LSP servers to ensure are installed
     })
-
+    -- Borders rounded for hover and signature help
+    local handlers = {
+      ["textDocument/hover"] = vim.lsp.with(vim.lsp.handlers.hover, { border = border }),
+      ["textDocument/signatureHelp"] = vim.lsp.with(vim.lsp.handlers.signature_help, { border = border }),
+    }
+    -- Setup server automatically. And set borders to rounded
     require("mason-lspconfig").setup_handlers({
       function(server_name)
-        require("lspconfig")[server_name].setup({})
+        require("lspconfig")[server_name].setup({ handlers = handlers })
       end,
     })
   end,
 }
 
+-- Used for tools that are not integrated with a LSP
 M[#M + 1] = {
   "nvimtools/none-ls.nvim",
   dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },

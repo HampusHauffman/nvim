@@ -23,9 +23,20 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
+    { "HampusHauffman/dracula.nvim", dev = true, branch = "oled", priority = 1000 },
   },
+  install = { colorscheme = { "dracula" } },
   checker = { enabled = true },
+  dev = {
+    path = "~/Documents",
+    fallback = false,
+  },
+  ui = {
+    border = "rounded",
+  },
 })
 
+vim.cmd("colorscheme dracula")
 require("opt")
 require("keys")
+require("aucmd")
