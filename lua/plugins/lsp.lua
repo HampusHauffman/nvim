@@ -75,4 +75,17 @@ M[#M + 1] = {
   end,
 }
 
+-- This is only used to make sure i can specify ensure installed for tools
+M[#M + 1] = {
+  "jay-babu/mason-null-ls.nvim",
+  dependencies = { "mason.nvim", "none-ls.nvim" },
+  config = function()
+    require("mason-null-ls").setup({
+      -- All sources in null-ls will be automatic_installation
+      ensure_installed = {},
+      automatic_installation = true,
+    })
+  end,
+}
+
 return M
