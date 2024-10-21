@@ -2,6 +2,7 @@
 local M = {
   { "nvim-telescope/telescope-ui-select.nvim" },
   { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
+  { "stevearc/dressing.nvim", opts = {} }, -- Pretty vim.ui
 }
 
 ---@type LazyKeysSpec[]

@@ -57,7 +57,7 @@ M[#M + 1] = {
         end, { "i", "s" }),
       }),
       sources = cmp.config.sources({
---        { name = "copilot" },
+        --        { name = "copilot" },
         { name = "nvim_lsp" },
       }, {
         { name = "buffer" },
