@@ -107,7 +107,6 @@ M[#M + 1] = {
     -- Define your formatters
     formatters_by_ft = {
       lua = { "stylua" },
-      python = { "isort", "black" },
       javascript = { "prettierd", stop_after_first = true },
       typescriptreact = { "prettierd", stop_after_first = true },
       typescript = { "prettierd", stop_after_first = true },
