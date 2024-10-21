@@ -5,22 +5,13 @@ local border = {
   { "╭", "FloatBorder" }, -- Top-left corner
   { "─", "FloatBorder" }, -- Top border
   { "╮", "FloatBorder" }, -- Top-right corner
-  { "│", "FloatBorder" }, -- Right border
-  { "╯", "FloatBorder" }, -- Bottom-right corner
-  { "─", "FloatBorder" }, -- Bottom border
+  { "│", "FloatBorder" }, -- Right border { "╯", "FloatBorder" }, -- Bottom-right corner { "─", "FloatBorder" }, -- Bottom border
   { "╰", "FloatBorder" }, -- Bottom-left corner
   { "│", "FloatBorder" }, -- Left border
 }
 
 ---@type LazyKeysSpec[]
 local lspKeys = {
-  {
-    "<leader>f",
-    function()
-      vim.lsp.buf.format({})
-    end,
-    desc = "Format buffer",
-  },
   { "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
   { "gi", vim.lsp.buf.implementation, desc = "Go to implementation" },
   {
@@ -91,26 +82,50 @@ M[#M + 1] = {
   end,
 }
 
--- Used for tools that are not integrated with a LSP
 M[#M + 1] = {
-  "nvimtools/none-ls.nvim",
-  dependencies = { "mason.nvim", "nvim-lua/plenary.nvim" },
-  config = function()
-    local null_ls = require("null-ls")
-    null_ls.setup({ sources = { null_ls.builtins.formatting.stylua } })
-  end,
-}
-
--- This is only used to make sure i can specify ensure installed for tools
-M[#M + 1] = {
-  "jay-babu/mason-null-ls.nvim",
-  dependencies = { "mason.nvim", "none-ls.nvim" },
-  config = function()
-    require("mason-null-ls").setup({
-      -- All sources in null-ls will be automatic_installation
-      ensure_installed = {},
-      automatic_installation = true,
-    })
+  "stevearc/conform.nvim",
+  dependencies = { "mason.nvim" },
+  event = { "BufWritePre" },
+  cmd = { "ConformInfo" },
+  keys = {
+    {
+      -- Customize or remove this keymap to your liking
+      "<leader>f",
+      function()
+        require("conform").format({ async = true })
+      end,
+      mode = "",
+      desc = "Format buffer",
+    },
+  },
+  -- This will provide type hinting with LuaLS
+  ---@module "conform"
+  ---@type conform.setupOpts
+  opts = {
+    -- Define your formatters
+    formatters_by_ft = {
+      lua = { "stylua" },
+      python = { "isort", "black" },
+      javascript = { "prettierd", stop_after_first = true },
+      typescriptreact = { "prettierd", stop_after_first = true },
+      typescript = { "prettierd", stop_after_first = true },
+    },
+    -- Set default options
+    default_format_opts = {
+      lsp_format = "fallback",
+    },
+    -- Set up format-on-save
+    format_on_save = { timeout_ms = 500 },
+    -- Customize formatters
+    formatters = {
+      shfmt = {
+        prepend_args = { "-i", "2" },
+      },
+    },
+  },
+  init = function()
+    -- If you want the formatexpr, here is the place to set it
+    vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
 
