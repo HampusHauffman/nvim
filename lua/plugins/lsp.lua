@@ -62,7 +62,7 @@ M[#M + 1] = {
 
     require("mason-lspconfig").setup({
       -- Install Stylua manually since there is no mapping
-      ensure_installed = { "lua_ls" }, -- Specify the LSP servers to ensure are installed
+      ensure_installed = { "lua_ls", "ts_ls", "eslint", "tailwindcss" }, -- Specify the LSP servers to ensure are installed
     })
     -- Borders rounded for hover and signature help
     local handlers = {
