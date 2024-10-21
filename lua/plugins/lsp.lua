@@ -5,7 +5,9 @@ local border = {
   { "╭", "FloatBorder" }, -- Top-left corner
   { "─", "FloatBorder" }, -- Top border
   { "╮", "FloatBorder" }, -- Top-right corner
-  { "│", "FloatBorder" }, -- Right border { "╯", "FloatBorder" }, -- Bottom-right corner { "─", "FloatBorder" }, -- Bottom border
+  { "│", "FloatBorder" }, -- Right border
+  { "╯", "FloatBorder" }, -- Bottom-right corner
+  { "─", "FloatBorder" }, -- Bottom border
   { "╰", "FloatBorder" }, -- Bottom-left corner
   { "│", "FloatBorder" }, -- Left border
 }
