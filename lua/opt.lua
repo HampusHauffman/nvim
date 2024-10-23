@@ -21,6 +21,7 @@ vim.diagnostic.config({
 vim.api.nvim_command(
   "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
 )
+vim.api.nvim_command("hi! link " .. "WinSeparator" .. " " .. "@enumMember")
 
 vim.fn.sign_define(
   "DiagnosticSignError",
