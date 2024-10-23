@@ -24,9 +24,8 @@ vim.opt.rtp:prepend(lazypath)
 
 vim.g.mapleader = " "
 
--- Setup lazy.nvim
+---@class LazyConfig
 require("lazy").setup({
-  -- automatically check for plugin updates
   spec = {
     -- import your plugins
     { import = "plugins" },
@@ -39,12 +38,14 @@ require("lazy").setup({
   },
   install = { colorscheme = { "dracula" } },
   checker = { enabled = true },
+  ---@diagnostic disable-next-line: assign-type-mismatch
   dev = { path = "~/Documents" },
   ui = {
     border = "rounded",
   },
 })
 
+--vim.cmd("colorscheme dracula-soft")
 vim.cmd("colorscheme dracula")
 require("opt")
 require("keys")
