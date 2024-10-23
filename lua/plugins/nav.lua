@@ -29,7 +29,11 @@ M[#M + 1] = {
     "MunifTanjim/nui.nvim",
   },
   keys = {
+    --{ "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer" },
     { "<leader>n", ":Neotree left focus reveal<CR>", "File explorer" },
+  },
+  opts = {
+    popup_border_style = "rounded",
   },
 }
 

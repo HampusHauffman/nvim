@@ -55,6 +55,7 @@ M[#M + 1] = {
     "williamboman/mason-lspconfig.nvim",
   },
   keys = lspKeys,
+  lazy = false,
   config = function()
     require("mason").setup({
       ui = { border = "rounded" },

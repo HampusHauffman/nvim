@@ -4,7 +4,13 @@ opt.clipboard = "unnamedplus"
 
 opt.wrap = true -- Disable line wrap
 opt.number = true -- Show line number
-opt.relativenumber = true
+opt.relativenumber = true --relativenumber
+opt.undofile = true -- Persistent undo
+opt.smartindent = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
+
+-- StatusLine
+opt.laststatus = 3 -- Set global statusline
+opt.cmdheight = 0
 
 -- Border for diagnostic
 vim.diagnostic.config({
@@ -12,7 +18,9 @@ vim.diagnostic.config({
 })
 
 -- Make the separator purple
-vim.api.nvim_command("hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember")
+vim.api.nvim_command(
+  "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
+)
 
 vim.fn.sign_define(
   "DiagnosticSignError",
