@@ -38,7 +38,9 @@ require("lazy").setup({
     },
   },
   install = { colorscheme = { "dracula" } },
-  checker = { enabled = true },
+  checker = {
+    notify = false, -- get a notification when new updates are found
+  },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = { path = "~/Documents" },
   ui = {
