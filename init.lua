@@ -36,6 +36,13 @@ require("lazy").setup({
       branch = "oled",
       priority = 1000,
     },
+    {
+      "HampusHauffman/block.nvim",
+      dev = true,
+      percent = 1.2,
+      priority = 1000,
+      opts = { percent = 1.4, depth = 4, bg = "#101010", automatic = false },
+    },
   },
   install = { colorscheme = { "dracula" } },
   checker = {

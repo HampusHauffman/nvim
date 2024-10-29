@@ -33,6 +33,11 @@ M[#M + 1] = {
     { "<leader>n", ":Neotree left focus reveal<CR>", "File explorer" },
   },
   opts = {
+    filesystem = {
+      filtered_items = {
+        visible = true,
+      },
+    },
     popup_border_style = "rounded",
     close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
     default_component_configs = {

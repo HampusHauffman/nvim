@@ -82,6 +82,20 @@ M[#M + 1] = {
       end,
       desc = "Toggle deleted",
     },
+    {
+      "<leader>hj",
+      function()
+        require("gitsigns").next_hunk()
+      end,
+      desc = "Toggle deleted",
+    },
+    {
+      "<leader>hk",
+      function()
+        require("gitsigns").prev_hunk()
+      end,
+      desc = "Toggle deleted",
+    },
   },
   opts = {},
 }
