@@ -15,6 +15,9 @@ M[#M + 1] = {
     },
   },
 }
+
+M[#M + 1] = { "echasnovski/mini.pairs", version = "*", opts = {} }
+
 M[#M + 1] = {
   "MagicDuck/grug-far.nvim",
   config = function()

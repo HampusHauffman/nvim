@@ -31,6 +31,3 @@ vim.cmd([[
 
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>", "Save file 💾")
-
--- New keybinding: Ctrl + w + = to equalize window sizes
-map("n", "<C-w> ^W=", "<C-w>=", "Equalize window sizes")
