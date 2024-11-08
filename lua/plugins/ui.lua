@@ -2,8 +2,24 @@
 local M = {}
 
 M[#M + 1] = {
-  "NvChad/nvim-colorizer.lua",
-  opts = {},
+  "brenoprata10/nvim-highlight-colors",
+  opts = {
+    ---Render style
+    ---@usage 'background'|'foreground'|'virtual'
+    render = "virtual",
+
+    ---Set virtual symbol (requires render to be set to 'virtual')
+    virtual_symbol = "■",
+
+    virtual_symbol_prefix = "",
+
+    virtual_symbol_suffix = " ",
+
+    virtual_symbol_position = "inline",
+
+    ---Highlight tailwind colors, e.g. 'bg-blue-500'
+    enable_tailwind = true,
+  },
 }
 
 M[#M + 1] = {

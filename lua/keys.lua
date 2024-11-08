@@ -31,3 +31,6 @@ vim.cmd([[
 
 -- Fast saving with <leader> and s
 map("n", "<leader>s", ":w<CR>", "Save file 💾")
+
+-- Allows Option backspace to delete words
+map("i", "<M-BS>", "<Esc> hciw", "Remove Word")

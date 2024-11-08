@@ -83,14 +83,14 @@ M[#M + 1] = {
       desc = "Toggle deleted",
     },
     {
-      "<leader>hj",
+      "<leader>hn",
       function()
         require("gitsigns").next_hunk()
       end,
       desc = "Toggle deleted",
     },
     {
-      "<leader>hk",
+      "<leader>hp",
       function()
         require("gitsigns").prev_hunk()
       end,
