@@ -67,6 +67,13 @@ M[#M + 1] = {
   },
   keys = {
     {
+      "<leader>m",
+      function()
+        Snacks.notifier.show_history()
+      end,
+      desc = "Show Notifier History",
+    },
+    {
       "<leader>gB",
       function()
         Snacks.gitbrowse()

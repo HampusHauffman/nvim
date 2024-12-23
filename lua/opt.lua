@@ -7,6 +7,7 @@ opt.number = true -- Show line number
 opt.relativenumber = true --relativenumber
 opt.undofile = true -- Persistent undo
 opt.smartindent = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
+opt.splitright = true -- Split to the right
 
 -- StatusLine
 opt.laststatus = 3 -- Set global statusline

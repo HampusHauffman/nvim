@@ -76,10 +76,15 @@ M[#M + 1] = {
         { border = border }
       ),
     }
+    -- List of servers to exclude
+    local exclude_servers = { "rust_analyzer" }
+
     -- Setup server automatically. And set borders to rounded
     require("mason-lspconfig").setup_handlers({
       function(server_name)
-        require("lspconfig")[server_name].setup({ handlers = handlers })
+        if not vim.tbl_contains(exclude_servers, server_name) then
+          require("lspconfig")[server_name].setup({ handlers = handlers })
+        end
       end,
     })
   end,
@@ -128,6 +133,28 @@ M[#M + 1] = {
   init = function()
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
+}
+
+M[#M + 1] = {
+  "mrcjkb/rustaceanvim",
+  ft = { "rust" },
+  config = function()
+    vim.g.rustaceanvim = {
+      tools = {
+        float_win_config = {
+          border = "rounded",
+        },
+      },
+    }
+  end,
+}
+
+M[#M + 1] = {
+  "saecki/crates.nvim",
+  tag = "stable",
+  config = function()
+    require("crates").setup()
   end,
 }
 
