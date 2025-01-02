@@ -1,6 +1,5 @@
 ---@type LazyPluginSpec[]
 local M = {}
-
 M[#M + 1] = {
   "brenoprata10/nvim-highlight-colors",
   opts = {

@@ -53,6 +53,7 @@ M[#M + 1] = {
     "telescope.nvim",
     "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
+    "saghen/blink.cmp",
   },
   keys = lspKeys,
   lazy = false,
@@ -65,6 +66,7 @@ M[#M + 1] = {
       -- Install Stylua manually since there is no mapping
       ensure_installed = { "lua_ls", "ts_ls", "eslint", "tailwindcss" }, -- Specify the LSP servers to ensure are installed
     })
+
     -- Borders rounded for hover and signature help
     local handlers = {
       ["textDocument/hover"] = vim.lsp.with(
@@ -83,7 +85,11 @@ M[#M + 1] = {
     require("mason-lspconfig").setup_handlers({
       function(server_name)
         if not vim.tbl_contains(exclude_servers, server_name) then
-          require("lspconfig")[server_name].setup({ handlers = handlers })
+          local capabilities = require("blink.cmp").get_lsp_capabilities()
+          require("lspconfig")[server_name].setup({
+            handlers = handlers,
+            capabilities = capabilities,
+          })
         end
       end,
     })
@@ -154,7 +160,7 @@ M[#M + 1] = {
   "saecki/crates.nvim",
   tag = "stable",
   config = function()
-    require("crates").setup()
+    require("crates").setup({})
   end,
 }
 

@@ -1,11 +1,21 @@
----@type LazyPluginSpec[]
 local M = {}
-
 M[#M + 1] = {
-  "github/copilot.vim",
+  "zbirenbaum/copilot.lua",
   cmd = "Copilot",
   event = "InsertEnter",
+  config = function()
+    require("copilot").setup({
+      suggestion = { enabled = false },
+      panel = { enabled = false },
+    })
+  end,
 }
+--
+--M[#M + 1] = {
+--  "github/copilot.vim",
+--  cmd = "Copilot",
+--  event = "InsertEnter",
+--}
 
 M[#M + 1] = {
   "MeanderingProgrammer/render-markdown.nvim",
@@ -22,12 +32,8 @@ M[#M + 1] = {
   config = true,
   opts = {
     display = {
-      action_palette = {
-        chat = {
-          window = {
-            position = "right", -- left|right|top|bottom (nil will default depending on vim.opt.splitright|vim.opt.splitbelow)
-          },
-        },
+      diff = {
+        provider = "mini_diff",
       },
     },
   },

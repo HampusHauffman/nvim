@@ -1,16 +1,15 @@
 ---@type LazyPluginSpec[]
+---@type LazyPluginSpec[]
 local M = {
-  { "nvim-telescope/telescope-ui-select.nvim" },
-  { "nvim-telescope/telescope-fzf-native.nvim", build = "make" },
-  { "stevearc/dressing.nvim", opts = {} }, -- Pretty vim.ui
+  { "ibhagwan/fzf-lua" },
 }
 
 ---@type LazyKeysSpec[]
-local telescopeKeys = {
+local fzfKeys = {
   {
     "ff",
     function()
-      require("telescope.builtin").find_files()
+      require("fzf-lua").files()
     end,
     desc = "Find files",
     mode = "n",
@@ -18,83 +17,78 @@ local telescopeKeys = {
   {
     "fa",
     function()
-      require("telescope.builtin").lsp_document_symbols({
-        -- symbols = {}
-      })
+      require("fzf-lua").lsp_document_symbols()
     end,
     desc = "Document symbols",
   },
   {
     "fg",
     function()
-      require("telescope.builtin").live_grep()
+      require("fzf-lua").live_grep()
     end,
     desc = "Find grep",
   },
   {
     "fo",
     function()
-      require("telescope.builtin").find_files()
+      require("fzf-lua").files()
     end,
     desc = "Find files",
   },
   {
     "<leader>e",
     function()
-      require("telescope.builtin").oldfiles({ only_cwd = true })
+      require("fzf-lua").oldfiles({ cwd_only = true })
     end,
     desc = "Previous files",
   },
   {
     "fb",
     function()
-      require("telescope.builtin").buffers()
+      require("fzf-lua").buffers()
     end,
     desc = "Find buffers",
   },
   {
     "fh",
     function()
-      require("telescope.builtin").help_tags()
+      require("fzf-lua").help_tags()
     end,
     desc = "Find help tags",
   },
 }
 
 M[#M + 1] = {
-  "nvim-telescope/telescope.nvim",
-  version = "0.1.x",
-  dependencies = { "nvim-lua/plenary.nvim" },
-  keys = telescopeKeys,
+  "ibhagwan/fzf-lua",
+  keys = fzfKeys,
   config = function(_, opts)
-    require("telescope").setup(opts)
+    require("fzf-lua").setup(opts)
   end,
   opts = {
-    defaults = {
-      mappings = {
-        n = {
-          ["kj"] = "close",
-          ["jk"] = "close",
-        },
-        i = {
-          ["<S-Tab>"] = "move_selection_previous",
-          ["<Tab>"] = "move_selection_next",
-          ["<C-k>"] = "move_selection_previous",
-          ["<C-j>"] = "move_selection_next",
-        },
+    winopts = {
+      width = 0.8,
+      height = 0.8,
+      row = 0.5,
+      col = 0.5,
+      preview = {
+        scrollchars = { "┃", "" },
       },
     },
-    extensions = {
-      ["ui-select"] = {
-        require("telescope.themes").get_dropdown({
-          -- even more opts
-        }),
-      },
+    fzf_opts = {
+      ["--no-scrollbar"] = true,
+    },
+    keymap = {
       fzf = {
-        fuzzy = true, -- false will only do exact matching
-        override_generic_sorter = true, -- override the generic sorter
-        override_file_sorter = true, -- override the file sorter
-        case_mode = "smart_case", -- or "ignore_case" or "respect_case"
+        ["ctrl-q"] = "select-all+accept",
+        ["ctrl-u"] = "half-page-up",
+        ["ctrl-d"] = "half-page-down",
+        ["ctrl-x"] = "jump",
+        ["ctrl-f"] = "preview-page-down",
+        ["ctrl-b"] = "preview-page-up",
+      },
+      builtin = {
+        ["<c-f>"] = "preview-page-down",
+        ["<c-b>"] = "preview-page-up",
       },
     },
   },
