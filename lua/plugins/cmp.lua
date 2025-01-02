@@ -28,10 +28,8 @@ M[#M + 1] = {
       preset = "none",
       ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
       ["<CR>"] = { "accept", "fallback" },
-
-      ["<Tab>"] = { "snippet_forward", "fallback" },
+      ["<Tab>"] = { "snippet_forward", "fallback", "accept", "fallback" },
       ["<S-Tab>"] = { "snippet_backward", "fallback" },
-
       ["<Up>"] = { "select_prev", "fallback" },
       ["<Down>"] = { "select_next", "fallback" },
       ["<C-p>"] = { "select_prev", "fallback" },

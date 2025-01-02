@@ -36,6 +36,11 @@ M[#M + 1] = {
   lazy = false,
   ---@type snacks.Config
   opts = {
+    input = {
+      enabled = true,
+    },
+
+    scroll = { enabled = true },
     bigfile = { enabled = true },
     dashboard = {
       enabled = true,
@@ -110,4 +115,5 @@ M[#M + 1] = {
     },
   },
 }
+
 return M
