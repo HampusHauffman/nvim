@@ -19,7 +19,7 @@ local lspKeys = {
   {
     "gr",
     function()
-      require("telescope.builtin").lsp_references({
+      require("fzf-lua").lsp_references({
         fname_width = 1000,
         show_line = false,
       })
@@ -29,7 +29,7 @@ local lspKeys = {
   {
     "gd",
     function()
-      require("telescope.builtin").lsp_definitions({})
+      require("fzf-lua").lsp_definitions({})
     end,
     desc = "Go to definition",
   },
@@ -50,7 +50,6 @@ local lspKeys = {
 M[#M + 1] = {
   "williamboman/mason.nvim",
   dependencies = {
-    "telescope.nvim",
     "neovim/nvim-lspconfig",
     "williamboman/mason-lspconfig.nvim",
     "saghen/blink.cmp",
