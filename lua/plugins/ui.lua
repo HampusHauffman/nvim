@@ -1,5 +1,6 @@
 ---@type LazyPluginSpec[]
 local M = {}
+M[#M + 1] = { "arkav/lualine-lsp-progress" }
 
 M[#M + 1] = {
   "brenoprata10/nvim-highlight-colors",
@@ -43,6 +44,9 @@ M[#M + 1] = {
       lualine_b = {
         { "filename", icon = { "", align = "left" } },
         "branch",
+      },
+      lualine_c = {
+        "lsp_progress",
       },
       lualine_x = {},
       lualine_y = { "filetype", "progress" },
