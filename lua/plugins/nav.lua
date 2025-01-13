@@ -62,6 +62,9 @@ M[#M + 1] = {
     require("fzf-lua").setup(opts)
   end,
   opts = {
+    oldfiles = {
+      include_current_session = true, -- include bufs from current session
+    },
     winopts = {
       width = 0.8,
       height = 0.8,

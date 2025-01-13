@@ -18,9 +18,10 @@ M[#M + 1] = {
       documentation = { window = { border = "rounded" } },
       -- Makes sure we dont auto select when in cmd mode
       list = {
-        selection = function(ctx)
-          return ctx.mode == "cmdline" and "auto_insert" or "preselect"
-        end,
+        selection = {
+          preselect = false,
+          auto_insert = false,
+        },
       },
     },
     signature = { enabled = true, window = { border = "rounded" } },

@@ -39,6 +39,8 @@ M[#M + 1] = {
     input = {
       enabled = true,
     },
+    indent = { enabled = true },
+    scope = { enabled = true },
 
     scroll = { enabled = true },
     bigfile = { enabled = true },

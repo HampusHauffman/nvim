@@ -1,4 +1,5 @@
 local M = {}
+
 M[#M + 1] = {
   "zbirenbaum/copilot.lua",
   cmd = "Copilot",
@@ -39,7 +40,7 @@ M[#M + 1] = {
   },
   keys = {
     {
-      "<C-a>",
+      "<leader><S-a>",
       "<cmd>CodeCompanionActions<cr>",
       mode = { "n", "v" },
       noremap = true,
