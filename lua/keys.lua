@@ -34,3 +34,6 @@ map("n", "<leader>s", ":w<CR>", "Save file 💾")
 
 -- Allows Option backspace to delete words
 map("i", "<M-BS>", "<Esc> hciw", "Remove Word")
+
+-- So that whenever i am in visual mode and press p, it pastes from the system clipboard / last yank
+map("v", "p", '"0p')
