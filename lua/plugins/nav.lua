@@ -62,6 +62,7 @@ M[#M + 1] = {
     require("fzf-lua").setup(opts)
     vim.cmd([[FzfLua register_ui_select]])
   end,
+
   opts = {
     oldfiles = {
       include_current_session = true, -- include bufs from current session

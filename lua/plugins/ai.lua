@@ -11,17 +11,6 @@ M[#M + 1] = {
     })
   end,
 }
---
---M[#M + 1] = {
---  "github/copilot.vim",
---  cmd = "Copilot",
---  event = "InsertEnter",
---}
-
-M[#M + 1] = {
-  "MeanderingProgrammer/render-markdown.nvim",
-  ft = { "markdown", "codecompanion" },
-}
 
 M[#M + 1] = {
   "olimorris/codecompanion.nvim",

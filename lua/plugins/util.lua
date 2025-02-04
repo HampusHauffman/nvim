@@ -13,6 +13,7 @@ M[#M + 1] = {
       { path = "luvit-meta/library", words = { "vim%.uv" } },
       { path = "lazy.nvim" },
       { path = "snacks.nvim" },
+      { path = "fzf-lua" },
     },
   },
 }
@@ -38,6 +39,11 @@ M[#M + 1] = {
   opts = {
     input = {
       enabled = true,
+    },
+    zen = {
+      toggles = {
+        dim = false,
+      },
     },
     indent = { enabled = true },
     scope = { enabled = true },
@@ -67,12 +73,22 @@ M[#M + 1] = {
     statuscolumn = { enabled = true },
     words = { enabled = true },
     styles = {
+      zen = {
+        backdrop = { transparent = false, blend = 40 },
+      },
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
     },
   },
   keys = {
+    {
+      "<s-z>",
+      function()
+        Snacks.zen()
+      end,
+      desc = "Zen",
+    },
     {
       "<leader>m",
       function()

@@ -3,6 +3,11 @@ local M = {}
 M[#M + 1] = { "arkav/lualine-lsp-progress" }
 
 M[#M + 1] = {
+  "MeanderingProgrammer/render-markdown.nvim",
+  ft = { "markdown", "codecompanion" },
+}
+
+M[#M + 1] = {
   "brenoprata10/nvim-highlight-colors",
   opts = {
     ---Render style

@@ -51,12 +51,13 @@ M[#M + 1] = {
       default = {
         "lsp",
         "path",
-        "snippets",
-        "buffer",
+        --"buffer",
         "codecompanion",
+        "dadbod",
         "copilot",
       },
       providers = {
+        dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         codecompanion = {
           name = "CodeCompanion",
           module = "codecompanion.providers.completion.blink",
