@@ -13,7 +13,6 @@ M[#M + 1] = {
       { path = "luvit-meta/library", words = { "vim%.uv" } },
       { path = "lazy.nvim" },
       { path = "snacks.nvim" },
-      { path = "fzf-lua" },
     },
   },
 }
@@ -31,15 +30,123 @@ M[#M + 1] = {
   end,
 }
 
+---@type LazyKeysSpec[]
+local navKeys = {
+  {
+    "ff",
+    function()
+      Snacks.picker.files()
+    end,
+    desc = "Find files",
+    mode = "n",
+  },
+  {
+    "fa",
+    function()
+      Snacks.picker.lsp_symbols()
+    end,
+    desc = "Document symbols",
+  },
+  {
+    "fg",
+    function()
+      Snacks.picker.grep()
+    end,
+    desc = "Find grep",
+  },
+  {
+    "fo",
+    function()
+      Snacks.picker.files()
+    end,
+    desc = "Find files",
+  },
+  {
+    "<leader>e",
+    function()
+      Snacks.picker.recent()
+    end,
+    desc = "Previous files",
+  },
+  {
+    "fb",
+    function()
+      Snacks.picker.buffers()
+    end,
+    desc = "Find buffers",
+  },
+  {
+    "fh",
+    function()
+      Snacks.picker.help()
+    end,
+    desc = "Find help tags",
+  },
+  {
+    "<s-z>",
+    function()
+      Snacks.zen()
+    end,
+    desc = "Zen",
+  },
+  {
+    "<leader>m",
+    function()
+      Snacks.notifier.show_history()
+    end,
+    desc = "Show Notifier History",
+  },
+  {
+    "<leader>gB",
+    function()
+      Snacks.gitbrowse()
+    end,
+    desc = "Git Browse",
+  },
+  {
+    "<leader>gb",
+    function()
+      Snacks.git.blame_line()
+    end,
+    desc = "Git Blame Line",
+  },
+  {
+    "<leader>gf",
+    function()
+      Snacks.lazygit.log_file()
+    end,
+    desc = "Lazygit Current File History",
+  },
+  {
+    "<leader>gg",
+    function()
+      Snacks.lazygit()
+    end,
+    desc = "Lazygit",
+  },
+  {
+    "<leader>gl",
+    function()
+      Snacks.lazygit.log()
+    end,
+    desc = "Lazygit Log (cwd)",
+  },
+}
+
 M[#M + 1] = {
   "folke/snacks.nvim",
   priority = 1000,
+  keys = navKeys,
   lazy = false,
   ---@type snacks.Config
   opts = {
+    explorer = {
+      replace_netrw = true, -- Replace netrw with the snacks explorer
+    },
     input = {
       enabled = true,
     },
+    picker = { ui_select = true },
     zen = {
       toggles = {
         dim = false,
@@ -79,57 +186,6 @@ M[#M + 1] = {
       notification = {
         wo = { wrap = true }, -- Wrap notifications
       },
-    },
-  },
-  keys = {
-    {
-      "<s-z>",
-      function()
-        Snacks.zen()
-      end,
-      desc = "Zen",
-    },
-    {
-      "<leader>m",
-      function()
-        Snacks.notifier.show_history()
-      end,
-      desc = "Show Notifier History",
-    },
-    {
-      "<leader>gB",
-      function()
-        Snacks.gitbrowse()
-      end,
-      desc = "Git Browse",
-    },
-    {
-      "<leader>gb",
-      function()
-        Snacks.git.blame_line()
-      end,
-      desc = "Git Blame Line",
-    },
-    {
-      "<leader>gf",
-      function()
-        Snacks.lazygit.log_file()
-      end,
-      desc = "Lazygit Current File History",
-    },
-    {
-      "<leader>gg",
-      function()
-        Snacks.lazygit()
-      end,
-      desc = "Lazygit",
-    },
-    {
-      "<leader>gl",
-      function()
-        Snacks.lazygit.log()
-      end,
-      desc = "Lazygit Log (cwd)",
     },
   },
 }

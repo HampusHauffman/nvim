@@ -13,6 +13,9 @@ opt.splitright = true -- Split to the right
 -- StatusLine
 opt.laststatus = 3 -- Set global statusline
 opt.cmdheight = 0
+--Test
+opt.diffopt =
+  "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
 
 -- Border for diagnostic
 vim.diagnostic.config({
@@ -20,12 +23,13 @@ vim.diagnostic.config({
 })
 
 -- Make the separator purple
-vim.api.nvim_command(
-  "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
-)
-vim.api.nvim_command("hi! link " .. "WinSeparator" .. " " .. "@enumMember")
-vim.api.nvim_command("hi! link " .. "FzfLuaBorder" .. " " .. "@enumMember")
-vim.api.nvim_command("hi! link " .. "FzfLuaCursorLine" .. " " .. "Normal")
+--vim.api.nvim_command(
+--  "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
+--)
+--vim.api.nvim_command("hi! link " .. "WinSeparator" .. " " .. "@enumMember")
+--vim.api.nvim_command("hi! link " .. "FzfLuaBorder" .. " " .. "@enumMember")
+--vim.api.nvim_command("hi! link " .. "FzfLuaCursorLine" .. " " .. "Normal")
+--vim.api.nvim_command("hi! link " .. "FzfLuaSearch" .. " " .. "Normal")
 
 vim.fn.sign_define(
   "DiagnosticSignError",

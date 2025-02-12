@@ -1,101 +1,5 @@
 ---@type LazyPluginSpec[]
 local M = {}
-
----@type LazyKeysSpec[]
-local fzfKeys = {
-  {
-    "ff",
-    function()
-      require("fzf-lua").files()
-    end,
-    desc = "Find files",
-    mode = "n",
-  },
-  {
-    "fa",
-    function()
-      require("fzf-lua").lsp_document_symbols()
-    end,
-    desc = "Document symbols",
-  },
-  {
-    "fg",
-    function()
-      require("fzf-lua").live_grep()
-    end,
-    desc = "Find grep",
-  },
-  {
-    "fo",
-    function()
-      require("fzf-lua").files()
-    end,
-    desc = "Find files",
-  },
-  {
-    "<leader>e",
-    function()
-      require("fzf-lua").oldfiles({ cwd_only = true })
-    end,
-    desc = "Previous files",
-  },
-  {
-    "fb",
-    function()
-      require("fzf-lua").buffers()
-    end,
-    desc = "Find buffers",
-  },
-  {
-    "fh",
-    function()
-      require("fzf-lua").help_tags()
-    end,
-    desc = "Find help tags",
-  },
-}
-
-M[#M + 1] = {
-  "ibhagwan/fzf-lua",
-  keys = fzfKeys,
-  config = function(_, opts)
-    require("fzf-lua").setup(opts)
-    vim.cmd([[FzfLua register_ui_select]])
-  end,
-
-  opts = {
-    oldfiles = {
-      include_current_session = true, -- include bufs from current session
-    },
-    winopts = {
-      width = 0.8,
-      height = 0.8,
-      row = 0.5,
-      col = 0.5,
-      preview = {
-        scrollchars = { "┃", "" },
-      },
-    },
-    fzf_opts = {
-      ["--no-scrollbar"] = true,
-    },
-    keymap = {
-      fzf = {
-        ["ctrl-q"] = "select-all+accept",
-        ["ctrl-u"] = "half-page-up",
-        ["ctrl-d"] = "half-page-down",
-        ["ctrl-x"] = "jump",
-        ["ctrl-f"] = "preview-page-down",
-        ["ctrl-b"] = "preview-page-up",
-      },
-      builtin = {
-        ["<c-f>"] = "preview-page-down",
-        ["<c-b>"] = "preview-page-up",
-      },
-    },
-  },
-}
-
 M[#M + 1] = {
   "christoomey/vim-tmux-navigator",
   lazy = false,
@@ -139,18 +43,29 @@ M[#M + 1] = {
       "File explorer",
     },
   },
-  opts = {
-    filesystem = {
-      filtered_items = {
-        visible = true,
+  opts = function(_, opts)
+    local function on_move(data)
+      Snacks.rename.on_rename_file(data.source, data.destination)
+    end
+    local events = require("neo-tree.events")
+    opts.event_handlers = opts.event_handlers or {}
+    vim.list_extend(opts.event_handlers, {
+      { event = events.FILE_MOVED, handler = on_move },
+      { event = events.FILE_RENAMED, handler = on_move },
+    })
+    return {
+      filesystem = {
+        filtered_items = {
+          visible = true,
+        },
       },
-    },
-    popup_border_style = "rounded",
-    close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
-    default_component_configs = {
-      modified = { symbol = "" },
-    },
-  },
+      popup_border_style = "rounded",
+      close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
+      default_component_configs = {
+        modified = { symbol = "" },
+      },
+    }
+  end,
 }
 
 M[#M + 1] = {

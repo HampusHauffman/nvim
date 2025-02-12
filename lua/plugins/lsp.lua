@@ -19,17 +19,14 @@ local lspKeys = {
   {
     "gr",
     function()
-      require("fzf-lua").lsp_references({
-        fname_width = 1000,
-        show_line = false,
-      })
+      Snacks.picker.lsp_references()
     end,
     desc = "Go to references",
   },
   {
     "gd",
     function()
-      require("fzf-lua").lsp_definitions({})
+      Snacks.picker.lsp_definitions()
     end,
     desc = "Go to definition",
   },
@@ -153,6 +150,16 @@ M[#M + 1] = {
       },
     }
   end,
+}
+
+M[#M + 1] = {
+  "nvim-flutter/flutter-tools.nvim",
+  lazy = false,
+  dependencies = {
+    "nvim-lua/plenary.nvim",
+    "stevearc/dressing.nvim", -- optional for vim.ui.select
+  },
+  config = true,
 }
 
 M[#M + 1] = {
