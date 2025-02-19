@@ -17,7 +17,7 @@ M[#M + 1] = {
   },
 }
 
-M[#M + 1] = { "echasnovski/mini.pairs", version = "*", opts = {} }
+--M[#M + 1] = { "echasnovski/mini.pairs", version = "*", opts = {} }
 
 M[#M + 1] = {
   "MagicDuck/grug-far.nvim",
@@ -131,7 +131,25 @@ local navKeys = {
     end,
     desc = "Lazygit Log (cwd)",
   },
+  {
+    "<leader>n",
+    function()
+      local explorer_pickers = Snacks.picker.get({ source = "explorer" })
+      for _, v in pairs(explorer_pickers) do
+        if v:is_focused() then
+          v:close()
+        else
+          v:focus()
+        end
+      end
+      if #explorer_pickers == 0 then
+        Snacks.picker.explorer()
+      end
+    end,
+  },
 }
+
+M[#M + 1] = { "tpope/vim-sleuth" }
 
 M[#M + 1] = {
   "folke/snacks.nvim",
@@ -145,6 +163,7 @@ M[#M + 1] = {
     },
     input = {
       enabled = true,
+      win = { style = "input" },
     },
     picker = { ui_select = true },
     zen = {

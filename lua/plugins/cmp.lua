@@ -14,8 +14,19 @@ M[#M + 1] = {
   ---@type blink.cmp.Config
   opts = {
     completion = {
-      menu = { border = "rounded" },
-      documentation = { window = { border = "rounded" } },
+      menu = {
+        border = "rounded",
+        draw = {
+          columns = {
+
+            { "kind_icon" },
+            { "label", "label_description", gap = 1 },
+            { "source_name" },
+          },
+        },
+      },
+      ghost_text = { enabled = true },
+      documentation = { auto_show = true, window = { border = "rounded" } },
       -- Makes sure we dont auto select when in cmd mode
       list = {
         selection = {

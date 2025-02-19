@@ -11,7 +11,7 @@ M[#M + 1] = {
     ---@diagnostic disable-next-line: missing-fields
     require("nvim-treesitter.configs").setup({
       indent = {
-        enable = true,
+        enable = false,
       },
       -- Install parsers synchronously (only applied to `ensure_installed`)
       sync_install = false,

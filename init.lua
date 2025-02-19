@@ -30,11 +30,26 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
+    --{
+    --  "HampusHauffman/dracula.nvim",
+    --  dev = true,
+    --  branch = "oled",
+    --  priority = 1000,
+    --},
     {
-      "HampusHauffman/dracula.nvim",
-      dev = true,
-      branch = "oled",
-      priority = 1000,
+      "Mofiqul/dracula.nvim",
+      opts = {
+        theme = "dracula-soft",
+        colors = {
+          bg = "#000000",
+          black = "#000000",
+        },
+        show_end_of_buffer = true, -- default false
+        transparent_bg = true, -- default false
+        lualine_bg_color = "#000000", -- default nil
+        italic_comment = true, -- default false
+        overrides = {},
+      },
     },
     {
       "HampusHauffman/block.nvim",
@@ -44,7 +59,7 @@ require("lazy").setup({
       opts = { percent = 1.4, depth = 4, bg = "#101010", automatic = false },
     },
   },
-  install = { colorscheme = { "dracula" } },
+  install = { colorscheme = { "dracula-soft" } },
   checker = {
     notify = false, -- get a notification when new updates are found
   },
@@ -56,7 +71,7 @@ require("lazy").setup({
 })
 
 --vim.cmd("colorscheme dracula-soft")
-vim.cmd("colorscheme dracula")
+vim.cmd("colorscheme dracula-soft")
 require("opt")
 require("keys")
 require("aucmd")

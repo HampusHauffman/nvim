@@ -30,18 +30,18 @@ M[#M + 1] = {
   keys = {
     --{ "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer" },
     --{ "<leader>n", ":Neotree left focus reveal<CR>", "File explorer" },
-    {
-      "<leader>n",
-      function()
-        local bufname = vim.api.nvim_buf_get_name(0)
-        if bufname:match("neo%-tree") then
-          vim.cmd("Neotree close")
-        else
-          vim.cmd("Neotree left focus reveal")
-        end
-      end,
-      "File explorer",
-    },
+    --    {
+    --      "<leader>n",
+    --      function()
+    --        local bufname = vim.api.nvim_buf_get_name(0)
+    --        if bufname:match("neo%-tree") then
+    --          vim.cmd("Neotree close")
+    --        else
+    --          vim.cmd("Neotree left focus reveal")
+    --        end
+    --      end,
+    --      "File explorer",
+    --    },
   },
   opts = function(_, opts)
     local function on_move(data)
