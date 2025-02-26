@@ -22,11 +22,7 @@ M[#M + 1] = {
 M[#M + 1] = {
   "MagicDuck/grug-far.nvim",
   config = function()
-    require("grug-far").setup({
-      -- options, see Configuration section below
-      -- there are no required options atm
-      -- engine = 'ripgrep' is default, but 'astgrep' can be specified
-    })
+    require("grug-far").setup({})
   end,
 }
 
@@ -143,7 +139,15 @@ local navKeys = {
         end
       end
       if #explorer_pickers == 0 then
-        Snacks.picker.explorer()
+        --if Snacks.zen.win.backdrop.closed == false then
+        --  Snacks.picker.explorer({
+        --    auto_close = true,
+        --    layout = { layout = { position = "float" } },
+        --  })
+        --else
+        --  Snacks.picker.explorer({})
+        --end
+          Snacks.picker.explorer({hidden = true})
       end
     end,
   },

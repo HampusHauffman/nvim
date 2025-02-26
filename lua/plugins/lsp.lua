@@ -31,17 +31,11 @@ local lspKeys = {
     desc = "Go to definition",
   },
   { "K", vim.lsp.buf.hover, desc = "Hover documentation" },
-  {
-    "<leader>r",
-    function()
-      vim.lsp.buf.rename()
-      vim.cmd("silent! wa")
-    end,
-    desc = "Rename symbol",
-  },
+  { "<leader>r", vim.lsp.buf.rename, desc = "Rename symbol" },
   { "<leader>c", vim.lsp.buf.code_action, desc = "Code action" },
   { "<c-p>", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic" },
   { "<c-n>", vim.diagnostic.goto_next, desc = "Go to next diagnostic" },
+  { "<c-b>", vim.diagnostic.open_float, desc = "Go to next diagnostic" },
 }
 
 M[#M + 1] = {
@@ -53,16 +47,8 @@ M[#M + 1] = {
   },
   keys = lspKeys,
   lazy = false,
-  config = function()
-    require("mason").setup({
-      ui = { border = "rounded" },
-    })
-
-    require("mason-lspconfig").setup({
-      -- Install Stylua manually since there is no mapping
-      ensure_installed = { "lua_ls", "ts_ls", "eslint", "tailwindcss" }, -- Specify the LSP servers to ensure are installed
-    })
-
+  ---@param opts MasonSettings | {ensure_installed: string[]}
+  config = function(_, opts)
     -- Borders rounded for hover and signature help
     local handlers = {
       ["textDocument/hover"] = vim.lsp.with(
@@ -74,21 +60,23 @@ M[#M + 1] = {
         { border = border }
       ),
     }
-    -- List of servers to exclude
-    local exclude_servers = { "rust_analyzer" }
 
-    -- Setup server automatically. And set borders to rounded
-    require("mason-lspconfig").setup_handlers({
-      function(server_name)
-        if not vim.tbl_contains(exclude_servers, server_name) then
-          local capabilities = require("blink.cmp").get_lsp_capabilities()
-          require("lspconfig")[server_name].setup({
-            handlers = handlers,
-            capabilities = capabilities,
-          })
-        end
-      end,
+    local capabilities = require("blink.cmp").get_lsp_capabilities()
+    local lspSetup = { capabilities = capabilities, handlers = handlers }
+
+    require("mason").setup({ ui = { border = "rounded" } })
+    require("mason-lspconfig").setup({
+      ensure_installed = { "lua_ls", "ts_ls", "eslint", "tailwindcss" },
+      handlers = {
+        function(server_name)
+          require("lspconfig")[server_name].setup(lspSetup)
+        end,
+        ["rust_analyzer"] = function() end,
+      },
     })
+
+    -- Remaining configs for lsp
+    require("lspconfig").gdscript.setup(lspSetup)
   end,
 }
 
@@ -118,15 +106,19 @@ M[#M + 1] = {
       javascript = { "prettierd", stop_after_first = true },
       typescriptreact = { "prettierd", stop_after_first = true },
       typescript = { "prettierd", stop_after_first = true },
+      gdscript = { "gdformat", stop_after_first = false },
     },
     -- Set default options
     default_format_opts = {
       lsp_format = "fallback",
     },
     -- Set up format-on-save
-    format_on_save = { timeout_ms = 500 },
+    --format_on_save = { timeout_ms = 500 },
     -- Customize formatters
     formatters = {
+      gdformat = {
+        cmd = "gdformat",
+      },
       shfmt = {
         prepend_args = { "-i", "2" },
       },
@@ -135,6 +127,23 @@ M[#M + 1] = {
   init = function()
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
+}
+
+-- Extra linting for GDScript
+M[#M + 1] = {
+  "mfussenegger/nvim-lint",
+  config = function()
+    require("lint").linters_by_ft = {
+      gdscript = { "gdlint" },
+    }
+
+    vim.api.nvim_create_autocmd("BufWritePost", {
+      pattern = "*",
+      callback = function()
+        require("lint").try_lint()
+      end,
+    })
   end,
 }
 

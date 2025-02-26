@@ -32,3 +32,27 @@ vim.api.nvim_create_autocmd("BufReadPost", {
     end
   end,
 })
+
+
+-- Create an augroup for NoHLSearch
+local nohl_group = vim.api.nvim_create_augroup("NoHLSearch", { clear = true })
+
+-- Function to disable hlsearch after a certain time
+local function nohl_after(n)
+  if not vim.g.nohl_starttime then
+    vim.g.nohl_starttime = os.time()
+  else
+    if vim.v.hlsearch == 1 and (os.time() - vim.g.nohl_starttime) >= n then
+      vim.cmd("set nohlsearch")
+      vim.g.nohl_starttime = nil
+    end
+  end
+end
+
+-- Create autocommands for CursorHold and CursorMoved
+vim.api.nvim_create_autocmd({ "CursorHold", "CursorMoved" }, {
+  group = nohl_group,
+  callback = function()
+    nohl_after(9)
+  end,
+})
