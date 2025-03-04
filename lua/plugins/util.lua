@@ -60,7 +60,7 @@ local navKeys = {
   {
     "<leader>e",
     function()
-      Snacks.picker.recent()
+      Snacks.picker.recent({ filter = { cwd = true } })
     end,
     desc = "Previous files",
   },
@@ -147,7 +147,7 @@ local navKeys = {
         --else
         --  Snacks.picker.explorer({})
         --end
-          Snacks.picker.explorer({hidden = true})
+        Snacks.picker.explorer({ hidden = true, exclude = {"*.gd.uid"} })
       end
     end,
   },
