@@ -33,7 +33,6 @@ vim.api.nvim_create_autocmd("BufReadPost", {
   end,
 })
 
-
 -- Create an augroup for NoHLSearch
 local nohl_group = vim.api.nvim_create_augroup("NoHLSearch", { clear = true })
 

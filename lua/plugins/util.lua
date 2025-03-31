@@ -147,7 +147,7 @@ local navKeys = {
         --else
         --  Snacks.picker.explorer({})
         --end
-        Snacks.picker.explorer({ hidden = true, exclude = {"*.gd.uid"} })
+        Snacks.picker.explorer({ hidden = true, exclude = {"*.gd.uid", "*.import", "*.tres"} })
       end
     end,
   },

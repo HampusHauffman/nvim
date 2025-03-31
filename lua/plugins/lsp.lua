@@ -77,6 +77,11 @@ M[#M + 1] = {
 
     -- Remaining configs for lsp
     require("lspconfig").gdscript.setup(lspSetup)
+    require("lspconfig").glsl_analyzer.setup({
+      capabilities = capabilities,
+      handlers = handlers,
+      filetypes = { "glsl", "gdshader" },
+    })
   end,
 }
 
@@ -130,7 +135,7 @@ M[#M + 1] = {
   end,
 }
 
--- Extra linting for GDScript
+-- Extra linting
 M[#M + 1] = {
   "mfussenegger/nvim-lint",
   config = function()
