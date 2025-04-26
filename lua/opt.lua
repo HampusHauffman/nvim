@@ -6,7 +6,7 @@ opt.wrap = true -- Disable line wrap
 opt.number = true -- Show line number
 opt.relativenumber = true --relativenumber
 opt.undofile = true -- Persistent undo
-opt.smartindent = true -- Autoindent new linespt.smartindent = true      -- Autoindent new lines
+opt.smartindent = true -- Autoindent new lines
 opt.autoindent = true
 opt.splitright = true -- Split to the right
 
@@ -26,6 +26,7 @@ vim.diagnostic.config({
 --vim.api.nvim_command(
 --  "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
 --)
+vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#020202" })
 vim.api.nvim_command("hi! link " .. "WinSeparator" .. " " .. "@enumMember")
 --vim.api.nvim_command("hi! link " .. "FzfLuaBorder" .. " " .. "@enumMember")
 --vim.api.nvim_command("hi! link " .. "FzfLuaCursorLine" .. " " .. "Normal")

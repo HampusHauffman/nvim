@@ -43,6 +43,7 @@ require("lazy").setup({
         colors = {
           bg = "#000000",
           black = "#000000",
+          visual = "#3E4452",
         },
         show_end_of_buffer = true, -- default false
         transparent_bg = true, -- default false
