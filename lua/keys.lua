@@ -13,7 +13,7 @@ map("", "<right>", "<nop>")
 map("n", "ö", "$")
 map("v", "ö", "$")
 
--- Map Esc to kk and jj
+-- Map Esc to kj and jk
 map("i", "jk", "<Esc>")
 map("i", "kj", "<Esc>")
 
@@ -22,6 +22,10 @@ map("i", "<C-h>", "<left>")
 map("i", "<C-j>", "<down>")
 map("i", "<C-k>", "<up>")
 map("i", "<C-l>", "<right>")
+
+-- no work
+map("n", "<leader>gh", "vgh")
+map("n", "<leader>gR", "vghgr")
 
 vim.cmd([[
   set wildcharm=<Tab>
@@ -36,4 +40,3 @@ map("n", "<leader>s", ":w<CR>", "Save file 💾")
 map("i", "<M-BS>", "<Esc> hciw", "Remove Word")
 
 -- So that whenever i am in visual mode and press p, it pastes from the system clipboard / last yank
---map("v", "p", '"0p')

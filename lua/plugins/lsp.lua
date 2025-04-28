@@ -1,17 +1,6 @@
 ---@type LazyPluginSpec[]
 local M = {}
 
-local border = {
-  { "╭", "FloatBorder" }, -- Top-left corner
-  { "─", "FloatBorder" }, -- Top border
-  { "╮", "FloatBorder" }, -- Top-right corner
-  { "│", "FloatBorder" }, -- Right border
-  { "╯", "FloatBorder" }, -- Bottom-right corner
-  { "─", "FloatBorder" }, -- Bottom border
-  { "╰", "FloatBorder" }, -- Bottom-left corner
-  { "│", "FloatBorder" }, -- Left border
-}
-
 ---@type LazyKeysSpec[]
 local lspKeys = {
   { "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
@@ -30,11 +19,29 @@ local lspKeys = {
     end,
     desc = "Go to definition",
   },
-  { "K", vim.lsp.buf.hover, desc = "Hover documentation" },
+  {
+    "K",
+    function()
+      vim.lsp.buf.hover({ border = "rounded" })
+    end,
+    desc = "Hover documentation",
+  },
   { "<leader>r", vim.lsp.buf.rename, desc = "Rename symbol" },
   { "<leader>c", vim.lsp.buf.code_action, desc = "Code action" },
-  { "<c-p>", vim.diagnostic.goto_prev, desc = "Go to previous diagnostic" },
-  { "<c-n>", vim.diagnostic.goto_next, desc = "Go to next diagnostic" },
+  {
+    "<c-p>",
+    function()
+      vim.diagnostic.jump({ count = -1, float = true })
+    end,
+    desc = "Go to previous diagnostic",
+  },
+  {
+    "<c-n>",
+    function()
+      vim.diagnostic.jump({ count = 1, float = true })
+    end,
+    desc = "Go to next diagnostic",
+  },
   { "<c-b>", vim.diagnostic.open_float, desc = "Go to next diagnostic" },
 }
 
@@ -50,19 +57,9 @@ M[#M + 1] = {
   ---@param opts MasonSettings | {ensure_installed: string[]}
   config = function(_, opts)
     -- Borders rounded for hover and signature help
-    local handlers = {
-      ["textDocument/hover"] = vim.lsp.with(
-        vim.lsp.handlers.hover,
-        { border = border }
-      ),
-      ["textDocument/signatureHelp"] = vim.lsp.with(
-        vim.lsp.handlers.signature_help,
-        { border = border }
-      ),
-    }
 
     local capabilities = require("blink.cmp").get_lsp_capabilities()
-    local lspSetup = { capabilities = capabilities, handlers = handlers }
+    local lspSetup = { capabilities = capabilities }
 
     require("mason").setup({ ui = { border = "rounded" } })
     require("mason-lspconfig").setup({
@@ -79,8 +76,7 @@ M[#M + 1] = {
     require("lspconfig").gdscript.setup(lspSetup)
     require("lspconfig").glsl_analyzer.setup({
       capabilities = capabilities,
-      handlers = handlers,
-      filetypes = { "glsl", "gdshader" },
+      filetypes = { "gdshader" },
     })
   end,
 }
@@ -174,14 +170,6 @@ M[#M + 1] = {
     "stevearc/dressing.nvim", -- optional for vim.ui.select
   },
   config = true,
-}
-
-M[#M + 1] = {
-  "saecki/crates.nvim",
-  tag = "stable",
-  config = function()
-    require("crates").setup({})
-  end,
 }
 
 M[#M + 1] = {

@@ -11,7 +11,8 @@ opt.autoindent = true
 opt.splitright = true -- Split to the right
 
 -- StatusLine
-opt.laststatus = 3 -- Set global statusline
+opt.laststatus = 0 -- Set global statusline
+--opt.laststatus = 3 -- Set global statusline
 opt.cmdheight = 0
 --Test
 opt.diffopt =
@@ -27,7 +28,9 @@ vim.diagnostic.config({
 --  "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
 --)
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#020202" })
-vim.api.nvim_command("hi! link " .. "WinSeparator" .. " " .. "@enumMember")
+vim.api.nvim_set_hl(0, "WinSeparator", { link = "@enumMember" })
+vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+
 --vim.api.nvim_command("hi! link " .. "FzfLuaBorder" .. " " .. "@enumMember")
 --vim.api.nvim_command("hi! link " .. "FzfLuaCursorLine" .. " " .. "Normal")
 --vim.api.nvim_command("hi! link " .. "FzfLuaSearch" .. " " .. "Normal")

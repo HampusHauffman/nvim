@@ -20,55 +20,6 @@ M[#M + 1] = {
 }
 
 M[#M + 1] = {
-  "nvim-neo-tree/neo-tree.nvim",
-  branch = "v3.x",
-  dependencies = {
-    "nvim-lua/plenary.nvim",
-    "nvim-tree/nvim-web-devicons",
-    "MunifTanjim/nui.nvim",
-  },
-  keys = {
-    --{ "<leader><s-n>", ":Neotree left focus reveal<CR>", "File explorer" },
-    --{ "<leader>n", ":Neotree left focus reveal<CR>", "File explorer" },
-    --    {
-    --      "<leader>n",
-    --      function()
-    --        local bufname = vim.api.nvim_buf_get_name(0)
-    --        if bufname:match("neo%-tree") then
-    --          vim.cmd("Neotree close")
-    --        else
-    --          vim.cmd("Neotree left focus reveal")
-    --        end
-    --      end,
-    --      "File explorer",
-    --    },
-  },
-  opts = function(_, opts)
-    local function on_move(data)
-      Snacks.rename.on_rename_file(data.source, data.destination)
-    end
-    local events = require("neo-tree.events")
-    opts.event_handlers = opts.event_handlers or {}
-    vim.list_extend(opts.event_handlers, {
-      { event = events.FILE_MOVED, handler = on_move },
-      { event = events.FILE_RENAMED, handler = on_move },
-    })
-    return {
-      filesystem = {
-        filtered_items = {
-          visible = true,
-        },
-      },
-      popup_border_style = "rounded",
-      close_if_last_window = true, -- Close Neo-tree if it is the last window left in the tab
-      default_component_configs = {
-        modified = { symbol = "" },
-      },
-    }
-  end,
-}
-
-M[#M + 1] = {
   "folke/flash.nvim",
   event = "VeryLazy",
   ---@type Flash.Config

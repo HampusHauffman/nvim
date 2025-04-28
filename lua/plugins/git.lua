@@ -12,6 +12,7 @@ M[#M + 1] = {
       desc = "Toggle mini.diff overlay",
     },
   },
+
   config = function()
     require("mini.diff").setup({
       mappings = {

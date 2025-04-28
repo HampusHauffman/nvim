@@ -13,6 +13,25 @@ M[#M + 1] = {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
+
+    cmdline = {
+      enabled = true,
+      completion = {
+        menu = {
+          auto_show = false,
+        },
+      },
+      sources = { "path", "cmdline" },
+      keymap = {
+        preset = "none", -- Disable the preset to use only our custom mappings
+        ["<C-j>"] = { "show_and_insert", "select_next", "fallback" },
+        ["<C-k>"] = { "show_and_insert", "select_prev", "fallback" },
+        ["<Tab>"] = { "show_and_insert", "select_next", "fallback" },
+        ["<S-Tab>"] = { "show_and_insert", "select_prev", "fallback" },
+        ["<C-space>"] = { "show_and_insert" },
+      },
+    },
+
     completion = {
       menu = {
         border = "rounded",
@@ -51,8 +70,6 @@ M[#M + 1] = {
     },
 
     appearance = {
-      -- Set to 'mono' for 'Nerd Font Mono' or 'normal' for 'Nerd Font'
-      -- Adjusts spacing to ensure icons are aligned
       nerd_font_variant = "mono",
     },
 
