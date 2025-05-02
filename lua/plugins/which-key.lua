@@ -13,15 +13,7 @@ M[#M + 1] = {
       { "g", mode = { "n", "v" } },
     },
   },
-  keys = {
-    {
-      "<leader>?",
-      function()
-        require("which-key").show({ global = false })
-      end,
-      desc = "Buffer Local Keymaps (which-key)",
-    },
-  },
+  keys = require("keymaps.nav").which_key,
 }
 
 return M

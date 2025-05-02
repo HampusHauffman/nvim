@@ -3,15 +3,7 @@ local M = {}
 M[#M + 1] = {
   "echasnovski/mini.diff",
   event = "VeryLazy",
-  keys = {
-    {
-      "<leader>go",
-      function()
-        require("mini.diff").toggle_overlay(0)
-      end,
-      desc = "Toggle mini.diff overlay",
-    },
-  },
+  keys = require("keymaps.git").diff,
 
   config = function()
     require("mini.diff").setup({

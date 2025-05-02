@@ -15,7 +15,6 @@ autocmd({ "VimResized" }, {
 })
 
 -- go to last loc when opening a buffer
-
 autocmd("BufReadPost", {
   pattern = "*",
   callback = function()
@@ -32,7 +31,7 @@ autocmd("BufReadPost", {
 })
 
 -- Save on insert mode exit
-("InsertLeave", {
+autocmd("InsertLeave", {
   group = augroup("save_on_insert_leave"),
   callback = function()
     if vim.bo.modified and vim.bo.buftype == "" then

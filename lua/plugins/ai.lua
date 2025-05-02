@@ -44,29 +44,7 @@ M[#M + 1] = {
       },
     },
   },
-  keys = {
-    {
-      "<leader><S-a>",
-      "<cmd>CodeCompanionActions<cr>",
-      mode = { "n", "v" },
-      noremap = true,
-      silent = true,
-    },
-    {
-      "<leader>a",
-      "<cmd>CodeCompanionChat Toggle<cr>",
-      mode = { "n", "v" },
-      noremap = true,
-      silent = true,
-    },
-    {
-      "ga",
-      "<cmd>CodeCompanionChat Add<cr>",
-      mode = "v",
-      noremap = true,
-      silent = true,
-    },
-  },
+  keys = require("keymaps.ai").keys,
 }
 
 return M

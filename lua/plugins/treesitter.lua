@@ -21,11 +21,7 @@ M[#M + 1] = {
 
       incremental_selection = {
         enable = true,
-        keymaps = {
-          init_selection = "<leader>v",
-          node_incremental = "<C-k>",
-          node_decremental = "<C-j>",
-        },
+        keymaps = require("keymaps.treesitter").keys,
       },
 
       highlight = {

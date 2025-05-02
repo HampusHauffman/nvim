@@ -28,142 +28,18 @@ M[#M + 1] = {
   end,
 }
 
+-- Import navigation keys from centralized location
 ---@type LazyKeysSpec[]
-local navKeys = {
-  {
-    "ff",
-    function()
-      Snacks.picker.files()
-    end,
-    desc = "Find files",
-    mode = "n",
-  },
-  {
-    "fa",
-    function()
-      Snacks.picker.lsp_symbols()
-    end,
-    desc = "Document symbols",
-  },
-  {
-    "fg",
-    function()
-      Snacks.picker.grep()
-    end,
-    desc = "Find grep",
-  },
-  {
-    "fo",
-    function()
-      Snacks.picker.files()
-    end,
-    desc = "Find files",
-  },
-  {
-    "<leader>e",
-    function()
-      Snacks.picker.recent({ filter = { cwd = true } })
-    end,
-    desc = "Previous files",
-  },
-  {
-    "fb",
-    function()
-      Snacks.picker.buffers()
-    end,
-    desc = "Find buffers",
-  },
-  {
-    "fh",
-    function()
-      Snacks.picker.help()
-    end,
-    desc = "Find help tags",
-  },
-  {
-    "<s-z>",
-    function()
-      Snacks.zen()
-    end,
-    desc = "Zen",
-  },
-  {
-    "<leader>m",
-    function()
-      Snacks.notifier.show_history()
-    end,
-    desc = "Show Notifier History",
-  },
-  {
-    "<leader>gB",
-    function()
-      Snacks.gitbrowse()
-    end,
-    desc = "Git Browse",
-  },
-  {
-    "<leader>gb",
-    function()
-      Snacks.git.blame_line()
-    end,
-    desc = "Git Blame Line",
-  },
-  {
-    "<leader>gf",
-    function()
-      Snacks.lazygit.log_file()
-    end,
-    desc = "Lazygit Current File History",
-  },
-  {
-    "<leader>gg",
-    function()
-      Snacks.lazygit()
-    end,
-    desc = "Lazygit",
-  },
-  {
-    "<leader>gl",
-    function()
-      Snacks.lazygit.log()
-    end,
-    desc = "Lazygit Log (cwd)",
-  },
-  {
-    "<leader>n",
-    function()
-      local explorer_pickers = Snacks.picker.get({ source = "explorer" })
-      for _, v in pairs(explorer_pickers) do
-        if v:is_focused() then
-          v:close()
-        else
-          v:focus()
-        end
-      end
-      if #explorer_pickers == 0 then
-        --if Snacks.zen.win.backdrop.closed == false then
-        --  Snacks.picker.explorer({
-        --    auto_close = true,
-        --    layout = { layout = { position = "float" } },
-        --  })
-        --else
-        --  Snacks.picker.explorer({})
-        --end
-        Snacks.picker.explorer({
-          hidden = true,
-          exclude = { "*.gd.uid", "*.import", "*.tres" },
-        })
-      end
-    end,
-  },
-}
+local navKeys = require("keymaps.nav").keys
+---@type LazyKeysSpec[]
+local gitKeys = require("keymaps.git").keys
 
 M[#M + 1] = { "tpope/vim-sleuth" }
 
 M[#M + 1] = {
   "folke/snacks.nvim",
   priority = 1000,
-  keys = navKeys,
+  keys = vim.list_extend(navKeys, gitKeys),
   lazy = false,
   ---@type snacks.Config
   opts = {

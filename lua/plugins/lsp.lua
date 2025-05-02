@@ -1,50 +1,6 @@
 ---@type LazyPluginSpec[]
 local M = {}
 
----@type LazyKeysSpec[]
-local lspKeys = {
-  { "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
-  { "gi", vim.lsp.buf.implementation, desc = "Go to implementation" },
-  {
-    "gr",
-    function()
-      Snacks.picker.lsp_references()
-    end,
-    desc = "Go to references",
-  },
-  {
-    "gd",
-    function()
-      Snacks.picker.lsp_definitions()
-    end,
-    desc = "Go to definition",
-  },
-  {
-    "K",
-    function()
-      vim.lsp.buf.hover({ border = "rounded" })
-    end,
-    desc = "Hover documentation",
-  },
-  { "<leader>r", vim.lsp.buf.rename, desc = "Rename symbol" },
-  { "<leader>c", vim.lsp.buf.code_action, desc = "Code action" },
-  {
-    "<c-p>",
-    function()
-      vim.diagnostic.jump({ count = -1, float = true })
-    end,
-    desc = "Go to previous diagnostic",
-  },
-  {
-    "<c-n>",
-    function()
-      vim.diagnostic.jump({ count = 1, float = true })
-    end,
-    desc = "Go to next diagnostic",
-  },
-  { "<c-b>", vim.diagnostic.open_float, desc = "Go to next diagnostic" },
-}
-
 M[#M + 1] = {
   "williamboman/mason.nvim",
   dependencies = {
@@ -52,7 +8,7 @@ M[#M + 1] = {
     "mason-lspconfig.nvim",
     "blink.cmp",
   },
-  keys = lspKeys,
+  keys = require("keymaps.lsp").keys,
   lazy = false,
   ---@param opts MasonSettings | {ensure_installed: string[]}
   config = function(_, opts)
@@ -86,17 +42,7 @@ M[#M + 1] = {
   dependencies = { "mason.nvim" },
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
-  keys = {
-    {
-      -- Customize or remove this keymap to your liking
-      "<leader>f",
-      function()
-        require("conform").format({ async = true })
-      end,
-      mode = "",
-      desc = "Format buffer",
-    },
-  },
+  keys = require("keymaps.lsp").format_keys,
   -- This will provide type hinting with LuaLS
   ---@module "conform"
   ---@type conform.setupOpts
