@@ -48,9 +48,9 @@ local lspKeys = {
 M[#M + 1] = {
   "williamboman/mason.nvim",
   dependencies = {
-    "neovim/nvim-lspconfig",
-    "williamboman/mason-lspconfig.nvim",
-    "saghen/blink.cmp",
+    "nvim-lspconfig",
+    "mason-lspconfig.nvim",
+    "blink.cmp",
   },
   keys = lspKeys,
   lazy = false,

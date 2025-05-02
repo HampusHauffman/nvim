@@ -4,7 +4,6 @@ local M = {}
 M[#M + 1] = {
   "folke/which-key.nvim",
   event = "VeryLazy",
-  ---@type
   opts = {
     win = { border = "rounded" },
     triggers = {

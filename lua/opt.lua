@@ -11,8 +11,8 @@ opt.autoindent = true
 opt.splitright = true -- Split to the right
 
 -- StatusLine
-opt.laststatus = 0 -- Set global statusline
---opt.laststatus = 3 -- Set global statusline
+-- opt.laststatus = 0 -- Set global statusline
+opt.laststatus = 3 -- Set global statusline
 opt.cmdheight = 0
 --Test
 opt.diffopt =

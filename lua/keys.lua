@@ -26,6 +26,7 @@ map("i", "<C-l>", "<right>")
 -- no work
 map("n", "<leader>gh", "vgh")
 map("n", "<leader>gR", "vghgr")
+map("n", "ga", "ggVG")
 
 vim.cmd([[
   set wildcharm=<Tab>

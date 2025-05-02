@@ -30,3 +30,13 @@ autocmd("BufReadPost", {
     end
   end,
 })
+
+-- Save on insert mode exit
+("InsertLeave", {
+  group = augroup("save_on_insert_leave"),
+  callback = function()
+    if vim.bo.modified and vim.bo.buftype == "" then
+      vim.cmd("silent write")
+    end
+  end,
+})
