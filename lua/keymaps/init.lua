@@ -1,3 +1,4 @@
+-- All the keybinds are located under /keymaps to allow ease of configuration of these
 local M = {}
 
 function M.load()

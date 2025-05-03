@@ -1,6 +1,6 @@
 local M = {}
 
--- Define LSP keymaps for use in lsp.lua
+--- Keys for lsp interactions
 ---@type LazyKeysSpec[]
 M.keys = {
   { "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
@@ -45,7 +45,6 @@ M.keys = {
   { "<c-b>", vim.diagnostic.open_float, desc = "Open diagnostic float" },
 }
 
--- Define keys for formatters
 ---@type LazyKeysSpec[]
 M.format_keys = {
   {

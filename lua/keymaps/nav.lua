@@ -1,6 +1,6 @@
 local M = {}
 
--- Define navigation keymaps
+--- Keys for navigation and other plugins
 ---@type LazyKeysSpec[]
 M.keys = {
   {

@@ -56,7 +56,11 @@ M[#M + 1] = {
         dim = false,
       },
     },
-    indent = { enabled = true },
+    indent = {
+      enabled = true,
+      only_scope = false, -- only show indent guides of the scope
+    },
+    chunk = { enabled = true },
     scope = { enabled = true },
 
     scroll = { enabled = true },
