@@ -77,6 +77,7 @@ M[#M + 1] = {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = {
+        "lazydev",
         "lsp",
         "path",
         --"buffer",
@@ -85,6 +86,12 @@ M[#M + 1] = {
         "copilot",
       },
       providers = {
+        lazydev = {
+          name = "LazyDev",
+          module = "lazydev.integrations.blink",
+          -- make lazydev completions top priority (see `:h blink.cmp`)
+          score_offset = 100,
+        },
         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
         codecompanion = {
           name = "CodeCompanion",
