@@ -20,6 +20,13 @@ M.keys = {
     desc = "Go to definition",
   },
   {
+    "<leader><s-r>",
+    function()
+      Snacks.rename.rename_file()
+    end,
+    desc = "Rename file",
+  },
+  {
     "K",
     function()
       vim.lsp.buf.hover({ border = "rounded" })

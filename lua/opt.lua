@@ -23,17 +23,9 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
--- Make the separator purple
---vim.api.nvim_command(
---  "hi! link " .. "NeoTreeWinSeparator" .. " " .. "@enumMember"
---)
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#020202" })
 vim.api.nvim_set_hl(0, "WinSeparator", { link = "@enumMember" })
 vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
-
---vim.api.nvim_command("hi! link " .. "FzfLuaBorder" .. " " .. "@enumMember")
---vim.api.nvim_command("hi! link " .. "FzfLuaCursorLine" .. " " .. "Normal")
---vim.api.nvim_command("hi! link " .. "FzfLuaSearch" .. " " .. "Normal")
 
 vim.fn.sign_define(
   "DiagnosticSignError",

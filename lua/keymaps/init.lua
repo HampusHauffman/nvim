@@ -2,7 +2,6 @@
 local M = {}
 
 function M.load()
-
   ---@param mode string|string[] Mode or modes for which the keymap is effective
   ---@param lhs string Left-hand side of the mapping
   ---@param rhs string|function Right-hand side of the mapping
@@ -38,7 +37,7 @@ function M.load()
   map("n", "ga", "ggVG", "Select all")
 
   -- Fast saving with <leader> and s
-  map("n", "<leader>s", ":w<CR>", "Save file 💾")
+  map("n", "<leader>s", ":silent w<CR>", "Save file 💾")
 
   -- Allows Option backspace to delete words
   map("i", "<M-BS>", "<Esc> hciw", "Remove Word")
