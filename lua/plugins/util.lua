@@ -28,19 +28,11 @@ M[#M + 1] = {
   end,
 }
 
--- Import navigation keys from centralized location
----@type LazyKeysSpec[]
-local navKeys = require("keymaps.nav").keys
----@type LazyKeysSpec[]
-local gitKeys = require("keymaps.git").keys
-
 M[#M + 1] = { "tpope/vim-sleuth" }
 
 M[#M + 1] = {
   "folke/snacks.nvim",
   priority = 1000,
-  keys = vim.list_extend(navKeys, gitKeys),
-  lazy = false,
   ---@type snacks.Config
   opts = {
     explorer = {

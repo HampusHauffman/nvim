@@ -26,4 +26,13 @@ M[#M + 1] = {
   end,
 }
 
+---@type LazyKeysSpec[]
+local gitKeys = require("keymaps.git").keys
+
+M[#M + 1] = {
+  "folke/snacks.nvim",
+  priority = 1000,
+  keys = gitKeys,
+}
+
 return M
