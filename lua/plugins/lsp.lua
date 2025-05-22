@@ -2,7 +2,7 @@
 local M = {}
 
 M[#M + 1] = {
-  "mason-org/mason.nvim",
+  "/mason.nvim",
   dependencies = {
     "nvim-lspconfig",
     "mason-lspconfig.nvim",

@@ -80,5 +80,5 @@ require("lazy").setup({
 --vim.cmd("colorscheme dracula-soft")
 vim.cmd("colorscheme dracula-soft")
 require("opt")
-require("keymaps").load()
+require("keymaps")
 require("aucmd")
