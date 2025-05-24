@@ -37,6 +37,7 @@ M[#M + 1] = {
   opts = {
     explorer = {
       replace_netrw = true, -- Replace netrw with the snacks explorer
+      auto_close = true,
     },
     input = {
       enabled = true,

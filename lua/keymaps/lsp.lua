@@ -20,7 +20,7 @@ M.keys = {
     desc = "Go to definition",
   },
   {
-    "<leader><s-r>",
+    "<leader>R",
     function()
       Snacks.rename.rename_file()
     end,
