@@ -30,10 +30,10 @@ M[#M + 1] = {
 
     -- Remaining configs for lsp
     require("lspconfig").gdscript.setup(lspSetup)
-    require("lspconfig").glsl_analyzer.setup({
-      capabilities = capabilities,
-      filetypes = { "gdshader" },
-    })
+    --require("lspconfig").glsl_analyzer.setup({
+    --  capabilities = capabilities,
+    --  filetypes = { "gdshader" },
+    --})
   end,
 }
 

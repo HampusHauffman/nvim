@@ -20,12 +20,19 @@ opt.diffopt =
 
 -- Border for diagnostic
 vim.diagnostic.config({
+  --virtual_lines = true,
+  virtual_text = true,
   float = { border = "rounded" },
 })
 
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#020202" })
 vim.api.nvim_set_hl(0, "WinSeparator", { link = "@enumMember" })
 vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+-- Fix color for Search
+vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "none", underline = true })
+vim.api.nvim_set_hl(0, "IncSearch", { bg = "none", fg = "none", underline = true })
+vim.api.nvim_set_hl(0, "CurSearch", { bg = "none", fg = "none", underline = true })
+--vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" ,fg="none", underline = true})
 
 vim.fn.sign_define(
   "DiagnosticSignError",

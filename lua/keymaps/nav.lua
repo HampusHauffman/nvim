@@ -4,6 +4,13 @@ local M = {}
 ---@type LazyKeysSpec[]
 M.keys = {
   {
+    "<leader>:",
+    function()
+      Snacks.picker.command_history()
+    end,
+    desc = "Command history",
+  },
+  {
     "ff",
     function()
       Snacks.picker.files()

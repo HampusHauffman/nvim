@@ -82,3 +82,7 @@ vim.cmd("colorscheme dracula-soft")
 require("opt")
 require("keymaps")
 require("aucmd")
+
+-- Activate manual lsp
+--vim.lsp.enable("gdshader-lsp")
+vim.lsp.enable("kotlin-ls")
