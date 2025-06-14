@@ -18,6 +18,9 @@ opt.cmdheight = 0
 opt.diffopt =
   "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
 
+vim.o.ignorecase = true -- Ignore case in search patterns
+vim.o.smartcase = true -- Smart case
+
 -- Border for diagnostic
 vim.diagnostic.config({
   --virtual_lines = true,

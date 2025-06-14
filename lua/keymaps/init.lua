@@ -25,7 +25,6 @@ vim.keymap.set("v", "p", function()
   return '"d"_dP'  -- delete to "d", not yank, then paste
 end, { expr = true, noremap = true }) -- expr allows us to use a series of commands
 
-
 -- Move to end with ö
 map("n", "ö", "$", "Move to end of line")
 map("v", "ö", "$", "Move to end of line")

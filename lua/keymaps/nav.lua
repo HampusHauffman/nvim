@@ -61,7 +61,7 @@ M.keys = {
     desc = "Find help tags",
   },
   {
-    "<s-z>",
+    "zen",
     function()
       Snacks.zen()
     end,
