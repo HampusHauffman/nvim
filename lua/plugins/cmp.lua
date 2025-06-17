@@ -83,7 +83,7 @@ M[#M + 1] = {
         --"buffer",
         "codecompanion",
         "dadbod",
-        "copilot",
+  ---"copilot",
       },
       providers = {
         lazydev = {
@@ -98,12 +98,12 @@ M[#M + 1] = {
           module = "codecompanion.providers.completion.blink",
         },
 
-        copilot = {
-          name = "copilot",
-          module = "blink-cmp-copilot",
-          score_offset = 100,
-          async = true,
-        },
+        --copilot = {
+        --  name = "copilot",
+        --  module = "blink-cmp-copilot",
+        --  score_offset = 100,
+        --  async = true,
+        --},
       },
     },
   },

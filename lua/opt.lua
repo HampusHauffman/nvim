@@ -33,26 +33,34 @@ vim.api.nvim_set_hl(0, "WinSeparator", { link = "@enumMember" })
 vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
 -- Fix color for Search
 vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "none", underline = true })
-vim.api.nvim_set_hl(0, "IncSearch", { bg = "none", fg = "none", underline = true })
-vim.api.nvim_set_hl(0, "CurSearch", { bg = "none", fg = "none", underline = true })
+vim.api.nvim_set_hl(
+  0,
+  "IncSearch",
+  { bg = "none", fg = "none", underline = true }
+)
+vim.api.nvim_set_hl(
+  0,
+  "CurSearch",
+  { bg = "none", fg = "none", underline = true }
+)
 --vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" ,fg="none", underline = true})
 
 vim.fn.sign_define(
   "DiagnosticSignError",
-  { text = " ", texthl = "DiagnosticSignError" }
-)
+  { text = "", texthl = "DiagnosticSignError" }
+) -- X
 vim.fn.sign_define(
   "DiagnosticSignWarn",
-  { text = " ", texthl = "DiagnosticSignWarn" }
-)
+  { text = "", texthl = "DiagnosticSignWarn" }
+) -- warning triangle
 vim.fn.sign_define(
   "DiagnosticSignInfo",
-  { text = " ", texthl = "DiagnosticSignInfo" }
-)
+  { text = "", texthl = "DiagnosticSignInfo" }
+) -- info circle
 vim.fn.sign_define(
   "DiagnosticSignHint",
-  { text = "󰌵", texthl = "DiagnosticSignHint" }
-)
+  { text = "", texthl = "DiagnosticSignHint" }
+) -- lightbulb
 
 vim.api.nvim_create_user_command("Messages", function()
   -- Get messages content

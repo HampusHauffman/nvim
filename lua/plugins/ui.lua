@@ -8,6 +8,15 @@ M[#M + 1] = {
 }
 
 M[#M + 1] = {
+  "hampushauffman/peacock.nvim",
+  dir = "~/Documents/peacock.nvim",
+  name = "peacock",
+
+  opts = {},
+  dev = true,
+}
+
+M[#M + 1] = {
   "brenoprata10/nvim-highlight-colors",
   opts = {
     ---Render style
