@@ -31,6 +31,7 @@ vim.diagnostic.config({
 vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#020202" })
 vim.api.nvim_set_hl(0, "WinSeparator", { link = "@enumMember" })
 vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
+vim.api.nvim_set_hl(0, "SignColumn", { bg = "#00FF00", fg = "#FF0000" })
 -- Fix color for Search
 vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "none", underline = true })
 vim.api.nvim_set_hl(
