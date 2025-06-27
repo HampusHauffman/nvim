@@ -93,7 +93,7 @@ M[#M + 1] = {
         {
           function()
             local reg = vim.fn.reg_recording()
-            return reg ~= "" and (" recording @" .. reg) or ""
+            return reg ~= "" and ("  @" .. reg) or ""
           end,
           color = { fg = "#ff9e64" },
         },
