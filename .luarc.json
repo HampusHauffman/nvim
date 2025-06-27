@@ -2,5 +2,6 @@
     "diagnostics.disable": [
         "missing-fields",
         "unused-local"
-    ]
+    ],
+    "completion.autoRequire": false
 }

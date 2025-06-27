@@ -36,7 +36,7 @@ M[#M + 1] = {
   ---@type snacks.Config
   opts = {
     explorer = {
-      replace_netrw = true, -- Replace netrw with the snacks explorer
+      replace_netrw = false, -- Replace netrw with the snacks explorer
       auto_close = true,
     },
     input = {
@@ -103,7 +103,6 @@ M[#M + 1] = {
       timeout = 3000,
     },
     quickfile = { enabled = true },
-    statuscolumn = { enabled = true },
     words = { enabled = true },
     styles = {
       zen = {

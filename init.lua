@@ -24,33 +24,36 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Leader key
 vim.g.mapleader = " "
+--vim.cmd("colorscheme dracula-soft")
+require("opt")
+require("keymaps")
+require("aucmd")
 
 ---@class LazyConfig
 require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
-    --{
-    --  "HampusHauffman/dracula.nvim",
-    --  dev = true,
-    --  branch = "oled",
-    --  priority = 1000,
-    --},
     {
       "Mofiqul/dracula.nvim",
-      opts = {
-        theme = "dracula-soft",
-        colors = {
-          bg = "#000000",
-          black = "#000000",
-          visual = "#3E4452",
-        },
-        show_end_of_buffer = true, -- default false
-        transparent_bg = true, -- default false
-        lualine_bg_color = "#000000", -- default nil
-        italic_comment = true, -- default false
-        overrides = {},
-      },
+      priority = math.huge,
+      lazy = false,
+      config = function()
+        require("dracula").setup({
+          theme = "dracula-soft",
+          colors = {
+            bg = "#000000",
+            black = "#000000",
+            visual = "#3E4452",
+          },
+          show_end_of_buffer = true, -- default false
+          transparent_bg = true, -- default false
+          lualine_bg_color = "#000000", -- default nil
+          italic_comment = true, -- default false
+          overrides = {},
+        })
+        vim.cmd("colorscheme dracula-soft")
+      end,
     },
     {
       "HampusHauffman/block.nvim",
@@ -77,20 +80,9 @@ require("lazy").setup({
   },
 })
 
---vim.cmd("colorscheme dracula-soft")
-vim.cmd("colorscheme dracula-soft")
-require("opt")
-require("keymaps")
-require("aucmd")
-
 -- Activate manual lsp
 --vim.lsp.enable("gdshader-lsp")
 vim.lsp.enable("kotlin-ls")
--- Enable true colors and show number/sign columns
-vim.opt.termguicolors = true
-vim.opt.number = true
-vim.opt.signcolumn = "yes"
 
 -- Set LineNr background to magenta
 --vim.api.nvim_set_hl(0, "SignColumn", { bg = "#FF00FF" })
-
