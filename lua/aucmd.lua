@@ -39,3 +39,21 @@ autocmd("InsertLeave", {
     end
   end,
 })
+
+-- Hide tmux status bar when entering Neovim
+vim.api.nvim_create_autocmd("VimEnter", {
+  callback = function()
+    if os.getenv("TMUX") then
+      os.execute("tmux set status off")
+    end
+  end,
+})
+
+-- Show tmux status bar when exiting Neovim
+vim.api.nvim_create_autocmd("VimLeave", {
+  callback = function()
+    if os.getenv("TMUX") then
+      os.execute("tmux set status on")
+    end
+  end,
+})
