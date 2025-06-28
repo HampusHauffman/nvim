@@ -19,6 +19,7 @@ M[#M + 1] = {
     name = "peacock",
     dev = true,
     config = function()
+      ---@type PeacockOptions
       require("peacock").setup({
         --sign_column_width = 1,
         --bar_enabled = false,

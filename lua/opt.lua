@@ -21,6 +21,7 @@ opt.diffopt =
 vim.o.ignorecase = true -- Ignore case in search patterns
 vim.o.smartcase = true -- Smart case
 vim.o.signcolumn = "yes:1"
+vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 -- Border for diagnostic
 vim.diagnostic.config({
