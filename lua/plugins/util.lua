@@ -66,12 +66,12 @@ M[#M + 1] = {
       sections = {
         {
           section = "terminal",
-          cmd = "cat /Users/hampus/.config/nvim/lua/header_art",
-          indent = 4,
-          height = 18,
+          cmd = "cat " .. vim.fn.stdpath("config") .. "/header_art",
+          indent = 8,
+          height = 22,
           random = 100,
         },
-        { section = "keys", gap = 1, padding = 1 },
+        --{ section = "keys", gap = 1, padding = 1 },
         { section = "startup" },
       },
     },
