@@ -53,18 +53,7 @@ require("lazy").setup({
           overrides = {},
         })
         vim.cmd("colorscheme dracula-soft")
-        local hl = vim.api.nvim_set_hl
-        hl(0, "ColorColumn", { bg = "#020202" })
-        --hl(0, "FloatBorder", { fg = "#00FF00" })
-        --hl(0, "WinSeparator", { link = "@enumMember" })
-        hl(0, "Normal", { bg = "#000000" })
-        hl(0, "Pmenu", { link = "Normal" })
-        --hl(0, "SignColumn", { bg = "#00FF00", fg = "#FF0000" })
-        -- Fix color for Search
-        hl(0, "Search", { bg = "none", fg = "none", underline = true })
-        hl(0, "IncSearch", { bg = "none", fg = "none", underline = true })
-        hl(0, "CurSearch", { bg = "none", fg = "none", underline = true })
-        --hl(0, "CursorLine", { bg = "none" ,fg="none", underline = true})
+        require("hl")
       end,
     },
     {
