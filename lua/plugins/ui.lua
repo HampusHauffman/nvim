@@ -12,36 +12,44 @@ M[#M + 1] = {
   dir = "~/Documents/peacock.nvim",
   name = "peacock",
   lazy = false,
-  {
-    "hampushauffman/peacock.nvim",
-    dependencies = { "nvim-lualine/lualine.nvim" },
-    dir = "~/Documents/peacock.nvim",
-    name = "peacock",
-    dev = true,
-    config = function()
-      ---@type PeacockOptions
-      require("peacock").setup({
-        --sign_column_width = 1,
-        --bar_enabled = false,
-        --eob_enabled = false,
-      })
+  dependencies = { "nvim-lualine/lualine.nvim" },
+  config = function()
+    ---@type PeacockOptions
+    require("peacock").setup({
+      --sign_column_width = 1,
+      bar_enabled = false,
+      --eob_enabled = false,
+      colors = {
+        "#FDC38E",
+        "#E1837F",
+        "#97EDA2",
+        "#F6F6B6",
+        "#D0B5F3",
+        "#E7A1D7",
+        "#BCF4F5",
+        "#FFFFFF",
+      },
+    })
 
-      -- Now that the plugin is set up and highlights exist, you can link or override them:
-      local nvim_set_hl = vim.api.nvim_set_hl
-      nvim_set_hl(0, "WinSeparator", { link = "PeacockFg" })
-      nvim_set_hl(0, "FloatBorder", { link = "PeacockFg" })
-      nvim_set_hl(0, "LineNr", { link = "PeacockFg" })
-      nvim_set_hl(0, "lualine_a_normal", { link = "PeacockBg" }) -- or use fg if needed
-      nvim_set_hl(0, "lualine_b_normal", { link = "PeacockFg" }) -- or use fg if needed
-      vim.schedule(function()
-        nvim_set_hl(
-          0,
-          "lualine_transitional_lualine_a_normal_to_StatusLine",
-          { link = "PeacockFg" }
-        ) -- or use fg if needed
-      end)
-    end,
-  },
+    -- Now that the plugin is set up and highlights exist, you can link or override them:
+    local set = vim.api.nvim_set_hl
+    set(0, "WinSeparator", { link = "PeacockFg" })
+    set(0, "FloatBorder", { link = "PeacockFg" })
+    set(0, "LineNr", { link = "PeacockFg" })
+    set(0, "lualine_a_normal", { link = "PeacockBg" }) -- or use fg if needed
+    set(0, "lualine_b_normal", { link = "PeacockFg" }) -- or use fg if needed
+    -- Link common UI groups used by snacks to Peacock highlights
+    set(0, "FloatBorder", { link = "PeacockFg" }) -- used for inactiveBorderColor
+    set(0, "FloatTitle", { link = "PeacockFg" }) -- used for inactiveBorderColor
+    set(0, "Directory", { link = "PeacockFg" }) -- used for inactiveBorderColor
+    vim.schedule(function()
+      set(
+        0,
+        "lualine_transitional_lualine_a_normal_to_StatusLine",
+        { link = "PeacockFg" }
+      )
+    end)
+  end,
   dev = true,
 }
 
@@ -102,7 +110,7 @@ M[#M + 1] = {
       lualine_x = {},
       lualine_y = { "filetype", "progress" },
       lualine_z = {
-        { "location", separator = { right = "" }, left_padding = 2 },
+        { "location", separator = {}, left_padding = 2 },
       },
     },
   },

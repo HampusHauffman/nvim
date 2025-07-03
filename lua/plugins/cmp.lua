@@ -44,7 +44,7 @@ M[#M + 1] = {
           },
         },
       },
-      ghost_text = { enabled = true },
+      ghost_text = { enabled = false },
       documentation = { auto_show = true, window = { border = "rounded" } },
       -- Makes sure we dont auto select when in cmd mode
       list = {

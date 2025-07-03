@@ -23,6 +23,8 @@ vim.o.smartcase = true -- Smart case
 vim.o.signcolumn = "yes:1"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
+-- This messes with some other plugins
+vim.g.snacks_animate = false
 -- Border for diagnostic
 vim.diagnostic.config({
   --virtual_lines = true,
@@ -30,24 +32,6 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
-vim.api.nvim_set_hl(0, "ColorColumn", { bg = "#020202" })
---vim.api.nvim_set_hl(0, "FloatBorder", { fg = "#00FF00" })
---vim.api.nvim_set_hl(0, "WinSeparator", { link = "@enumMember" })
-vim.api.nvim_set_hl(0, "Pmenu", { link = "Normal" })
---vim.api.nvim_set_hl(0, "SignColumn", { bg = "#00FF00", fg = "#FF0000" })
--- Fix color for Search
-vim.api.nvim_set_hl(0, "Search", { bg = "none", fg = "none", underline = true })
-vim.api.nvim_set_hl(
-  0,
-  "IncSearch",
-  { bg = "none", fg = "none", underline = true }
-)
-vim.api.nvim_set_hl(
-  0,
-  "CurSearch",
-  { bg = "none", fg = "none", underline = true }
-)
---vim.api.nvim_set_hl(0, "CursorLine", { bg = "none" ,fg="none", underline = true})
 
 vim.fn.sign_define(
   "DiagnosticSignError",
