@@ -22,6 +22,7 @@ vim.o.ignorecase = true -- Ignore case in search patterns
 vim.o.smartcase = true -- Smart case
 vim.o.signcolumn = "yes:1"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+vim.o.virtualedit = "block"
 
 -- This messes with some other plugins
 vim.g.snacks_animate = false
