@@ -33,6 +33,7 @@ M[#M + 1] = { "tpope/vim-sleuth" }
 M[#M + 1] = {
   "folke/snacks.nvim",
   priority = 1000,
+  lazy = false,
   ---@type snacks.Config
   opts = {
     explorer = {
