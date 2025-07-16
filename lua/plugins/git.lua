@@ -1,10 +1,10 @@
 ---@type LazyPluginSpec[]
 local M = {}
+local keys = require("keymaps.git")
 M[#M + 1] = {
   "echasnovski/mini.diff",
   event = "VeryLazy",
-  keys = require("keymaps.git").diff,
-
+  keys = keys.diff,
   config = function()
     require("mini.diff").setup({
       mappings = {
@@ -27,12 +27,11 @@ M[#M + 1] = {
 }
 
 ---@type LazyKeysSpec[]
-local gitKeys = require("keymaps.git").keys
 
 M[#M + 1] = {
   "folke/snacks.nvim",
   priority = 1000,
-  keys = gitKeys,
+  keys = keys.keys,
 }
 
 return M

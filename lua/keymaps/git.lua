@@ -1,6 +1,15 @@
 local M = {}
 
 ---@type LazyKeysSpec[]
+M.diff = {
+  {
+    "<leader>go",
+    function()
+      require("mini.diff").toggle_overlay(0)
+    end,
+  },
+}
+---@type LazyKeysSpec[]
 M.keys = {
   {
     "<leader>gB",

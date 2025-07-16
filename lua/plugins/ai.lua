@@ -13,6 +13,7 @@ local M = {}
 --  end,
 --}
 
+-- Adapters: https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
 M[#M + 1] = {
   "olimorris/codecompanion.nvim",
   dependencies = {
@@ -22,17 +23,22 @@ M[#M + 1] = {
   lazy = false,
   config = true,
   opts = {
+    strategies = {
+      chat = {
+        adapter = "gemini",
+      },
+      inline = {
+        adapter = "gemini",
+      },
+    },
     adapters = {
       opts = {
         show_defaults = false,
       },
-      copilot = function()
-        return require("codecompanion.adapters").extend("copilot", {
+      gemini = function()
+        return require("codecompanion.adapters").extend("gemini", {
           schema = {
-            model = {
-              --default = "gpt-4",
-              default = "claude-3.7-sonnet",
-            },
+            default = "gemini-2.5-pro",
           },
         })
       end,
