@@ -82,8 +82,9 @@ M[#M + 1] = {
         "path",
         --"buffer",
         "codecompanion",
+        "minuet",
         "dadbod",
-  ---"copilot",
+        ---"copilot",
       },
       providers = {
         lazydev = {
@@ -97,7 +98,15 @@ M[#M + 1] = {
           name = "CodeCompanion",
           module = "codecompanion.providers.completion.blink",
         },
-
+        minuet = {
+          name = "minuet",
+          module = "minuet.blink",
+          async = true,
+          -- Should match minuet.config.request_timeout * 1000,
+          -- since minuet.config.request_timeout is in seconds
+          timeout_ms = 3000,
+          score_offset = 50, -- Gives minuet higher priority among suggestions
+        },
         --copilot = {
         --  name = "copilot",
         --  module = "blink-cmp-copilot",

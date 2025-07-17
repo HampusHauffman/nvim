@@ -13,6 +13,7 @@ local M = {}
 --  end,
 --}
 
+-- Test this for gemini autocomplete: https://github.com/milanglacier/minuet-ai.nvim
 -- Adapters: https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
 M[#M + 1] = {
   "olimorris/codecompanion.nvim",
@@ -38,7 +39,9 @@ M[#M + 1] = {
       gemini = function()
         return require("codecompanion.adapters").extend("gemini", {
           schema = {
-            default = "gemini-2.5-pro",
+            model = {
+              default = "gemini-2.5-pro",
+            },
           },
         })
       end,
@@ -51,6 +54,20 @@ M[#M + 1] = {
     },
   },
   keys = require("keymaps.ai").keys,
+}
+
+
+M[#M + 1] = {
+  "milanglacier/minuet-ai.nvim",
+  dependencies = { "nvim-lua/plenary.nvim" },
+  opts = {
+    provider = "gemini",
+    provider_options = {
+      gemini = {
+        model = "gemini-2.0-flash",
+      },
+    },
+  },
 }
 
 return M

@@ -26,6 +26,24 @@ M.keys = {
     silent = true,
     desc = "Add selection to Code Companion Chat",
   },
+  {
+    "<leader>ac",
+    function()
+      require("minuet").complete()
+    end,
+    noremap = true,
+    silent = true,
+    desc = "Minuet Complete",
+  },
+  {
+    "<leader>ad",
+    function()
+      require("minuet").dismiss()
+    end,
+    noremap = true,
+    silent = true,
+    desc = "Minuet Dismiss",
+  },
 }
 
 return M
