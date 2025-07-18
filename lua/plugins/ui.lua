@@ -12,6 +12,7 @@ M[#M + 1] = {
   dir = "~/Documents/peacock.nvim",
   name = "peacock",
   lazy = false,
+  priority = 999, -- After (1000: Colorscheme)
   dependencies = { "nvim-lualine/lualine.nvim" },
   config = function()
     ---@type PeacockOptions
@@ -36,12 +37,16 @@ M[#M + 1] = {
     set(0, "WinSeparator", { link = "PeacockFg" })
     set(0, "FloatBorder", { link = "PeacockFg" })
     set(0, "LineNr", { link = "PeacockFg" })
-    set(0, "lualine_a_normal", { link = "PeacockBg" }) -- or use fg if needed
-    set(0, "lualine_b_normal", { link = "PeacockFg" }) -- or use fg if needed
+    set(0, "lualine_a_normal", { link = "PeacockBg" })
+    set(0, "lualine_b_normal", { link = "PeacockFg" })
     -- Link common UI groups used by snacks to Peacock highlights
-    set(0, "FloatBorder", { link = "PeacockFg" }) -- used for inactiveBorderColor
-    set(0, "FloatTitle", { link = "PeacockFg" }) -- used for inactiveBorderColor
-    set(0, "Directory", { link = "PeacockFg" }) -- used for inactiveBorderColor
+    set(0, "FloatBorder", { link = "PeacockFg" })
+    set(0, "FloatTitle", { link = "PeacockFg" })
+    set(0, "Directory", { link = "PeacockFg" })
+    -- BlinkCMP
+    set(0, "BlinkCmpMenuBorder", { link = "PeacockFg" })
+    set(0, "BlinkCmpDocBorder", { link = "PeacockFg" })
+    set(0, "BlinkCmpSignatureHelpBorder", { link = "PeacockFg" })
     vim.schedule(function()
       set(
         0,

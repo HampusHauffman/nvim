@@ -36,7 +36,7 @@ require("lazy").setup({
     { import = "plugins" },
     {
       "Mofiqul/dracula.nvim",
-      priority = math.huge,
+      priority = 1000,
       lazy = false,
       config = function()
         require("dracula").setup({

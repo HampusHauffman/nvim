@@ -13,7 +13,6 @@ local M = {}
 --  end,
 --}
 
-
 -- For both codecompanion and minuet the API key for gemeni is stored under env: GEMINI_API_KEY (Default for both)
 
 -- Test this for gemini autocomplete: https://github.com/milanglacier/minuet-ai.nvim
@@ -58,7 +57,6 @@ M[#M + 1] = {
   },
   keys = require("keymaps.ai").keys,
 }
-
 
 M[#M + 1] = {
   "milanglacier/minuet-ai.nvim",
