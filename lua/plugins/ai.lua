@@ -14,7 +14,6 @@ local M = {}
 --}
 
 -- For both codecompanion and minuet the API key for gemeni is stored under env: GEMINI_API_KEY (Default for both)
-
 -- Test this for gemini autocomplete: https://github.com/milanglacier/minuet-ai.nvim
 -- Adapters: https://github.com/olimorris/codecompanion.nvim/tree/main/lua/codecompanion/adapters
 M[#M + 1] = {

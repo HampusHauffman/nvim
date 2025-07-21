@@ -85,5 +85,3 @@ require("lazy").setup({
 --vim.lsp.enable("gdshader-lsp")
 vim.lsp.enable("kotlin-ls")
 
--- Set LineNr background to magenta
---hl(0, "SignColumn", { bg = "#FF00FF" })

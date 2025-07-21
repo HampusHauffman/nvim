@@ -33,7 +33,6 @@ vim.diagnostic.config({
   float = { border = "rounded" },
 })
 
-
 vim.fn.sign_define(
   "DiagnosticSignError",
   { text = "", texthl = "DiagnosticSignError" }
