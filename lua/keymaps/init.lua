@@ -48,7 +48,7 @@ map("n", "ga", "ggVG", "Select all")
 map("n", "<leader>s", ":silent w<CR>", "Save file 💾")
 
 -- Allows Option backspace to delete words
-map("i", "<M-BS>", "<Esc> hciw", "Remove Word")
+map("i", "<M-BS>", "<C-w>", "Delete previous word")
 
 -- Command mode mappings
 vim.cmd([[
