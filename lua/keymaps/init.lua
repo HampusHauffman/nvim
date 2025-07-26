@@ -10,20 +10,13 @@ local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, options)
 end
 
+-- Plugin that opens a picker when pressing "
+
 -- Disable arrow keys to be 1337
 map("", "<up>", "<nop>", "Disable up arrow")
 map("", "<down>", "<nop>", "Disable down arrow")
 map("", "<left>", "<nop>", "Disable left arrow")
 map("", "<right>", "<nop>", "Disable right arrow")
-
----- Remap so d, D, X adds it to a reigster called d instead of default clipboard
---vim.keymap.set({"n","v"}, "D", '"dD', { noremap = true })
---vim.keymap.set({"n","v"}, "d", '"dd', { noremap = true })
---vim.keymap.set({"n","v"}, "x", '"dx', { noremap = true })
----- Visual paste: keep yank, store replaced text in "d"
---vim.keymap.set("v", "p", function()
---  return '"d"_dP'  -- delete to "d", not yank, then paste
---end, { expr = true, noremap = true }) -- expr allows us to use a series of commands
 
 -- Move to end with ö
 map("n", "ö", "$", "Move to end of line")

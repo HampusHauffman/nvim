@@ -65,7 +65,7 @@ M[#M + 1] = {
         "path",
         --"buffer",
         "codecompanion",
-        "minuet",
+        --"minuet",
         "dadbod",
         ---"copilot",
       },

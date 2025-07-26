@@ -29,7 +29,15 @@ M[#M + 1] = {
     })
 
     -- Remaining configs for lsp
-    require("lspconfig").gdscript.setup(lspSetup)
+    require("lspconfig").gdscript.setup({
+      capabilities = capabilities,
+      on_attach = function(client, bufnr)
+        -- Exec Path: /opt/homebrew/bin/nvim
+        -- Exec Flags: --server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>"
+        -- Start server to listen to inputs from godot
+        vim.fn.serverstart(vim.fn.getcwd() .. "/server.pipe")
+      end,
+    })
     --require("lspconfig").glsl_analyzer.setup({
     --  capabilities = capabilities,
     --  filetypes = { "gdshader" },
