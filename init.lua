@@ -76,7 +76,7 @@ require("lazy").setup({
   },
   install = { colorscheme = { "dracula-soft" } },
   checker = {
-    notify = false, -- get a notification when new updates are found
+    notify = true, -- get a notification when new updates are found
   },
   ---@diagnostic disable-next-line: assign-type-mismatch
   dev = { path = "~/Documents" },
@@ -92,6 +92,11 @@ vim.lsp.enable("kotlin-ls")
 -- Global variable for command line content
 _G.lualine_cmdline = nil
 
+---@type string[]
+local message_errors =
+  { "emsg", "echoerr", "lua_error", "rpc_error", "shell_err" }
+
+local use_ext_messages = vim.notify ~= vim._notify
 -- Hook into cmdline UI events
 vim.ui_attach(
   vim.api.nvim_create_namespace("nui_cmdline"),
@@ -116,7 +121,7 @@ vim.ui_attach(
         message = message .. chunk[2]
       end
 
-      if kind == "return_prompt" and message:match("Press ENTER") then
+      if kind == "return_prompt" then
         vim.api.nvim_feedkeys(
           vim.api.nvim_replace_termcodes("<CR>", true, false, true),
           "n",
@@ -125,8 +130,18 @@ vim.ui_attach(
         return
       end
 
+      local level = "info"
+      for _, value in pairs(message_errors) do
+        if kind == value then
+          level = "error"
+        end
+      end
+
       vim.schedule(function()
-        vim.notify("Kind: " .. kind .. ", Message: " .. vim.trim(message))
+        vim.notify(
+          "Kind: " .. kind .. ", Message: " .. vim.trim(message),
+          level
+        )
       end)
     end
   end
