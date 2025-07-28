@@ -24,7 +24,7 @@ vim.o.signcolumn = "yes:1"
 vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 vim.o.virtualedit = "block"
 --vim.o.mopt = "wait:500,history:500" -- Show any "enter" mess for half a sec then remove
-vim.o.shortmess = "ltToOCFsq"
+vim.o.shortmess = "ltToOCFsqS"
 
 -- This messes with some other plugins
 vim.g.snacks_animate = false

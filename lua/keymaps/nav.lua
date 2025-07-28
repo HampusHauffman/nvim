@@ -28,9 +28,16 @@ M.keys = {
   {
     "fg",
     function()
-      Snacks.picker.grep()
+      Snacks.picker.grep({ })
     end,
     desc = "Find grep",
+  },
+  {
+    "fw",
+    function()
+      Snacks.picker.grep_word()
+    end,
+    desc = "Find word",
   },
   {
     "fo",

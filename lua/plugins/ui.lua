@@ -111,6 +111,11 @@ M[#M + 1] = {
           end,
           color = { fg = "#ff9e64" },
         },
+        {
+          function()
+            return _G.lualine_cmdline or ""
+          end,
+        },
       },
       lualine_x = {},
       lualine_y = { "filetype", "progress" },

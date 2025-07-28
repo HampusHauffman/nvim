@@ -35,7 +35,12 @@ M[#M + 1] = {
         -- Exec Path: /opt/homebrew/bin/nvim
         -- Exec Flags: --server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>"
         -- Start server to listen to inputs from godot
-        vim.fn.serverstart(vim.fn.getcwd() .. "/server.pipe")
+        local pipe_path = vim.fn.getcwd() .. "/server.pipe"
+        -- serverlist() returns a list of available server addresses
+        if not vim.tbl_contains(vim.fn.serverlist(), pipe_path) then
+          -- Start server to listen to inputs from Godot, only if not already started
+          vim.fn.serverstart(pipe_path)
+        end
       end,
     })
     --require("lspconfig").glsl_analyzer.setup({
