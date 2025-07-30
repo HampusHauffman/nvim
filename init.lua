@@ -35,10 +35,6 @@ require("lazy").setup({
     -- import your plugins
     { import = "plugins" },
     {
-      "MunifTanjim/nui.nvim",
-      lazy = false,
-    },
-    {
       "Mofiqul/dracula.nvim",
       priority = 1000,
       lazy = false,
@@ -88,61 +84,3 @@ require("lazy").setup({
 -- Activate manual lsp
 --vim.lsp.enable("gdshader-lsp")
 vim.lsp.enable("kotlin-ls")
-
--- Global variable for command line content
-_G.lualine_cmdline = nil
-
----@type string[]
-local message_errors =
-  { "emsg", "echoerr", "lua_error", "rpc_error", "shell_err" }
-
-local use_ext_messages = vim.notify ~= vim._notify
--- Hook into cmdline UI events
-vim.ui_attach(
-  vim.api.nvim_create_namespace("nui_cmdline"),
-  { ext_cmdline = true, ext_messages = true },
-  ---@diagnostic disable-next-line: redundant-parameter
-  function(event, ...)
-    if event == "cmdline_show" then
-      local content, _, firstc, prompt = ...
-      local line = (firstc or "") .. (prompt or "")
-      for _, chunk in ipairs(content) do
-        line = line .. chunk[2]
-      end
-      _G.lualine_cmdline = line
-      require("lualine").refresh()
-    elseif event == "cmdline_hide" then
-      _G.lualine_cmdline = nil
-      require("lualine").refresh()
-    elseif event == "msg_show" then
-      local kind, content = ...
-      local message = ""
-      for _, chunk in ipairs(content) do
-        message = message .. chunk[2]
-      end
-
-      if kind == "return_prompt" then
-        vim.api.nvim_feedkeys(
-          vim.api.nvim_replace_termcodes("<CR>", true, false, true),
-          "n",
-          true
-        )
-        return
-      end
-
-      local level = "info"
-      for _, value in pairs(message_errors) do
-        if kind == value then
-          level = "error"
-        end
-      end
-
-      vim.schedule(function()
-        vim.notify(
-          "Kind: " .. kind .. ", Message: " .. vim.trim(message),
-          level
-        )
-      end)
-    end
-  end
-)

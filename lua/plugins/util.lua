@@ -15,6 +15,7 @@ M[#M + 1] = {
       { path = "luvit-meta/library", words = { "vim%.uv" } },
       { path = "lazy.nvim" },
       { path = "snacks.nvim" },
+      { path = "noice.nvim" },
     },
   },
 }

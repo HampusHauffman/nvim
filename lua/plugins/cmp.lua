@@ -20,7 +20,7 @@ M[#M + 1] = {
       enabled = true,
       completion = {
         menu = {
-          auto_show = true,
+          auto_show = false,
         },
       },
       sources = { "path", "cmdline" },

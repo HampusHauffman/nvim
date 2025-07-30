@@ -78,6 +78,20 @@ M[#M + 1] = {
 }
 
 M[#M + 1] = {
+  "folke/noice.nvim",
+  event = "VeryLazy",
+  ---@type NoiceConfig
+  opts = {
+    lsp = {
+      hover = { enabled = false },
+    },
+  },
+  dependencies = {
+    "MunifTanjim/nui.nvim",
+  },
+}
+
+M[#M + 1] = {
   "nvim-lualine/lualine.nvim",
   dependencies = { "nvim-web-devicons" },
   opts = {
@@ -112,9 +126,7 @@ M[#M + 1] = {
           color = { fg = "#ff9e64" },
         },
         {
-          function()
-            return _G.lualine_cmdline or ""
-          end,
+          function() end,
         },
       },
       lualine_x = {},
@@ -125,21 +137,5 @@ M[#M + 1] = {
     },
   },
 }
-
---M[#M + 1] = {
---  "folke/noice.nvim",
---  event = "VeryLazy",
---  opts = {
---    lsp = {
---      signature = {
---        enabled = false,
---      },
---    },
---  },
---  dependencies = {
---    "MunifTanjim/nui.nvim",
---    "rcarriga/nvim-notify",
---  },
---}
 
 return M
