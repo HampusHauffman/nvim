@@ -43,6 +43,8 @@ map("n", "<leader>s", ":silent w<CR>", "Save file 💾")
 -- Allows Option backspace to delete words
 map("i", "<M-BS>", "<C-w>", "Delete previous word")
 
+map("n", ";", "q:i", "Command window")
+
 -- Command mode mappings
 vim.cmd([[
     set wildcharm=<Tab>

@@ -15,12 +15,12 @@ M[#M + 1] = {
   ---@module 'blink.cmp'
   ---@type blink.cmp.Config
   opts = {
-
     cmdline = {
+
       enabled = true,
       completion = {
         menu = {
-          auto_show = false,
+          auto_show = true,
         },
       },
       sources = { "path", "cmdline" },

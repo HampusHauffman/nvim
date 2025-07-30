@@ -14,6 +14,8 @@ opt.splitright = true -- Split to the right
 -- opt.laststatus = 0 -- Set global statusline
 opt.laststatus = 3 -- Set global statusline
 opt.cmdheight = 0
+vim.o.cmdwinheight = 3
+
 --Test
 opt.diffopt =
   "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
@@ -51,4 +53,3 @@ vim.fn.sign_define(
   "DiagnosticSignHint",
   { text = "", texthl = "DiagnosticSignHint" }
 ) -- lightbulb
-
