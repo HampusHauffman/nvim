@@ -83,4 +83,3 @@ require("lazy").setup({
 
 -- Activate manual lsp
 --vim.lsp.enable("gdshader-lsp")
-vim.lsp.enable("kotlin-ls")

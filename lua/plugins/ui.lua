@@ -73,9 +73,6 @@ M[#M + 1] = {
     enable_tailwind = true,
   },
 }
-M[#M + 1] = {
-  "nvim-tree/nvim-web-devicons",
-}
 
 M[#M + 1] = {
   "folke/noice.nvim",
@@ -84,6 +81,7 @@ M[#M + 1] = {
   opts = {
     lsp = {
       hover = { enabled = false },
+      signature = { enabled = false },
     },
   },
   dependencies = {
@@ -93,7 +91,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "nvim-lualine/lualine.nvim",
-  dependencies = { "nvim-web-devicons" },
+  dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {
       theme = "dracula-nvim",

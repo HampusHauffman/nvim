@@ -27,10 +27,10 @@ M[#M + 1] = {
   opts = {
     strategies = {
       chat = {
-        adapter = "gemini",
+        adapter = "openai",
       },
       inline = {
-        adapter = "gemini",
+        adapter = "openai",
       },
     },
     adapters = {
@@ -42,6 +42,28 @@ M[#M + 1] = {
           schema = {
             model = {
               default = "gemini-2.5-pro",
+            },
+          },
+        })
+      end,
+      openai = function()
+        return require("codecompanion.adapters").extend("openai_compatible", {
+          env = {
+            url = "https://zllm.data.zalan.do",
+            api_key = function()
+              return vim.fn.trim(vim.fn.system("ztoken"))
+            end,
+            chat_url = "/v1/chat/completions",
+          },
+          schema = {
+            model = {
+              default = "bedrock/anthropic.claude-sonnet-4-20250514-v1:0",
+            },
+            temperature = {
+              default = 0.3,
+            },
+            max_completion_tokens = {
+              default = 8000,
             },
           },
         })
