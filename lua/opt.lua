@@ -32,7 +32,6 @@ vim.o.shortmess = "ltToOCFsqS"
 vim.g.snacks_animate = false
 -- Border for diagnostic
 vim.diagnostic.config({
-  --virtual_lines = true,
   virtual_text = true,
   float = { border = "rounded" },
 })
