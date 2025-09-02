@@ -123,7 +123,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "nvim-flutter/flutter-tools.nvim",
-  lazy = false,
+  lazy = true,
   dependencies = {
     "nvim-lua/plenary.nvim",
     "stevearc/dressing.nvim", -- optional for vim.ui.select
