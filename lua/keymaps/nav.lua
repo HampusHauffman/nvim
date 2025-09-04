@@ -28,7 +28,7 @@ M.keys = {
   {
     "fg",
     function()
-      Snacks.picker.grep({ })
+      Snacks.picker.grep({})
     end,
     desc = "Find grep",
   },
@@ -95,7 +95,21 @@ M.keys = {
       if #explorer_pickers == 0 then
         Snacks.picker.explorer({
           hidden = true,
-          exclude = { "*.gd.uid", "*.import", "*.tres" },
+          exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
+          layout = {
+            layout = {
+              position = "left",
+              -- Make sure on large screen we have a larger window for navigation
+              width = function()
+                local win_width = vim.api.nvim_win_get_width(0)
+                print(win_width)
+                if win_width < 200 then
+                  return 40
+                end
+                return 0.3
+              end,
+            },
+          },
         })
       end
     end,
@@ -114,11 +128,46 @@ M.tmux = {
 
 -- Flash navigation keys
 M.flash = {
-  { "s", mode = { "n", "x", "o" }, function() require("flash").jump() end, desc = "Flash" },
-  { "S", mode = { "n", "x", "o" }, function() require("flash").treesitter() end, desc = "Flash Treesitter" },
-  { "r", mode = "o", function() require("flash").remote() end, desc = "Remote Flash" },
-  { "R", mode = { "o", "x" }, function() require("flash").treesitter_search() end, desc = "Treesitter Search" },
-  { "<c-s>", mode = { "c" }, function() require("flash").toggle() end, desc = "Toggle Flash Search" },
+  {
+    "s",
+    mode = { "n", "x", "o" },
+    function()
+      require("flash").jump()
+    end,
+    desc = "Flash",
+  },
+  {
+    "S",
+    mode = { "n", "x", "o" },
+    function()
+      require("flash").treesitter()
+    end,
+    desc = "Flash Treesitter",
+  },
+  {
+    "r",
+    mode = "o",
+    function()
+      require("flash").remote()
+    end,
+    desc = "Remote Flash",
+  },
+  {
+    "R",
+    mode = { "o", "x" },
+    function()
+      require("flash").treesitter_search()
+    end,
+    desc = "Treesitter Search",
+  },
+  {
+    "<c-s>",
+    mode = { "c" },
+    function()
+      require("flash").toggle()
+    end,
+    desc = "Toggle Flash Search",
+  },
 }
 
 -- WhichKey navigation
