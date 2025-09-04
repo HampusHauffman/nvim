@@ -102,7 +102,6 @@ M.keys = {
               -- Make sure on large screen we have a larger window for navigation
               width = function()
                 local win_width = vim.api.nvim_win_get_width(0)
-                print(win_width)
                 if win_width < 200 then
                   return 40
                 end
