@@ -1,15 +1,6 @@
 local M = {}
 
 ---@type LazyKeysSpec[]
-M.diff = {
-  {
-    "<leader>go",
-    function()
-      require("mini.diff").toggle_overlay(0)
-    end,
-  },
-}
----@type LazyKeysSpec[]
 M.keys = {
   {
     "<leader>gB",
@@ -49,6 +40,7 @@ M.keys = {
 }
 
 -- Mini diff keys
+---@type LazyKeysSpec[]
 M.diff = {
   {
     "<leader>go",
@@ -56,6 +48,55 @@ M.diff = {
       require("mini.diff").toggle_overlay(0)
     end,
     desc = "Toggle mini.diff overlay",
+  },
+  -- Apply hunk
+  {
+    "<leader>ga",
+    function()
+      require("mini.diff").apply_hunk()
+    end,
+    desc = "Apply hunk (Normal)",
+    mode = "n",
+  },
+  {
+    "ga",
+    function()
+      require("mini.diff").apply_hunk()
+    end,
+    desc = "Apply hunk (Visual)",
+    mode = "v",
+  },
+  -- Reset hunk
+  {
+    "<leader>gr",
+    function()
+      require("mini.diff").reset_hunk()
+    end,
+    desc = "Reset hunk (Normal)",
+    mode = "n",
+  },
+  {
+    "gr",
+    function()
+      require("mini.diff").reset_hunk()
+    end,
+    desc = "Reset hunk (Visual)",
+    mode = "v",
+  },
+  -- Navigation
+  {
+    "<leader>gp",
+    function()
+      require("mini.diff").goto_hunk("prev")
+    end,
+    desc = "Goto previous hunk",
+  },
+  {
+    "<leader>gn",
+    function()
+      require("mini.diff").goto_hunk("next")
+    end,
+    desc = "Goto next hunk",
   },
 }
 

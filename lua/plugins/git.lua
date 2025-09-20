@@ -8,11 +8,7 @@ M[#M + 1] = {
   config = function()
     require("mini.diff").setup({
       mappings = {
-        apply = "<leader>ga",
-        reset = "<leader>gr",
         textobject = "gh",
-        goto_prev = "<leader>gp",
-        goto_next = "<leader>gn",
       },
       view = {
         style = "sign",
