@@ -7,9 +7,7 @@ M[#M + 1] = {
   keys = keys.diff,
   config = function()
     require("mini.diff").setup({
-      mappings = {
-        textobject = "gh",
-      },
+      mappings = keys.diff_mappings,
       view = {
         style = "sign",
         signs = {

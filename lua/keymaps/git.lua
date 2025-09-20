@@ -39,7 +39,7 @@ M.keys = {
   },
 }
 
--- Mini diff keys
+-- This key is handled by lazy.nvim directly
 ---@type LazyKeysSpec[]
 M.diff = {
   {
@@ -49,55 +49,15 @@ M.diff = {
     end,
     desc = "Toggle mini.diff overlay",
   },
-  -- Apply hunk
-  {
-    "<leader>ga",
-    function()
-      require("mini.diff").apply_hunk()
-    end,
-    desc = "Apply hunk (Normal)",
-    mode = "n",
-  },
-  {
-    "ga",
-    function()
-      require("mini.diff").apply_hunk()
-    end,
-    desc = "Apply hunk (Visual)",
-    mode = "v",
-  },
-  -- Reset hunk
-  {
-    "<leader>gr",
-    function()
-      require("mini.diff").reset_hunk()
-    end,
-    desc = "Reset hunk (Normal)",
-    mode = "n",
-  },
-  {
-    "gr",
-    function()
-      require("mini.diff").reset_hunk()
-    end,
-    desc = "Reset hunk (Visual)",
-    mode = "v",
-  },
-  -- Navigation
-  {
-    "<leader>gp",
-    function()
-      require("mini.diff").goto_hunk("prev")
-    end,
-    desc = "Goto previous hunk",
-  },
-  {
-    "<leader>gn",
-    function()
-      require("mini.diff").goto_hunk("next")
-    end,
-    desc = "Goto next hunk",
-  },
+}
+
+-- These are not keymaps, but settings for mini.diff's setup function
+M.diff_mappings = {
+  apply = "<leader>ga",
+  reset = "<leader>gr",
+  textobject = "gh",
+  goto_prev = "<leader>gp",
+  goto_next = "<leader>gn",
 }
 
 return M
