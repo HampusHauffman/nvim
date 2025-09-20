@@ -13,7 +13,7 @@ M[#M + 1] = {
         signs = {
           add = "▎",
           change = "▎",
-          delete = "",
+          delete = "_",
         },
       },
     })
