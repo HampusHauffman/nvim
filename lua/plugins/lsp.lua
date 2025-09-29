@@ -2,57 +2,23 @@
 local M = {}
 
 M[#M + 1] = {
-  "mason-org/mason.nvim",
-  dependencies = {
-    "neovim/nvim-lspconfig",
-    "mason-org/mason-lspconfig.nvim",
-    "blink.cmp",
-  },
+  "mason-org/mason-lspconfig.nvim",
+  opts = {},
   keys = require("keymaps.lsp").keys,
-  lazy = false,
-  ---@param opts MasonSettings | {ensure_installed: string[]}
+  dependencies = {
+    { "mason-org/mason.nvim", opts = {} },
+    "neovim/nvim-lspconfig",
+  },
   config = function(_, opts)
-    -- Borders rounded for hover and signature help
-
-    local capabilities = require("blink.cmp").get_lsp_capabilities()
-    local lspSetup = { capabilities = capabilities }
-
-    require("mason").setup({ ui = { border = "rounded" } })
-    require("mason-lspconfig").setup({
-      ensure_installed = { "lua_ls", "ts_ls", "eslint", "tailwindcss" },
-      handlers = {
-        function(server_name)
-          require("lspconfig")[server_name].setup(lspSetup)
-        end,
-        ["rust_analyzer"] = function() end,
-      },
-    })
-
-    -- Remaining configs for lsp
-    require("lspconfig").gdscript.setup({
-      capabilities = capabilities,
-      on_attach = function(client, bufnr)
-        -- Exec Path: /opt/homebrew/bin/nvim
-        -- Exec Flags: --server {project}/server.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line}+1,{col})<CR>"
-        -- Start server to listen to inputs from godot
-        local pipe_path = vim.fn.getcwd() .. "/server.pipe"
-        -- serverlist() returns a list of available server addresses
-        if not vim.tbl_contains(vim.fn.serverlist(), pipe_path) then
-          -- Start server to listen to inputs from Godot, only if not already started
-          pcall(vim.fn.serverstart, pipe_path)
-        end
-      end,
-    })
-    --require("lspconfig").glsl_analyzer.setup({
-    --  capabilities = capabilities,
-    --  filetypes = { "gdshader" },
-    --})
+    require("mason-lspconfig").setup(opts)
+    -- Enable custom gdscript LSP server
+    vim.lsp.enable("gdscript")
   end,
 }
 
 M[#M + 1] = {
   "stevearc/conform.nvim",
-  dependencies = { "mason.nvim" },
+  dependencies = { "mason-org/mason.nvim" },
   event = { "BufWritePre" },
   cmd = { "ConformInfo" },
   keys = require("keymaps.lsp").format_keys,

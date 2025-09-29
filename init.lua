@@ -80,6 +80,3 @@ require("lazy").setup({
     border = "rounded",
   },
 })
-
--- Activate manual lsp
---vim.lsp.enable("gdshader-lsp")

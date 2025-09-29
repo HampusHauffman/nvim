@@ -57,3 +57,20 @@ vim.api.nvim_create_autocmd("VimLeave", {
     end
   end,
 })
+
+vim.api.nvim_create_autocmd("LspAttach", {
+  group = augroup("lsp_attach"),
+  callback = function(args)
+    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
+
+    -- gdscript specific setup
+    if client.name == "gdscript" then
+      -- Start server to listen to inputs from godot
+      local pipe_path = vim.fn.getcwd() .. "/server.pipe"
+      if not vim.tbl_contains(vim.fn.serverlist(), pipe_path) then
+        -- Start server to listen to inputs from Godot, only if not already started
+        pcall(vim.fn.serverstart, pipe_path)
+      end
+    end
+  end,
+})
