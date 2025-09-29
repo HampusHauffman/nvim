@@ -58,7 +58,7 @@ require("lazy").setup({
     },
     {
       "HampusHauffman/block.nvim",
-      dev = true,
+      --dev = true,
       percent = 1.2,
       priority = 1000,
       opts = {

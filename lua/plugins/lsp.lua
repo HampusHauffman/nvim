@@ -4,8 +4,8 @@ local M = {}
 M[#M + 1] = {
   "mason-org/mason.nvim",
   dependencies = {
-    "nvim-lspconfig",
-    "mason-lspconfig.nvim",
+    "neovim/nvim-lspconfig",
+    "mason-org/mason-lspconfig.nvim",
     "blink.cmp",
   },
   keys = require("keymaps.lsp").keys,

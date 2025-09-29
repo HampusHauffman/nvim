@@ -9,7 +9,8 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "hampushauffman/peacock.nvim",
-  dir = "~/Documents/peacock.nvim",
+  --dir = "~/Documents/peacock.nvim",
+  --dev = true,
   name = "peacock",
   lazy = false,
   priority = 999, -- After (1000: Colorscheme)
@@ -55,7 +56,6 @@ M[#M + 1] = {
       )
     end)
   end,
-  dev = true,
 }
 
 M[#M + 1] = {
