@@ -99,7 +99,7 @@ M[#M + 1] = {
       lualine_a = {
         {
           "mode",
-          separator = { left = "█" },
+          separator = { left = "" },
           right_padding = 2,
         },
       },
