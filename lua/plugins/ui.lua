@@ -39,7 +39,7 @@ M[#M + 1] = {
     set(0, "FloatBorder", { link = "PeacockFg" })
     set(0, "LineNr", { link = "PeacockFg" })
     set(0, "lualine_a_normal", { link = "PeacockBg" })
-    set(0, "lualine_b_normal", { link = "PeacockFg" })
+    --set(0, "lualine_b_normal", { link = "PeacockFg" })
     -- Link common UI groups used by snacks to Peacock highlights
     set(0, "FloatBorder", { link = "PeacockFg" })
     set(0, "FloatTitle", { link = "PeacockFg" })
@@ -48,13 +48,6 @@ M[#M + 1] = {
     set(0, "BlinkCmpMenuBorder", { link = "PeacockFg" })
     set(0, "BlinkCmpDocBorder", { link = "PeacockFg" })
     set(0, "BlinkCmpSignatureHelpBorder", { link = "PeacockFg" })
-    vim.schedule(function()
-      set(
-        0,
-        "lualine_transitional_lualine_a_normal_to_StatusLine",
-        { link = "PeacockFg" }
-      )
-    end)
   end,
 }
 
@@ -122,9 +115,6 @@ M[#M + 1] = {
             return reg ~= "" and ("  @" .. reg) or ""
           end,
           color = { fg = "#ff9e64" },
-        },
-        {
-          function() end,
         },
       },
       lualine_x = {},
