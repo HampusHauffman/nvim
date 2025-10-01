@@ -18,11 +18,6 @@ M[#M + 1] = {
   opts = {
     cmdline = {
       enabled = true,
-      completion = {
-        menu = {
-          auto_show = false,
-        },
-      },
       sources = { "path", "cmdline" },
       keymap = cmp_keymaps.cmdline_keymap,
     },
@@ -31,15 +26,14 @@ M[#M + 1] = {
         border = "rounded",
         draw = {
           columns = {
-
             { "kind_icon" },
             { "label", "label_description", gap = 1 },
-            { "source_name" },
+            --{ "source_name" },
           },
         },
       },
+
       ghost_text = { enabled = false },
-      ghost_text_highlight = "Comment",
       documentation = { auto_show = true, window = { border = "rounded" } },
       -- Makes sure we dont auto select when in cmd mode
       list = {
@@ -51,10 +45,6 @@ M[#M + 1] = {
     },
     signature = { enabled = true, window = { border = "rounded" } },
     keymap = cmp_keymaps.keymap,
-
-    appearance = {
-      nerd_font_variant = "mono",
-    },
 
     -- Default list of enabled providers defined so that you can extend it
     -- elsewhere in your config, without redefining it, due to `opts_extend`
