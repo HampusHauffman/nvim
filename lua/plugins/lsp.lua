@@ -3,10 +3,13 @@ local M = {}
 
 M[#M + 1] = {
   "mason-org/mason-lspconfig.nvim",
-  opts = {},
+  opts = {
+    ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "copilot" },
+  },
+  lazy = false,
   keys = require("keymaps.lsp").keys,
   dependencies = {
-    { "mason-org/mason.nvim", opts = {} },
+    { "mason-org/mason.nvim", opts = { ui = { border = "rounded" } } },
     "neovim/nvim-lspconfig",
   },
   config = function(_, opts)

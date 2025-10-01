@@ -32,16 +32,6 @@ map("i", "<C-j>", "<down>", "Move down")
 map("i", "<C-k>", "<up>", "Move up")
 map("i", "<C-l>", "<right>", "Move right")
 
--- Scroll by 1/3 of the screen
-map({ "n", "v" }, "<S-d>", function()
-  local amount = math.floor(vim.fn.winheight(0) / 3)
-  vim.cmd("normal! " .. amount .. "<C-e>")
-end, "Scroll down 1/3 screen")
-map({ "n", "v" }, "<S-u>", function()
-  local amount = math.floor(vim.fn.winheight(0) / 3)
-  vim.cmd("normal! " .. amount .. "<C-y>")
-end, "Scroll up 1/3 screen")
-
 -- No work keys
 map("n", "<leader>gh", "vgh", "Select hunk")
 map("n", "<leader>gR", "vghgr", "Reset hunk")

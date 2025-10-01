@@ -8,6 +8,7 @@ M[#M + 1] = {
   dependencies = {
     "rafamadriz/friendly-snippets",
     "giuxtaposition/blink-cmp-copilot",
+    "fang2hou/blink-copilot",
   },
 
   -- use a release tag to download pre-built binaries
@@ -16,7 +17,6 @@ M[#M + 1] = {
   ---@type blink.cmp.Config
   opts = {
     cmdline = {
-
       enabled = true,
       completion = {
         menu = {
@@ -26,7 +26,6 @@ M[#M + 1] = {
       sources = { "path", "cmdline" },
       keymap = cmp_keymaps.cmdline_keymap,
     },
-
     completion = {
       menu = {
         border = "rounded",
@@ -40,6 +39,7 @@ M[#M + 1] = {
         },
       },
       ghost_text = { enabled = false },
+      ghost_text_highlight = "Comment",
       documentation = { auto_show = true, window = { border = "rounded" } },
       -- Makes sure we dont auto select when in cmd mode
       list = {
@@ -60,6 +60,7 @@ M[#M + 1] = {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = {
+        "copilot",
         "lazydev",
         "lsp",
         "path",
@@ -67,7 +68,6 @@ M[#M + 1] = {
         "codecompanion",
         --"minuet",
         "dadbod",
-        ---"copilot",
       },
       providers = {
         lazydev = {
@@ -90,12 +90,12 @@ M[#M + 1] = {
           timeout_ms = 3000,
           score_offset = 50, -- Gives minuet higher priority among suggestions
         },
-        --copilot = {
-        --  name = "copilot",
-        --  module = "blink-cmp-copilot",
-        --  score_offset = 100,
-        --  async = true,
-        --},
+        copilot = {
+          name = "copilot",
+          module = "blink-copilot",
+          score_offset = 100,
+          async = true,
+        },
       },
     },
   },
