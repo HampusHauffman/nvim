@@ -34,8 +34,10 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
+    { "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = { flavour = "mocha" } },
     {
       "Mofiqul/dracula.nvim",
+      enabled = false,
       priority = 1000,
       lazy = false,
       config = function()
@@ -80,3 +82,4 @@ require("lazy").setup({
     border = "rounded",
   },
 })
+vim.cmd.colorscheme "catppuccin-mocha"
