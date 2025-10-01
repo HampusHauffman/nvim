@@ -14,19 +14,21 @@ opt.splitright = true -- Split to the right
 -- opt.laststatus = 0 -- Set global statusline
 opt.laststatus = 3 -- Set global statusline
 opt.cmdheight = 0
-vim.o.cmdwinheight = 3
+opt.cmdwinheight = 3
 
 --Test
 opt.diffopt =
   "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"
 
-vim.o.ignorecase = true -- Ignore case in search patterns
-vim.o.smartcase = true -- Smart case
-vim.o.signcolumn = "yes:1"
-vim.o.foldexpr = "v:lua.vim.treesitter.foldexpr()"
-vim.o.virtualedit = "block"
---vim.o.mopt = "wait:500,history:500" -- Show any "enter" mess for half a sec then remove
-vim.o.shortmess = "ltToOCFsqS"
+opt.ignorecase = true -- Ignore case in search patterns
+opt.smartcase = true -- Smart case
+opt.signcolumn = "yes:1"
+opt.foldmethod = "expr"
+opt.foldlevel = 10
+opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+opt.virtualedit = "block"
+--opt.mopt = "wait:500,history:500" -- Show any "enter" mess for half a sec then remove
+opt.shortmess = "ltToOCFsqS"
 
 -- This messes with some other plugins
 vim.g.snacks_animate = false
