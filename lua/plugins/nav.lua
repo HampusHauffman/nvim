@@ -2,7 +2,6 @@
 local M = {}
 M[#M + 1] = {
   "christoomey/vim-tmux-navigator",
-  lazy = false,
   cmd = {
     "TmuxNavigateLeft",
     "TmuxNavigateDown",
@@ -32,7 +31,6 @@ local navKeys = require("keymaps.nav").keys
 
 M[#M + 1] = {
   "folke/snacks.nvim",
-  priority = 1000,
   keys = navKeys,
 }
 return M

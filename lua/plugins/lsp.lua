@@ -6,7 +6,7 @@ M[#M + 1] = {
   opts = {
     ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "copilot" },
   },
-  lazy = false,
+  cmd = "Mason",
   keys = require("keymaps.lsp").keys,
   dependencies = {
     { "mason-org/mason.nvim", opts = { ui = { border = "rounded" } } },

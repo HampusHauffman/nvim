@@ -4,8 +4,6 @@ local M = {}
 -- Manage libuv types with lazy. Plugin will never be loaded
 M[#M + 1] = { "Bilal2453/luvit-meta", lazy = true }
 
-M[#M + 1] = { "sindrets/diffview.nvim" }
-
 M[#M + 1] = {
   "folke/lazydev.nvim",
   ft = "lua",
@@ -24,6 +22,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "MagicDuck/grug-far.nvim",
+  cmd = { "GrugFar" },
   config = function()
     require("grug-far").setup({})
   end,

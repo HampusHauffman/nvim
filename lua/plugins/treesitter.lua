@@ -6,6 +6,9 @@ M[#M + 1] = {
   build = function()
     require("nvim-treesitter.install").update({ with_sync = true })()
   end,
+  lazy = vim.fn.argc(-1) == 0, -- load treesitter early when opening a file from the cmdline
+  event = { "VeryLazy" },
+  cmd = { "TSUpdate", "TSInstall", "TSLog", "TSUninstall" },
   config = function()
     --local keymaps = require "keymaps".treesitter
     ---@diagnostic disable-next-line: missing-fields

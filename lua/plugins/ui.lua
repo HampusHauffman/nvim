@@ -12,6 +12,7 @@ M[#M + 1] = {
   --dir = "~/Documents/peacock.nvim",
   --dev = true,
   name = "peacock",
+  enabled = false,
   lazy = false,
   priority = 999, -- After (1000: Colorscheme)
   dependencies = { "nvim-lualine/lualine.nvim" },
@@ -53,6 +54,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "brenoprata10/nvim-highlight-colors",
+  event = { "BufReadPost", "BufNewFile" },
   opts = {
     ---Render style
     ---@usage 'background'|'foreground'|'virtual'
@@ -84,6 +86,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "nvim-lualine/lualine.nvim",
+  event = { "VeryLazy" },
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {

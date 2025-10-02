@@ -73,6 +73,7 @@ require("lazy").setup({
     {
       "HampusHauffman/block.nvim",
       --dev = true,
+      enabled = false,
       percent = 1.2,
       priority = 1000,
       opts = {
@@ -81,6 +82,21 @@ require("lazy").setup({
         bg = "#101010",
         automatic = false,
         colors = { "#00ff00", "#ff0000", "#0000ff" },
+      },
+    },
+    performance = {
+      rtp = {
+        -- disable some rtp plugins
+        disabled_plugins = {
+          "gzip",
+          -- "matchit",
+          -- "matchparen",
+          -- "netrwPlugin",
+          "tarPlugin",
+          "tohtml",
+          "tutor",
+          "zipPlugin",
+        },
       },
     },
   },
