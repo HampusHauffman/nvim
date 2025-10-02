@@ -34,29 +34,41 @@ require("lazy").setup({
   spec = {
     -- import your plugins
     { import = "plugins" },
-    { "catppuccin/nvim", name = "catppuccin", priority = 1000, opts = { flavour = "mocha" } },
     {
-      "Mofiqul/dracula.nvim",
-      enabled = false,
+      "catppuccin/nvim",
+      name = "catppuccin",
       priority = 1000,
-      lazy = false,
-      config = function()
-        require("dracula").setup({
-          theme = "dracula-soft",
-          colors = {
-            bg = "#000000",
-            black = "#000000",
-            visual = "#3E4452",
+      opts = {
+        flavour = "mocha",
+        lsp_styles = {
+          underlines = {
+            errors = { "undercurl" },
+            hints = { "undercurl" },
+            warnings = { "undercurl" },
+            information = { "undercurl" },
           },
-          show_end_of_buffer = true, -- default false
-          transparent_bg = true, -- default false
-          lualine_bg_color = "#000000", -- default nil
-          italic_comment = true, -- default false
-          overrides = {},
-        })
-        vim.cmd("colorscheme dracula-soft")
-        require("hl")
-      end,
+        },
+        integrations = {
+          alpha = true,
+          cmp = true,
+          dashboard = true,
+          flash = true,
+          fzf = true,
+          grug_far = true,
+          gitsigns = true,
+          indent_blankline = { enabled = true },
+          leap = true,
+          lsp_trouble = true,
+          mason = true,
+          mini = true,
+          neotest = true,
+          noice = true,
+          notify = true,
+          snacks = true,
+          treesitter_context = true,
+          which_key = true,
+        },
+      },
     },
     {
       "HampusHauffman/block.nvim",
@@ -72,7 +84,6 @@ require("lazy").setup({
       },
     },
   },
-  install = { colorscheme = { "dracula-soft" } },
   checker = {
     notify = true, -- get a notification when new updates are found
   },
@@ -82,4 +93,4 @@ require("lazy").setup({
     border = "rounded",
   },
 })
-vim.cmd.colorscheme "catppuccin-mocha"
+vim.cmd.colorscheme("catppuccin-mocha")
