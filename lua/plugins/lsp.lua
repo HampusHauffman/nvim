@@ -7,6 +7,7 @@ M[#M + 1] = {
     ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "copilot" },
   },
   cmd = "Mason",
+  event = { "VeryLazy" },
   keys = require("keymaps.lsp").keys,
   dependencies = {
     { "mason-org/mason.nvim", opts = { ui = { border = "rounded" } } },
@@ -62,6 +63,7 @@ M[#M + 1] = {
 -- Extra linting
 M[#M + 1] = {
   "mfussenegger/nvim-lint",
+  event = { "BufReadPost", "BufNewFile" },
   config = function()
     require("lint").linters_by_ft = {
       gdscript = { "gdlint" },
@@ -102,6 +104,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "kristijanhusak/vim-dadbod-ui",
+  lazy = true,
   dependencies = {
     { "tpope/vim-dadbod", lazy = true },
     {

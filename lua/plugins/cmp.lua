@@ -11,7 +11,7 @@ M[#M + 1] = {
     "fang2hou/blink-copilot",
   },
 
-  event = { "InsertEnter", "CmdlineEnter" },
+  event = { "InsertEnter", "CmdlineChanged" },
   -- use a release tag to download pre-built binaries
   version = "*",
   ---@module 'blink.cmp'

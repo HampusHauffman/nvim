@@ -1,6 +1,6 @@
 ---@type LazyPluginSpec[]
 local M = {}
-M[#M + 1] = { "arkav/lualine-lsp-progress" }
+M[#M + 1] = { "arkav/lualine-lsp-progress", event = "VeryLazy" }
 
 M[#M + 1] = {
   "MeanderingProgrammer/render-markdown.nvim",

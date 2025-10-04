@@ -85,6 +85,7 @@ require("lazy").setup({
       },
     },
     performance = {
+
       rtp = {
         -- disable some rtp plugins
         disabled_plugins = {

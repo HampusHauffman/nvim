@@ -28,7 +28,7 @@ M[#M + 1] = {
   end,
 }
 
-M[#M + 1] = { "tpope/vim-sleuth" }
+M[#M + 1] = { "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } }
 
 M[#M + 1] = {
   "folke/snacks.nvim",
