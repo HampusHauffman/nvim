@@ -48,6 +48,13 @@ require("lazy").setup({
             information = { "undercurl" },
           },
         },
+        custom_highlights = function(colors)
+          return {
+            ["@variable"] = { fg = colors.lavender },
+            ["@property"] = { fg = colors.saphire },
+            ["@member"] = { fg = colors.peach },
+          }
+        end,
         integrations = {
           alpha = true,
           cmp = true,

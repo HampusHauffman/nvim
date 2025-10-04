@@ -17,7 +17,7 @@ M[#M + 1] = {
   priority = 999, -- After (1000: Colorscheme)
   dependencies = { "nvim-lualine/lualine.nvim" },
   config = function()
-    ---@type PeacockOptions
+    -- ---@type PeacockOptions
     require("peacock").setup({
       --sign_column_width = 1,
       bar_enabled = false,
