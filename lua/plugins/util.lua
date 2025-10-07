@@ -46,9 +46,8 @@ M[#M + 1] = {
     },
     picker = { ui_select = true },
     zen = {
-      toggles = {
-        dim = false,
-      },
+      toggles={},
+      win = { backdrop = { transparent = false, blend = 99 } },
     },
     indent = {
       enabled = true,

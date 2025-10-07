@@ -13,10 +13,10 @@ end
 -- Plugin that opens a picker when pressing "
 
 -- Disable arrow keys to be 1337
-map("", "<up>", "<nop>", "Disable up arrow")
-map("", "<down>", "<nop>", "Disable down arrow")
-map("", "<left>", "<nop>", "Disable left arrow")
-map("", "<right>", "<nop>", "Disable right arrow")
+-- map("", "<up>", "<nop>", "Disable up arrow")
+-- map("", "<down>", "<nop>", "Disable down arrow")
+-- map("", "<left>", "<nop>", "Disable left arrow")
+-- map("", "<right>", "<nop>", "Disable right arrow")
 
 -- Move to end with ö
 map("n", "ö", "$", "Move to end of line")
@@ -31,6 +31,23 @@ map("i", "<C-h>", "<left>", "Move left")
 map("i", "<C-j>", "<down>", "Move down")
 map("i", "<C-k>", "<up>", "Move up")
 map("i", "<C-l>", "<right>", "Move right")
+
+-- Resize with arrows
+map("n", "<C-Left>", function()
+  vim.cmd("vertical resize -" .. vim.v.count1)
+end, "Decrease window width")
+
+map("n", "<C-Down>", function()
+  vim.cmd("resize -" .. vim.v.count1)
+end, "Decrease window height")
+
+map("n", "<C-Up>", function()
+  vim.cmd("resize +" .. vim.v.count1)
+end, "Increase window height")
+
+map("n", "<C-Right>", function()
+  vim.cmd("vertical resize +" .. vim.v.count1)
+end, "Increase window width")
 
 -- No work keys
 map("n", "<leader>gh", "vgh", "Select hunk")
