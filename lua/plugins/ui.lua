@@ -1,6 +1,5 @@
 ---@type LazyPluginSpec[]
 local M = {}
-M[#M + 1] = { "arkav/lualine-lsp-progress", event = "VeryLazy" }
 
 M[#M + 1] = {
   "MeanderingProgrammer/render-markdown.nvim",
@@ -90,10 +89,12 @@ M[#M + 1] = {
   dependencies = { "nvim-tree/nvim-web-devicons" },
   opts = {
     options = {
+      section_separators = { left = "", right = "" },
+      component_separators = { left = "", right = "" },
+
       --theme = "dracula-nvim",
       theme = "catppuccin",
       extensions = { "quickkix" },
-      --component_separators = "  ",
       globalstatus = true,
       disabled_filetypes = {
         winbar = { "neo-tree", "terminal", "toggleterm" },
@@ -103,16 +104,14 @@ M[#M + 1] = {
       lualine_a = {
         {
           "mode",
-          separator = { left = "" },
+          separator = { left = "", right = "" },
           right_padding = 2,
         },
       },
-      lualine_b = {
-        { "filename", icon = { "", align = "left" } },
-        "branch",
-      },
+      lualine_b = { "branch", "diff", "diagnostics" },
       lualine_c = {
-        "lsp_progress",
+        { "filename" },
+        { "lsp_status", padding = 4 },
         {
           function()
             local reg = vim.fn.reg_recording()
@@ -121,11 +120,9 @@ M[#M + 1] = {
           color = { fg = "#ff9e64" },
         },
       },
-      lualine_x = {},
-      lualine_y = { "filetype", "progress" },
-      lualine_z = {
-        { "location", separator = {}, left_padding = 2 },
-      },
+      lualine_x = { "encoding", "fileformat", "filetype" },
+      lualine_y = { "progress" },
+      lualine_z = { "location" },
     },
   },
 }
