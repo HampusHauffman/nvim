@@ -15,7 +15,7 @@ M[#M + 1] = {
   "olimorris/codecompanion.nvim",
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "nvim-treesitter/nvim-treesitter",
+    --"nvim-treesitter/nvim-treesitter",
   },
   lazy = true,
   config = true,

@@ -128,6 +128,32 @@ M.tmux = {
 -- Flash navigation keys
 M.flash = {
   {
+    "<C-k>",
+    mode = { "v" },
+    function()
+      require("flash").treesitter({
+        actions = {
+          ["<C-k>"] = "next",
+          ["<C-j>"] = "prev",
+        },
+      })
+    end,
+    desc = "Treesitter incremenet selection",
+  },
+  {
+    "<C-j>",
+    mode = { "v" },
+    function()
+      require("flash").treesitter({
+        actions = {
+          ["<C-k>"] = "next",
+          ["<C-j>"] = "prev",
+        },
+      })
+    end,
+    desc = "Treesitter decrement selection",
+  },
+  {
     "s",
     mode = { "n", "x", "o" },
     function()

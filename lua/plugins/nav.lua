@@ -15,10 +15,13 @@ M[#M + 1] = {
 M[#M + 1] = {
   "folke/flash.nvim",
   event = "VeryLazy",
-  ---@type Flash.Config
+  ---@class Flash.Config
   opts = {
     modes = {
       char = { enabled = false }, -- Disables default keys (F, f, T, t) so i can use S
+      treesitter = {
+        labels = "",
+      },
     },
   },
   -- Use centralized keymaps

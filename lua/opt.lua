@@ -24,7 +24,7 @@ opt.ignorecase = true -- Ignore case in search patterns
 opt.smartcase = true -- Smart case
 opt.signcolumn = "yes:1"
 opt.foldmethod = "expr"
-opt.foldlevel = 5
+opt.foldlevel = 3
 opt.foldenable = false -- Use zi to enable folds
 opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 

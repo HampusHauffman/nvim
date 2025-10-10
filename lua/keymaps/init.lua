@@ -17,7 +17,6 @@ end
 -- map("", "<down>", "<nop>", "Disable down arrow")
 -- map("", "<left>", "<nop>", "Disable left arrow")
 -- map("", "<right>", "<nop>", "Disable right arrow")
-
 -- Move to end with ö
 map("n", "ö", "$", "Move to end of line")
 map("v", "ö", "$", "Move to end of line")

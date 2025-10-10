@@ -14,6 +14,7 @@ M[#M + 1] = {
       { path = "lazy.nvim" },
       { path = "snacks.nvim" },
       { path = "noice.nvim" },
+      { path = "flash.nvim" },
     },
   },
 }
