@@ -3,16 +3,16 @@ local M = {}
 
 M[#M + 1] = {
   "mason-org/mason-lspconfig.nvim",
+  dependencies = {
+    { "mason-org/mason.nvim", opts = { ui = { border = "rounded" } } },
+    "neovim/nvim-lspconfig",
+  },
   opts = {
     ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "copilot" },
   },
   cmd = "Mason",
   event = { "VeryLazy" },
   keys = require("keymaps.lsp").keys,
-  dependencies = {
-    { "mason-org/mason.nvim", opts = { ui = { border = "rounded" } } },
-    "neovim/nvim-lspconfig",
-  },
   config = function(_, opts)
     require("mason-lspconfig").setup(opts)
     -- Enable custom gdscript LSP server
@@ -43,7 +43,7 @@ M[#M + 1] = {
       lsp_format = "fallback",
     },
     -- Set up format-on-save
-    --format_on_save = { timeout_ms = 500 },
+    format_on_save = { timeout_ms = 500 },
     -- Customize formatters
     formatters = {
       gdformat = {
