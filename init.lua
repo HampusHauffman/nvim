@@ -24,6 +24,7 @@ vim.opt.rtp:prepend(lazypath)
 
 -- Leader key
 vim.g.mapleader = " "
+vim.g.maplocalleader = " "
 --vim.cmd("colorscheme dracula-soft")
 require("opt")
 require("keymaps")
@@ -117,4 +118,5 @@ require("lazy").setup({
     border = "rounded",
   },
 })
+
 vim.cmd.colorscheme("catppuccin-mocha")
