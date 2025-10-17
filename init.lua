@@ -51,9 +51,10 @@ require("lazy").setup({
         },
         custom_highlights = function(colors)
           return {
-            ["@variable"] = { fg = colors.lavender },
-            ["@property"] = { fg = colors.saphire },
-            ["@member"] = { fg = colors.peach },
+            -- ["@variable"] = { fg = colors.lavender },
+            -- ["@property"] = { fg = colors.peach },
+            -- ["@member"] = { fg = colors.peach },
+            -- ["Function"] = { fg = colors.peach },
           }
         end,
         integrations = {

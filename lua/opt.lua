@@ -26,7 +26,7 @@ opt.signcolumn = "yes:1"
 opt.foldmethod = "expr"
 opt.foldlevel = 3
 opt.foldenable = false -- Use zi to enable folds
-opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
+--opt.foldexpr = "v:lua.vim.treesitter.foldexpr()"
 
 _G.FoldText = function()
   local api = vim.api

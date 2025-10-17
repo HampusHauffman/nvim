@@ -16,6 +16,7 @@ M[#M + 1] = {
   config = function(_, opts)
     require("mason-lspconfig").setup(opts)
     -- Enable custom gdscript LSP server
+    --vim.lsp.enable("gdscript")
     vim.lsp.enable("gdscript")
   end,
 }
