@@ -15,6 +15,7 @@ M[#M + 1] = {
       { path = "snacks.nvim" },
       { path = "noice.nvim" },
       { path = "flash.nvim" },
+      { path = "blink.nvim" },
     },
   },
 }
@@ -47,7 +48,7 @@ M[#M + 1] = {
     },
     picker = { ui_select = true },
     zen = {
-      toggles={},
+      toggles = {},
       win = { backdrop = { transparent = false, blend = 99 } },
     },
     indent = {
