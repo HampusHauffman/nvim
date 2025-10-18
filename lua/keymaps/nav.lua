@@ -70,6 +70,7 @@ M.keys = {
   {
     "<leader>§",
     function()
+      ---@type snacks.zen.Config
       Snacks.zen()
     end,
     desc = "Zen",

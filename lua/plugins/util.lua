@@ -39,7 +39,7 @@ M[#M + 1] = {
   ---@type snacks.Config
   opts = {
     explorer = {
-      replace_netrw = false, -- Replace netrw with the snacks explorer
+      replace_netrw = true, -- Replace netrw with the snacks explorer
       auto_close = true,
     },
     input = {
@@ -48,8 +48,17 @@ M[#M + 1] = {
     },
     picker = { ui_select = true },
     zen = {
-      toggles = {},
       win = { backdrop = { transparent = false, blend = 99 } },
+      on_open = function()
+        pcall(require("mini.diff").disable, 0)
+        vim.opt_local.nu = false
+        vim.opt_local.rnu = false
+      end,
+      on_close = function()
+        pcall(require("mini.diff").enable, 0)
+        vim.opt_local.nu = true
+        vim.opt_local.rnu = true
+      end,
     },
     indent = {
       enabled = true,
