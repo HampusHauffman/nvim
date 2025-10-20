@@ -48,6 +48,14 @@ map("n", "<C-Right>", function()
   vim.cmd("vertical resize +" .. vim.v.count1)
 end, "Increase window width")
 
+-- Map / in visual mode to search highlight to open search
+vim.keymap.set(
+  "v",
+  "/",
+  [[y/\V<C-r>=escape(@",'/\')<CR><CR>]],
+  { noremap = true, silent = true }
+)
+
 -- No work keys
 map("n", "<leader>gh", "vgh", "Select hunk")
 map("n", "<leader>gR", "vghgr", "Reset hunk")

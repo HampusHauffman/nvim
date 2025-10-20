@@ -8,7 +8,9 @@ M[#M + 1] = {
   },
   cmd = "Copilot",
   event = "InsertEnter",
-  opts = {},
+  opts = {
+    disable_limit_reached_message = true, -- Set to `true` to suppress completion limit reached popup
+  },
 }
 
 M[#M + 1] = {

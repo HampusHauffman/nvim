@@ -17,6 +17,11 @@ M[#M + 1] = {
     require("mason-lspconfig").setup(opts)
     -- Enable custom gdscript LSP server
     --vim.lsp.enable("gdscript")
+    -- https://neovim.io/doc/user/lsp.html#lsp-config-merge
+    vim.lsp.config.bashls = {
+      filetypes = { "zsh" },
+    }
+
     vim.lsp.enable("gdscript")
   end,
 }
