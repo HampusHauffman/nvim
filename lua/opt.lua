@@ -16,6 +16,9 @@ opt.laststatus = 3 -- Set global statusline
 opt.cmdheight = 0
 opt.cmdwinheight = 3
 
+-- spell
+--vim.cmd([[set spell]])
+
 --Test
 opt.diffopt =
   "internal,filler,closeoff,indent-heuristic,linematch:60,algorithm:histogram"

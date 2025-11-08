@@ -39,6 +39,7 @@ require("lazy").setup({
       "catppuccin/nvim",
       name = "catppuccin",
       priority = 1000,
+      ---@type CatppuccinOptions
       opts = {
         flavour = "mocha",
         lsp_styles = {
@@ -49,9 +50,19 @@ require("lazy").setup({
             information = { "undercurl" },
           },
         },
+        -- auto_integrations = true,
+        color_overrides = {
+          all = {
+            base = "#000000",
+            mantle = "#000000",
+            crust = "#000000",
+          },
+        },
         custom_highlights = function(colors)
           return {
-            -- ["@variable"] = { fg = colors.lavender },
+            ["@variable"] = { fg = colors.pink },
+            ["@function.call.gdscript"] = { fg = colors.mauve },
+            ["WinSeparator"] = { fg = colors.blue },
             -- ["@property"] = { fg = colors.peach },
             -- ["@member"] = { fg = colors.peach },
             -- ["Function"] = { fg = colors.peach },

@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
   on_attach = function(client, bufnr)
     -- Exec Path: /opt/homebrew/bin/nvim

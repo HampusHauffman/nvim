@@ -4,6 +4,22 @@ local function augroup(name)
   return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
 end
 
+autocmd({ "FileType" }, {
+  pattern = "qf",
+  callback = function()
+    vim.keymap.set("n", "dd", function()
+      local lnum = vim.fn.line(".")
+      local qf = vim.fn.getqflist()
+      -- Close empty list
+      table.remove(qf, lnum)
+      vim.fn.setqflist(qf, "r")
+      if #qf == 0 then
+        vim.api.nvim_win_close(0, false)
+      end
+    end, { buffer = true, desc = "Delete quickfix entry" })
+  end,
+})
+
 -- resize splits if window got resized
 autocmd({ "VimResized" }, {
   group = augroup("resize_splits"),

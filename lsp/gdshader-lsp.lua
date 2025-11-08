@@ -1,3 +1,4 @@
+---@type vim.lsp.ClientConfig
 return {
   name = "gdshader-lsp",
   cmd = { "/Users/hampus/Documents/gdshader-lsp/target/debug/gdshader-lsp" },

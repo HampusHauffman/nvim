@@ -1,5 +1,7 @@
 local M = {}
 
+---@type string[]
+local excludes = { "*.import", "*.tres", "*.uid", "*.tscn" }
 --- Keys for navigation and other plugins
 ---@type LazyKeysSpec[]
 M.keys = {
@@ -13,7 +15,7 @@ M.keys = {
   {
     "ff",
     function()
-      Snacks.picker.files()
+      Snacks.picker.files({ exclude = excludes })
     end,
     desc = "Find files",
     mode = "n",
@@ -28,7 +30,7 @@ M.keys = {
   {
     "fg",
     function()
-      Snacks.picker.grep({})
+      Snacks.picker.grep({ exclude = excludes })
     end,
     desc = "Find grep",
   },

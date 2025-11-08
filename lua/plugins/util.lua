@@ -16,6 +16,8 @@ M[#M + 1] = {
       { path = "noice.nvim" },
       { path = "flash.nvim" },
       { path = "blink.nvim" },
+      { path = "catppuccin" },
+      { path = "nvim-dap" },
     },
   },
 }
@@ -46,7 +48,9 @@ M[#M + 1] = {
       enabled = true,
       win = { style = "input" },
     },
-    picker = { ui_select = true },
+    picker = {
+      ui_select = true,
+    },
     zen = {
       win = { backdrop = { transparent = false, blend = 99 } },
       on_open = function()
