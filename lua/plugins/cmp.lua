@@ -7,8 +7,8 @@ M[#M + 1] = {
   -- optional: provides snippets for the snippet source
   dependencies = {
     "rafamadriz/friendly-snippets",
-    "giuxtaposition/blink-cmp-copilot",
-    "fang2hou/blink-copilot",
+    -- "giuxtaposition/blink-cmp-copilot",
+    -- "fang2hou/blink-copilot",
   },
 
   event = { "VeryLazy", "InsertEnter", "CmdlineChanged" },
@@ -51,7 +51,7 @@ M[#M + 1] = {
     -- elsewhere in your config, without redefining it, due to `opts_extend`
     sources = {
       default = {
-        "copilot",
+        -- "copilot",
         "lazydev",
         "lsp",
         "path",
@@ -65,7 +65,7 @@ M[#M + 1] = {
           min_keyword_length = function(ctx)
             -- when typing a command, only show when the keyword is 4 characters or longer
             if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
-              return 4
+              return 3
             end
             return 0
           end,
@@ -81,12 +81,12 @@ M[#M + 1] = {
           name = "CodeCompanion",
           module = "codecompanion.providers.completion.blink",
         },
-        copilot = {
-          name = "copilot",
-          module = "blink-copilot",
-          score_offset = 100,
-          async = true,
-        },
+        -- copilot = {
+        --   name = "copilot",
+        --   module = "blink-copilot",
+        --   score_offset = 100,
+        --   async = true,
+        -- },
       },
     },
   },

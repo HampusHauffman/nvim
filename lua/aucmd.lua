@@ -7,6 +7,13 @@ end
 autocmd({ "FileType" }, {
   pattern = "qf",
   callback = function()
+    vim.keymap.set(
+      "n",
+      "q",
+      ":cclose<CR>",
+      { buffer = true, desc = "Close quickfix" }
+    )
+
     vim.keymap.set("n", "dd", function()
       local lnum = vim.fn.line(".")
       local qf = vim.fn.getqflist()

@@ -23,9 +23,11 @@ M.keys = {
   {
     "fa",
     function()
-      Snacks.picker.lsp_symbols()
+      Snacks.picker.lsp_symbols({
+        layout = { preset = "sidebar" },
+      })
     end,
-    desc = "Document symbols",
+    desc = "Document symbols (sidebar)",
   },
   {
     "fg",

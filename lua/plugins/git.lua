@@ -20,6 +20,8 @@ M[#M + 1] = {
   end,
 }
 
+M[#M + 1] = { "sindrets/diffview.nvim", opts = {} }
+
 ---@type LazyKeysSpec[]
 
 M[#M + 1] = {
