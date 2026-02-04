@@ -56,7 +56,7 @@ M[#M + 1] = {
         "lsp",
         "path",
         --"buffer",
-        "codecompanion",
+        --"codecompanion",
         --"minuet",
         "dadbod",
       },

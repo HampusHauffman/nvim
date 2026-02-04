@@ -131,4 +131,10 @@ require("lazy").setup({
   },
 })
 
+ vim.filetype.add({
+    extension = {
+    gdshader = "gdshader",
+  },
+})
+
 vim.cmd.colorscheme("catppuccin-mocha")

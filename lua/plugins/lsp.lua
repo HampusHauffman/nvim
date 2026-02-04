@@ -23,6 +23,7 @@ M[#M + 1] = {
     }
 
     vim.lsp.enable("gdscript")
+    vim.lsp.enable("gdshader")
   end,
 }
 
@@ -63,6 +64,15 @@ M[#M + 1] = {
   init = function()
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
+  end,
+}
+
+M[#M + 1] = {
+  "nvim-java/nvim-java",
+  enabled = true,
+  config = function()
+    require("java").setup()
+    vim.lsp.enable("jdtls")
   end,
 }
 
