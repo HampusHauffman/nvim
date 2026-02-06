@@ -42,6 +42,7 @@ require("lazy").setup({
       ---@type CatppuccinOptions
       opts = {
         flavour = "mocha",
+        transparent_background = true,
         lsp_styles = {
           underlines = {
             errors = { "undercurl" },

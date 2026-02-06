@@ -68,6 +68,8 @@ M[#M + 1] = {
   },
 }
 
+M[#M + 1] = { "nvim-treesitter/nvim-treesitter-context", config = true }
+
 M[#M + 1] = {
   "folke/noice.nvim",
   event = "VeryLazy",
