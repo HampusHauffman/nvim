@@ -3,7 +3,7 @@ local M = {}
 
 M[#M + 1] = {
   "MeanderingProgrammer/render-markdown.nvim",
-  ft = { "markdown", "codecompanion" },
+  ft = { "markdown" },
 }
 
 M[#M + 1] = {
@@ -72,6 +72,7 @@ M[#M + 1] = { "nvim-treesitter/nvim-treesitter-context", config = true }
 
 M[#M + 1] = {
   "folke/noice.nvim",
+  enabled = false,
   event = "VeryLazy",
   ---@type NoiceConfig
   opts = {

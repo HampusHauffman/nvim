@@ -43,6 +43,12 @@ require("lazy").setup({
       opts = {
         flavour = "mocha",
         transparent_background = true,
+        -- Make floating windows/menus (lazy, mason, snacks explorer, etc.)
+        -- inherit the terminal background so transparency shows through.
+        float = {
+          transparent = true,
+          solid = false,
+        },
         lsp_styles = {
           underlines = {
             errors = { "undercurl" },
@@ -83,7 +89,7 @@ require("lazy").setup({
           mason = true,
           mini = true,
           neotest = true,
-          noice = true,
+          noice = false,
           notify = true,
           snacks = true,
           treesitter_context = true,

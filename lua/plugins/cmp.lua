@@ -52,7 +52,6 @@ M[#M + 1] = {
         "lsp",
         "path",
         --"buffer",
-        --"codecompanion",
         --"minuet",
         "dadbod",
       },
@@ -61,7 +60,7 @@ M[#M + 1] = {
           min_keyword_length = function(ctx)
             -- when typing a command, only show when the keyword is 4 characters or longer
             if ctx.mode == "cmdline" and string.find(ctx.line, " ") == nil then
-              return 3
+              return 0
             end
             return 0
           end,
@@ -73,10 +72,6 @@ M[#M + 1] = {
           score_offset = 100,
         },
         dadbod = { name = "Dadbod", module = "vim_dadbod_completion.blink" },
-        codecompanion = {
-          name = "CodeCompanion",
-          module = "codecompanion.providers.completion.blink",
-        },
       },
     },
   },
