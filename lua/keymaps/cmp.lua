@@ -19,9 +19,10 @@ M.cmdline_keymap = {
   preset = "inherit",
   ["<Tab>"] = { "show_and_insert_or_accept_single", "select_next" },
   ["<S-Tab>"] = { "show_and_insert_or_accept_single", "select_prev" },
-  ["<CR>"] = { "select_and_accept", "fallback" },
+  ["<Down>"] = { "select_next", "fallback" },
+  ["<Up>"] = { "select_prev", "fallback" },
+  ["<CR>"] = { "fallback" },
   ["<C-space>"] = { "show", "fallback" },
-
   ["<C-j>"] = { "select_next", "fallback" },
   ["<C-k>"] = { "select_prev", "fallback" },
 }
