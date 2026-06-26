@@ -69,7 +69,7 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "nvim-java/nvim-java",
-  enabled = true,
+  enabled = false,
   config = function()
     require("java").setup()
     vim.lsp.enable("jdtls")

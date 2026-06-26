@@ -13,7 +13,7 @@ if not (vim.uv or vim.loop).fs_stat(lazypath) then
   if vim.v.shell_error ~= 0 then
     vim.api.nvim_echo({
       { "Failed to clone lazy.nvim:\n", "ErrorMsg" },
-      { out, "WarningMsg" },
+      { out,                            "WarningMsg" },
       { "\nPress any key to exit..." },
     }, true, {})
     vim.fn.getchar()
@@ -94,7 +94,7 @@ require("lazy").setup({
     {
       "HampusHauffman/block.nvim",
       dev = true,
-      --enabled = false,
+      enabled = false,
       percent = 1.2,
       priority = 1000,
       opts = {
@@ -132,8 +132,8 @@ require("lazy").setup({
   },
 })
 
- vim.filetype.add({
-    extension = {
+vim.filetype.add({
+  extension = {
     gdshader = "gdshader",
   },
 })

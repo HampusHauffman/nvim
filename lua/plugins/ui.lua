@@ -95,7 +95,7 @@ M[#M + 1] = {
       component_separators = { left = "", right = "" },
 
       --theme = "dracula-nvim",
-      theme = "catppuccin",
+      -- theme = "catppuccin",
       extensions = { "quickkix" },
       globalstatus = true,
       disabled_filetypes = {

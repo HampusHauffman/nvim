@@ -4,11 +4,8 @@ local cmp_keymaps = require("keymaps.cmp")
 
 M[#M + 1] = {
   "saghen/blink.cmp",
-  -- optional: provides snippets for the snippet source
   dependencies = {
     "rafamadriz/friendly-snippets",
-    -- "giuxtaposition/blink-cmp-copilot",
-    -- "fang2hou/blink-copilot",
   },
 
   event = { "VeryLazy", "InsertEnter", "CmdlineChanged" },
@@ -28,12 +25,11 @@ M[#M + 1] = {
         draw = {
           columns = {
             { "kind_icon" },
-            { "label", "label_description", gap = 1 },
+            { "label",    "label_description", gap = 1 },
             --{ "source_name" },
           },
         },
       },
-
       ghost_text = { enabled = false },
       documentation = { auto_show = true, window = { border = "rounded" } },
       -- Makes sure we dont auto select when in cmd mode
@@ -81,12 +77,6 @@ M[#M + 1] = {
           name = "CodeCompanion",
           module = "codecompanion.providers.completion.blink",
         },
-        -- copilot = {
-        --   name = "copilot",
-        --   module = "blink-copilot",
-        --   score_offset = 100,
-        --   async = true,
-        -- },
       },
     },
   },
