@@ -9,6 +9,7 @@ M[#M + 1] = {
   },
   opts = {
     ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "copilot" },
+    automatic_enable = { exclude = { "jdtls" } },
   },
   cmd = "Mason",
   event = { "VeryLazy" },
@@ -64,15 +65,6 @@ M[#M + 1] = {
   init = function()
     -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
-  end,
-}
-
-M[#M + 1] = {
-  "nvim-java/nvim-java",
-  enabled = false,
-  config = function()
-    require("java").setup()
-    vim.lsp.enable("jdtls")
   end,
 }
 
