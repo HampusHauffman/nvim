@@ -1,23 +1,22 @@
 local autocmd = vim.api.nvim_create_autocmd
 
 local function augroup(name)
-  return vim.api.nvim_create_augroup("lazyvim_" .. name, { clear = true })
+  return vim.api.nvim_create_augroup("config_" .. name, { clear = true })
 end
 
-autocmd({ "FileType" }, {
+-- Add quickfix-local close and delete mappings.
+autocmd("FileType", {
+  group = augroup("quickfix"),
   pattern = "qf",
   callback = function()
-    vim.keymap.set(
-      "n",
-      "q",
-      ":cclose<CR>",
-      { buffer = true, desc = "Close quickfix" }
-    )
+    vim.keymap.set("n", "q", "<cmd>cclose<cr>", {
+      buffer = true,
+      desc = "Close quickfix",
+    })
 
     vim.keymap.set("n", "dd", function()
       local lnum = vim.fn.line(".")
       local qf = vim.fn.getqflist()
-      -- Close empty list
       table.remove(qf, lnum)
       vim.fn.setqflist(qf, "r")
       if #qf == 0 then
@@ -27,8 +26,8 @@ autocmd({ "FileType" }, {
   end,
 })
 
--- resize splits if window got resized
-autocmd({ "VimResized" }, {
+-- Equalize splits after resizing Neovim.
+autocmd("VimResized", {
   group = augroup("resize_splits"),
   callback = function()
     local current_tab = vim.fn.tabpagenr()
@@ -37,23 +36,23 @@ autocmd({ "VimResized" }, {
   end,
 })
 
--- go to last loc when opening a buffer
+-- Restore the last cursor position when reopening a file.
 autocmd("BufReadPost", {
-  pattern = "*",
+  group = augroup("last_location"),
   callback = function()
     local line = vim.fn.line("'\"")
     if
       line > 1
       and line <= vim.fn.line("$")
       and vim.bo.filetype ~= "commit"
-      and vim.fn.index({ "xxd", "gitrebase", "http" }, vim.bo.filetype) == -1
+      and not vim.tbl_contains({ "xxd", "gitrebase", "http" }, vim.bo.filetype)
     then
       vim.cmd('normal! g`"')
     end
   end,
 })
 
--- Save on insert mode exit
+-- Save modified file buffers after leaving insert mode.
 autocmd("InsertLeave", {
   group = augroup("save_on_insert_leave"),
   callback = function()
@@ -63,37 +62,20 @@ autocmd("InsertLeave", {
   end,
 })
 
--- Hide tmux status bar when entering Neovim
-vim.api.nvim_create_autocmd("VimEnter", {
-  callback = function()
-    if os.getenv("TMUX") then
-      os.execute("tmux set status off")
-    end
-  end,
-})
+if vim.env.TMUX then
+  -- Hide the tmux status bar while Neovim is active.
+  autocmd("VimEnter", {
+    group = augroup("tmux_status"),
+    callback = function()
+      vim.fn.system({ "tmux", "set", "status", "off" })
+    end,
+  })
 
--- Show tmux status bar when exiting Neovim
-vim.api.nvim_create_autocmd("VimLeave", {
-  callback = function()
-    if os.getenv("TMUX") then
-      os.execute("tmux set status on")
-    end
-  end,
-})
-
-vim.api.nvim_create_autocmd("LspAttach", {
-  group = augroup("lsp_attach"),
-  callback = function(args)
-    local client = assert(vim.lsp.get_client_by_id(args.data.client_id))
-
-    -- gdscript specific setup
-    if client.name == "gdscript" then
-      -- Start server to listen to inputs from godot
-      local pipe_path = vim.fn.getcwd() .. "/server.pipe"
-      if not vim.tbl_contains(vim.fn.serverlist(), pipe_path) then
-        -- Start server to listen to inputs from Godot, only if not already started
-        pcall(vim.fn.serverstart, pipe_path)
-      end
-    end
-  end,
-})
+  -- Restore the tmux status bar when leaving Neovim.
+  autocmd("VimLeave", {
+    group = augroup("tmux_status_exit"),
+    callback = function()
+      vim.fn.system({ "tmux", "set", "status", "on" })
+    end,
+  })
+end

@@ -39,7 +39,6 @@ M.keys = {
   },
 }
 
--- This key is handled by lazy.nvim directly
 ---@type LazyKeysSpec[]
 M.diff = {
   {
@@ -49,15 +48,6 @@ M.diff = {
     end,
     desc = "Toggle mini.diff overlay",
   },
-}
-
--- These are not keymaps, but settings for mini.diff's setup function
-M.diff_mappings = {
-  apply = "<leader>ga",
-  reset = "<leader>gr",
-  textobject = "gh",
-  goto_prev = "<leader>gp",
-  goto_next = "<leader>gn",
 }
 
 return M

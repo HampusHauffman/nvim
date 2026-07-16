@@ -1,80 +1,77 @@
 local M = {}
 
----@type string[]
 local excludes = { "*.import", "*.tres", "*.uid", "*.tscn" }
---- Keys for navigation and other plugins
+
+local function picker(method, opts)
+  return function()
+    Snacks.picker[method](opts)
+  end
+end
+
+local function flash(method)
+  return function()
+    require("flash")[method]()
+  end
+end
+
+local function toggle_explorer()
+  local explorers = Snacks.picker.get({ source = "explorer" })
+  if #explorers > 0 then
+    for _, explorer in ipairs(explorers) do
+      if explorer:is_focused() then
+        explorer:close()
+      else
+        explorer:focus()
+      end
+    end
+    return
+  end
+
+  Snacks.picker.explorer({
+    hidden = true,
+    exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
+    layout = {
+      layout = {
+        position = "left",
+        width = function()
+          return vim.api.nvim_win_get_width(0) < 200 and 40 or 0.3
+        end,
+      },
+    },
+  })
+end
+
+local function treesitter_select()
+  require("flash").treesitter({
+    actions = {
+      ["<C-k>"] = "next",
+      ["<C-j>"] = "prev",
+    },
+  })
+end
+
 ---@type LazyKeysSpec[]
 M.keys = {
-  {
-    "<leader>:",
-    function()
-      Snacks.picker.command_history()
-    end,
-    desc = "Command history",
-  },
-  {
-    "ff",
-    function()
-      Snacks.picker.files({ exclude = excludes })
-    end,
-    desc = "Find files",
-    mode = "n",
-  },
+  { "<leader>:", picker("command_history"), desc = "Command history" },
+  { "ff", picker("files", { exclude = excludes }), desc = "Find files" },
   {
     "fa",
-    function()
-      Snacks.picker.lsp_symbols({
-        layout = { preset = "sidebar" },
-      })
-    end,
+    picker("lsp_symbols", { layout = { preset = "sidebar" } }),
     desc = "Document symbols (sidebar)",
   },
-  {
-    "fg",
-    function()
-      Snacks.picker.grep({ exclude = excludes })
-    end,
-    desc = "Find grep",
-  },
-  {
-    "fw",
-    function()
-      Snacks.picker.grep_word()
-    end,
-    desc = "Find word",
-  },
-  {
-    "fo",
-    function()
-      Snacks.picker.files()
-    end,
-    desc = "Find files",
-  },
+  { "fg", picker("grep", { exclude = excludes }), desc = "Find grep" },
+  { "fw", picker("grep_word"), desc = "Find word" },
+  { "fo", picker("files"), desc = "Find files" },
   {
     "<leader>e",
-    function()
-      Snacks.picker.recent({ filter = { cwd = true } })
-    end,
+    picker("recent", { filter = { cwd = true } }),
     desc = "Previous files",
   },
-  {
-    "fb",
-    function()
-      Snacks.picker.buffers()
-    end,
-    desc = "Find buffers",
-  },
-  {
-    "fh",
-    function()
-      Snacks.picker.help()
-    end,
-    desc = "Find help tags",
-  },
+  { "fb", picker("buffers"), desc = "Find buffers" },
+  { "fh", picker("help"), desc = "Find help tags" },
   {
     "<leader>§",
     function()
-      ---@type snacks.zen.Config
       Snacks.zen()
     end,
     desc = "Zen",
@@ -86,42 +83,9 @@ M.keys = {
     end,
     desc = "Show Notifier History",
   },
-  {
-    "<leader>n",
-    function()
-      local explorer_pickers = Snacks.picker.get({ source = "explorer" })
-      for _, v in pairs(explorer_pickers) do
-        if v:is_focused() then
-          v:close()
-        else
-          v:focus()
-        end
-      end
-      if #explorer_pickers == 0 then
-        Snacks.picker.explorer({
-          hidden = true,
-          exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
-          layout = {
-            layout = {
-              position = "left",
-              -- Make sure on large screen we have a larger window for navigation
-              width = function()
-                local win_width = vim.api.nvim_win_get_width(0)
-                if win_width < 200 then
-                  return 40
-                end
-                return 0.3
-              end,
-            },
-          },
-        })
-      end
-    end,
-    desc = "Toggle explorer",
-  },
+  { "<leader>n", toggle_explorer, desc = "Toggle explorer" },
 }
 
--- Tmux navigation keys
 M.tmux = {
   { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
   { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
@@ -130,77 +94,46 @@ M.tmux = {
   { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
 }
 
--- Flash navigation keys
 M.flash = {
   {
     "<C-k>",
-    mode = { "v" },
-    function()
-      require("flash").treesitter({
-        actions = {
-          ["<C-k>"] = "next",
-          ["<C-j>"] = "prev",
-        },
-      })
-    end,
-    desc = "Treesitter incremenet selection",
+    treesitter_select,
+    mode = "v",
+    desc = "Treesitter increment selection",
   },
   {
     "<C-j>",
-    mode = { "v" },
-    function()
-      require("flash").treesitter({
-        actions = {
-          ["<C-k>"] = "next",
-          ["<C-j>"] = "prev",
-        },
-      })
-    end,
+    treesitter_select,
+    mode = "v",
     desc = "Treesitter decrement selection",
   },
   {
     "s",
+    flash("jump"),
     mode = { "n", "x", "o" },
-    function()
-      require("flash").jump()
-    end,
     desc = "Flash",
   },
   {
     "S",
+    flash("treesitter"),
     mode = { "n", "x", "o" },
-    function()
-      require("flash").treesitter()
-    end,
     desc = "Flash Treesitter",
   },
-  {
-    "r",
-    mode = "o",
-    function()
-      require("flash").remote()
-    end,
-    desc = "Remote Flash",
-  },
+  { "r", flash("remote"), mode = "o", desc = "Remote Flash" },
   {
     "R",
+    flash("treesitter_search"),
     mode = { "o", "x" },
-    function()
-      require("flash").treesitter_search()
-    end,
     desc = "Treesitter Search",
   },
   {
     "<c-s>",
-    mode = { "c" },
-    function()
-      require("flash").toggle()
-    end,
+    flash("toggle"),
+    mode = "c",
     desc = "Toggle Flash Search",
   },
 }
 
--- WhichKey navigation
 M.which_key = {
   {
     "<leader>?",

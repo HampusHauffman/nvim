@@ -1,37 +1,17 @@
--- All the keybinds are located under /keymaps to allow ease of configuration of these
-local M = {}
-
----@param mode string|string[] Mode or modes for which the keymap is effective
----@param lhs string Left-hand side of the mapping
----@param rhs string|function Right-hand side of the mapping
----@param desc string Optional description
 local function map(mode, lhs, rhs, desc)
-  local options = { noremap = true, silent = true, desc = desc }
-  vim.keymap.set(mode, lhs, rhs, options)
+  vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
 end
 
--- Plugin that opens a picker when pressing "
+map({ "n", "v" }, "ö", "$", "Move to end of line")
 
--- Disable arrow keys to be 1337
--- map("", "<up>", "<nop>", "Disable up arrow")
--- map("", "<down>", "<nop>", "Disable down arrow")
--- map("", "<left>", "<nop>", "Disable left arrow")
--- map("", "<right>", "<nop>", "Disable right arrow")
--- Move to end with ö
-map("n", "ö", "$", "Move to end of line")
-map("v", "ö", "$", "Move to end of line")
-
--- Map Esc to kj and jk
 map("i", "jk", "<Esc>", "Exit insert mode")
 map("i", "kj", "<Esc>", "Exit insert mode")
 
--- Move in insert mode
 map("i", "<C-h>", "<left>", "Move left")
 map("i", "<C-j>", "<down>", "Move down")
 map("i", "<C-k>", "<up>", "Move up")
 map("i", "<C-l>", "<right>", "Move right")
 
--- Resize with arrows
 map("n", "<C-Left>", function()
   vim.cmd("vertical resize -" .. vim.v.count1)
 end, "Decrease window width")
@@ -48,32 +28,19 @@ map("n", "<C-Right>", function()
   vim.cmd("vertical resize +" .. vim.v.count1)
 end, "Increase window width")
 
--- Map / in visual mode to search highlight to open search
-vim.keymap.set(
+map(
   "v",
   "/",
-  [[y/\V<C-r>=escape(@",'/\')<CR><CR>]],
-  { noremap = true, silent = true }
+  [[y/\V<C-r>=escape(@",'/\')<CR><CR>]]
 )
 
--- No work keys
 map("n", "<leader>gh", "vgh", "Select hunk")
 map("n", "<leader>gR", "vghgr", "Reset hunk")
 map("n", "ga", "ggVG", "Select all")
-
--- Fast saving with <leader> and s
-map("n", "<leader>s", ":silent w<CR>", "Save file 💾")
-
--- Allows Option backspace to delete words
+map("n", "<leader>s", "<cmd>silent write<cr>", "Save file 💾")
 map("i", "<M-BS>", "<C-w>", "Delete previous word")
-
 map("n", ";", "q:i", "Command window")
 
--- Command mode mappings
-vim.cmd([[
-    set wildcharm=<Tab>
-    cnoremap <C-j> <Tab>
-    cnoremap <C-k> <S-Tab>
-  ]])
-
-return M
+vim.opt.wildcharm = 9
+map("c", "<C-j>", "<Tab>")
+map("c", "<C-k>", "<S-Tab>")

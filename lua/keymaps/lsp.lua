@@ -1,6 +1,5 @@
 local M = {}
 
---- Keys for lsp interactions
 ---@type LazyKeysSpec[]
 M.keys = {
   { "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },

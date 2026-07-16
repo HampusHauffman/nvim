@@ -8,67 +8,49 @@ M[#M + 1] = {
     "neovim/nvim-lspconfig",
   },
   opts = {
-    ensure_installed = { "lua_ls", "ts_ls", "rust_analyzer", "copilot" },
-    automatic_enable = { exclude = { "jdtls" } },
+    ensure_installed = {
+      "copilot",
+      "jdtls",
+      "lua_ls",
+      "rust_analyzer",
+      "ts_ls",
+    },
+    automatic_enable = { exclude = { "jdtls", "rust_analyzer" } },
   },
   cmd = "Mason",
-  event = { "VeryLazy" },
+  event = { "BufReadPre", "BufNewFile" },
   keys = require("keymaps.lsp").keys,
   config = function(_, opts)
     require("mason-lspconfig").setup(opts)
-    -- Enable custom gdscript LSP server
-    --vim.lsp.enable("gdscript")
-    -- https://neovim.io/doc/user/lsp.html#lsp-config-merge
-    vim.lsp.config.bashls = {
-      filetypes = { "zsh" },
-    }
-
     vim.lsp.enable("gdscript")
-    vim.lsp.enable("gdshader")
   end,
 }
 
 M[#M + 1] = {
   "stevearc/conform.nvim",
-  dependencies = { "mason-org/mason.nvim" },
-  event = { "BufWritePre" },
-  cmd = { "ConformInfo" },
+  event = "BufWritePre",
+  cmd = "ConformInfo",
   keys = require("keymaps.lsp").format_keys,
-  -- This will provide type hinting with LuaLS
   ---@module "conform"
   ---@type conform.setupOpts
   opts = {
-    -- Define your formatters
     formatters_by_ft = {
       lua = { "stylua" },
       javascript = { "prettierd", stop_after_first = true },
-      typescriptreact = { "prettierd", stop_after_first = true },
       typescript = { "prettierd", stop_after_first = true },
-      gdscript = { "gdformat", stop_after_first = false },
+      typescriptreact = { "prettierd", stop_after_first = true },
+      gdscript = { "gdformat" },
     },
-    -- Set default options
     default_format_opts = {
       lsp_format = "fallback",
     },
-    -- Set up format-on-save
     format_on_save = { timeout_ms = 500 },
-    -- Customize formatters
-    formatters = {
-      gdformat = {
-        cmd = "gdformat",
-      },
-      shfmt = {
-        prepend_args = { "-i", "2" },
-      },
-    },
   },
   init = function()
-    -- If you want the formatexpr, here is the place to set it
     vim.o.formatexpr = "v:lua.require'conform'.formatexpr()"
   end,
 }
 
--- Extra linting
 M[#M + 1] = {
   "mfussenegger/nvim-lint",
   event = { "BufReadPost", "BufNewFile" },
@@ -77,8 +59,9 @@ M[#M + 1] = {
       gdscript = { "gdlint" },
     }
 
+    -- Lint GDScript files after writing them.
     vim.api.nvim_create_autocmd("BufWritePost", {
-      pattern = "*",
+      pattern = "*.gd",
       callback = function()
         require("lint").try_lint()
       end,
@@ -88,8 +71,8 @@ M[#M + 1] = {
 
 M[#M + 1] = {
   "mrcjkb/rustaceanvim",
-  ft = { "rust" },
-  config = function()
+  ft = "rust",
+  init = function()
     vim.g.rustaceanvim = {
       tools = {
         float_win_config = {
@@ -105,21 +88,19 @@ M[#M + 1] = {
   lazy = false,
   dependencies = {
     "nvim-lua/plenary.nvim",
-    "stevearc/dressing.nvim", -- optional for vim.ui.select
+    "stevearc/dressing.nvim",
   },
   config = true,
 }
 
 M[#M + 1] = {
   "kristijanhusak/vim-dadbod-ui",
-  lazy = true,
   dependencies = {
     { "tpope/vim-dadbod", lazy = true },
     {
       "kristijanhusak/vim-dadbod-completion",
       ft = { "sql", "mysql", "plsql" },
-      lazy = true,
-    }, -- Optional
+    },
   },
   cmd = {
     "DBUI",
@@ -128,7 +109,6 @@ M[#M + 1] = {
     "DBUIFindBuffer",
   },
   init = function()
-    -- Your DBUI configuration
     vim.g.db_ui_use_nerd_fonts = 1
   end,
 }

@@ -6,7 +6,6 @@ M[#M + 1] = {
   branch = "main",
   build = ":TSUpdate",
   lazy = false,
-
   opts = {
     ensure_installed = {
       "lua",
@@ -16,12 +15,9 @@ M[#M + 1] = {
       "markdown",
       "c",
     },
-
     highlight = {
-
       enable = true,
     },
-
     indent = {
       enable = true,
     },

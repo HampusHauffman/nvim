@@ -1,7 +1,6 @@
 ---@type LazyPluginSpec[]
 local M = {}
 
--- Manage libuv types with lazy. Plugin will never be loaded
 M[#M + 1] = { "Bilal2453/luvit-meta", lazy = true }
 
 M[#M + 1] = {
@@ -13,26 +12,23 @@ M[#M + 1] = {
       { path = "luvit-meta/library", words = { "vim%.uv" } },
       { path = "lazy.nvim" },
       { path = "snacks.nvim" },
-      { path = "noice.nvim" },
       { path = "flash.nvim" },
-      { path = "blink.nvim" },
       { path = "catppuccin" },
       { path = "nvim-dap" },
     },
   },
 }
 
---M[#M + 1] = { "echasnovski/mini.pairs", version = "*", opts = {} }
-
 M[#M + 1] = {
   "MagicDuck/grug-far.nvim",
-  cmd = { "GrugFar" },
-  config = function()
-    require("grug-far").setup({})
-  end,
+  cmd = "GrugFar",
+  opts = {},
 }
 
-M[#M + 1] = { "tpope/vim-sleuth", event = { "BufReadPost", "BufNewFile" } }
+M[#M + 1] = {
+  "tpope/vim-sleuth",
+  event = { "BufReadPost", "BufNewFile" },
+}
 
 M[#M + 1] = {
   "folke/snacks.nvim",
@@ -41,12 +37,11 @@ M[#M + 1] = {
   ---@type snacks.Config
   opts = {
     explorer = {
-      replace_netrw = true, -- Replace netrw with the snacks explorer
+      replace_netrw = true,
       auto_close = true,
     },
     input = {
       enabled = true,
-      win = { style = "input" },
     },
     picker = {
       ui_select = true,
@@ -54,42 +49,21 @@ M[#M + 1] = {
     zen = {
       win = { backdrop = { transparent = false, blend = 99 } },
       on_open = function()
-        pcall(require("mini.diff").disable, 0)
-        vim.opt_local.nu = false
-        vim.opt_local.rnu = false
+        require("mini.diff").disable(0)
+        vim.opt_local.number = false
+        vim.opt_local.relativenumber = false
       end,
       on_close = function()
-        pcall(require("mini.diff").enable, 0)
-        vim.opt_local.nu = true
-        vim.opt_local.rnu = true
+        require("mini.diff").enable(0)
+        vim.opt_local.number = true
+        vim.opt_local.relativenumber = true
       end,
     },
-    indent = {
-      enabled = true,
-      only_scope = false, -- only show indent guides of the scope
-    },
+    indent = { enabled = true },
     chunk = { enabled = true },
     scope = { enabled = true },
-
     scroll = { enabled = true },
     bigfile = { enabled = true },
-    dashboard = {
-      enabled = false,
-      preset = {
-        --header = [[ ]]
-      },
-      sections = {
-        {
-          section = "terminal",
-          cmd = "cat " .. vim.fn.stdpath("config") .. "/header_art",
-          indent = 8,
-          height = 22,
-          random = 100,
-        },
-        --{ section = "keys", gap = 1, padding = 1 },
-        { section = "startup" },
-      },
-    },
     notifier = {
       enabled = true,
       timeout = 3000,
@@ -97,11 +71,8 @@ M[#M + 1] = {
     quickfile = { enabled = true },
     words = { enabled = true },
     styles = {
-      zen = {
-        backdrop = { transparent = false, blend = 40 },
-      },
       notification = {
-        wo = { wrap = true }, -- Wrap notifications
+        wo = { wrap = true },
       },
     },
   },

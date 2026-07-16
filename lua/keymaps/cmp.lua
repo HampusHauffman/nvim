@@ -1,4 +1,5 @@
 local M = {}
+
 ---@type blink.cmp.KeymapConfig
 M.keymap = {
   preset = "none",
