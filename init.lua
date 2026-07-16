@@ -67,11 +67,11 @@ require("lazy").setup({
         },
         custom_highlights = function(colors)
           return {
-            ["@variable"] = { fg = colors.pink },
-            ["@function.call.gdscript"] = { fg = colors.mauve },
-            ["WinSeparator"] = { fg = colors.blue },
+            -- ["@variable"] = { fg = colors.pink },
+            -- ["@function.call.gdscript"] = { fg = colors.mauve },
+            -- ["WinSeparator"] = { fg = colors.blue },
             -- ["@property"] = { fg = colors.peach },
-            -- ["@member"] = { fg = colors.peach },
+            -- ["@mcember"] = { fg = colors.peach },
             -- ["Function"] = { fg = colors.peach },
           }
         end,
@@ -100,15 +100,17 @@ require("lazy").setup({
     {
       "HampusHauffman/block.nvim",
       dev = true,
-      enabled = false,
-      percent = 1.2,
-      priority = 1000,
+      enabled = true,
       opts = {
-        percent = 1.4,
-        depth = 4,
-        bg = "#101010",
-        automatic = false,
-        colors = { "#00ff00", "#ff0000", "#0000ff" },
+        automatic = true,
+        -- colors = {
+        --   "#2d2536", -- mauve
+        --   "#1e2837", -- blue
+        --   "#253223", -- green
+        --   "#37271e", -- peach
+        -- },
+        priority = 1000,
+        padding = 4,
       },
     },
     performance = {

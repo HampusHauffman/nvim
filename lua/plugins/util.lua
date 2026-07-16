@@ -74,7 +74,7 @@ M[#M + 1] = {
     scroll = { enabled = true },
     bigfile = { enabled = true },
     dashboard = {
-      enabled = true,
+      enabled = false,
       preset = {
         --header = [[ ]]
       },
