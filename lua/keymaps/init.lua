@@ -32,19 +32,24 @@ map("i", "<C-j>", "<down>", "Move down")
 map("i", "<C-k>", "<up>", "Move up")
 map("i", "<C-l>", "<right>", "Move right")
 
-map("n", "<C-Left>", function()
+map("n", "<C-w><C-h>", "<C-w>H", "Move window left")
+map("n", "<C-w><C-j>", "<C-w>J", "Move window down")
+map("n", "<C-w><C-k>", "<C-w>K", "Move window up")
+map("n", "<C-w><C-l>", "<C-w>L", "Move window right")
+
+map("n", "<C-w>H", function()
   vim.cmd("vertical resize -" .. vim.v.count1)
 end, "Decrease window width")
 
-map("n", "<C-Down>", function()
+map("n", "<C-w>J", function()
   vim.cmd("resize -" .. vim.v.count1)
 end, "Decrease window height")
 
-map("n", "<C-Up>", function()
+map("n", "<C-w>K", function()
   vim.cmd("resize +" .. vim.v.count1)
 end, "Increase window height")
 
-map("n", "<C-Right>", function()
+map("n", "<C-w>L", function()
   vim.cmd("vertical resize +" .. vim.v.count1)
 end, "Increase window width")
 

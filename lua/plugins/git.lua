@@ -2,7 +2,6 @@ local M = {}
 
 function M.setup()
   require("mini.diff").setup({
-
     mappings = {
       apply = "",
       reset = "",
@@ -31,6 +30,7 @@ function M.setup()
       },
     },
   })
+
   require("neogit").setup({
     integrations = {
       codediff = true,

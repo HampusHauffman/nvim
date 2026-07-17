@@ -54,6 +54,19 @@ M.diff = {
     desc = "Reset hunk",
   },
   {
+    "<leader>gr",
+    function()
+      local cursor = vim.fn.line(".")
+      local anchor = vim.fn.line("v")
+      require("mini.diff").do_hunks(0, "reset", {
+        line_start = math.min(cursor, anchor),
+        line_end = math.max(cursor, anchor),
+      })
+    end,
+    mode = "x",
+    desc = "Reset selected hunks",
+  },
+  {
     "<leader>go",
     function()
       require("mini.diff").toggle_overlay(0)
