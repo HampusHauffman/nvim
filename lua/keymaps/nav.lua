@@ -14,33 +14,6 @@ local function flash(method)
   end
 end
 
-local function toggle_explorer()
-  local explorers = Snacks.picker.get({ source = "explorer" })
-  if #explorers > 0 then
-    for _, explorer in ipairs(explorers) do
-      if explorer:is_focused() then
-        explorer:close()
-      else
-        explorer:focus()
-      end
-    end
-    return
-  end
-
-  Snacks.picker.explorer({
-    hidden = true,
-    exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
-    layout = {
-      layout = {
-        position = "left",
-        width = function()
-          return vim.api.nvim_win_get_width(0) < 200 and 40 or 0.3
-        end,
-      },
-    },
-  })
-end
-
 local function treesitter_select()
   require("flash").treesitter({
     actions = {
@@ -69,6 +42,8 @@ M.keys = {
   },
   { "fb", picker("buffers"), desc = "Find buffers" },
   { "fh", picker("help"), desc = "Find help tags" },
+  { "<leader>m", picker("git_status"), desc = "Git changes" },
+
   {
     "<leader>§",
     function()
@@ -77,13 +52,13 @@ M.keys = {
     desc = "Zen",
   },
   {
-    "<leader>m",
-    function()
-      Snacks.notifier.show_history()
-    end,
-    desc = "Show Notifier History",
+    "<leader>n",
+    picker("explorer", {
+      hidden = true,
+      exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
+    }),
+    desc = "Files",
   },
-  { "<leader>n", toggle_explorer, desc = "Toggle explorer" },
 }
 
 M.tmux = {

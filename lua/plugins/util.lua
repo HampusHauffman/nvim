@@ -64,17 +64,8 @@ M[#M + 1] = {
     scope = { enabled = true },
     scroll = { enabled = true },
     bigfile = { enabled = true },
-    notifier = {
-      enabled = true,
-      timeout = 3000,
-    },
     quickfile = { enabled = true },
     words = { enabled = true },
-    styles = {
-      notification = {
-        wo = { wrap = true },
-      },
-    },
   },
 }
 
