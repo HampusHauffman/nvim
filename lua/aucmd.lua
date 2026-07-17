@@ -52,6 +52,28 @@ autocmd("BufReadPost", {
   end,
 })
 
+-- Assure we refresh explorer after changes
+local function refresh_git_explorers()
+  local git = require("snacks.explorer.git")
+  for _, explorer in ipairs(Snacks.picker.get({ source = "explorer", tab = false })) do
+    git.refresh(explorer:cwd())
+    explorer:refresh()
+  end
+end
+
+local git_explorer_group = augroup("git_explorer_refresh")
+
+autocmd({ "FocusGained", "ShellCmdPost", "TabEnter" }, {
+  group = git_explorer_group,
+  callback = refresh_git_explorers,
+})
+
+autocmd("User", {
+  group = git_explorer_group,
+  pattern = { "CodeDiffClose", "Neogit*" },
+  callback = refresh_git_explorers,
+})
+
 -- Save modified file buffers after leaving insert mode.
 -- autocmd("InsertLeave", {
 --   group = augroup("save_on_insert_leave"),
