@@ -1,8 +1,17 @@
+---@T
 local autocmd = vim.api.nvim_create_autocmd
 
 local function augroup(name)
   return vim.api.nvim_create_augroup("config_" .. name, { clear = true })
 end
+
+-- Gives an error if we fail to load a spec
+autocmd("VimEnter", {
+  once = true,
+  callback = function()
+    require("lazy.core.config").spec:report()
+  end,
+})
 
 -- Add quickfix-local close and delete mappings.
 autocmd("FileType", {
