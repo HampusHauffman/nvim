@@ -6,12 +6,22 @@ local M = {}
 ---@alias CommandAction string|function|CommandToComplete
 ---@type [string, CommandAction][]
 M.commands = {
-  { "Update plugins", vim.pack.update },
-  { "Check plugins", "checkhealth vim.pack" },
-  { "Check health", { complete = "checkhealth " } },
-  { "Restart NeoVim", "restart" },
-  { "DiffView", "restart" },
-  { "Git: recent commits", "CodeDiff history" },
+  { "Update plugins",      vim.pack.update },
+  { "Check plugins",       "checkhealth vim.pack" },
+  { "Check health",        { complete = "checkhealth " } },
+  { "Restart NeoVim",      "restart" },
+  { "DiffView",            "restart" },
+  { "Mason", "Mason" },
+  { "GIT: recent commits", "CodeDiff history" },
+  { "LSP: Restart", "lsp restart" },
+  { "Block", "Block" },
+  {
+    "Undo tree",
+    function()
+      vim.cmd.packadd("nvim.undotree")
+      require("undotree").open()
+    end,
+  },
 }
 
 function M.open()

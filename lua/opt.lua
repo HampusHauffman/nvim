@@ -6,6 +6,7 @@ opt.wrap = true
 opt.number = true
 opt.relativenumber = true
 opt.undofile = true
+opt.autowriteall = true
 opt.smartindent = true
 opt.autoindent = true
 opt.splitright = true
