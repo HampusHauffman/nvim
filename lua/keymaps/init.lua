@@ -1,5 +1,23 @@
+---@class KeymapSpec: vim.keymap.set.Opts
+---@field [1] string
+---@field [2] string|function
+---@field mode? string|string[]
+
+local M = {}
+
 local function map(mode, lhs, rhs, desc)
   vim.keymap.set(mode, lhs, rhs, { silent = true, desc = desc })
+end
+
+---@param keys KeymapSpec[]
+function M.set(keys)
+  for _, key in ipairs(keys) do
+    vim.keymap.set(key.mode or "n", key[1], key[2], {
+      desc = key.desc,
+      nowait = key.nowait,
+      silent = true,
+    })
+  end
 end
 
 map({ "n", "v" }, "ö", "$", "Move to end of line")
@@ -40,3 +58,7 @@ map("n", "ga", "ggVG", "Select all")
 map("n", "<leader>s", "<cmd>silent write<cr>", "Save file 💾")
 map("i", "<M-BS>", "<C-w>", "Delete previous word")
 map("n", ";", "q:i", "Command window")
+
+map("n", "<leader>w", require("keymaps.commands").open, "Commands")
+
+return M

@@ -6,7 +6,7 @@ local function call(module, method)
   end
 end
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.ui = {
   { "<leader>du", call("dapui", "toggle"), desc = "Dap UI" },
   {
@@ -17,7 +17,7 @@ M.ui = {
   },
 }
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.keys = {
   {
     "<leader>dB",

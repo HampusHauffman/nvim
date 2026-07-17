@@ -1,37 +1,20 @@
-local keys = require("keymaps.nav")
-
----@type LazyPluginSpec[]
 local M = {}
 
-M[#M + 1] = {
-  "christoomey/vim-tmux-navigator",
-  cmd = {
-    "TmuxNavigateLeft",
-    "TmuxNavigateDown",
-    "TmuxNavigateUp",
-    "TmuxNavigateRight",
-    "TmuxNavigatePrevious",
-  },
-  keys = keys.tmux,
-}
-
-M[#M + 1] = {
-  "folke/flash.nvim",
-  event = "VeryLazy",
-  opts = {
+function M.setup()
+  require("flash").setup({
     modes = {
       char = { enabled = false },
       treesitter = {
         labels = "",
       },
     },
-  },
-  keys = keys.flash,
-}
+  })
 
-M[#M + 1] = {
-  "folke/snacks.nvim",
-  keys = keys.keys,
-}
+  local keymaps = require("keymaps")
+  local nav = require("keymaps.nav")
+  keymaps.set(nav.tmux)
+  keymaps.set(nav.flash)
+  keymaps.set(nav.keys)
+end
 
 return M

@@ -1,6 +1,6 @@
 local M = {}
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.keys = {
   { "gD", vim.lsp.buf.declaration, desc = "Go to declaration" },
   { "gi", vim.lsp.buf.implementation, desc = "Go to implementation" },
@@ -51,7 +51,7 @@ M.keys = {
   { "<c-b>", vim.diagnostic.open_float, desc = "Open diagnostic float" },
 }
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.format_keys = {
   {
     "<leader>f",

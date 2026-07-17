@@ -1,6 +1,6 @@
 local M = {}
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.keys = {
   {
     "<leader>gB",
@@ -17,29 +17,32 @@ M.keys = {
     desc = "Git Blame Line",
   },
   {
-    "<leader>gf",
+    "<leader>gd",
+    "<cmd>CodeDiff<cr>",
+    desc = "Git Diff",
+  },
+  {
+    "<leader>gD",
     function()
-      Snacks.lazygit.log_file()
+      vim.api.nvim_feedkeys(":CodeDiff ", "n", false)
     end,
-    desc = "Lazygit Current File History",
+    desc = "Git Diff Revision",
   },
   {
     "<leader>gg",
     function()
-      Snacks.lazygit()
+      require("neogit").open()
     end,
-    desc = "Lazygit",
+    desc = "Neogit",
   },
   {
-    "<leader>gl",
-    function()
-      Snacks.lazygit.log()
-    end,
-    desc = "Lazygit Log (cwd)",
+    "<leader>gh",
+    "<cmd>CodeDiff history<cr>",
+    desc = "Git History",
   },
 }
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.diff = {
   {
     "<leader>go",

@@ -1,29 +1,48 @@
----@type LazyPluginSpec[]
 local M = {}
 
-M[#M + 1] = {
-  "MeanderingProgrammer/render-markdown.nvim",
-  ft = "markdown",
-}
+function M.setup()
+  require("catppuccin").setup({
+    flavour = "mocha",
+    transparent_background = true,
+    float = {
+      transparent = true,
+    },
+    lsp_styles = {
+      underlines = {
+        errors = { "undercurl" },
+        hints = { "undercurl" },
+        warnings = { "undercurl" },
+        information = { "undercurl" },
+      },
+    },
+    color_overrides = {
+      all = {
+        base = "#000000",
+        mantle = "#000000",
+        crust = "#000000",
+      },
+    },
+    integrations = {
+      grug_far = true,
+      mason = true,
+      snacks = true,
+      which_key = true,
+    },
+  })
 
-M[#M + 1] = {
-  "brenoprata10/nvim-highlight-colors",
-  event = { "BufReadPost", "BufNewFile" },
-  opts = {
+  require("block").setup({
+    automatic = false,
+    priority = 1000,
+    padding = 4,
+  })
+
+  require("nvim-highlight-colors").setup({
     enable_tailwind = true,
-  },
-}
+  })
 
-M[#M + 1] = {
-  "nvim-treesitter/nvim-treesitter-context",
-  opts = {},
-}
+  require("treesitter-context").setup({})
 
-M[#M + 1] = {
-  "nvim-lualine/lualine.nvim",
-  event = "VeryLazy",
-  dependencies = { "nvim-tree/nvim-web-devicons" },
-  opts = {
+  require("lualine").setup({
     options = {
       section_separators = { left = "", right = "" },
       component_separators = { left = "", right = "" },
@@ -52,7 +71,7 @@ M[#M + 1] = {
       lualine_y = { "progress" },
       lualine_z = { "location" },
     },
-  },
-}
+  })
+end
 
 return M

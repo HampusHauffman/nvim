@@ -1,41 +1,19 @@
----@type LazyPluginSpec[]
 local M = {}
 
-M[#M + 1] = { "Bilal2453/luvit-meta", lazy = true }
-
-M[#M + 1] = {
-  "folke/lazydev.nvim",
-  ft = "lua",
-  cmd = "LazyDev",
-  opts = {
+function M.setup()
+  require("lazydev").setup({
     library = {
       { path = "luvit-meta/library", words = { "vim%.uv" } },
-      { path = "lazy.nvim" },
       { path = "snacks.nvim" },
       { path = "flash.nvim" },
       { path = "catppuccin" },
       { path = "nvim-dap" },
     },
-  },
-}
+  })
 
-M[#M + 1] = {
-  "MagicDuck/grug-far.nvim",
-  cmd = "GrugFar",
-  opts = {},
-}
+  require("grug-far").setup({})
 
-M[#M + 1] = {
-  "tpope/vim-sleuth",
-  event = { "BufReadPost", "BufNewFile" },
-}
-
-M[#M + 1] = {
-  "folke/snacks.nvim",
-  priority = 1000,
-  lazy = false,
-  ---@type snacks.Config
-  opts = {
+  require("snacks").setup({
     explorer = {
       replace_netrw = true,
       auto_close = true,
@@ -66,7 +44,7 @@ M[#M + 1] = {
     bigfile = { enabled = true },
     quickfile = { enabled = true },
     words = { enabled = true },
-  },
-}
+  })
+end
 
 return M

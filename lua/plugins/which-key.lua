@@ -1,10 +1,7 @@
----@type LazyPluginSpec[]
 local M = {}
 
-M[#M + 1] = {
-  "folke/which-key.nvim",
-  event = "VeryLazy",
-  opts = {
+function M.setup()
+  require("which-key").setup({
     win = { border = "rounded" },
     triggers = {
       { "<auto>", mode = "nixsotc" },
@@ -12,8 +9,9 @@ M[#M + 1] = {
       { "f", mode = { "n", "v" } },
       { "g", mode = { "n", "v" } },
     },
-  },
-  keys = require("keymaps.nav").which_key,
-}
+  })
+
+  require("keymaps").set(require("keymaps.nav").which_key)
+end
 
 return M

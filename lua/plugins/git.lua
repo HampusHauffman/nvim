@@ -1,13 +1,7 @@
-local keymaps = require("keymaps.git")
-
----@type LazyPluginSpec[]
 local M = {}
 
-M[#M + 1] = {
-  "echasnovski/mini.diff",
-  event = "VeryLazy",
-  keys = keymaps.diff,
-  opts = {
+function M.setup()
+  require("mini.diff").setup({
     mappings = {
       apply = "<leader>ga",
       reset = "<leader>gr",
@@ -23,14 +17,22 @@ M[#M + 1] = {
         delete = "_",
       },
     },
-  },
-}
+  })
 
-M[#M + 1] = { "sindrets/diffview.nvim", opts = {} }
+  require("codediff").setup({})
+  require("neogit").setup({
+    integrations = {
+      codediff = true,
+      diffview = false,
+      snacks = true,
+    },
+    diff_viewer = "codediff",
+  })
 
-M[#M + 1] = {
-  "folke/snacks.nvim",
-  keys = keymaps.keys,
-}
+  local keymaps = require("keymaps")
+  local git = require("keymaps.git")
+  keymaps.set(git.diff)
+  keymaps.set(git.keys)
+end
 
 return M

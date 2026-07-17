@@ -14,6 +14,23 @@ local function flash(method)
   end
 end
 
+local function open_explorer()
+  local explorer = Snacks.picker.get({ source = "explorer" })[1]
+  if explorer then
+    if explorer:is_focused() then
+      explorer:close()
+    else
+      explorer:focus()
+    end
+    return
+  end
+
+  Snacks.picker.explorer({
+    hidden = true,
+    exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
+  })
+end
+
 local function treesitter_select()
   require("flash").treesitter({
     actions = {
@@ -23,7 +40,7 @@ local function treesitter_select()
   })
 end
 
----@type LazyKeysSpec[]
+---@type KeymapSpec[]
 M.keys = {
   { "<leader>:", picker("command_history"), desc = "Command history" },
   {
@@ -57,20 +74,17 @@ M.keys = {
   },
   {
     "<leader>n",
-    picker("explorer", {
-      hidden = true,
-      exclude = { "*.gd.uid", "*.import", "*.tres", "*.uid" },
-    }),
+    open_explorer,
     desc = "Files",
   },
 }
 
 M.tmux = {
-  { "<c-h>", "<cmd><C-U>TmuxNavigateLeft<cr>" },
-  { "<c-j>", "<cmd><C-U>TmuxNavigateDown<cr>" },
-  { "<c-k>", "<cmd><C-U>TmuxNavigateUp<cr>" },
-  { "<c-l>", "<cmd><C-U>TmuxNavigateRight<cr>" },
-  { "<c-\\>", "<cmd><C-U>TmuxNavigatePrevious<cr>" },
+  { "<c-h>", "<cmd>TmuxNavigateLeft<cr>" },
+  { "<c-j>", "<cmd>TmuxNavigateDown<cr>" },
+  { "<c-k>", "<cmd>TmuxNavigateUp<cr>" },
+  { "<c-l>", "<cmd>TmuxNavigateRight<cr>" },
+  { "<c-\\>", "<cmd>TmuxNavigatePrevious<cr>" },
 }
 
 M.flash = {

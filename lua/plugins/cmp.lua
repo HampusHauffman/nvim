@@ -1,16 +1,9 @@
-local keymaps = require("keymaps.cmp")
-
----@type LazyPluginSpec[]
 local M = {}
 
-M[#M + 1] = {
-  "saghen/blink.cmp",
-  dependencies = { "rafamadriz/friendly-snippets" },
-  event = { "VeryLazy", "InsertEnter", "CmdlineChanged" },
-  version = "*",
-  ---@module "blink.cmp"
-  ---@type blink.cmp.Config
-  opts = {
+function M.setup()
+  local keymaps = require("keymaps.cmp")
+
+  require("blink.cmp").setup({
     cmdline = {
       enabled = true,
       sources = { "path", "cmdline" },
@@ -57,8 +50,7 @@ M[#M + 1] = {
         },
       },
     },
-  },
-  opts_extend = { "sources.default" },
-}
+  })
+end
 
 return M
