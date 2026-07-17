@@ -1,6 +1,5 @@
 local M = {}
 
----@type blink.cmp.KeymapConfig
 M.keymap = {
   preset = "none",
   ["<C-space>"] = { "show", "show_documentation", "hide_documentation" },
@@ -15,7 +14,6 @@ M.keymap = {
   ["<C-j>"] = { "select_next", "fallback" },
 }
 
----@type blink.cmp.KeymapConfig
 M.cmdline_keymap = {
   preset = "inherit",
   ["<Tab>"] = { "show_and_insert_or_accept_single", "select_next" },
