@@ -53,14 +53,14 @@ autocmd("BufReadPost", {
 })
 
 -- Save modified file buffers after leaving insert mode.
--- autocmd("InsertLeave", {
---   group = augroup("save_on_insert_leave"),
---   callback = function()
---     if vim.bo.modified and vim.bo.buftype == "" then
---       vim.cmd("silent write")
---     end
---   end,
--- })
+autocmd("InsertLeave", {
+  group = augroup("save_on_insert_leave"),
+  callback = function()
+    if vim.bo.modified and vim.bo.buftype == "" then
+      vim.cmd("silent write")
+    end
+  end,
+})
 
 if vim.env.TMUX then
   -- Hide the tmux status bar while Neovim is active.
