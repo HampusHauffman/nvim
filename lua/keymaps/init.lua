@@ -40,7 +40,3 @@ map("n", "ga", "ggVG", "Select all")
 map("n", "<leader>s", "<cmd>silent write<cr>", "Save file 💾")
 map("i", "<M-BS>", "<C-w>", "Delete previous word")
 map("n", ";", "q:i", "Command window")
-
-vim.opt.wildcharm = 9
-map("c", "<C-j>", "<Tab>")
-map("c", "<C-k>", "<S-Tab>")

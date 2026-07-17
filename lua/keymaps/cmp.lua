@@ -24,8 +24,8 @@ M.cmdline_keymap = {
   ["<Up>"] = { "select_prev", "fallback" },
   ["<CR>"] = { "fallback" },
   ["<C-space>"] = { "show", "fallback" },
-  ["<C-j>"] = { "select_next", "fallback" },
-  ["<C-k>"] = { "select_prev", "fallback" },
+  ["<C-j>"] = { "show_and_insert_or_accept_single", "select_next" },
+  ["<C-k>"] = { "show_and_insert_or_accept_single", "select_prev" },
 }
 
 return M
