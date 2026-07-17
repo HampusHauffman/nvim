@@ -1,4 +1,3 @@
----@T
 local autocmd = vim.api.nvim_create_autocmd
 
 local function augroup(name)
