@@ -45,6 +45,15 @@ M.keys = {
 ---@type KeymapSpec[]
 M.diff = {
   {
+    "<leader>gr",
+    function()
+      return require("mini.diff").operator("reset") .. "gh"
+    end,
+    expr = true,
+    remap = true,
+    desc = "Reset hunk",
+  },
+  {
     "<leader>go",
     function()
       require("mini.diff").toggle_overlay(0)

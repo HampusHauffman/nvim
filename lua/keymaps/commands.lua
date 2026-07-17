@@ -11,6 +11,7 @@ M.commands = {
   { "Check health", { complete = "checkhealth " } },
   { "Restart NeoVim", "restart" },
   { "DiffView", "restart" },
+  { "Git: recent commits", "CodeDiff history" },
 }
 
 function M.open()

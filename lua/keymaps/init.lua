@@ -12,11 +12,13 @@ end
 ---@param keys KeymapSpec[]
 function M.set(keys)
   for _, key in ipairs(keys) do
-    vim.keymap.set(key.mode or "n", key[1], key[2], {
-      desc = key.desc,
-      nowait = key.nowait,
-      silent = true,
-    })
+    local opts = vim.deepcopy(key)
+    local mode = opts.mode or "n"
+    opts[1] = nil
+    opts[2] = nil
+    opts.mode = nil
+    opts.silent = opts.silent ~= false
+    vim.keymap.set(mode, key[1], key[2], opts)
   end
 end
 
