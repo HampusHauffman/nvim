@@ -26,7 +26,11 @@ end
 ---@type LazyKeysSpec[]
 M.keys = {
   { "<leader>:", picker("command_history"), desc = "Command history" },
-  { "ff", picker("files", { exclude = excludes }), desc = "Find files" },
+  {
+    "ff",
+    picker("files", { hidden = true, exclude = excludes }),
+    desc = "Find files",
+  },
   {
     "fa",
     picker("lsp_symbols", { layout = { preset = "sidebar" } }),
