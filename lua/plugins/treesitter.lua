@@ -1,6 +1,15 @@
 local M = {}
 
 local update_required = false
+local parsers = {
+  "lua",
+  "vim",
+  "vimdoc",
+  "query",
+  "markdown",
+  "c",
+  "gdscript",
+}
 
 function M.init()
   vim.api.nvim_create_autocmd("PackChanged", {
@@ -22,21 +31,25 @@ function M.init()
 end
 
 function M.setup()
-  require("nvim-treesitter").setup({
-    ensure_installed = {
-      "lua",
-      "vim",
-      "vimdoc",
-      "query",
-      "markdown",
-      "c",
-    },
-    highlight = {
-      enable = true,
-    },
-    indent = {
-      enable = true,
-    },
+  local treesitter = require("nvim-treesitter")
+  treesitter.setup({})
+  treesitter.install(parsers)
+
+  vim.api.nvim_create_autocmd("FileType", {
+    group = vim.api.nvim_create_augroup(
+      "treesitter_features",
+      { clear = true }
+    ),
+    callback = function(args)
+      local filetype = vim.bo[args.buf].filetype
+      local language = vim.treesitter.language.get_lang(filetype) or filetype
+
+      if vim.treesitter.language.add(language) then
+        vim.treesitter.start(args.buf, language)
+        vim.bo[args.buf].indentexpr =
+          "v:lua.require'nvim-treesitter'.indentexpr()"
+      end
+    end,
   })
 
   if update_required then

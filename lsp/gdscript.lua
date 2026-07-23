@@ -1,3 +1,4 @@
+-- server /tmp/godot.pipe --remote-send "<C-\><C-N>:e {file}<CR>:call cursor({line},{col})<CR>"
 ---@type vim.lsp.ClientConfig
 return {
   on_attach = function()
