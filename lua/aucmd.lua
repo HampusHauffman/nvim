@@ -53,12 +53,25 @@ autocmd("BufReadPost", {
 })
 
 -- Assure we refresh explorer after changes
+local git_explorer_refresh_pending = false
+
 local function refresh_git_explorers()
-  local git = require("snacks.explorer.git")
-  for _, explorer in ipairs(Snacks.picker.get({ source = "explorer", tab = false })) do
-    git.refresh(explorer:cwd())
-    explorer:refresh()
+  if git_explorer_refresh_pending then
+    return
   end
+
+  git_explorer_refresh_pending = true
+  vim.schedule(function()
+    git_explorer_refresh_pending = false
+
+    local git = require("snacks.explorer.git")
+    for _, explorer in
+      ipairs(Snacks.picker.get({ source = "explorer", tab = false }))
+    do
+      git.refresh(explorer:cwd())
+      explorer:refresh()
+    end
+  end)
 end
 
 local git_explorer_group = augroup("git_explorer_refresh")
