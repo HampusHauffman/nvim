@@ -43,12 +43,13 @@ local packages = {
   github("echasnovski/mini.diff"),
   github("esmuellert/codediff.nvim"),
   github("NeogitOrg/neogit"),
+  github("hampushauffman/block.nvim"),
 }
 
 function M.setup()
-  local block_path = vim.fn.expand("~/Documents/block.nvim")
-  assert(vim.uv.fs_stat(block_path), "block.nvim not found at " .. block_path)
-  vim.opt.rtp:prepend(block_path)
+  -- local block_path = vim.fn.expand("~/Documents/block.nvim")
+  -- assert(vim.uv.fs_stat(block_path), "block.nvim not found at " .. block_path)
+  -- vim.opt.rtp:prepend(block_path)
 
   require("plugins.lsp").init()
   require("plugins.treesitter").init()

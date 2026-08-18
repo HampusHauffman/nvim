@@ -5,6 +5,10 @@
       "src": "https://github.com/saghen/blink.cmp",
       "version": ">=0.0.0"
     },
+    "block.nvim": {
+      "rev": "6fb969ab12579e58b9379aa51933cad4a466cf75",
+      "src": "https://github.com/hampushauffman/block.nvim"
+    },
     "catppuccin": {
       "rev": "05e8787020dcfdb937bf2ff23855ea2415b4e072",
       "src": "https://github.com/catppuccin/nvim"
