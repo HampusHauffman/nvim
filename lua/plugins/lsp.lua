@@ -19,11 +19,11 @@ function M.setup()
 
   require("mason-lspconfig").setup({
     ensure_installed = {
-      "copilot",
-      "jdtls",
       "lua_ls",
-      "rust_analyzer",
-      "ts_ls",
+      -- "copilot",
+      -- "jdtls",
+      -- "rust_analyzer",
+      -- "ts_ls",
     },
     automatic_enable = { exclude = { "jdtls", "rust_analyzer" } },
   })

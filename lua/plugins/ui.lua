@@ -30,11 +30,11 @@ function M.setup()
     },
   })
 
-  require("block").setup({
-    automatic = false,
-    priority = 1000,
-    padding = 4,
-  })
+  -- require("block").setup({
+  --   -- automatic = false,
+  --   -- priority = 1000,
+  --   -- padding = 4,
+  -- })
 
   require("nvim-highlight-colors").setup({
     enable_tailwind = true,
