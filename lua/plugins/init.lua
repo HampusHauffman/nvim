@@ -43,6 +43,7 @@ local packages = {
   github("echasnovski/mini.diff"),
   github("esmuellert/codediff.nvim"),
   github("NeogitOrg/neogit"),
+  github("HampusHauffman/lazygit.nvim"),
   github("hampushauffman/block.nvim"),
 }
 

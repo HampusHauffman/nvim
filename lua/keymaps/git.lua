@@ -31,9 +31,9 @@ M.keys = {
   {
     "<leader>gg",
     function()
-      require("neogit").open()
+      require("lazygit").toggle()
     end,
-    desc = "Neogit",
+    desc = "LazyGit",
   },
   {
     "<leader>gh",

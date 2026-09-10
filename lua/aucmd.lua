@@ -87,6 +87,15 @@ autocmd("User", {
   callback = refresh_git_explorers,
 })
 
+autocmd({ "BufLeave", "TermClose" }, {
+  group = git_explorer_group,
+  callback = function(event)
+    if vim.bo[event.buf].filetype == "lazygit" then
+      refresh_git_explorers()
+    end
+  end,
+})
+
 -- Save modified file buffers after leaving insert mode.
 -- autocmd("InsertLeave", {
 --   group = augroup("save_on_insert_leave"),

@@ -1,6 +1,8 @@
 local M = {}
 
 function M.setup()
+  require("lazygit").setup()
+
   require("mini.diff").setup({
     mappings = {
       apply = "",
